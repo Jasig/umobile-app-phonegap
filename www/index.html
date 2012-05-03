@@ -135,14 +135,9 @@
         };
 
         
-        function onBodyLoad () {
-            document.addEventListener("deviceready", onDeviceReady, false);
-            $.mobile.showPageLoadingMsg("a", "Loading modules");
-        };
-        
-    	function onDeviceReady () {
+    	var onDeviceReady = function () {
     	    var credentials;
-
+    	    
     	    // get credentials and login function
     	    credentials = umobile.auth.retrieveCredentials();
     	    if (credentials) {
@@ -163,10 +158,16 @@
     	    });
     	    
         };
-    
+
+        $(document).ready(function () {
+            console.log("Loading uMobile");
+            document.addEventListener("deviceready", onDeviceReady, false);
+            $.mobile.showPageLoadingMsg("a", "Loading modules");
+        });
+
     </script>
   </head>
-  <body onload="onBodyLoad()" class="up fl-theme-iphone dashboard-grid">
+  <body class="up fl-theme-iphone dashboard-grid">
   
       <!--  Main app home page.  Offers links to uMobile modules -->
       <div class="portal dashboard" data-role="page" id="home">
