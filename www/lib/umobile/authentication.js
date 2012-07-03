@@ -21,8 +21,8 @@ umobile.auth = umobile.auth || {};
         username = GibberishAES.enc(credentials.username, config.encryptionKey);
         password = GibberishAES.enc(credentials.password, config.encryptionKey);
     
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);    
+        window.localStorage.setItem("username", username);
+        window.localStorage.setItem("password", password);    
     
     };
     
@@ -33,8 +33,8 @@ umobile.auth = umobile.auth || {};
         
         var encUsername, encPassword, username, password, credentials;
         
-        encUsername = localStorage.getItem("username");
-        encPassword = localStorage.getItem("password");
+        encUsername = window.localStorage.getItem("username");
+        encPassword = window.localStorage.getItem("password");
         
         if (username && password) {
             username = GibberishAES.dec(credentials.encUsername, config.encryptionKey);
@@ -60,8 +60,8 @@ umobile.auth = umobile.auth || {};
     
         // if credentials are included, add them to the POST data
         if (credentials) {
-            data.userName = credentials.username;
-            data.password = credentials.password;
+            data.userName = credentials.attributes.username;
+            data.password = credentials.attributes.password;
             console.log("Attempting local login via URL " + url);
         }
         
@@ -74,9 +74,14 @@ umobile.auth = umobile.auth || {};
             url : getLocalLoginServletUrl(),
             data: data,
             success : function(data, textStatus, jqXHR) {
-                if (!credentials || credentials.username === data.user) {
+                if (!credentials || !credentials.attributes.username) {
+                    console.log("Established guest session");
+                    onSuccess(data);
+                } else if (credentials.attributes.username === data.user) {
+                    console.log("Successful authentication for user " + credentials.attributes.username);
                     onSuccess(data);
                 } else {
+                    console.log("Error performing local authentication: " + textStatus + ", " + errorThrown);
                     onError(jqXHR, "Auth failure");
                 }
             },
@@ -114,7 +119,7 @@ umobile.auth = umobile.auth || {};
                 // have a CAS session and were directed straight to uMobile
                 if (html.indexOf('name="lt"') === -1) {
                     data = $.parseJSON(html);
-                    if (!credentials || credentials.username === data.user) {
+                    if (!credentials || credentials.attributes.username === data.user) {
                         onSuccess(data);
                     } else {
                         console.log("Error parsing layout JSON response");
@@ -136,15 +141,15 @@ umobile.auth = umobile.auth || {};
                         url: casUrl,
                         data: {
                             service: serviceUrl,
-                            username: credentials.username,
-                            password: credentials.password,
+                            username: credentials.attributes.username,
+                            password: credentials.attributes.password,
                             lt: flowId,
                             execution: executionId,
                             _eventId: 'submit',
                             submit: 'LOGIN'
                         },
                         success : function(data, textStatus, jqXHR) {
-                            if (!credentials || credentials.username === data.user) {
+                            if (!credentials || credentials.attributes.username === data.user) {
                                 onSuccess(data);
                             } else {
                                 console.log("Error parsing layout JSON response" + textStatus + ", " + errorThrown);
