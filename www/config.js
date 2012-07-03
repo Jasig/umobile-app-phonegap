@@ -6,8 +6,13 @@ config.uMobileServerContext = "";
 config.casServerUrl = "http://localhost:8080";
 
 // authentication
-config.loginFn = "localLogin";      // valid choices are localLogin or casLogin
+//config.loginFn = "localLogin";      // valid choices are localLogin or casLogin
 config.encryptionKey = "umobile";
+
+// Sample configuration for local HTML5-only testing
+//config.uMobileServerUrl = "http://localhost/path/to/umobile-app-phonegap/www";
+//config.uMobileServerContext = "/test-data";
+//config.loginFn = "mockLogin";
 
 // locally-hosted icons for uMobile modules, keyed by module fname
 config.nativeIcons = {
@@ -30,4 +35,7 @@ config.nativeIcons = {
     videos : 'youtube.png',
     weather : 'weather.png',
     info : 'default-icon.png'
+};
+
+config.nativeModules = {
 };

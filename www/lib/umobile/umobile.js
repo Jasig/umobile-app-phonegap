@@ -79,7 +79,7 @@ $(function(){
         model: Module,
         sync: getSync("modules"),
         initialize: function () {
-            this.sync = getSync("modules"),
+            this.sync = getSync("modules");
         },
         save: function (options) {
             this.sync("update", this, options);
@@ -165,7 +165,8 @@ $(function(){
     };
     
     var getSession = function () {
-        umobile.auth.localLogin(
+        var loginFn = window["umobile"]["auth"][config.loginFn];
+        loginFn(
             Creds,
             function (data) {
                 console.log("Rendering response for user " + data.user);
@@ -262,5 +263,8 @@ $(function(){
     };
     
     document.addEventListener("deviceready", onDeviceReady, false);
+    if (config.loginFn === 'mockLogin') {
+        onDeviceReady();
+    }
 
 });

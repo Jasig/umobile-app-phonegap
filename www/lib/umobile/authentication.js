@@ -46,6 +46,47 @@ umobile.auth = umobile.auth || {};
         }
     
     };
+
+    umobile.auth.mockLogin = function(credentials, onSuccess, onError) {
+        
+        var data, url;
+    
+        // if credentials are included, add them to the POST data
+        if (credentials && credentials.get("username") && credentials.get("password")) {
+            url = config.uMobileServerUrl + config.uMobileServerContext + "/layout-student.json";
+            console.log("Attempting local login via URL " + url);
+        }
+        
+        else {
+            url = config.uMobileServerUrl + config.uMobileServerContext + "/layout-guest.json";
+            console.log("Establishing guest session via URL " + url);
+        }
+    
+        // POST to the uMobile login servlet
+        $.ajax({
+            url : url,
+            success : function(data, textStatus, jqXHR) {
+                if (!credentials || !credentials.attributes.username) {
+                    console.log("Established guest session");
+                    onSuccess(data);
+                } else if (credentials.attributes.username === data.user) {
+                    console.log("Successful authentication for user " + credentials.attributes.username);
+                    onSuccess(data);
+                } else {
+                    console.log("Error performing local authentication: " + textStatus + ", " + errorThrown);
+                    onError(jqXHR, "Auth failure");
+                }
+            },
+            error : function (jqXHR, textStatus, errorThrown) { 
+                console.log("Error performing local authentication: " + textStatus + ", " + errorThrown);
+                onError(jqXHR, textStatus, errorThrown); 
+            },
+            dataType : "json",
+            type : "GET"
+        });
+        
+    };
+
     
     /**
      * Perform authentication via the uMobile application server's local authentication
@@ -59,7 +100,7 @@ umobile.auth = umobile.auth || {};
         url = getLocalLoginServletUrl();
     
         // if credentials are included, add them to the POST data
-        if (credentials) {
+        if (credentials && credentials.get("username") && credentials.get("password")) {
             data.userName = credentials.attributes.username;
             data.password = credentials.attributes.password;
             console.log("Attempting local login via URL " + url);
