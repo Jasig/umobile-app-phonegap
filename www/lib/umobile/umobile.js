@@ -55,22 +55,26 @@ $(function(){
 
             var module = this.model;
             this.$el.find("a").bind("click", function () { 
-                
-                // construct the URL for the selected module
-                console.log("Displaying module " + module.attributes.fname + " with URL " + module.attributes.url);
-
-                // update the module page to contain the title and text for the
-                // selected module
-                $(".module-page-title").text(module.attributes.title);
-                $("iframe").attr("src", module.attributes.url);
-
-                // transition to the module page
-                $.mobile.changePage("#module", { transition: "none" });
+                showModule(module);
             });
             return this;
         }
     });
     
+    var showModule = function (module) {
+        // construct the URL for the selected module
+        console.log("Displaying module " + module.attributes.fname + " with URL " + module.attributes.url);
+
+        // update the module page to contain the title and text for the
+        // selected module
+        $(".module-page-title").text(module.attributes.title);
+        $("iframe").attr("src", module.attributes.url);
+
+        // transition to the module page
+        $.mobile.changePage("#module", { transition: "none" });
+        state.save({ currentView: module.get("fname") });
+    };
+        
     var Credentials = Backbone.Model.extend({
         defaults: function () {
             return {
@@ -187,8 +191,26 @@ $(function(){
             this.$("#prefs .portlet-content").append(this.authView.render().el);
             $.mobile.hidePageLoadingMsg();
 
+            console.log(state.get("currentView"));
+            if (state.get("currentView") !== 'home') {
+                Modules.each(function (module) {
+                    if (module.get("fname") == state.get("currentView")) {
+                        showModule(module);
+                    }
+                });
+            }
+        
         }
     });
+    
+    var getUrlParam = function (name) {
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results == null) {
+            return null;
+        } else {
+            return results[1] || 0;
+        }
+    };
 
     // Finally, we kick things off by creating the **App**.
     var onDeviceReady = function () {
@@ -201,6 +223,12 @@ $(function(){
                 Creds.fetch({
                     success: function () {
                         SessionTracking.get(function (time) { 
+                            
+                            var module = getUrlParam("module");
+                            if (module) {
+                                state.save("currentView", module);
+                            }
+                            
                             console.log("Session time: " + time);
                             if (time != 0) {
                                 state.save("lastSessionAccess", time);
