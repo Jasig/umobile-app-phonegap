@@ -126,7 +126,7 @@ umobile.auth = umobile.auth || {};
                     onError(jqXHR, "Auth failure");
                 }
             },
-            error : function (jqXHR, textStatus, errorThrown) { 
+            error : function (jqXHR, textStatus, errorThrown) {
                 console.log("Error performing local authentication: " + textStatus + ", " + errorThrown);
                 onError(jqXHR, textStatus, errorThrown); 
             },

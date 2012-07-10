@@ -2,12 +2,15 @@ var config = {};
         
 // base server configuration
 config.uMobileServerUrl = "http://10.0.2.2:8080";   // android only, otherwise http://localhost:8080
+//config.uMobileServerUrl = "https://umobile.unicon.net";   // android only, otherwise http://localhost:8080
 config.uMobileServerContext = "";
 config.casServerUrl = "http://localhost:8080";
 
 // authentication
-//config.loginFn = "localLogin";      // valid choices are localLogin or casLogin
+config.loginFn = "localLogin";      // valid choices are localLogin or casLogin
 config.encryptionKey = "umobile";
+
+config.storageFn = "local";
 
 // Sample configuration for local HTML5-only testing
 //config.uMobileServerUrl = "http://localhost/path/to/umobile-app-phonegap/www";
@@ -38,4 +41,5 @@ config.nativeIcons = {
 };
 
 config.nativeModules = {
+    map : 'map.html'
 };

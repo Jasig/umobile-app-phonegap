@@ -11,6 +11,7 @@
 
     <!-- Include all required JS libraries -->
     <script type="text/javascript" charset="utf-8" src="lib/external/cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/umobile/umobile-plugins-android.js"></script>
     <script type="text/javascript" charset="utf-8" src="lib/external/jquery-1.6.1.js"></script>
     <script type="text/javascript">
         $(document).bind("mobileinit", function(){
@@ -29,6 +30,7 @@
     <!--  Include uMobile libraries and configuration -->
     <script src="config.js"></script>
     <script src="lib/umobile/authentication.js"></script>
+    <script src="lib/umobile/storage.js"></script>
     <script src="lib/umobile/umobile.js"></script>
 
     <body class="up fl-theme-iphone dashboard-grid">
@@ -65,7 +67,7 @@
             </div>
 
             <!-- Module content  -->
-            <iframe style="width: 100%; height:500px; border: none; padding: 0; margin: 0">
+            <iframe id="module-content" style="width: 100%; height:500px; border: none; padding: 0; margin: 0">
             </iframe>
 
         </div>

@@ -2,52 +2,6 @@ $(function(){
 
     var App;
     
-    var getSync = function(key) {
-        return function (method, model, options) {
-            var id = model.id || key;
-            var storageKey = key + "." + model.id;
-            switch (method) {
-                case "read":
-                    console.log("reading " + storageKey);
-                    var state = window.localStorage.getItem(storageKey);
-                    if (state) {
-                        console.log("read " + state);
-                        if (model.id) {
-                            model.set(JSON.parse(state));
-                        } else {
-                            var arr = JSON.parse(state);
-                            var modules = [];
-                            $(arr).each(function (idx, module) {
-                                modules.push(new model.model(module));
-                            });
-                            model.reset(modules);
-                        }
-                        options.success(model);
-                    } else {
-                        console.log("initializing new " + storageKey + " for " + JSON.stringify(model));
-                        window.localStorage.setItem(storageKey, JSON.stringify(model));
-                        options.success(model);
-                    }
-                break;
-                case "create":
-                    console.log("creating " + storageKey);
-                    window.localStorage.setItem(storageKey, JSON.stringify(model));
-                    options.success(model);
-                break;
-                case "update":
-                    console.log("saving " + storageKey);
-                    window.localStorage.setItem(storageKey, JSON.stringify(model));
-                    options.success(model);
-                break;
-                case "delete":
-                    console.log("removing " + storageKey);
-                    window.localStorage.removeItem(storageKey);
-                    options.success(model);
-                break;
-            }
-        }
-    };
-    
     var AppState = Backbone.Model.extend({
         defaults: function () {
             return {
@@ -56,7 +10,7 @@ $(function(){
                 lastSessionAccess: null
             };
         },
-        sync: getSync("state")
+        sync: umobile.storage.sync(window["umobile"]["storage"][config.storageFn], "state")
     });
     
     var state = new AppState;
@@ -72,14 +26,13 @@ $(function(){
                 isNative: false
             };
         },
-        sync: getSync("module")
+        sync: umobile.storage.sync(window["umobile"]["storage"][config.storageFn], "module")
     });
 
     var ModuleList = Backbone.Collection.extend({
         model: Module,
-        sync: getSync("modules"),
         initialize: function () {
-            this.sync = getSync("modules");
+            this.sync = umobile.storage.sync(window["umobile"]["storage"][config.storageFn], "modules");
         },
         save: function (options) {
             this.sync("update", this, options);
@@ -126,7 +79,7 @@ $(function(){
                 password: null
             };
         },
-        sync: getSync("credentials")
+        sync: umobile.storage.sync(window["umobile"]["storage"][config.storageFn], "credentials")
     });
     
     var Creds = new Credentials;
@@ -147,7 +100,6 @@ $(function(){
         },
         updateCredentials: function () {
             this.model.save({ username: this.usernameInput.val(), password: this.passwordInput.val() }, { silent: true });
-            console.log(this.usernameInput.val());
             this.model.change();
         },
         logout: function () {
@@ -159,9 +111,9 @@ $(function(){
     });
 
     var onUpdateCredentials = function (appInstance) { 
+        $.mobile.changePage("#home", { transition: "none" });
         $.mobile.showPageLoadingMsg("a", "Loading modules");
         getSession();
-        $.mobile.changePage("#home", { transition: "none" });
     };
     
     var getSession = function () {
@@ -197,6 +149,7 @@ $(function(){
                     "lastSessionAccess": (new Date()).getTime(),
                     "authenticated": Creds.get("username") ? true : false
                 });
+                SessionTracking.set(state.get("lastSessionAccess"));
                 Modules.save({ success: function () { App.render(); }});
 
             },
@@ -247,19 +200,34 @@ $(function(){
             success: function () {
                 Creds.fetch({
                     success: function () {
-                        var now = (new Date()).getTime();
-                        if ((now - Number(state.get("lastSessionAccess"))) < 1000*60*10) {
-                            Modules.fetch({ success: function () { App.render(); } });
-                        } else {
-                            getSession({ success: function () { App.render(); } });
-                        }
+                        SessionTracking.get(function (time) { 
+                            console.log("Session time: " + time);
+                            if (time != 0) {
+                                state.save("lastSessionAccess", time);
+                            }
+                                
+                            var now = (new Date()).getTime();
+                            if ((now - Number(state.get("lastSessionAccess"))) < 1000*60*10) {
+                                Modules.fetch({ success: function () { 
+                                    App.render();
+                                    Creds.bind('change', onUpdateCredentials, this);
+                                    Creds.bind('destroy', onUpdateCredentials, this);
+                                } });
+                            } else {
+                                getSession({ success: function () { 
+                                    App.render();
+                                    Creds.bind('change', onUpdateCredentials, this);
+                                    Creds.bind('destroy', onUpdateCredentials, this);
+                                } });
+                            }
+                            
+                        });
                     }
                 });
             }
         });
         
-        Creds.bind('change', onUpdateCredentials, this);
-        Creds.bind('destroy', onUpdateCredentials, this);
+        
     };
     
     document.addEventListener("deviceready", onDeviceReady, false);
