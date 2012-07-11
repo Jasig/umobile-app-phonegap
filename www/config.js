@@ -13,9 +13,9 @@ config.encryptionKey = "umobile";
 config.storageFn = "local";
 
 // Sample configuration for local HTML5-only testing
-//config.uMobileServerUrl = "http://localhost/path/to/umobile-app-phonegap/www";
-//config.uMobileServerContext = "/test-data";
-//config.loginFn = "mockLogin";
+config.uMobileServerUrl = "http://localhost/~athena/dev/umobile-app-phonegap/www";
+config.uMobileServerContext = "/test-data";
+config.loginFn = "mockLogin";
 
 // locally-hosted icons for uMobile modules, keyed by module fname
 config.nativeIcons = {
