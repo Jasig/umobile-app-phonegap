@@ -140,7 +140,7 @@ umobile.auth = umobile.auth || {};
         
         var casUrl, serviceUrl;
 
-        if (!credentials) {
+        if (!credentials || !credentials.get("username") || !credentials.get("password")) {
             return umobile.auth.localLogin(credentials, onSuccess, onError);
         }
         
@@ -199,7 +199,7 @@ umobile.auth = umobile.auth || {};
                         },
                         error : function (jqXHR, textStatus, errorThrown) { 
                             console.log("Error submitting CAS credentials: " + textStatus + ", " + errorThrown);
-                            onError(jqXHR, textStatus, errorThrown); 
+                            return umobile.auth.localLogin(credentials, onSuccess, onError);
                         },
                         dataType : "json",
                         type : "POST"

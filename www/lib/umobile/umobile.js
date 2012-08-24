@@ -117,10 +117,10 @@ $(function(){
     var onUpdateCredentials = function (appInstance) { 
         $.mobile.changePage("#home", { transition: "none" });
         $.mobile.showPageLoadingMsg("a", "Loading modules");
-        getSession();
+        getSession(function () { App.render(); });
     };
     
-    var getSession = function () {
+    var getSession = function (success) {
         var loginFn = window["umobile"]["auth"][config.loginFn];
         loginFn(
             Creds,
@@ -141,10 +141,10 @@ $(function(){
                             portlet.url = config.nativeModules[portlet.fname];
                             portlet.isNative = true;
                         } else {
-                            portlet.url = config.uMobileServerUrl + config.uMobileServerContext + portlet.url;
+                            portlet.url = config.uMobileServerUrl + portlet.url;
                         }
 
-                        newmodules.push(new Module(portlet));
+                                            newmodules.push(new Module(portlet));
                     });
                 });
                 Modules.reset(newmodules);
@@ -153,8 +153,9 @@ $(function(){
                     "lastSessionAccess": (new Date()).getTime(),
                     "authenticated": Creds.get("username") ? true : false
                 });
+                console.log("Setting session tracking");
                 SessionTracking.set(state.get("lastSessionAccess"));
-                Modules.save({ success: function () { App.render(); }});
+                Modules.save({ success: success });
 
             },
             function (jqXHR, textStatus, errorThrown) {
@@ -177,10 +178,12 @@ $(function(){
 
             console.log("rendering");
             this.$(".portal-nav").html("");
+                                       console.log("cleared html");
             Modules.each(function (module) {
                 var moduleView = new ModuleView({ model: module });
                 this.$(".portal-nav").append(moduleView.render().el);
             });
+                                       console.log("added modules");
             
             if (!state.get("authenticated")) {
                 this.footer.show();
@@ -191,8 +194,7 @@ $(function(){
             this.$("#prefs .portlet-content").append(this.authView.render().el);
             $.mobile.hidePageLoadingMsg();
 
-            console.log(state.get("currentView"));
-            if (state.get("currentView") !== 'home') {
+            if ((!Creds.get("username") || state.get("authenticated")) && state.get("currentView") && state.get("currentView") !== 'home') {
                 Modules.each(function (module) {
                     if (module.get("fname") == state.get("currentView")) {
                         showModule(module);
@@ -242,11 +244,11 @@ $(function(){
                                     Creds.bind('destroy', onUpdateCredentials, this);
                                 } });
                             } else {
-                                getSession({ success: function () { 
+                                getSession(function () {
                                     App.render();
                                     Creds.bind('change', onUpdateCredentials, this);
                                     Creds.bind('destroy', onUpdateCredentials, this);
-                                } });
+                                });
                             }
                             
                         });
