@@ -1,0 +1,14 @@
+{
+	"name": "uMobile",
+	"description": "uMobile HTML5 development",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"grunt": "0.4.0",
+		"grunt-contrib-copy": "0.4.0",
+		"express": "3.1.0"
+	}
+}
