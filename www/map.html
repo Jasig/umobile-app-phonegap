@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title></title>
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-    <meta charset="utf-8">
-    
-    <link rel="stylesheet" href="css/jquerymobile/jqm.theme.css" type="text/css"/>
-    <link rel="stylesheet" href="css/portal.css" type="text/css"/>
-    
-    <!-- Include all required JS libraries -->
-    <script type="text/javascript" charset="utf-8" src="lib/external/cordova.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/external/jquery-1.6.1.js"></script>
-    <script type="text/javascript">
-        $(document).bind("mobileinit", function(){
-            $.extend(  $.mobile , {
-              ajaxEnabled: false,
-              ajaxFormsEnabled: false
-            });
-         });
-    </script>
-    <script type="text/javascript" charset="utf-8" src="lib/external/jquery.mobile-1.0rc1.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/external/jquery-ui-1.8.13.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/external/fluid-all-1.4.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/external/gibberishAES.js"></script>
-    
-    <!--  Include uMobile libraries and configuration -->
-    <script type="text/javascript" charset="utf-8" src="config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/umobile/authentication.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/umobile/home.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-    
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var myOptions = {
-                    center: new google.maps.LatLng(-34.397, 150.644),
-                    zoom: 8,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                  };
-            var map = new google.maps.Map(document.getElementById("map_canvas"),
-                myOptions);
-        });
-    </script>
-    
-    <body>
+	<head>
+		<title>uMobile</title>
 
-        <div class="portal focused" data-role="page" id="map">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
 
-            <!-- Module titlebar -->
-            <div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
-                <a href="index.html" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
-                <h1 class="title module-page-title">Map</h1>
-            </div>
-          
-            <div class="portlet">
-                <div class="portlet-content" data-role="content">
-                    <div id="map_canvas" style="width:100%; height:400px"></div>
-                </div>
-            </div>
-          
-        </div>
-        
-    </body>
+		<!--CSS Dependencies-->
+		<link rel="stylesheet" href="css/jquerymobile/jqm.theme.css" type="text/css">
+		<link rel="stylesheet" href="css/portal.css" type="text/css">
+
+		<!--JavaScript Dependencies-->
+		<script type="text/javascript" src="js/lib/cordova/cordova.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery-1.6.1.js"></script>
+		<script type="text/javascript">
+			$(document).bind("mobileinit", function(){
+				$.extend($.mobile , {
+					ajaxEnabled: false,
+					ajaxFormsEnabled: false
+				});
+			});
+		</script>
+		<script type="text/javascript" src="js/lib/jquery/jquery.mobile-1.0rc1.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery-ui-1.8.13.js"></script>
+		<script type="text/javascript" src="js/lib/fluid/fluid-all-1.4.0.js"></script>
+		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
+
+		<!--JavaScript Source Files-->
+		<script type="text/javascript" src="js/src/config.js"></script>
+		<script type="text/javascript" src="js/src/authentication.js"></script>
+		<script type="text/javascript" src="js/src/home.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var myOptions = {
+					center: new google.maps.LatLng(-34.397, 150.644),
+					zoom: 8,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+			});
+		</script>
+	<head>
+	<body>
+		<!--
+		| Map View.
+		-->
+		<div class="portal focused" data-role="page" id="map">
+			<!--titlebar-->
+			<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
+				<a href="index.html" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
+				<h1 class="title module-page-title">Map</h1>
+			</div>
+			<!--portlet-->
+			<div class="portlet">
+				<div class="portlet-content" data-role="content">
+					<div id="map_canvas" style="width:100%; height:400px"></div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
