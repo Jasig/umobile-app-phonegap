@@ -132,7 +132,7 @@ $(function(){
                         portlet.id = portlet.fname;
                         
                         if (config.nativeIcons[portlet.fname]) {
-                            portlet.iconUrl = "icons/" + config.nativeIcons[portlet.fname];
+                            portlet.iconUrl = "images/icons/" + config.nativeIcons[portlet.fname];
                         } else {
                             portlet.iconUrl = config.uPortalServerUrl + portlet.iconUrl;
                         }

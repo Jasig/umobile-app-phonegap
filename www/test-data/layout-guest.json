@@ -13,7 +13,7 @@
                         "url": "/news.html",
                         "description": "Personalized news and RSS reader",
                         "newItemCount": "0",
-                        "iconUrl": "/icons/feed.png"
+                        "iconUrl": "/images/icons/feed.png"
                     },
                     {
                         "fname": "calendar",
@@ -21,7 +21,7 @@
                         "url": "/calendar.html",
                         "description": "Current weather conditions and forecast.",
                         "newItemCount": "1",
-                        "iconUrl": "/icons/calendar.png"
+                        "iconUrl": "/images/icons/calendar.png"
                     }]},
                 { "id": "u27l1s5", "title": "Map",
                 "portlets": [
@@ -31,7 +31,7 @@
                         "url": "/map.html",
                         "description": "Campus Map Portlet",
                         "newItemCount": "0",
-                        "iconUrl": "/icons/map.png"
+                        "iconUrl": "/images/icons/map.png"
                     }]}]
                     }
 }

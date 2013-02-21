@@ -1,4 +1,5 @@
 // commit 017a948047e355ae0c2cdc8c4188ae57b115528a
+// cordova-android-1.7.0rc1
 
 // File generated at :: Mon Apr 23 2012 11:36:23 GMT-0700 (PDT)
 
