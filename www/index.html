@@ -40,7 +40,7 @@
 				<!--header-->
 				<div data-role="header" data-backbtn="false" class="titlebar portlet-wrapper-titlebar">
 					<h1 class="title">uMobile</h1>
-					<a href="#pref" class="ui-btn-right" data-transition="none" data-icon="gear">
+					<a href="#preference" class="ui-btn-right" data-transition="none" data-icon="gear">
 						<span>Prefs</span>
 					</a>
 				</div>
@@ -54,7 +54,7 @@
 
 				<!--footer-->
 				<div data-role="footer" class="umobile-auth-invitation">
-					<a href="#pref" data-transition="none">
+					<a href="#preference" data-transition="none">
 						You are using uMobile as a guest user. Click here to log in!
 					</a>
 				</div>
@@ -107,10 +107,10 @@
 			<script type="text/x-handlebars-template" id="auth-template">
 				<form class="umobile-auth-form" action="javascript:;">
 					<label for="usernameInput">Username:</label>
-					<input id="usernameInput" name="username" type="text" value="<%= username %>"/>
+					<input id="usernameInput" name="username" type="text" value="{{username}}"/>
 
 					<label for="passwordInput">Password:</label>
-					<input id="passwordInput" name="password" type="password" value="<%= password %>"/>
+					<input id="passwordInput" name="password" type="password" value="{{password}}"/>
 
 					<input type="submit" name="update" value="Update"/>
 					<input type="button" class="logout-button" name="logout" value="Log out"/>
