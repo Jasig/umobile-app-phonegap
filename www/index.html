@@ -12,8 +12,14 @@
 		<!--JavaScript Dependencies-->
 		<script type="text/javascript" src="js/lib/cordova/cordova.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/lib/jquerymobile/jquery-mobile.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
+		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
+		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
+		<script type="text/javascript" src="js/lib/handlebars/handlebars.js"></script>
 		<script type="text/javascript">
-			$(document).bind("mobileinit", function(){
+			$(document).bind("mobileinit", function () {
 				$.extend($.mobile , {
 					ajaxEnabled: false,
 					ajaxFormsEnabled: false
@@ -21,98 +27,110 @@
 			});
 			var localStorage;
 		</script>
-		<script type="text/javascript" src="js/lib/jquerymobile/jquery-mobile.js"></script>
-		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
-		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
-		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
-
-		<!--JavaScript Source Files-->
-		<script type="text/javascript" src="js/src/config.js"></script>
-		<!--<script type="text/javascript" src="js/src/umobile-plugins.js"></script>-->
-		<script type="text/javascript" src="js/src/umobile-plugins-web.js"></script>
-		<script type="text/javascript" src="js/src/authentication.js"></script>
-		<script type="text/javascript" src="js/src/storage.js"></script>
-		<script type="text/javascript" src="js/src/umobile.js"></script>
 	</head>
 
 	<body class="up fl-theme-iphone dashboard-grid">
-		<!--
-		| Home View
-		-->
-		<div class="portal dashboard" data-role="page" id="home">
-			<!--header-->
-			<div data-role="header" data-backbtn="false" class="titlebar portlet-wrapper-titlebar">
-				<h1 class="title">uMobile</h1>
-				<a href="#prefs" class="ui-btn-right" data-transition="none" data-icon="gear">
-					<span>Prefs</span>
-				</a>
-			</div>
-
-			<!--links-->
-			<div class="portal-nav"></div>
-
-			<!--reload
-			<a href="index.html?module=news">reload</a>
+		<div id="appView">
+			<!--
+			| =====================
+			| Home View
+			| =====================
 			-->
+			<div id="home" class="portal dashboard" data-role="page">
+				<!--header-->
+				<div data-role="header" data-backbtn="false" class="titlebar portlet-wrapper-titlebar">
+					<h1 class="title">uMobile</h1>
+					<a href="#pref" class="ui-btn-right" data-transition="none" data-icon="gear">
+						<span>Prefs</span>
+					</a>
+				</div>
 
-			<!--footer
-			<div data-role="footer" class="umobile-auth-invitation" style="display:none;">
-				<a href="#prefs" data-transition="none">You are using uMobile as a guest user.  Click here to log in!</a>
-			</div>
-			-->
-		</div>
+				<!--links-->
+				<div id="portalNav" class="portal-nav"></div>
 
-		<!--
-		| Module iFrame. Displays WebView Content.
-		-->
-		<div class="portal focused" data-role="page" id="module">
-			<!--titlebar-->
-			<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
-				<a href="#home" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
-				<h1 class="title module-page-title">Portlet</h1>
-			</div>
+				<!--reload
+				<a href="index.html?module=news">reload</a>
+				-->
 
-			<!--content-->
-			<iframe id="module-content" style="width: 100%; height:500px; border: none; padding: 0; margin: 0"></iframe>
-		</div>
-
-		<!--
-		| Preferences. Authentication and options.
-		-->
-		<div class="portal focused" data-role="page" id="prefs">
-			<!--titlebar-->
-			<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
-				<a href="#home" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
-				<h1 class="title module-page-title">Preferences</h1>
-			</div>
-
-			<!--content-->
-			<div class="portlet">
-				<div class="portlet-content" data-role="content">
+				<!--footer-->
+				<div data-role="footer" class="umobile-auth-invitation">
+					<a href="#pref" data-transition="none">
+						You are using uMobile as a guest user. Click here to log in!
+					</a>
 				</div>
 			</div>
+
+			<!--
+			| =====================
+			| Module View
+			| =====================
+			-->
+			<div id="module" class="portal focused" data-role="page">
+				<!--titlebar-->
+				<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
+					<a href="#home" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
+					<h1 class="title module-page-title">Portlet</h1>
+				</div>
+
+				<!--content-->
+				<iframe style="width: 100%; height:500px; border: none; padding: 0; margin: 0"></iframe>
+			</div>
+
+			<!--
+			| =====================
+			| Preferences View
+			| =====================
+			-->
+			<div id="preference" class="portal focused" data-role="page">
+				<!--titlebar-->
+				<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
+					<a href="#home" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
+					<h1 class="title module-page-title">Preferences</h1>
+				</div>
+
+				<!--content-->
+				<div class="portlet">
+					<div class="portlet-content" data-role="content"></div>
+				</div>
+			</div>
+
+			<!--Script Templates-->
+			<!--Module-->
+			<script type="text/x-handlebars-template" id="module-template">
+				<a href="javascript:;" title="To view {{title}}" class="ui-link">
+					<span class="badge new-item up-new-item-count-{{newItemCount}}">{{newItemCount}}</span>
+					<span class="icon"><img class="portlet-icon" src="{{iconUrl}}" alt="{{title}}"/></span>
+					<span class="title">{{title}}</span>
+				</a>
+			</script>
+			<!--Authentication-->
+			<script type="text/x-handlebars-template" id="auth-template">
+				<form class="umobile-auth-form" action="javascript:;">
+					<label for="usernameInput">Username:</label>
+					<input id="usernameInput" name="username" type="text" value="<%= username %>"/>
+
+					<label for="passwordInput">Password:</label>
+					<input id="passwordInput" name="password" type="password" value="<%= password %>"/>
+
+					<input type="submit" name="update" value="Update"/>
+					<input type="button" class="logout-button" name="logout" value="Log out"/>
+				 </form>
+			</script>
+
+			<!--JavaScript Source Files-->
+			<script type="text/javascript" src="js/src/config.js"></script>
+			<script type="text/javascript" src="js/src/app.js"></script>
+			<script type="text/javascript" src="js/src/service/SessionTrackerMock.js"></script>
+			<script type="text/javascript" src="js/src/service/Authentication.js"></script>
+			<script type="text/javascript" src="js/src/service/Storage.js"></script>
+			<script type="text/javascript" src="js/src/model/State.js"></script>
+			<script type="text/javascript" src="js/src/model/Module.js"></script>
+			<script type="text/javascript" src="js/src/model/Credential.js"></script>
+			<script type="text/javascript" src="js/src/collection/ModuleCollection.js"></script>
+			<script type="text/javascript" src="js/src/view/Module.js"></script>
+			<script type="text/javascript" src="js/src/view/Credential.js"></script>
+			<script type="text/javascript" src="js/src/view/App.js"></script>
+			<script type="text/javascript" src="js/src/bootstrap.js"></script>
 		</div>
 	</body>
-
-	<!--Script Templates-->
-	<script type="text/template" id="module-template">
-		<a href="javascript:;" title="To view <%= title %>" class="ui-link">
-			<span class="badge new-item"><%= newItemCount %></span>
-			<span class="icon"><img class="portlet-icon" src="<%= iconUrl %>" alt=""/></span>
-			<span class="title"><%= title %></span>
-		</a>
-	</script>
-
-	<script type="text/template" id="auth-template">
-		<form class="umobile-auth-form" action="javascript:;">
-			<label for="usernameInput">Username:</label>
-			<input id="usernameInput" name="username" type="text" value="<%= username %>"/>
-
-			<label for="passwordInput">Password:</label>
-			<input id="passwordInput" name="password" type="password" value="<%= password %>"/>
-
-			<input type="submit" name="update" value="Update"/>
-			<input type="button" class="logout-button" name="logout" value="Log out"/>
-		 </form>
-	</script>
 </html>
