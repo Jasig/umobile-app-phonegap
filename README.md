@@ -38,7 +38,7 @@ You may also encounter a warning about installing grunt with the _-g_ parameter.
 Once complete, the **node_modules** directory, containing all of your project's node modules, will be addded to your project.
 
 ### Start the Server
-Open a terminal window and navigate to the root of the cso-ui project.
+Open a terminal window and navigate to the root of the umobile-app-phonegap project.
 
     cd path/to/umobile-phonegap
 
