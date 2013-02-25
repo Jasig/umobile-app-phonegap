@@ -1,4 +1,6 @@
-(function($, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, Handlebars:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	Manages the Credential view.
@@ -52,8 +54,8 @@
 		@type Object
 		**/
 		events: {
-			"submit form": "updateCredentials",
-			"click .logout-button": "logout"
+			'submit form': 'submitHandler',
+			'click .logout-button': 'logoutHandler'
 		},
 
 		/**
@@ -65,25 +67,62 @@
 		credModel: {},
 
 		/**
-		...
+		Method extracts credentials from the login form
+		and attempts to persist them by calling save on
+		the Credential model. Triggers a change event
+		on the Credential model.
 
 		@method updateCredentials
+		@param {Object} form jQuery-wrapped form element.
 		**/
-		updateCredentials: function () {
-			this.model.save({ username: this.usernameInput.val(), password: this.passwordInput.val() }, { silent: true });
-			this.model.change();
+		updateCredentials: function (form) {
+			// Define & initialize.
+			var username = form.find(this.selectors.username),
+				password = form.find(this.selectors.password);
+
+			// Save credentials without raising an event.
+			this.credModel.save({username: username.val(), password: password.val()}, {silent: true});
+			this.credModel.change();
 		},
 
 		/**
-		...
+		Method clears the username and password input fields on the
+		login form and persists null values for the username and password
+		on the Credential model. Triggers a change event on the Credential model.
 
 		@method logout
+		@param {Object} form jQuery-wrapped form element.
 		**/
-		logout: function () {
-			this.usernameInput = this.$("input[name=username]").val("");
-			this.passwordInput = this.$("input[name=password]").val("");
-			this.model.save({ username: null, password: null });
-			console.log("Logging out");
+		logout: function (form) {
+			// Define
+			var username = form.find(this.selectors.username).val(''),
+				password = form.find(this.selectors.password).val('');
+
+			this.credModel.save({username: null, password: null});
+		},
+
+		/**
+		Handler for the logout button on the Credential view.
+
+		@method logoutHandler
+		@param {Object} e Event object.
+		**/
+		logoutHandler: function (e) {
+			e.preventDefault();
+			var form = $(e.target).closest('form');
+			this.logout(form);
+		},
+
+		/**
+		Handler for the update button on the Credential view.
+
+		@method submitHandler
+		@param {Object} e Event object.
+		**/
+		submitHandler: function (e) {
+			e.preventDefault();
+			var form = $(e.target).closest('form');
+			this.updateCredentials(form);
 		},
 
 		/**
@@ -103,7 +142,7 @@
 		},
 
 		/**
-		Renders the UI for the Credential view.
+		Method renders the UI for the Credential view.
 
 		@method render
 		@return {Object} Credential view.
@@ -115,7 +154,7 @@
 
 		/**
 		Entry point for the Credential view.
-		Initialize is called when the view is first created.
+		Method is called when the view is first created.
 
 		@method initialize
 		@param {Object} options Object hash of options.
@@ -127,4 +166,4 @@
 		}
 	});
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

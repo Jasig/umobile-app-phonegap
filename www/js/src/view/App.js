@@ -1,4 +1,6 @@
-(function($, _, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	Manages the main application view.
@@ -69,6 +71,18 @@
 		},
 
 		/**
+		...
+
+		@method directToCurrentView
+		**/
+		onUpdateCredentials: function () {
+			console.log('Credentials Updated');
+			$.mobile.changePage('#home', {transition: 'none'});
+			$.mobile.showPageLoadingMsg('a', 'Loading modules');
+			umobile.Session.getSession();
+		},
+
+		/**
 		Directs user to the current view when a user is unauthenticated
 		and the current view is not the home screen.
 
@@ -80,7 +94,7 @@
 				currentView = this.stateModel.get('currentView'),
 				modules;
 
-			if ( (!userName || !authenticated) && (currentView && currentView !== 'home') ) {
+			if ((!userName || !authenticated) && (currentView && currentView !== 'home')) {
 				modules = this.moduleCollection.models;
 				_.each(modules, function (module, idx) {
 					if (module.get('fname') === this.stateModel.get('currentView')) {
@@ -209,13 +223,14 @@
 
 			// Listen for the 'change' event on a user's credentials.
 			this.credModel.on('change', _.bind(function () {
-				console.log('Credentials changed.');
+				this.onUpdateCredentials();
 			}, this));
 
-			// 
+			/*
 			this.credModel.on('destroy', _.bind(function () {
 				console.log('Credentials destoried.');
 			}, this));
+			*/
 
 			// Subscribe to the 'module.selected' event for the selection of a module.
 			$.subscribe('module.selected', _.bind(function (module) {

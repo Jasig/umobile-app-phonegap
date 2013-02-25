@@ -1,4 +1,6 @@
-(function($, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	The Module model houses information relating to each
@@ -15,10 +17,10 @@
 		@type Object
 		**/
 		defaults: {
-			fname: "fname",
-			title: "Title",
-			url: "url",
-			iconUrl: "imgUrl",
+			fname: 'fname',
+			title: 'Title',
+			url: 'url',
+			iconUrl: 'imgUrl',
 			newItemCount: 0,
 			isNative: false
 		},
@@ -29,7 +31,7 @@
 
 		@method sync
 		**/
-		sync: umobile.storage.sync(window["umobile"]["storage"][config.storageFn], "module")
+		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'module')
 	});
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

@@ -1,4 +1,6 @@
-(function($, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	The Credential model houses information relating to a user's
@@ -29,4 +31,4 @@
 		sync: umobile.storage.sync(umobile.storage[config.storageFn], "credentials")
 	});
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

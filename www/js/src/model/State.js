@@ -1,4 +1,6 @@
-(function($, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	The State model houses the state of a user's authentication status.
@@ -14,7 +16,7 @@
 		@type Object
 		**/
 		defaults: {
-			id: "state",
+			id: 'state',
 			authenticated: false,
 			lastSessionAccess: null
 		},
@@ -28,4 +30,4 @@
 		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'state')
 	});
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

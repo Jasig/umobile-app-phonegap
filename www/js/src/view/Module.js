@@ -1,4 +1,6 @@
-(function($, _, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, Handlebars:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	Manages the individual Module or portlet view.
@@ -89,7 +91,7 @@
 		},
 
 		/**
-		Renders the UI for the Module view.
+		Method renders the UI for the Module view.
 
 		@method render
 		@return {Object} Module view.
@@ -102,7 +104,7 @@
 
 		/**
 		Entry point for the Module view.
-		Initialize is called when the view is first created.
+		Method is called when the view is first created.
 
 		@method initialize
 		@param {Object} options Object hash of options.

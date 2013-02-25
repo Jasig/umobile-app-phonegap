@@ -22,5 +22,15 @@ var umobile = {
 	/**
 	@submodule view
 	**/
-	view: {}
+	view: {},
+
+	/**
+	@submodule auth
+	**/
+	auth: {},
+
+	/**
+	@submodule storage
+	**/
+	storage: {}
 };

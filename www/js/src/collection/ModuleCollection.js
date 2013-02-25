@@ -1,4 +1,6 @@
-(function($, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	/**
 	The Module collection houses a collection of modules or portlets.
@@ -55,4 +57,4 @@
 		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'modules')
 	});
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

@@ -1,7 +1,10 @@
-(function($, _, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	// Document.ready.
 	$(function () {
+
 		/**
 		...
 
@@ -10,24 +13,26 @@
 		**/
 		var getUrlParam = function (name) {
 			var result = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-			console.log('Get url parameter: ', result);
 			return (!result) ? null : result[1] || 0;
 		};
 
 		/**
-		
+		...
+
 		@class bootstrap
+		@constructor
 		**/
 		umobile.bootstrap = {
 			app: {},
 
 			/**
-			Parses the data returned by the getSession() method.
+			Parses the data broadcasted by the Session.getSession() method.
 			Iterates over the layout JSON and adds modules (i.e. portlets)
 			to the ModuleCollection based upon the number of portlets
 			contained within the JSON feed.
 
 			@method buildModuleCollection
+			@param {Object} data Object containing layout and portlet information.
 			**/
 			buildModuleCollection: function (data) {
 				// Define.
@@ -91,27 +96,6 @@
 			},
 
 			/**
-			Login a user with the configured login function.
-			Data pertaining to a user and thier layout is made
-			available when successful.
-
-			@method getSession
-			**/
-			getSession: function () {
-				var loginFn = umobile.auth[config.loginFn];
-				loginFn(
-					this.app.credModel,
-					_.bind(function (data) {
-						console.log("Rendering response for user: " + data.user);
-						this.buildModuleCollection(data);
-					}, this),
-					_.bind(function (jqXHR, textStatus, errorThrown) {
-						console.log('Error: ' + textStatus + ', ' + errorThrown);
-					}, this)
-				);
-			},
-
-			/**
 			Success handler for the Credential request.
 
 			@method credSuccessHandler
@@ -133,16 +117,13 @@
 					}
 
 					// Fetch list of modules from the server and render the application.
-					// Or fetch a collection of modules from an existing session and render
-					// the application.
+					// Or fetch a collection of modules from an existing session and render.
 					now = (new Date()).getTime();
 					lastSession = Number(this.app.stateModel.get('lastSessionAccess'));
-					if ((now - lastSession) < (1000*60*10)) {
-						this.app.moduleCollection.fetch({
-							success: function () {}
-						});
+					if ((now - lastSession) < (1000 * 60 * 10)) {
+						this.app.moduleCollection.fetch({success: function () {}});
 					} else {
-						this.getSession();
+						umobile.Session.getSession();
 					}
 				}, this));
 			},
@@ -158,7 +139,7 @@
 
 			/**
 			When triggered, the onDeviceReady() method renders a
-			loader to end users, inializes the main application
+			loader to end users, initializes the main application
 			view and starts the process of requesting data.
 
 			@method onDeviceReady
@@ -184,35 +165,40 @@
 			},
 
 			/**
-			Adds the 'deviceready' event listener to the document.
+			Method adds the 'deviceready' event listener to the document.
 			When triggered, the onDeviceReady() method is called.
 
 			@method initEventListener
 			**/
 			initEventListener: function () {
+				// onDeviceReady event.
 				document.addEventListener("deviceready", this.onDeviceReady, false);
 				if (config.loginFn === 'mockLogin') {
 					this.onDeviceReady();
 				}
+
+				// Subscribe to 'session.retrieved' event.
+				$.subscribe('session.retrieved', _.bind(function (data) {
+					this.buildModuleCollection(data);
+				}, this));
 			},
 
 			/**
-			Initializes the Session and Credential models
-			as well as the ModuleList collection during the
-			bootstrap phase.
+			Method initializes the State and Credential models as well as
+			the Module collection during the bootstrap phase.
 
 			@method initModels
 			**/
 			initModels: function () {
 				this.app = umobile.app;
 				this.app.stateModel = new umobile.model.State();
-				this.app.moduleCollection = new umobile.collection.ModuleCollection();
 				this.app.credModel = new umobile.model.Credential();
+				this.app.moduleCollection = new umobile.collection.ModuleCollection();
 			},
 
 			/**
 			Entry point for the umobile application.
-			Kicks off the bootstrap process.
+			Method kicks off the bootstrap process.
 
 			@method init
 			**/
@@ -224,7 +210,6 @@
 		};
 
 		umobile.bootstrap.initialize();
-		console.log('umobile: ', umobile.app);
 	});
 
 })(jQuery, _, umobile, config);
