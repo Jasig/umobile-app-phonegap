@@ -1,0 +1,12 @@
+{
+	"environment": "web",
+	
+	"htmlRemoveComments": true,
+	"htmlCollapseWhitespace": true, 
+
+	"imageOptimizationLevel": 3,
+	"imageOptimizationProgressive": true,
+
+	"javascriptMangle": true,
+	"javascriptPreserveComments": false
+}

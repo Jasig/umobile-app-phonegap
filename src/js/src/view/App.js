@@ -141,7 +141,7 @@
 		**/
 		renderModules: function (collection) {
 			// Define & initialize.
-			var nav = this.loc('nav'),
+			var nav = this.loc('nav').html(''),
 				modules = collection.models || this.moduleCollection.toJSON();
 
 			// Iterate over modules and initialize each module view.
