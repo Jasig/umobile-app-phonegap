@@ -30,6 +30,11 @@ module.exports = function(grunt) {
 		  {src: ['**'], dest: 'www/css/lib/jquerymobile/images/', expand:true, 
 		   cwd:'src/css/lib/jquerymobile/images'}
 		]
+	  },
+	  copy_docs: {
+		files: [
+		  {src: ['**'], dest: '.', expand:true, cwd:'www/docs/'},
+		]
 	  }
 	},
 
@@ -199,7 +204,7 @@ module.exports = function(grunt) {
 
   var setup = [];
   var clean = ['clean'];
-  var copy = ['copy'];
+  var copy = ['copy:main', 'copy:images'];
   var images = [];
   var css = ['cssmin'];
   var javascript = ['uglify'];
@@ -213,7 +218,8 @@ module.exports = function(grunt) {
   grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
   // Register tasks.
-  grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 'exec:git_checkout_pages']);
+  grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 
+  							  'exec:git_checkout_pages', 'copy:copy_docs']);
   grunt.registerTask('default', taskList);
  
 };
