@@ -195,7 +195,7 @@ module.exports = function(grunt) {
 	      stderr: true
 	    },
 	    git_add_pages: {
-	      command: 'git add -A',
+	      command: 'git add **/* -A',
 	      stdout: true,
 	      stderr: true
 	    },
