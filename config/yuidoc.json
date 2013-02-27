@@ -1,0 +1,8 @@
+{
+	"options": {
+		"paths": [
+			"src/js/src/"
+		],
+		"outdir": "docs/"
+	}
+}
