@@ -230,8 +230,8 @@ module.exports = function(grunt) {
   // Register tasks.
   grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 
   							  'exec:git_checkout_pages', 
-  							  'copy:copy_docs', 'exec:git_checkout_pages',
-  							  'exec:git_checkout_pages']);
+  							  'copy:copy_docs', 'exec:git_add_pages',
+  							  'exec:git_commit_pages']);
 
   grunt.registerTask('default', taskList);
  
