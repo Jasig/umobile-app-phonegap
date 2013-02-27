@@ -30,11 +30,6 @@ module.exports = function(grunt) {
 		  {src: ['**'], dest: 'www/css/lib/jquerymobile/images/', expand:true, 
 		   cwd:'src/css/lib/jquerymobile/images'}
 		]
-	  },
-	  copy_docs: {
-		files: [
-		  {src: ['**'], dest: '.', expand:true, cwd:'www/docs/'},
-		]
 	  }
 	},
 
