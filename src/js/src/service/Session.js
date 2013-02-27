@@ -6,7 +6,6 @@
 	Manages Session information.
 
 	@class Session
-	@constructor
 	**/
 	umobile.Session = {
 
@@ -15,7 +14,7 @@
 		function. Data pertaining to a user and thier layout is made
 		available when successful.
 
-		@class getSession
+		@method getSession
 		**/
 		getSession: function () {
 			var loginFn = umobile.auth[config.loginFn];

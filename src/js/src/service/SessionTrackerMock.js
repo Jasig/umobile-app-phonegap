@@ -10,7 +10,6 @@
 	implementation of the SessionTracking class.
 
 	@class SessionTrackerMock
-	@constructor
 	**/
 	umobile.SessionTracker = {
 		time: 0,

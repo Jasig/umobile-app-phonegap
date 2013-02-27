@@ -7,6 +7,8 @@
 	login credentials.
 
 	@class Credential
+	@submodule model
+	@namespace model
 	@constructor
 	**/
 	umobile.model.Credential = Backbone.Model.extend({
@@ -17,18 +19,18 @@
 		@type Object
 		**/
 		defaults: {
-			id: "credentials",
+			id: 'credentials',
 			username: null,
 			password: null
 		},
 
 		/**
-		Overrides Backbone.sync with umobile.storage.sync method.
+		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.
 
 		@method sync
 		**/
-		sync: umobile.storage.sync(umobile.storage[config.storageFn], "credentials")
+		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'credentials')
 	});
 
 })(jQuery, _, umobile, config);

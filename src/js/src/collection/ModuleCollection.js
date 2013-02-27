@@ -6,6 +6,8 @@
 	The Module collection houses a collection of modules or portlets.
 
 	@class ModuleCollection
+	@submodule collection
+	@namespace collection
 	@constructor
 	**/
 	umobile.collection.ModuleCollection = Backbone.Collection.extend({
@@ -18,16 +20,7 @@
 		model: umobile.model.Module,
 
 		/**
-		Entry point for the ModuleCollection.
-
-		@method initialize
-		**/
-		initialize: function () {
-			this.sync = umobile.storage.sync(umobile.storage[config.storageFn], 'modules');
-		},
-
-		/**
-		Overrides Backbone.save. Makes an 'update' call to the
+		Method overrides Backbone.save. Makes an update call to the
 		umobile.storage.sync method.
 
 		@method save
@@ -38,7 +31,7 @@
 		},
 
 		/**
-		Overrides Backbone.fetch. Makes a 'read' call to the
+		Method overrides Backbone.fetch. Makes a read call to the
 		umobile.storage.sync method.
 
 		@method fetch
@@ -49,12 +42,21 @@
 		},
 
 		/**
-		Overrides Backbone.sync with umobile.storage.sync method.
+		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.
 
 		@method sync
 		**/
-		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'modules')
+		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'modules'),
+
+		/**
+		Entry point for the ModuleCollection.
+
+		@method initialize
+		**/
+		initialize: function () {
+			this.sync = umobile.storage.sync(umobile.storage[config.storageFn], 'modules');
+		}
 	});
 
 })(jQuery, _, umobile, config);
