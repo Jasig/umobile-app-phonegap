@@ -32,16 +32,23 @@ module.exports = function(grunt) {
 			command: 'git commit -q --all --message="Commit project docs..."',
 			stdout: true,
 			stderr: true
+		},
+		git_push_pages: {
+			command: 'git push git@github.com:Jasig/umobile-app-phonegap.git gh-pages',
+			stdout: true,
+			stderr: true
 		}
+
 	}
   });
 
-  // Load plugins/tasks.
-  grunt.loadNpmTasks('grunt-contrib');
-  grunt.loadNpmTasks('grunt-exec');
 
-  // Register tasks.
-  grunt.registerTask('default', ['copy:copy_docs', 
-  								 'exec:git_add_pages',
-								 'exec:git_commit_pages']);
+	// Load plugins/tasks.
+	grunt.loadNpmTasks('grunt-contrib');
+	grunt.loadNpmTasks('grunt-exec');
+
+	// Register tasks.
+	grunt.registerTask('default', ['copy:copy_docs', 
+  									 'exec:git_add_pages',
+									 'exec:git_commit_pages']);
 };
