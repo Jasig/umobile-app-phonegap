@@ -204,6 +204,11 @@ module.exports = function(grunt) {
 	      stdout: true,
 	      stderr: true
 	    },
+	    git_checkout_master: {
+	      command: 'git checkout UPG-11',
+	      stdout: true,
+	      stderr: true
+	    }
 	}
   });
 
@@ -231,7 +236,8 @@ module.exports = function(grunt) {
   grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 
   							  'exec:git_checkout_pages', 
   							  'copy:copy_docs', 'exec:git_add_pages',
-  							  'exec:git_commit_pages']);
+  							  'exec:git_commit_pages', 
+  							  'exec:git_checkout_master']);
 
   grunt.registerTask('default', taskList);
  
