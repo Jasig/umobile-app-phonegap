@@ -17,8 +17,15 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          {src: ['src/data/layout-guest.json'], dest: 'www/data/layout-guest.json'},
-          {src: ['src/data/layout-student.json'], dest: 'www/data/layout-student.json'}
+          {src: ['**'], dest: 'www/data/', expand:true, cwd:'src/data/'}
+        ]
+      }, 
+      images: {
+        files: [
+          {src: ['**'], dest: 'www/images/', expand:true, cwd:'src/images/'},
+          {src: ['**'], dest: 'www/data/icons/', expand:true, cwd:'src/data/icons/'},
+          {src: ['**'], dest: 'www/css/lib/jquerymobile/images/', expand:true, 
+           cwd:'src/css/lib/jquerymobile/images'}
         ]
       }
     },
@@ -50,21 +57,6 @@ module.exports = function(grunt) {
             'www/courses.html': 'src/courses.html'
           }
         }
-    },
-
-    imagemin: {
-      minimizeImages: {
-        options: {
-          optimizationLevel: config.imageOptimizationLevel,
-          progressive: config.imageOptimizationProgressive
-        },
-        files: {
-          'www/images/': 'src/images/*.*',
-          'www/data/icons': 'src/data/icons/*.*',
-          'www/images/icons': 'src/images/icons/*.*',
-          'www/css/lib/jquerymobile/images': 'src/css/lib/jquerymobile/images/*.*'
-        }
-      }
     },
 
     cssmin: {
@@ -183,7 +175,7 @@ module.exports = function(grunt) {
   var setup = [];
   var clean = ['clean'];
   var copy = ['copy'];
-  var images = ['imagemin'];
+  var images = [];
   var css = ['cssmin'];
   var javascript = ['uglify'];
   var html = ['targethtml', 'htmlmin'];
