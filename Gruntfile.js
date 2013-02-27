@@ -23,23 +23,13 @@ module.exports = function(grunt) {
 	},
 
 	exec: {
-		git_checkout_pages: {
-			command: 'git checkout gh-pages',
-			stdout: true,
-			stderr: true
-		},
 		git_add_pages: {
 			command: 'git add . -A',
 			stdout: true,
 			stderr: true
 		},
 		git_commit_pages: {
-			command: 'git commit -q --all --branch --message="Commit Project Docs"',
-			stdout: true,
-			stderr: true
-		},
-		git_checkout_master: {
-			command: 'git checkout UPG-11',
+			command: 'git commit -q --all --message="Commit project docs..."',
 			stdout: true,
 			stderr: true
 		}
@@ -51,9 +41,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-exec');
 
   // Register tasks.
-  grunt.registerTask('default', ['clean:remove_docs','yuidoc', 
-							  'exec:git_checkout_pages', 
-							  'copy:copy_docs', 'exec:git_add_pages',
-							  'exec:git_commit_pages', 
-							  'exec:git_checkout_master']);
+  grunt.registerTask('default', ['copy:copy_docs', 
+  								 'exec:git_add_pages',
+								 'exec:git_commit_pages']);
 };
