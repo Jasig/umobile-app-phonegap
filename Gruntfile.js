@@ -1,3 +1,6 @@
+var scmUrl = 'git@github.com:Jasig/umobile-app-phonegap.git';
+var scmBranch = 'gh-pages';
+
 module.exports = function(grunt) {
   'use strict';
 
@@ -23,6 +26,11 @@ module.exports = function(grunt) {
 	},
 
 	exec: {
+		git_pull_pages: {
+			command: 'git pull '+ scmUrl + ' ' + scmBranch,
+			stdout: true,
+			stderr: true
+		},
 		git_add_pages: {
 			command: 'git add . -A',
 			stdout: true,
@@ -34,7 +42,7 @@ module.exports = function(grunt) {
 			stderr: true
 		},
 		git_push_pages: {
-			command: 'git push git@github.com:Jasig/umobile-app-phonegap.git gh-pages',
+			command: 'git push ' + scmUrl + ' ' + scmBranch,
 			stdout: true,
 			stderr: true
 		}
