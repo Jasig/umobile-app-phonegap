@@ -9,6 +9,7 @@
 	"dependencies": {
 		"grunt": "0.4.0",
 		"grunt-contrib": "*",
+        "grunt-exec": "*",
 		"nconf": "*",
 		"express": "3.1.0"
 	}
