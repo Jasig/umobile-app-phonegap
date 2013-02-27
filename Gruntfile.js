@@ -200,7 +200,7 @@ module.exports = function(grunt) {
 	      stderr: true
 	    },
 	    git_commit_pages: {
-	      command: 'git commit --all --branch --message="Commit Project Docs"',
+	      command: 'git commit -q --all --branch --message="Commit Project Docs"',
 	      stdout: true,
 	      stderr: true
 	    },
