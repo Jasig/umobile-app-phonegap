@@ -194,6 +194,16 @@ module.exports = function(grunt) {
 	      stdout: true,
 	      stderr: true
 	    },
+	    git_add_pages: {
+	      command: 'git add -A',
+	      stdout: true,
+	      stderr: true
+	    },
+	    git_commit_pages: {
+	      command: 'git commit --all --branch --message="Commit Project Docs"',
+	      stdout: true,
+	      stderr: true
+	    },
 	}
   });
 
@@ -219,7 +229,10 @@ module.exports = function(grunt) {
 
   // Register tasks.
   grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 
-  							  'exec:git_checkout_pages', 'copy:copy_docs']);
+  							  'exec:git_checkout_pages', 
+  							  'copy:copy_docs', 'exec:git_checkout_pages',
+  							  'exec:git_checkout_pages']);
+
   grunt.registerTask('default', taskList);
  
 };
