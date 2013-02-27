@@ -9,9 +9,12 @@ module.exports = function(grunt) {
 	pkg: grunt.file.readJSON('package.json'),
 	
 	clean: {
-	  cleanWWW: {
-		src: ['www']
-	  }
+		cleanWWW: {
+			src: ['www']
+		},
+		cleanDocs: {
+			src: ['www/docs']
+		}
 	},
 
 	copy: {
@@ -68,7 +71,7 @@ module.exports = function(grunt) {
 	  }
 	},
 
- 	htmlmin: {
+	htmlmin: {
 		  minimizeHtml: {
 		   options: {
 			removeComments: config.htmlRemoveComments,
@@ -179,7 +182,6 @@ module.exports = function(grunt) {
 			}
 		}
 	}
-
   });
 
   // Load plugins/tasks.
@@ -189,7 +191,7 @@ module.exports = function(grunt) {
 
   var setup = [];
   var clean = ['clean'];
-  var copy = ['copy'];
+  var copy = ['copy:main', 'copy:images'];
   var images = [];
   var css = ['cssmin'];
   var javascript = ['uglify'];
@@ -203,7 +205,8 @@ module.exports = function(grunt) {
   grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
   // Register tasks.
-  grunt.registerTask('docs', ['yuidoc']);
+  grunt.registerTask('docs', ['clean:cleanDocs','yuidoc']);
+
   grunt.registerTask('default', taskList);
  
 };
