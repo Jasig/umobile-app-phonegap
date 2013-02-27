@@ -50,5 +50,6 @@ module.exports = function(grunt) {
 	// Register tasks.
 	grunt.registerTask('default', ['copy:copy_docs', 
   									 'exec:git_add_pages',
-									 'exec:git_commit_pages']);
+									 'exec:git_commit_pages',
+									 'exec:git_push_pages']);
 };
