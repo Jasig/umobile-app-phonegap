@@ -1,0 +1,16 @@
+{
+	"name": "uMobile",
+	"description": "uMobile",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"grunt": "0.4.0",
+		"grunt-contrib": "*",
+        "grunt-exec": "*",
+		"nconf": "*",
+		"express": "3.1.0"
+	}
+}
