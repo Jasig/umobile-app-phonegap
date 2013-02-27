@@ -9,9 +9,12 @@ module.exports = function(grunt) {
 	pkg: grunt.file.readJSON('package.json'),
 	
 	clean: {
-	  cleanWWW: {
-		src: ['www']
-	  }
+		cleanWWW: {
+			src: ['www']
+		}, 
+	  	remove_docs: {
+			src: ['www/docs']
+		}
 	},
 
 	copy: {
@@ -181,11 +184,6 @@ module.exports = function(grunt) {
 	},
 
 	exec: {
-		remove_docs: {
-	      command: 'rm -fd www/docs',
-	      stdout: true,
-	      stderr: true
-	    },
 	    git_checkout_pages: {
 	      command: 'git checkout gh-pages',
 	      stdout: true,
@@ -215,7 +213,7 @@ module.exports = function(grunt) {
   grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
   // Register tasks.
-  grunt.registerTask('docs', ['exec:remove_docs','yuidoc', 'exec:git_checkout_pages']);
+  grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 'exec:git_checkout_pages']);
   grunt.registerTask('default', taskList);
  
 };
