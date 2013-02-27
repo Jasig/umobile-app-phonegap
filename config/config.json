@@ -1,6 +1,6 @@
 {
 	"environment": "web",
-	
+
 	"htmlRemoveComments": true,
 	"htmlCollapseWhitespace": true, 
 
