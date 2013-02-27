@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 	  }
 	},
 
- 	htmlmin: {
+	htmlmin: {
 		  minimizeHtml: {
 		   options: {
 			removeComments: config.htmlRemoveComments,
@@ -178,8 +178,20 @@ module.exports = function(grunt) {
 				outdir: 'www/docs/'
 			}
 		}
-	}
+	},
 
+	exec: {
+		remove_docs: {
+	      command: 'rm -fd www/docs',
+	      stdout: true,
+	      stderr: true
+	    },
+	    git_checkout_pages: {
+	      command: 'git checkout gh-pages',
+	      stdout: true,
+	      stderr: true
+	    },
+	}
   });
 
   // Load plugins/tasks.
@@ -203,7 +215,7 @@ module.exports = function(grunt) {
   grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
   // Register tasks.
-  grunt.registerTask('docs', ['yuidoc']);
+  grunt.registerTask('docs', ['exec:remove_docs','yuidoc', 'exec:git_checkout_pages']);
   grunt.registerTask('default', taskList);
  
 };
