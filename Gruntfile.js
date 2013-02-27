@@ -11,8 +11,8 @@ module.exports = function(grunt) {
 	clean: {
 		cleanWWW: {
 			src: ['www']
-		}, 
-	  	remove_docs: {
+		},
+		cleanDocs: {
 			src: ['www/docs']
 		}
 	},
@@ -181,29 +181,6 @@ module.exports = function(grunt) {
 				outdir: 'www/docs/'
 			}
 		}
-	},
-
-	exec: {
-	    git_checkout_pages: {
-	      command: 'git checkout gh-pages',
-	      stdout: true,
-	      stderr: true
-	    },
-	    git_add_pages: {
-	      command: 'git add **/* -A',
-	      stdout: true,
-	      stderr: true
-	    },
-	    git_commit_pages: {
-	      command: 'git commit --all --branch --message="Commit Project Docs"',
-	      stdout: true,
-	      stderr: true
-	    },
-	    git_checkout_master: {
-	      command: 'git checkout UPG-11',
-	      stdout: true,
-	      stderr: true
-	    }
 	}
   });
 
@@ -228,11 +205,7 @@ module.exports = function(grunt) {
   grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
   // Register tasks.
-  grunt.registerTask('docs', ['clean:remove_docs','yuidoc', 
-  							  'exec:git_checkout_pages', 
-  							  'copy:copy_docs', 'exec:git_add_pages',
-  							  'exec:git_commit_pages', 
-  							  'exec:git_checkout_master']);
+  grunt.registerTask('docs', ['clean:cleanDocs','yuidoc']);
 
   grunt.registerTask('default', taskList);
  
