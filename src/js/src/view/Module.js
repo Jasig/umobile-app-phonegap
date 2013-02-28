@@ -6,6 +6,8 @@
 	Manages the individual Module or portlet view.
 
 	@class Module
+	@submodule view
+	@namespace view
 	@constructor
 	**/
 	umobile.view.Module = Backbone.View.extend({

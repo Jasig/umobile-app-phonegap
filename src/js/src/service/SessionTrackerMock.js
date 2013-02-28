@@ -1,18 +1,21 @@
-(function($, umobile, config) {
+/*global window:true, _:true, document:true, jQuery:true, umobile:true, config:true, console:true */
+(function ($, _, umobile, config) {
+	'use strict';
 
 	// Override config.js to provide mock data
 	// and mock login functionality.
-	config.uMobileServerContext = "/data";
-	config.loginFn = "mockLogin";
+	config.uMobileServerContext = '/data';
+	config.loginFn = 'mockLogin';
 
 	/**
 	The SesssionTrackerMock class mocks the in-memory
 	implementation of the SessionTracking class.
 
 	@class SessionTrackerMock
-	@constructor
+	@submodule session
+	@namespace session
 	**/
-	umobile.SessionTracker = {
+	umobile.session.SessionTracker = {
 		time: 0,
 		get: function (success) {
 			if (typeof success !== 'function') {
@@ -28,4 +31,4 @@
 		}
 	};
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

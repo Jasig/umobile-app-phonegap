@@ -6,6 +6,8 @@
 	Manages the main application view.
 
 	@class App
+	@submodule view
+	@namespace view
 	@constructor
 	**/
 	umobile.view.App = Backbone.View.extend({
@@ -15,7 +17,7 @@
 		@property el
 		@type Object
 		**/
-		el: "#appView",
+		el: '#appView',
 
 		/**
 		Object hash of valid DOM selectors.
@@ -71,19 +73,21 @@
 		},
 
 		/**
-		...
+		Method is triggered whenever a user's credentials
+		are updated. When triggered, this method directs
+		users to the home screen and makes a request to
+		retrieve layout data for the updated credentials.
 
-		@method directToCurrentView
+		@method onUpdateCredentials
 		**/
 		onUpdateCredentials: function () {
-			console.log('Credentials Updated');
 			$.mobile.changePage('#home', {transition: 'none'});
 			$.mobile.showPageLoadingMsg('a', 'Loading modules');
-			umobile.Session.getSession();
+			umobile.auth.getSession();
 		},
 
 		/**
-		Directs user to the current view when a user is unauthenticated
+		Method directs user to the current view when a user is unauthenticated
 		and the current view is not the home screen.
 
 		@method directToCurrentView
@@ -193,7 +197,7 @@
 			frame.attr('src', module.attributes.url);
 
 			// Transition to the selected module.
-			$.mobile.changePage('#module', {transition: "none"});
+			$.mobile.changePage('#module', {transition: 'none'});
 
 			// Update state with current view.
 			this.stateModel.save({currentView: module.get('fname')});
@@ -225,12 +229,6 @@
 			this.credModel.on('change', _.bind(function () {
 				this.onUpdateCredentials();
 			}, this));
-
-			/*
-			this.credModel.on('destroy', _.bind(function () {
-				console.log('Credentials destoried.');
-			}, this));
-			*/
 
 			// Subscribe to the 'module.selected' event for the selection of a module.
 			$.subscribe('module.selected', _.bind(function (module) {
