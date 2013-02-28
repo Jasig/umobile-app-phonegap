@@ -1,5 +1,4 @@
 /*global window:true, _:true, document:true, jQuery:true, umobile:true, config:true, console:true */
-
 (function ($, _, umobile, config) {
 	'use strict';
 
@@ -13,6 +12,7 @@
 	implementation of the SessionTracking class.
 
 	@class SessionTrackerMock
+	@namespace session
 	**/
 	umobile.session.SessionTracker = {
 		time: 0,

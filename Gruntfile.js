@@ -146,7 +146,6 @@ module.exports = function (grunt) {
 					'www/js/src/model/State.js': 'src/js/src/model/State.js',
 
 					'www/js/src/service/Authentication.js': 'src/js/src/service/Authentication.js',
-					'www/js/src/service/Session.js': 'src/js/src/service/Session.js',
 					'www/js/src/service/SessionTracker.js': 'src/js/src/service/SessionTracker.js',
 					'www/js/src/service/SessionTrackerMock.js': 'src/js/src/service/SessionTrackerMock.js',
 					'www/js/src/service/Storage.js': 'src/js/src/service/Storage.js',

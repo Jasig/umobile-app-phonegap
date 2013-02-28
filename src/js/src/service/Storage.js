@@ -6,13 +6,13 @@
 	Manages persistence of data for the umobile application.
 
 	@class Storage
-	@submodule storage
 	@namespace storage
 	**/
 	umobile.storage = umobile.storage || {};
 
 	/**
-	...
+	Method overrides Backbone.sync implementation
+	to persist application data.
 
 	@method sync
 	**/

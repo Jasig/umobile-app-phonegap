@@ -8,8 +8,6 @@
 		/**
 		Method searches the URL for the given name argument.
 
-		@class Bootstrap
-		@submodule bootstrap
 		@method getUrlParam
 		@param {String} name Parameter to search for on the URL.
 		@return {String} URL parameter.
@@ -24,9 +22,9 @@
 		Manages the bootstrap process for the umobile application.
 
 		@class Bootstrap
-		@submodule bootstrap
+		@namespace app
 		**/
-		umobile.bootstrap = {
+		umobile.app.bootstrap = {
 			/**
 			Property stores reference to umobile.app, which houses the
 			running instance of the umobile application.
@@ -139,7 +137,7 @@
 					if ((now - lastSession) < (1000 * 60 * 10)) {
 						this.app.moduleCollection.fetch({success: function () {}});
 					} else {
-						umobile.Session.getSession();
+						umobile.auth.getSession();
 					}
 				}, this));
 			},
@@ -226,7 +224,7 @@
 			}
 		};
 
-		umobile.bootstrap.initialize();
+		umobile.app.bootstrap.initialize();
 	});
 
 })(jQuery, _, umobile, config);

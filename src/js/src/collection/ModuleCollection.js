@@ -6,7 +6,6 @@
 	The Module collection houses a collection of modules or portlets.
 
 	@class ModuleCollection
-	@submodule collection
 	@namespace collection
 	@constructor
 	**/

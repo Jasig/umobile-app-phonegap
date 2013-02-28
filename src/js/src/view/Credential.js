@@ -6,7 +6,6 @@
 	Manages the Credential view.
 
 	@class Credential
-	@submodule view
 	@namespace view
 	@constructor
 	**/

@@ -1,12 +1,11 @@
-/*global window:true, document:true, jQuery:true, umobile:true, config:true, GibberishAES:true, console:true */
-(function ($, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, GibberishAES:true, console:true */
+(function ($, _, umobile, config) {
 	'use strict';
 
 	/**
 	Manages authentication process for the umobile application.
 
 	@class Authentication
-	@submodule auth
 	@namespace auth
 	**/
 	umobile.auth = umobile.auth || {};
@@ -31,6 +30,27 @@
 	**/
 	var getLocalLogoutServletUrl = function () {
 		return config.uMobileServerUrl + config.uMobileServerContext + '/Logout';
+	};
+
+	/**
+	Method logs a user into the system with the configured login
+	function. Data pertaining to a user and thier layout is made
+	available when successful.
+
+	@method getSession
+	**/
+	umobile.auth.getSession = function () {
+		var loginFn = umobile.auth[config.loginFn];
+		loginFn(
+			umobile.app.credModel,
+			_.bind(function (data) {
+				console.log('Broadcasting data for user: ' + data.user);
+				$.publish('session.retrieved', data);
+			}, this),
+			_.bind(function (jqXHR, textStatus, errorThrown) {
+				console.log('Error: ' + textStatus + ', ' + errorThrown);
+			}, this)
+		);
 	};
 
 	/**
@@ -284,4 +304,4 @@
 		});
 	};
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);

@@ -7,7 +7,6 @@
 	login credentials.
 
 	@class Credential
-	@submodule model
 	@namespace model
 	@constructor
 	**/

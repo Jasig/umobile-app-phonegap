@@ -6,7 +6,6 @@
 	The State model houses the state of a user's authentication status.
 
 	@class State
-	@submodule model
 	@namespace model
 	@constructor
 	**/
