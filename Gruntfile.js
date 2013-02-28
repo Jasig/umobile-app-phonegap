@@ -6,6 +6,8 @@ var nconf = require('nconf'),
 	setup, clean, copy, images, css, lint,
 	javascript, html, tearDown, taskList;
 
+var configSettingsFile = 'filters/js/config/' + config.configSettings + '.js';
+
 // Grunt.
 module.exports = function (grunt) {
 	'use strict';
@@ -136,7 +138,7 @@ module.exports = function (grunt) {
 				files: {
 					'www/js/src/app.js': 'src/js/src/app.js',
 					'www/js/src/bootstrap.js': 'src/js/src/bootstrap.js',
-					'www/js/src/config.js': 'src/js/src/config.js',
+					'www/js/src/config.js': configSettingsFile,
 					'www/js/src/home.js': 'src/js/src/home.js',
 
 					'www/js/src/collection/ModuleCollection.js': 'src/js/src/collection/ModuleCollection.js',
@@ -212,9 +214,10 @@ module.exports = function (grunt) {
 	taskList = setup.concat(clean, images, css, lint, javascript, html, copy, tearDown);
 
 	grunt.log.ok('Using build environment: ' + config.targetEnvironment);
+	grunt.log.ok('Using configuration settings: ' + config.configSettings);
 
 	// Register tasks.
 	grunt.registerTask('docs', ['clean:cleanDocs', 'yuidoc']);
-	grunt.registerTask('lint', ['jshint']);
+	grunt.registerTask('lint', lint);
 	grunt.registerTask('default', taskList);
 };

@@ -189,7 +189,7 @@
 			initEventListener: function () {
 				// onDeviceReady event.
 				document.addEventListener('deviceready', this.onDeviceReady, false);
-				if (config.loginFn === 'mockLogin') {
+				if (config.loginFn === 'localLogin') {
 					this.onDeviceReady();
 				}
 

@@ -25,5 +25,8 @@ nconf.file({file: config.configFile});
 /** Supported environments are: 'web', 'android', 'iphone' **/
 config.targetEnvironment = nconf.get('environment') || 'web';
 
+/** Configuration type to be used. Supported types are 'mock', 'local', 'cas' **/
+config.configSettings = nconf.get('config') || 'mock';
+
 // Export module.
 module.exports = config;

@@ -2,9 +2,7 @@
 var config = {};
 
 // BASE SERVER URL
-// config.uMobileServerUrl = 'http://10.0.2.2:8080';			// Android only, otherwise http://localhost:8080.
-// config.uMobileServerUrl = 'https://umobile.unicon.net';		// Android only, otherwise http://localhost:8080.
-config.uMobileServerUrl = 'http://localhost:5000';				// HTML5 testing url.
+config.uMobileServerUrl = 'http://localhost:8080';				// HTML5 testing url, otherwise 'http://10.0.2.2:8080' for android
 
 // UMOBILE SERVER CONTEXT PATH
 config.uMobileServerContext = '';

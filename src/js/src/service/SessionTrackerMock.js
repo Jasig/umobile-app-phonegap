@@ -2,11 +2,6 @@
 (function ($, _, umobile, config) {
 	'use strict';
 
-	// Override config.js to provide mock data
-	// and mock login functionality.
-	config.uMobileServerContext = '/data';
-	config.loginFn = 'mockLogin';
-
 	/**
 	The SesssionTrackerMock class mocks the in-memory
 	implementation of the SessionTracking class.
