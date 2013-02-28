@@ -59,5 +59,12 @@ var umobile = {
 
 	@submodule storage
 	**/
-	storage: {}
+	storage: {},
+
+	/**
+	Submodule for the umobile session implementation.
+
+	@submodule session
+	**/
+	session: {}
 };

@@ -98,7 +98,7 @@
 				});
 
 				// Update time in the Session Tracker.
-				umobile.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
+				umobile.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
 
 				// Save the collection.
 				this.app.moduleCollection.save({
@@ -117,7 +117,7 @@
 			@method credSuccessHandler
 			**/
 			credSuccessHandler: function (model, response, options) {
-				umobile.SessionTracker.get(_.bind(function (time) {
+				umobile.session.SessionTracker.get(_.bind(function (time) {
 					var module, now, lastSession;
 
 					// Search the url for the module parameter.

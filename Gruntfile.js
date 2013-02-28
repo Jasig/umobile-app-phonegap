@@ -3,7 +3,7 @@
 // Modules & variables.
 var nconf = require('nconf'),
 	config = require('./config'),
-	setup, clean, copy, images, css,
+	setup, clean, copy, images, css, lint,
 	javascript, html, tearDown, taskList;
 
 // Grunt.
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
 				document: true
 			},
 			all: [
-				'src/js/src/*.js',
+				'src/js/src/**/*.js',
 				'config/*.js',
 				'tasks/*.js',
 				'*.js'
@@ -204,12 +204,13 @@ module.exports = function (grunt) {
 	copy = ['copy:main', 'copy:images'];
 	images = [];
 	css = ['cssmin'];
+	lint = ['jshint'];
 	javascript = ['uglify'];
 	html = ['targethtml', 'htmlmin'];
 	tearDown = [];
 
 	// Define task list.
-	taskList = setup.concat(clean, images, css, javascript, html, copy, tearDown);
+	taskList = setup.concat(clean, images, css, lint, javascript, html, copy, tearDown);
 
 	grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
