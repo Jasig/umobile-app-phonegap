@@ -6,6 +6,8 @@
 	The State model houses the state of a user's authentication status.
 
 	@class State
+	@submodule model
+	@namespace model
 	@constructor
 	**/
 	umobile.model.State = Backbone.Model.extend({
@@ -22,7 +24,7 @@
 		},
 
 		/**
-		Overrides Backbone.sync with umobile.storage.sync method.
+		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.
 
 		@method sync

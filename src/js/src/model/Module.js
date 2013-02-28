@@ -7,6 +7,8 @@
 	module or portlet.
 
 	@class Module
+	@submodule model
+	@namespace model
 	@constructor
 	**/
 	umobile.model.Module = Backbone.Model.extend({
@@ -26,7 +28,7 @@
 		},
 
 		/**
-		Overrides Backbone.sync with umobile.storage.sync method.
+		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.
 
 		@method sync

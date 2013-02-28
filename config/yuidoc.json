@@ -3,6 +3,6 @@
 		"paths": [
 			"src/js/src/"
 		],
-		"outdir": "docs/"
+		"outdir": "www/docs/"
 	}
 }

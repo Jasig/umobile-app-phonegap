@@ -6,9 +6,11 @@
 	$(function () {
 
 		/**
-		...
+		Method searches the URL for the given name argument.
 
 		@method getUrlParam
+		@param {String} name Parameter to search for on the URL.
+		@return {String} URL parameter.
 		@private
 		**/
 		var getUrlParam = function (name) {
@@ -17,19 +19,27 @@
 		};
 
 		/**
-		...
+		Manages the bootstrap process for the umobile application.
 
-		@class bootstrap
-		@constructor
+		@class Bootstrap
+		@submodule app
+		@namespace app
 		**/
-		umobile.bootstrap = {
+		umobile.app.bootstrap = {
+			/**
+			Property stores reference to umobile.app, which houses the
+			running instance of the umobile application.
+
+			@property app
+			@type Object
+			**/
 			app: {},
 
 			/**
-			Parses the data broadcasted by the Session.getSession() method.
-			Iterates over the layout JSON and adds modules (i.e. portlets)
-			to the ModuleCollection based upon the number of portlets
-			contained within the JSON feed.
+			Method parses the data received by the session.retrieved event.
+			Iterates over layout JSON and adds modules (i.e. portlets) to
+			the ModuleCollection based upon the number of portlets described
+			by the JSON feed.
 
 			@method buildModuleCollection
 			@param {Object} data Object containing layout and portlet information.
@@ -56,7 +66,7 @@
 						// match is not found, set the icon url to an icon on the
 						// server.
 						if (config.nativeIcons[portlet.fname]) {
-							portlet.iconUrl = "images/icons/" + config.nativeIcons[portlet.fname];
+							portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
 						} else {
 							portlet.iconUrl = config.uPortalServerUrl + portlet.iconUrl;
 						}
@@ -83,11 +93,11 @@
 				// Update state.
 				this.app.stateModel.save({
 					'lastSessionAccess': (new Date()).getTime(),
-					'authenticated': this.app.credModel.get("username") ? true : false
+					'authenticated': this.app.credModel.get('username') ? true : false
 				});
 
 				// Update time in the Session Tracker.
-				umobile.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
+				umobile.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
 
 				// Save the collection.
 				this.app.moduleCollection.save({
@@ -96,12 +106,17 @@
 			},
 
 			/**
-			Success handler for the Credential request.
+			Success handler for the Credential request. Method checks the backend session
+			access tracker. If the session tracker is non-zero, this method updates the application
+			state with the value from the session tracker. This method also checks the application
+			state for the last session access timestamp. If a timestamp is present and is within
+			session length, this method assumes a valid session and skips authentication. Otherwise,
+			the authentication process is started.
 
 			@method credSuccessHandler
 			**/
 			credSuccessHandler: function (model, response, options) {
-				umobile.SessionTracker.get(_.bind(function (time) {
+				umobile.session.SessionTracker.get(_.bind(function (time) {
 					var module, now, lastSession;
 
 					// Search the url for the module parameter.
@@ -123,7 +138,7 @@
 					if ((now - lastSession) < (1000 * 60 * 10)) {
 						this.app.moduleCollection.fetch({success: function () {}});
 					} else {
-						umobile.Session.getSession();
+						umobile.auth.getSession();
 					}
 				}, this));
 			},
@@ -138,15 +153,15 @@
 			},
 
 			/**
-			When triggered, the onDeviceReady() method renders a
-			loader to end users, initializes the main application
-			view and starts the process of requesting data.
+			When triggered, method renders a loader to end users,
+			initializes the main application view and starts the
+			data retrieval process.
 
 			@method onDeviceReady
 			**/
 			onDeviceReady: function () {
 				// Show loader.
-				$.mobile.showPageLoadingMsg("a", "Loading modules");
+				$.mobile.showPageLoadingMsg('a', 'Loading Modules');
 
 				// Initialize the main application view.
 				this.app.appView = new umobile.view.App();
@@ -165,14 +180,15 @@
 			},
 
 			/**
-			Method adds the 'deviceready' event listener to the document.
-			When triggered, the onDeviceReady() method is called.
+			Method sets up listeners for the umobile applicaiton during the bootstrap
+			process. The application is currently set up to listen for the deviceready
+			event and a custom session.retrieved event.
 
 			@method initEventListener
 			**/
 			initEventListener: function () {
 				// onDeviceReady event.
-				document.addEventListener("deviceready", this.onDeviceReady, false);
+				document.addEventListener('deviceready', this.onDeviceReady, false);
 				if (config.loginFn === 'mockLogin') {
 					this.onDeviceReady();
 				}
@@ -209,7 +225,7 @@
 			}
 		};
 
-		umobile.bootstrap.initialize();
+		umobile.app.bootstrap.initialize();
 	});
 
 })(jQuery, _, umobile, config);
