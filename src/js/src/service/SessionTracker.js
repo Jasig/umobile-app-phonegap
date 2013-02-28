@@ -6,6 +6,7 @@
 	Gets and sets the last accessed timestamp for the current session.
 
 	@class SessionTracker
+	@submodule session
 	@namespace session
 	**/
 	umobile.session.SessionTracker = {

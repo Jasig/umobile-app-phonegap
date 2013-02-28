@@ -4,12 +4,15 @@ all source logic to the umobile namespace. Houses the
 app, bootstrap, model, collection, view, auth and storage
 submodules.
 
+@module umobile
 @namespace umobile
+@main umobile
 **/
 var umobile = {
 	/**
 	Namespace for running instance of the umobile application.
 
+	@submodule app
 	@namespace app
 	**/
 	app: {},
@@ -19,6 +22,7 @@ var umobile = {
 	Houses the Credential, Module and State model
 	implementations.
 
+	@submodule model
 	@namespace model
 	**/
 	model: {},
@@ -27,6 +31,7 @@ var umobile = {
 	Namespace for umobile collection implementations.
 	Houses the Module collection implementation.
 
+	@submodule collection
 	@namespace collection
 	**/
 	collection: {},
@@ -36,6 +41,7 @@ var umobile = {
 	Houses the App, Credential and Module view
 	implementations.
 
+	@submodule view
 	@namespace view
 	**/
 	view: {},
@@ -43,6 +49,7 @@ var umobile = {
 	/**
 	Namespace for the umobile authentication implementation.
 
+	@submodule auth
 	@namespace auth
 	**/
 	auth: {},
@@ -50,6 +57,7 @@ var umobile = {
 	/**
 	Namespace for the umobile storage implementation.
 
+	@submodule storage
 	@namespace storage
 	**/
 	storage: {},
@@ -57,6 +65,7 @@ var umobile = {
 	/**
 	Namespace for the umobile session implementation.
 
+	@submodule session
 	@namespace session
 	**/
 	session: {}

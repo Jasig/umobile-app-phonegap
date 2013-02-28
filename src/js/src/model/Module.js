@@ -7,6 +7,7 @@
 	module or portlet.
 
 	@class Module
+	@submodule model
 	@namespace model
 	@constructor
 	**/

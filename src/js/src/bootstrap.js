@@ -22,6 +22,7 @@
 		Manages the bootstrap process for the umobile application.
 
 		@class Bootstrap
+		@submodule app
 		@namespace app
 		**/
 		umobile.app.bootstrap = {

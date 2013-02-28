@@ -6,6 +6,7 @@
 	Manages the main application view.
 
 	@class App
+	@submodule view
 	@namespace view
 	@constructor
 	**/

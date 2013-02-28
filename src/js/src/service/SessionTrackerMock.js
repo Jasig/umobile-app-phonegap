@@ -12,6 +12,7 @@
 	implementation of the SessionTracking class.
 
 	@class SessionTrackerMock
+	@submodule session
 	@namespace session
 	**/
 	umobile.session.SessionTracker = {

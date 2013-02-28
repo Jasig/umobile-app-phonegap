@@ -6,6 +6,7 @@
 	Manages the individual Module or portlet view.
 
 	@class Module
+	@submodule view
 	@namespace view
 	@constructor
 	**/

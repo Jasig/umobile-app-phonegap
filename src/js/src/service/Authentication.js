@@ -6,6 +6,7 @@
 	Manages authentication process for the umobile application.
 
 	@class Authentication
+	@submodule auth
 	@namespace auth
 	**/
 	umobile.auth = umobile.auth || {};

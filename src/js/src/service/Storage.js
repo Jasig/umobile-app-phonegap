@@ -6,6 +6,7 @@
 	Manages persistence of data for the umobile application.
 
 	@class Storage
+	@submodule storage
 	@namespace storage
 	**/
 	umobile.storage = umobile.storage || {};
