@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>view</title>
+    <title>src\js\src\service\Storage.js</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -124,63 +124,163 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>view Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: src\js\src\service\Storage.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, GibberishAES:true, console:true *&#x2F;
+(function ($, _, umobile, config) {
+	&#x27;use strict&#x27;;
 
-    
-        <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;src_js_src_view_Module.js.html#l5"><code>src\js\src\view\Module.js:5</code></a>
-        </div>
-    
+	&#x2F;**
+	Manages persistence of data for the umobile application.
 
-    
-</div>
+	@class Storage
+	@submodule storage
+	@namespace storage
+	**&#x2F;
+	umobile.storage = umobile.storage || {};
 
+	&#x2F;**
+	Method overrides Backbone.sync implementation
+	to persist application data.
 
+	@method sync
+	**&#x2F;
+	umobile.storage.sync = function (storage, key) {
+		storage.init();
+		return function (method, model, options) {
+			var id = model.id || key;
+			var storageKey = key + &#x27;.&#x27; + model.id;
+			switch (method) {
+			case &#x27;read&#x27;:
+				console.log(&#x27;reading &#x27; + storageKey);
+				storage.getItem(
+					storageKey,
+					function (result) {
+						if (result) {
+							console.log(&#x27;read &#x27; + result);
+							if (model.id) {
+								model.set(JSON.parse(result));
+							} else {
+								var arr = JSON.parse(result);
+								var modules = [];
+								$(arr).each(function (idx, module) {
+									modules.push(new model.model(module));
+								});
+								model.reset(modules);
+							}
+							options.success(model);
+						} else {
+							console.log(&#x27;initializing new &#x27; + storageKey + &#x27; for &#x27; + JSON.stringify(model));
+							storage.setItem(storageKey, JSON.stringify(model));
+							options.success(model);
+						}
+					}
+				);
+				break;
+			case &#x27;create&#x27;:
+				console.log(&#x27;creating &#x27; + storageKey + &#x27;: &#x27; + JSON.stringify(model));
+				storage.setItem(storageKey, JSON.stringify(model));
+				options.success(model);
+				break;
+			case &#x27;update&#x27;:
+				console.log(&#x27;saving &#x27; + storageKey + &#x27;: &#x27; + JSON.stringify(model));
+				storage.setItem(storageKey, JSON.stringify(model));
+				options.success(model);
+				break;
+			case &#x27;delete&#x27;:
+				console.log(&#x27;removing &#x27; + storageKey);
+				storage.removeItem(storageKey);
+				options.success(model);
+				break;
+			}
+		};
+	};
 
-<div class="box intro">
-    <p>Namespace for umobile view implementations.
-Houses the App, Credential and Module view
-implementations.</p>
-</div>
+	&#x2F;**
+	Manages the persistance of data to local storage.
 
+	@class Local
+	@submodule storage
+	@namespace storage
+	**&#x2F;
+	umobile.storage.local = {
+		init: function () {},
+		getItem: function (storageKey, success) {
+			return success(window.localStorage.getItem(storageKey));
+		},
+		setItem: function (storageKey, json) {
+			window.localStorage.setItem(storageKey, json);
+		},
+		removeItem: function (storageKey) {
+			window.localStorage.removeItem(storageKey);
+		}
+	};
 
+	&#x2F;**
+	Manages the persistance of data to the umobile database.
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+	@class DB
+	@submodule storage
+	@namespace storage
+	**&#x2F;
+	umobile.storage.db = {
+		init: function () {
+			var db = window.openDatabase(&#x27;umobile&#x27;, &#x27;1.0&#x27;, &#x27;uMobile DB&#x27;, 1000000);
+			db.transaction(
+				function (tx) {
+					tx.executeSql(&#x27;CREATE TABLE IF NOT EXISTS umobile (id unique, data)&#x27;);
+				},
+				function (tx, err) { console.log(&#x27;Error processing SQL: &#x27; + err); }
+			);
+		},
+		getItem: function (storageKey, success) {
+			var db = window.openDatabase(&#x27;umobile&#x27;, &#x27;1.0&#x27;, &#x27;uMobile DB&#x27;, 1000000);
+			db.transaction(
+				function (tx) {
+					tx.executeSql(
+						&#x27;SELECT * FROM umobile WHERE id=?&#x27;,
+						[storageKey],
+						function (tx, results) {
+							if (results.rows.length &gt; 0) {
+								success(results.rows.item(0).data);
+							} else {
+								success(null);
+							}
+						},
+						function (tx, err) { console.log(&#x27;Error processing SQL: &#x27; + err); }
+					);
+				},
+				function (tx, err) { console.log(&#x27;Error processing SQL: &#x27; + err); }
+			);
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/view.App.html">
-                        view.App
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/view.Credential.html">
-                        view.Credential
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/view.Module.html">
-                        view.Module
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
+			return window.localStorage.getItem(storageKey);
+		},
+		setItem: function (storageKey, json) {
+			var db = window.openDatabase(&#x27;umobile&#x27;, &#x27;1.0&#x27;, &#x27;uMobile DB&#x27;, 1000000);
+			db.transaction(
+				function (tx) {
+					tx.executeSql(&#x27;DELETE FROM umobile WHERE id=?&#x27;, [storageKey]);
+					tx.executeSql(&#x27;INSERT INTO umobile (id, data) VALUES (?, ?)&#x27;, [storageKey, json]);
+				},
+				function (tx, err) { console.log(&#x27;Error processing SQL: &#x27; + err); }
+			);
+		},
+		removeItem: function (storageKey) {
+			var db = window.openDatabase(&#x27;umobile&#x27;, &#x27;1.0&#x27;, &#x27;uMobile DB&#x27;, 1000000);
+			db.transaction(
+				function (tx) {
+					tx.executeSql(&#x27;DELETE FROM umobile WHERE id=?&#x27;, [storageKey]);
+				},
+				function (tx, err) { console.log(&#x27;Error processing SQL: &#x27; + err); }
+			);
+			window.localStorage.removeItem(storageKey);
+		}
+	};
 
-    <div class="yui3-u-1-2">
-        
-    </div>
+})(jQuery, _, umobile, config);
+    </pre>
 </div>
 
                     </div>

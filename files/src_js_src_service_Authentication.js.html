@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\js\src\service\Authentication.js - uMobile</title>
+    <title>src\js\src\service\Authentication.js</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="..&#x2F;assets/css/logo.png" title="uMobile"></h1>
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: </em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,23 +41,33 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/App.html">App</a></li>
+                <li><a href="..&#x2F;classes/app.Bootstrap.html">app.Bootstrap</a></li>
             
-                <li><a href="..&#x2F;classes/bootstrap.html">bootstrap</a></li>
+                <li><a href="..&#x2F;classes/auth.Authentication.html">auth.Authentication</a></li>
             
-                <li><a href="..&#x2F;classes/Credential.html">Credential</a></li>
+                <li><a href="..&#x2F;classes/collection.ModuleCollection.html">collection.ModuleCollection</a></li>
             
-                <li><a href="..&#x2F;classes/getSession.html">getSession</a></li>
+                <li><a href="..&#x2F;classes/model.Credential.html">model.Credential</a></li>
             
-                <li><a href="..&#x2F;classes/Module.html">Module</a></li>
+                <li><a href="..&#x2F;classes/model.Module.html">model.Module</a></li>
             
-                <li><a href="..&#x2F;classes/ModuleCollection.html">ModuleCollection</a></li>
+                <li><a href="..&#x2F;classes/model.State.html">model.State</a></li>
             
-                <li><a href="..&#x2F;classes/Session.html">Session</a></li>
+                <li><a href="..&#x2F;classes/session.SessionTracker.html">session.SessionTracker</a></li>
             
-                <li><a href="..&#x2F;classes/SessionTrackerMock.html">SessionTrackerMock</a></li>
+                <li><a href="..&#x2F;classes/session.SessionTrackerMock.html">session.SessionTrackerMock</a></li>
             
-                <li><a href="..&#x2F;classes/State.html">State</a></li>
+                <li><a href="..&#x2F;classes/storage.DB.html">storage.DB</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Local.html">storage.Local</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Storage.html">storage.Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/view.App.html">view.App</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Credential.html">view.Credential</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Module.html">view.Module</a></li>
             
             </ul>
 
@@ -70,6 +80,8 @@
                 <li><a href="..&#x2F;modules/collection.html">collection</a></li>
             
                 <li><a href="..&#x2F;modules/model.html">model</a></li>
+            
+                <li><a href="..&#x2F;modules/session.html">session</a></li>
             
                 <li><a href="..&#x2F;modules/storage.html">storage</a></li>
             
@@ -116,169 +128,250 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-&#x2F;*global window:true, document:true, jQuery:true, umobile:true, config:true, GibberishAES:true, console:true *&#x2F;
-(function ($, umobile, config) {
+&#x2F;*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, GibberishAES:true, console:true *&#x2F;
+(function ($, _, umobile, config) {
 	&#x27;use strict&#x27;;
 
+	&#x2F;**
+	Manages authentication process for the umobile application.
+
+	@class Authentication
+	@submodule auth
+	@namespace auth
+	**&#x2F;
+	umobile.auth = umobile.auth || {};
+
+	&#x2F;**
+	Method returns local login servlet url.
+
+	@method getLocalLoginServletUrl
+	@return {String} local login servlet url.
+	@private
+	**&#x2F;
 	var getLocalLoginServletUrl = function () {
-		return config.uMobileServerUrl + config.uMobileServerContext + &quot;&#x2F;Login&quot;;
-	};
-	
-	var getLocalLogoutServletUrl = function () {
-		return config.uMobileServerUrl + config.uMobileServerContext + &quot;&#x2F;Logout&quot;;
+		return config.uMobileServerUrl + config.uMobileServerContext + &#x27;&#x2F;Login&#x27;;
 	};
 
 	&#x2F;**
-	Store the user&#x27;s credentials in the local app storage.
+	Method returns local logout servlet url.
+
+	@method getLocalLoginServletUrl
+	@return {String} local logout servlet url.
+	@private
+	**&#x2F;
+	var getLocalLogoutServletUrl = function () {
+		return config.uMobileServerUrl + config.uMobileServerContext + &#x27;&#x2F;Logout&#x27;;
+	};
+
+	&#x2F;**
+	Method logs a user into the system with the configured login
+	function. Data pertaining to a user and thier layout is made
+	available when successful.
+
+	@method getSession
+	**&#x2F;
+	umobile.auth.getSession = function () {
+		var loginFn = umobile.auth[config.loginFn];
+		loginFn(
+			umobile.app.credModel,
+			_.bind(function (data) {
+				console.log(&#x27;Broadcasting data for user: &#x27; + data.user);
+				$.publish(&#x27;session.retrieved&#x27;, data);
+			}, this),
+			_.bind(function (jqXHR, textStatus, errorThrown) {
+				console.log(&#x27;Error: &#x27; + textStatus + &#x27;, &#x27; + errorThrown);
+			}, this)
+		);
+	};
+
+	&#x2F;**
+	Method stores user credentials in local storage.
 
 	@method storeCredentials
+	@param {Object} credentials Object hash containing user credentials.
 	**&#x2F;
 	umobile.auth.storeCredentials = function (credentials) {
+		&#x2F;&#x2F; Define.
 		var username, password;
-		
+
+		&#x2F;&#x2F; Initialize &amp; encrypt.
 		username = GibberishAES.enc(credentials.username, config.encryptionKey);
 		password = GibberishAES.enc(credentials.password, config.encryptionKey);
 
-		window.localStorage.setItem(&quot;username&quot;, username);
-		window.localStorage.setItem(&quot;password&quot;, password);
+		&#x2F;&#x2F; Persist in local storage.
+		window.localStorage.setItem(&#x27;username&#x27;, username);
+		window.localStorage.setItem(&#x27;password&#x27;, password);
 	};
 
 	&#x2F;**
-	 * Retrieve the user&#x27;s credentials from local app storage.
-	 *&#x2F;
+	Method retrieves user credentials from local storage.
+
+	@method retrieveCredentials
+	**&#x2F;
 	umobile.auth.retrieveCredentials = function () {
+		&#x2F;&#x2F; Define.
 		var encUsername, encPassword, username, password, credentials;
 
-		encUsername = window.localStorage.getItem(&quot;username&quot;);
-		encPassword = window.localStorage.getItem(&quot;password&quot;);
+		&#x2F;&#x2F; Initialize &amp; retrieve from local storage.
+		encUsername = window.localStorage.getItem(&#x27;username&#x27;);
+		encPassword = window.localStorage.getItem(&#x27;password&#x27;);
 
+		&#x2F;&#x2F; TODO: Double check this logic. The username and password variables are
+		&#x2F;&#x2F; undefined so they will equate to false.
 		if (username &amp;&amp; password) {
 			username = GibberishAES.dec(credentials.encUsername, config.encryptionKey);
 			password = GibberishAES.dec(credentials.encPassword, config.encryptionKey);
 			return { username: username, password: password };
 		} else {
-			console.log(&quot;No credentials found for user&quot;);
+			console.log(&#x27;No credentials found for user&#x27;);
 			return null;
 		}
 	};
 
+	&#x2F;**
+	Method mocks the login process for development purposes.
+
+	@method mockLogin
+	@param {Object} credentials Object hash containing user credentials.
+	@param {Function} onSuccess Handler for successful operation.
+	@param {Function} onError Handler for unsucssessful operation.
+	**&#x2F;
 	umobile.auth.mockLogin = function (credentials, onSuccess, onError) {
+		&#x2F;&#x2F; Define.
 		var data, url;
 
-		&#x2F;&#x2F; if credentials are included, add them to the POST data
-		if (credentials &amp;&amp; credentials.get(&quot;username&quot;) &amp;&amp; credentials.get(&quot;password&quot;)) {
-			url = config.uMobileServerUrl + config.uMobileServerContext + &quot;&#x2F;layout-student.json&quot;;
-			console.log(&quot;Attempting local login via URL &quot; + url);
+		&#x2F;&#x2F; If credentials are included, add them to the POST data.
+		if (credentials &amp;&amp; credentials.get(&#x27;username&#x27;) &amp;&amp; credentials.get(&#x27;password&#x27;)) {
+			url = config.uMobileServerUrl + config.uMobileServerContext + &#x27;&#x2F;layout-student.json&#x27;;
+			console.log(&#x27;Attempting local login via URL &#x27; + url);
 		} else {
-			url = config.uMobileServerUrl + config.uMobileServerContext + &quot;&#x2F;layout-guest.json&quot;;
-			console.log(&quot;Establishing guest session via URL &quot; + url);
+			url = config.uMobileServerUrl + config.uMobileServerContext + &#x27;&#x2F;layout-guest.json&#x27;;
+			console.log(&#x27;Establishing guest session via URL &#x27; + url);
 		}
 
-		&#x2F;&#x2F; POST to the uMobile login servlet
+		&#x2F;&#x2F; Request to uMobile login servlet.
 		$.ajax({
-			url : url,
+			url: url,
+			dataType: &#x27;json&#x27;,
+			type: &#x27;GET&#x27;,
 			success: function (data, textStatus, jqXHR) {
 				if (!credentials || !credentials.attributes.username) {
-					console.log(&quot;Established guest session&quot;);
+					console.log(&#x27;Established guest session.&#x27;);
 					onSuccess(data);
 				} else if (credentials.attributes.username === data.user) {
-					console.log(&quot;Successful authentication for user &quot; + credentials.attributes.username);
+					console.log(&#x27;Successful authentication for user &#x27; + credentials.attributes.username);
 					onSuccess(data);
 				} else {
-					console.log(&quot;Error performing local authentication: &quot; + textStatus);
-					onError(jqXHR, &quot;Auth failure&quot;);
+					console.log(&#x27;Error performing local authentication: &#x27; + textStatus);
+					onError(jqXHR, &#x27;Auth failure&#x27;);
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.log(&quot;Error performing local authentication: &quot; + textStatus + &quot;, &quot; + errorThrown);
+				console.log(&#x27;Error performing local authentication: &#x27; + textStatus + &#x27;, &#x27; + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
-			},
-			dataType : &quot;json&quot;,
-			type : &quot;GET&quot;
+			}
 		});
 	};
 
 	&#x2F;**
-	 * Perform authentication via the uMobile application server&#x27;s local authentication
-	 * controller.
-	 *&#x2F;
+	Method performs authentication through the uMobile application server
+	local authentication controller.
+
+	@method localLogin
+	@param {Object} credentials Object hash containing user credentials.
+	@param {Function} onSuccess Handler for successful operation.
+	@param {Function} onError Handler for unsucssessful operation.
+	**&#x2F;
 	umobile.auth.localLogin = function (credentials, onSuccess, onError) {
+		&#x2F;&#x2F; Define.
 		var data, url;
 
-		data = { refUrl: config.uMobileServerContext + &quot;&#x2F;layout.json&quot; };
+		data = {refUrl: config.uMobileServerContext + &#x27;&#x2F;layout.json&#x27;};
 		url = getLocalLoginServletUrl();
 
-		&#x2F;&#x2F; if credentials are included, add them to the POST data
-		if (credentials &amp;&amp; credentials.get(&quot;username&quot;) &amp;&amp; credentials.get(&quot;password&quot;)) {
+		&#x2F;&#x2F; If credentials are included, add them to the POST data.
+		if (credentials &amp;&amp; credentials.get(&#x27;username&#x27;) &amp;&amp; credentials.get(&#x27;password&#x27;)) {
 			data.userName = credentials.attributes.username;
 			data.password = credentials.attributes.password;
-			console.log(&quot;Attempting local login via URL &quot; + url);
+			console.log(&#x27;Attempting local login via URL &#x27; + url);
 		} else {
-			console.log(&quot;Establishing guest session via URL &quot; + url);
+			console.log(&#x27;Establishing guest session via URL &#x27; + url);
 		}
 
 		&#x2F;&#x2F; POST to the uMobile login servlet
 		$.ajax({
-			url : getLocalLoginServletUrl(),
+			url: getLocalLoginServletUrl(),
 			data: data,
-			success : function (data, textStatus, jqXHR) {
+			dataType: &#x27;json&#x27;,
+			type: &#x27;POST&#x27;,
+			success: function (data, textStatus, jqXHR) {
 				if (!credentials || !credentials.attributes.username) {
-					console.log(&quot;Established guest session&quot;);
+					console.log(&#x27;Established guest session&#x27;);
 					onSuccess(data);
 				} else if (credentials.attributes.username === data.user) {
-					console.log(&quot;Successful authentication for user &quot; + credentials.attributes.username);
+					console.log(&#x27;Successful authentication for user &#x27; + credentials.attributes.username);
 					onSuccess(data);
 				} else {
-					console.log(&quot;Error performing local authentication: &quot; + textStatus);
-					onError(jqXHR, &quot;Auth failure&quot;);
+					console.log(&#x27;Error performing local authentication: &#x27; + textStatus);
+					onError(jqXHR, &#x27;Auth failure&#x27;);
 				}
 			},
-			error : function (jqXHR, textStatus, errorThrown) {
-				console.log(&quot;Error performing local authentication: &quot; + textStatus + &quot;, &quot; + errorThrown);
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(&#x27;Error performing local authentication: &#x27; + textStatus + &#x27;, &#x27; + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
-			},
-			dataType : &quot;json&quot;,
-			type : &quot;POST&quot;
+			}
 		});
 	};
 
+	&#x2F;**
+	Method performs CAS authentication.
+
+	@method casLogin
+	@param {Object} credentials Object hash containing user credentials.
+	@param {Function} onSuccess Handler for successful operation.
+	@param {Function} onError Handler for unsucssessful operation.
+	**&#x2F;
 	umobile.auth.casLogin = function (credentials, onSuccess, onError) {
+		&#x2F;&#x2F; Define.
 		var casUrl, serviceUrl;
 
-		if (!credentials || !credentials.get(&quot;username&quot;) || !credentials.get(&quot;password&quot;)) {
+		&#x2F;&#x2F; When credentials are false, fall back to local login.
+		if (!credentials || !credentials.get(&#x27;username&#x27;) || !credentials.get(&#x27;password&#x27;)) {
 			return umobile.auth.localLogin(credentials, onSuccess, onError);
 		}
 
+		&#x2F;&#x2F; Initialize &amp; define url paths.
 		casUrl = config.casServerUrl + &#x27;&#x2F;cas&#x2F;login&#x27;;
-		serviceUrl = getLocalLoginServletUrl() + &quot;?refUrl=&quot; + config.uMobileServerContext + &quot;&#x2F;layout.json&quot;;
-		console.log(&quot;Attempting CAS authentication to URL &quot; + casUrl + &quot; using serviceUrl &quot; + serviceUrl);
+		serviceUrl = getLocalLoginServletUrl() + &#x27;?refUrl=&#x27; + config.uMobileServerContext + &#x27;&#x2F;layout.json&#x27;;
+		console.log(&#x27;Attempting CAS authentication to URL &#x27; + casUrl + &#x27; using serviceUrl &#x27; + serviceUrl);
 
-		&#x2F;&#x2F; POST to the uMobile login servlet
+		&#x2F;&#x2F; Request to the uMobile login servlet.
 		$.ajax({
-			url : casUrl,
-			data: { service: serviceUrl },
-			success : function (html, textStatus, jqXHR) {
-				
+			url: casUrl,
+			data: {service: serviceUrl},
+			dataType: &#x27;html&#x27;,
+			type: &#x27;GET&#x27;,
+			success: function (html, textStatus, jqXHR) {
+				&#x2F;&#x2F; Define.
 				var flowRegex, executionRegex, flowId, executionId, data;
-				
-				&#x2F;&#x2F; if this doesn&#x27;t look like the CAS login form, we already
-				&#x2F;&#x2F; have a CAS session and were directed straight to uMobile
+
+				&#x2F;&#x2F; If this doesn&#x27;t look like the CAS login form, we already
+				&#x2F;&#x2F; have a CAS session and were directed straight to uMobile.
 				if (html.indexOf(&#x27;name=&quot;lt&quot;&#x27;) === -1) {
 					data = $.parseJSON(html);
 					if (!credentials || credentials.attributes.username === data.user) {
 						onSuccess(data);
 					} else {
-						console.log(&quot;Error parsing layout JSON response&quot;);
-						onError(jqXHR, &quot;Auth failure&quot;);
+						console.log(&#x27;Error parsing layout JSON response.&#x27;);
+						onError(jqXHR, &#x27;Auth failure&#x27;);
 					}
-				} else { &#x2F;&#x2F; otherwise submit the user&#x27;s credentials
+				} else { &#x2F;&#x2F; Otherwise submit the user&#x27;s credentials.
 					flowRegex = &#x2F;input type=&quot;hidden&quot; name=&quot;lt&quot; value=&quot;([a-z0-9\-]*)?&quot;&#x2F;i;
 					executionRegex = &#x2F;input type=&quot;hidden&quot; name=&quot;execution&quot; value=&quot;([a-z0-9\-]*)?&quot;&#x2F;i;
-
 					flowId = flowRegex.exec(html)[1];
 					executionId = executionRegex.exec(html)[1];
 
-					console.log(&quot;Submitting user credentials to CAS&quot;);
+					console.log(&#x27;Submitting user credentials to CAS.&#x27;);
 					$.ajax({
 						url: casUrl,
 						data: {
@@ -290,51 +383,59 @@
 							_eventId: &#x27;submit&#x27;,
 							submit: &#x27;LOGIN&#x27;
 						},
-						success : function (data, textStatus, jqXHR) {
+						dataType: &#x27;json&#x27;,
+						type: &#x27;POST&#x27;,
+						success: function (data, textStatus, jqXHR) {
 							if (!credentials || credentials.attributes.username === data.user) {
 								onSuccess(data);
 							} else {
-								console.log(&quot;Error parsing layout JSON response&quot; + textStatus);
-								onError(jqXHR, &quot;Auth failure&quot;);
+								console.log(&#x27;Error parsing layout JSON response&#x27; + textStatus);
+								onError(jqXHR, &#x27;Auth failure&#x27;);
 							}
 						},
-						error : function (jqXHR, textStatus, errorThrown) {
-							console.log(&quot;Error submitting CAS credentials: &quot; + textStatus + &quot;, &quot; + errorThrown);
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.log(&#x27;Error submitting CAS credentials: &#x27; + textStatus + &#x27;, &#x27; + errorThrown);
 							return umobile.auth.localLogin(credentials, onSuccess, onError);
-						},
-						dataType : &quot;json&quot;,
-						type : &quot;POST&quot;
+						}
 					});
 				}
 			},
-			error : function (jqXHR, textStatus, errorThrown) {
-				console.log(&quot;Error accessing CAS login page: &quot; + textStatus + &quot;, &quot; + errorThrown);
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(&#x27;Error accessing CAS login page: &#x27; + textStatus + &#x27;, &#x27; + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
-			},
-			dataType : &quot;html&quot;,
-			type : &quot;GET&quot;
+			}
 		});
 	};
 
+	&#x2F;**
+	Method logs the current user out of the application and attempts
+	to reauthenticate based upon the given credentials parameter.
+
+	@method switchuser
+	@param {Object} credentials Object hash containing user credentials.
+	@param {Function} onSuccess Handler for successful operation.
+	@param {Function} onError Handler for unsucssessful operation.
+	**&#x2F;
 	umobile.auth.switchuser = function (credentials, onSuccess, onError) {
+		&#x2F;&#x2F; Define.
 		var logoutUrl = getLocalLogoutServletUrl();
 
-		console.log(&quot;Logging out via URL &quot; + logoutUrl);
+		console.log(&#x27;Logging out via URL &#x27; + logoutUrl);
 		$.ajax({
-			url : logoutUrl,
-			success : function (html, textStatus, jqXHR) {
+			url: logoutUrl,
+			success: function (html, textStatus, jqXHR) {
 				umobile.auth[config.loginFn](credentials, onSuccess, onError);
 			},
-			error : function (jqXHR, textStatus, errorThrown) {
-				console.log(&quot;Error logging out: &quot; + textStatus + &quot;, &quot; + errorThrown);
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(&#x27;Error logging out: &#x27; + textStatus + &#x27;, &#x27; + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
 			},
-			dataType : &quot;html&quot;,
-			type : &quot;GET&quot;
+			dataType: &#x27;html&#x27;,
+			type: &#x27;GET&#x27;
 		});
 	};
 
-})(jQuery, umobile, config);
+})(jQuery, _, umobile, config);
     </pre>
 </div>
 

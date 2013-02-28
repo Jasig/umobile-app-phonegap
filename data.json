@@ -1,372 +1,573 @@
 {
-    "project": {
-        "name": "uMobile",
-        "description": "uMobile",
-        "version": "0.0.1"
-    },
+    "project": {},
     "files": {
         "src\\js\\src\\collection\\ModuleCollection.js": {
             "name": "src\\js\\src\\collection\\ModuleCollection.js",
             "modules": {},
             "classes": {
-                "ModuleCollection": 1
+                "collection.ModuleCollection": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "collection": 1
+            }
         },
         "src\\js\\src\\model\\Credential.js": {
             "name": "src\\js\\src\\model\\Credential.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "model.Credential": 1
+            },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "model": 1
+            }
         },
         "src\\js\\src\\model\\Module.js": {
             "name": "src\\js\\src\\model\\Module.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "model.Module": 1
+            },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "model": 1
+            }
         },
         "src\\js\\src\\model\\State.js": {
             "name": "src\\js\\src\\model\\State.js",
             "modules": {},
             "classes": {
-                "State": 1
+                "model.State": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "model": 1
+            }
         },
         "src\\js\\src\\service\\Authentication.js": {
             "name": "src\\js\\src\\service\\Authentication.js",
             "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "src\\js\\src\\service\\Session.js": {
-            "name": "src\\js\\src\\service\\Session.js",
-            "modules": {},
             "classes": {
-                "Session": 1,
-                "getSession": 1
+                "auth.Authentication": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "auth": 1
+            }
+        },
+        "src\\js\\src\\service\\SessionTracker.js": {
+            "name": "src\\js\\src\\service\\SessionTracker.js",
+            "modules": {},
+            "classes": {
+                "session.SessionTracker": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "session": 1
+            }
         },
         "src\\js\\src\\service\\SessionTrackerMock.js": {
             "name": "src\\js\\src\\service\\SessionTrackerMock.js",
             "modules": {},
             "classes": {
-                "SessionTrackerMock": 1
+                "session.SessionTrackerMock": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "session": 1
+            }
+        },
+        "src\\js\\src\\service\\Storage.js": {
+            "name": "src\\js\\src\\service\\Storage.js",
+            "modules": {},
+            "classes": {
+                "storage.Storage": 1,
+                "storage.Local": 1,
+                "storage.DB": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "storage": 1
+            }
         },
         "src\\js\\src\\view\\App.js": {
             "name": "src\\js\\src\\view\\App.js",
             "modules": {},
             "classes": {
-                "App": 1
+                "view.App": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "view": 1
+            }
         },
         "src\\js\\src\\view\\Credential.js": {
             "name": "src\\js\\src\\view\\Credential.js",
             "modules": {},
             "classes": {
-                "Credential": 1
+                "view.Credential": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "view": 1
+            }
         },
         "src\\js\\src\\view\\Module.js": {
             "name": "src\\js\\src\\view\\Module.js",
             "modules": {},
             "classes": {
-                "Module": 1
+                "view.Module": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "view": 1
+            }
         },
         "src\\js\\src\\app.js": {
             "name": "src\\js\\src\\app.js",
             "modules": {
+                "collection": 1,
+                "model": 1,
+                "auth": 1,
+                "session": 1,
+                "storage": 1,
+                "view": 1,
+                "umobile": 1,
+                "app": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {
                 "umobile": 1,
                 "app": 1,
                 "model": 1,
                 "collection": 1,
                 "view": 1,
                 "auth": 1,
-                "storage": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
+                "storage": 1,
+                "session": 1
+            }
         },
         "src\\js\\src\\bootstrap.js": {
             "name": "src\\js\\src\\bootstrap.js",
             "modules": {},
             "classes": {
-                "bootstrap": 1
+                "app.Bootstrap": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "app": 1
+            }
         }
     },
     "modules": {
+        "collection": {
+            "name": "collection",
+            "submodules": {},
+            "classes": {
+                "collection.ModuleCollection": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {
+                "collection": 1
+            },
+            "module": "umobile",
+            "namespace": "collection",
+            "file": "src\\js\\src\\collection\\ModuleCollection.js",
+            "line": 5,
+            "description": "Namespace for umobile collection implementations.\nHouses the Module collection implementation."
+        },
+        "model": {
+            "name": "model",
+            "submodules": {},
+            "classes": {
+                "model.Credential": 1,
+                "model.Module": 1,
+                "model.State": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {
+                "model": 1
+            },
+            "module": "umobile",
+            "namespace": "model",
+            "file": "src\\js\\src\\model\\State.js",
+            "line": 5,
+            "description": "Namespace for umobile model implementations.\nHouses the Credential, Module and State model\nimplementations."
+        },
+        "auth": {
+            "name": "auth",
+            "submodules": {},
+            "classes": {
+                "auth.Authentication": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {
+                "auth": 1
+            },
+            "module": "umobile",
+            "namespace": "auth",
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 5,
+            "description": "Namespace for the umobile authentication implementation."
+        },
+        "session": {
+            "name": "session",
+            "submodules": {},
+            "classes": {
+                "session.SessionTracker": 1,
+                "session.SessionTrackerMock": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {
+                "session": 1
+            },
+            "module": "umobile",
+            "namespace": "session",
+            "file": "src\\js\\src\\service\\SessionTrackerMock.js",
+            "line": 10,
+            "description": "Namespace for the umobile session implementation."
+        },
+        "storage": {
+            "name": "storage",
+            "submodules": {},
+            "classes": {
+                "storage.Storage": 1,
+                "storage.Local": 1,
+                "storage.DB": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {
+                "storage": 1
+            },
+            "module": "umobile",
+            "namespace": "storage",
+            "file": "src\\js\\src\\service\\Storage.js",
+            "line": 91,
+            "description": "Namespace for the umobile storage implementation."
+        },
+        "view": {
+            "name": "view",
+            "submodules": {},
+            "classes": {
+                "view.App": 1,
+                "view.Credential": 1,
+                "view.Module": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {
+                "view": 1
+            },
+            "module": "umobile",
+            "namespace": "view",
+            "file": "src\\js\\src\\view\\Module.js",
+            "line": 5,
+            "description": "Namespace for umobile view implementations.\nHouses the App, Credential and Module view\nimplementations."
+        },
         "umobile": {
             "name": "umobile",
             "submodules": {
+                "collection": 1,
+                "model": 1,
+                "auth": 1,
+                "session": 1,
+                "storage": 1,
+                "view": 1,
+                "app": 1
+            },
+            "classes": {
+                "collection.ModuleCollection": 1,
+                "model.Credential": 1,
+                "model.Module": 1,
+                "model.State": 1,
+                "auth.Authentication": 1,
+                "session.SessionTracker": 1,
+                "session.SessionTrackerMock": 1,
+                "storage.Storage": 1,
+                "storage.Local": 1,
+                "storage.DB": 1,
+                "view.App": 1,
+                "view.Credential": 1,
+                "view.Module": 1,
+                "app.Bootstrap": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "umobile": 1,
                 "app": 1,
                 "model": 1,
                 "collection": 1,
                 "view": 1,
                 "auth": 1,
-                "storage": 1
+                "storage": 1,
+                "session": 1
             },
-            "classes": {
-                "ModuleCollection": 1,
-                "Credential": 1,
-                "Module": 1,
-                "State": 1,
-                "Session": 1,
-                "getSession": 1,
-                "SessionTrackerMock": 1,
-                "App": 1,
-                "bootstrap": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
+            "tag": "main",
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 19,
-            "description": "Namespace for the umobile application."
+            "line": 21,
+            "description": "Main module for the umobile application. Namespaces\nall source logic to the umobile namespace. Houses the\napp, bootstrap, model, collection, view, auth and storage\nsubmodules.",
+            "itemtype": "main"
         },
         "app": {
             "name": "app",
             "submodules": {},
-            "classes": {},
+            "classes": {
+                "app.Bootstrap": 1
+            },
             "fors": {},
             "is_submodule": 1,
-            "namespaces": {},
+            "namespaces": {
+                "app": 1
+            },
             "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\app.js",
-            "line": 7
-        },
-        "model": {
-            "name": "model",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\app.js",
-            "line": 12
-        },
-        "collection": {
-            "name": "collection",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\app.js",
-            "line": 17
-        },
-        "view": {
-            "name": "view",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\app.js",
-            "line": 22
-        },
-        "auth": {
-            "name": "auth",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\app.js",
-            "line": 27
-        },
-        "storage": {
-            "name": "storage",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "is_submodule": 1,
-            "namespaces": {},
-            "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\app.js",
-            "line": 32
+            "namespace": "umobile",
+            "file": "src\\js\\src\\bootstrap.js",
+            "line": 21,
+            "description": "Namespace for running instance of the umobile application."
         }
     },
     "classes": {
-        "ModuleCollection": {
-            "name": "ModuleCollection",
-            "shortname": "ModuleCollection",
+        "collection.ModuleCollection": {
+            "name": "collection.ModuleCollection",
+            "shortname": "collection.ModuleCollection",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
+            "namespace": "collection",
             "file": "src\\js\\src\\collection\\ModuleCollection.js",
             "line": 5,
             "description": "The Module collection houses a collection of modules or portlets.",
+            "submodule": "collection",
             "is_constructor": 1
         },
-        "Credential": {
-            "name": "Credential",
-            "shortname": "Credential",
+        "model.Credential": {
+            "name": "model.Credential",
+            "shortname": "model.Credential",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
-            "file": "src\\js\\src\\view\\Credential.js",
+            "namespace": "model",
+            "file": "src\\js\\src\\model\\Credential.js",
             "line": 5,
-            "description": "Manages the Credential view.",
+            "description": "The Credential model houses information relating to a user's\nlogin credentials.",
+            "submodule": "model",
             "is_constructor": 1
         },
-        "Module": {
-            "name": "Module",
-            "shortname": "Module",
+        "model.Module": {
+            "name": "model.Module",
+            "shortname": "model.Module",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
-            "file": "src\\js\\src\\view\\Module.js",
+            "namespace": "model",
+            "file": "src\\js\\src\\model\\Module.js",
             "line": 5,
-            "description": "Manages the individual Module or portlet view.",
+            "description": "The Module model houses information relating to each\nmodule or portlet.",
+            "submodule": "model",
             "is_constructor": 1
         },
-        "State": {
-            "name": "State",
-            "shortname": "State",
+        "model.State": {
+            "name": "model.State",
+            "shortname": "model.State",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
+            "namespace": "model",
             "file": "src\\js\\src\\model\\State.js",
             "line": 5,
             "description": "The State model houses the state of a user's authentication status.",
+            "submodule": "model",
             "is_constructor": 1
         },
-        "Session": {
-            "name": "Session",
-            "shortname": "Session",
+        "auth.Authentication": {
+            "name": "auth.Authentication",
+            "shortname": "auth.Authentication",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
-            "file": "src\\js\\src\\service\\Session.js",
+            "namespace": "auth",
+            "file": "src\\js\\src\\service\\Authentication.js",
             "line": 5,
-            "description": "Manages Session information.",
-            "is_constructor": 1
+            "description": "Manages authentication process for the umobile application.",
+            "submodule": "auth"
         },
-        "getSession": {
-            "name": "getSession",
-            "shortname": "getSession",
+        "session.SessionTracker": {
+            "name": "session.SessionTracker",
+            "shortname": "session.SessionTracker",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
-            "file": "src\\js\\src\\service\\Session.js",
-            "line": 13,
-            "description": "Method logs a user into the system with the configured login\nfunction. Data pertaining to a user and thier layout is made\navailable when successful."
+            "namespace": "session",
+            "file": "src\\js\\src\\service\\SessionTracker.js",
+            "line": 5,
+            "description": "Gets and sets the last accessed timestamp for the current session.",
+            "submodule": "session"
         },
-        "SessionTrackerMock": {
-            "name": "SessionTrackerMock",
-            "shortname": "SessionTrackerMock",
+        "session.SessionTrackerMock": {
+            "name": "session.SessionTrackerMock",
+            "shortname": "session.SessionTrackerMock",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
+            "namespace": "session",
             "file": "src\\js\\src\\service\\SessionTrackerMock.js",
-            "line": 8,
+            "line": 10,
             "description": "The SesssionTrackerMock class mocks the in-memory\nimplementation of the SessionTracking class.",
-            "is_constructor": 1
+            "submodule": "session"
         },
-        "App": {
-            "name": "App",
-            "shortname": "App",
+        "storage.Storage": {
+            "name": "storage.Storage",
+            "shortname": "storage.Storage",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
+            "namespace": "storage",
+            "file": "src\\js\\src\\service\\Storage.js",
+            "line": 5,
+            "description": "Manages persistence of data for the umobile application.",
+            "submodule": "storage"
+        },
+        "storage.Local": {
+            "name": "storage.Local",
+            "shortname": "storage.Local",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "umobile",
+            "submodule": "storage",
+            "namespace": "storage",
+            "file": "src\\js\\src\\service\\Storage.js",
+            "line": 71,
+            "description": "Manages the persistance of data to local storage."
+        },
+        "storage.DB": {
+            "name": "storage.DB",
+            "shortname": "storage.DB",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "umobile",
+            "submodule": "storage",
+            "namespace": "storage",
+            "file": "src\\js\\src\\service\\Storage.js",
+            "line": 91,
+            "description": "Manages the persistance of data to the umobile database."
+        },
+        "view.App": {
+            "name": "view.App",
+            "shortname": "view.App",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "umobile",
+            "namespace": "view",
             "file": "src\\js\\src\\view\\App.js",
             "line": 5,
             "description": "Manages the main application view.",
+            "submodule": "view",
             "is_constructor": 1
         },
-        "bootstrap": {
-            "name": "bootstrap",
-            "shortname": "bootstrap",
+        "view.Credential": {
+            "name": "view.Credential",
+            "shortname": "view.Credential",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "umobile",
-            "namespace": "",
-            "file": "src\\js\\src\\bootstrap.js",
-            "line": 19,
-            "description": "...",
+            "namespace": "view",
+            "file": "src\\js\\src\\view\\Credential.js",
+            "line": 5,
+            "description": "Manages the Credential view.",
+            "submodule": "view",
             "is_constructor": 1
+        },
+        "view.Module": {
+            "name": "view.Module",
+            "shortname": "view.Module",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "umobile",
+            "namespace": "view",
+            "file": "src\\js\\src\\view\\Module.js",
+            "line": 5,
+            "description": "Manages the individual Module or portlet view.",
+            "submodule": "view",
+            "is_constructor": 1
+        },
+        "app.Bootstrap": {
+            "name": "app.Bootstrap",
+            "shortname": "app.Bootstrap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "umobile",
+            "namespace": "app",
+            "file": "src\\js\\src\\bootstrap.js",
+            "line": 21,
+            "description": "Manages the bootstrap process for the umobile application.",
+            "submodule": "app"
         }
     },
     "classitems": [
         {
             "file": "src\\js\\src\\collection\\ModuleCollection.js",
-            "line": 12,
+            "line": 14,
             "description": "The model class contained by the collection.",
             "itemtype": "property",
             "name": "model",
             "type": "Object",
-            "class": "ModuleCollection"
+            "class": "collection.ModuleCollection",
+            "submodule": "collection",
+            "namespace": "collection"
         },
         {
             "file": "src\\js\\src\\collection\\ModuleCollection.js",
-            "line": 20,
-            "description": "Entry point for the ModuleCollection.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "ModuleCollection"
-        },
-        {
-            "file": "src\\js\\src\\collection\\ModuleCollection.js",
-            "line": 29,
-            "description": "Overrides Backbone.save. Makes an 'update' call to the\numobile.storage.sync method.",
+            "line": 22,
+            "description": "Method overrides Backbone.save. Makes an update call to the\numobile.storage.sync method.",
             "itemtype": "method",
             "name": "save",
             "params": [
@@ -376,12 +577,14 @@
                     "type": "Object"
                 }
             ],
-            "class": "ModuleCollection"
+            "class": "collection.ModuleCollection",
+            "submodule": "collection",
+            "namespace": "collection"
         },
         {
             "file": "src\\js\\src\\collection\\ModuleCollection.js",
-            "line": 40,
-            "description": "Overrides Backbone.fetch. Makes a 'read' call to the\numobile.storage.sync method.",
+            "line": 33,
+            "description": "Method overrides Backbone.fetch. Makes a read call to the\numobile.storage.sync method.",
             "itemtype": "method",
             "name": "fetch",
             "params": [
@@ -391,135 +594,338 @@
                     "type": "Object"
                 }
             ],
-            "class": "ModuleCollection"
+            "class": "collection.ModuleCollection",
+            "submodule": "collection",
+            "namespace": "collection"
         },
         {
             "file": "src\\js\\src\\collection\\ModuleCollection.js",
-            "line": 51,
-            "description": "Overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
+            "line": 44,
+            "description": "Method overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
             "itemtype": "method",
             "name": "sync",
-            "class": "ModuleCollection"
+            "class": "collection.ModuleCollection",
+            "submodule": "collection",
+            "namespace": "collection"
+        },
+        {
+            "file": "src\\js\\src\\collection\\ModuleCollection.js",
+            "line": 52,
+            "description": "Entry point for the ModuleCollection.",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "collection.ModuleCollection",
+            "submodule": "collection",
+            "namespace": "collection"
         },
         {
             "file": "src\\js\\src\\model\\Credential.js",
-            "line": 13,
+            "line": 15,
             "description": "The defaults hash is used to specify the default attributes.",
             "itemtype": "property",
             "name": "defaults",
             "type": "Object",
-            "class": "Credential"
+            "class": "model.Credential",
+            "submodule": "model",
+            "namespace": "model"
         },
         {
             "file": "src\\js\\src\\model\\Credential.js",
-            "line": 25,
-            "description": "Overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
+            "line": 27,
+            "description": "Method overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
             "itemtype": "method",
             "name": "sync",
-            "class": "Credential"
+            "class": "model.Credential",
+            "submodule": "model",
+            "namespace": "model"
         },
         {
             "file": "src\\js\\src\\model\\Module.js",
-            "line": 13,
+            "line": 15,
             "description": "The defaults hash is used to specify the default attributes.",
             "itemtype": "property",
             "name": "defaults",
             "type": "Object",
-            "class": "Module"
+            "class": "model.Module",
+            "submodule": "model",
+            "namespace": "model"
         },
         {
             "file": "src\\js\\src\\model\\Module.js",
-            "line": 28,
-            "description": "Overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
+            "line": 30,
+            "description": "Method overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
             "itemtype": "method",
             "name": "sync",
-            "class": "Module"
+            "class": "model.Module",
+            "submodule": "model",
+            "namespace": "model"
         },
         {
             "file": "src\\js\\src\\model\\State.js",
-            "line": 12,
+            "line": 14,
             "description": "The defaults hash is used to specify the default attributes.",
             "itemtype": "property",
             "name": "defaults",
             "type": "Object",
-            "class": "State"
+            "class": "model.State",
+            "submodule": "model",
+            "namespace": "model"
         },
         {
             "file": "src\\js\\src\\model\\State.js",
-            "line": 24,
-            "description": "Overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
+            "line": 26,
+            "description": "Method overrides Backbone.sync with umobile.storage.sync method.\nPersists the state of the model to the server.",
             "itemtype": "method",
             "name": "sync",
-            "class": "State"
+            "class": "model.State",
+            "submodule": "model",
+            "namespace": "model"
         },
         {
             "file": "src\\js\\src\\service\\Authentication.js",
-            "line": 13,
-            "description": "Store the user's credentials in the local app storage.",
+            "line": 14,
+            "description": "Method returns local login servlet url.",
+            "itemtype": "method",
+            "name": "getLocalLoginServletUrl",
+            "return": {
+                "description": "local login servlet url.",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 25,
+            "description": "Method returns local logout servlet url.",
+            "itemtype": "method",
+            "name": "getLocalLoginServletUrl",
+            "return": {
+                "description": "local logout servlet url.",
+                "type": "String"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 36,
+            "description": "Method logs a user into the system with the configured login\nfunction. Data pertaining to a user and thier layout is made\navailable when successful.",
+            "itemtype": "method",
+            "name": "getSession",
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 57,
+            "description": "Method stores user credentials in local storage.",
             "itemtype": "method",
             "name": "storeCredentials",
-            "class": "Session"
+            "params": [
+                {
+                    "name": "credentials",
+                    "description": "Object hash containing user credentials.",
+                    "type": "Object"
+                }
+            ],
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
         },
         {
             "file": "src\\js\\src\\service\\Authentication.js",
-            "line": 28,
-            "description": "Retrieve the user's credentials from local app storage.",
-            "class": "Session"
+            "line": 76,
+            "description": "Method retrieves user credentials from local storage.",
+            "itemtype": "method",
+            "name": "retrieveCredentials",
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
         },
         {
             "file": "src\\js\\src\\service\\Authentication.js",
-            "line": 83,
-            "description": "Perform authentication via the uMobile application server's local authentication\ncontroller.",
-            "class": "Session"
+            "line": 101,
+            "description": "Method mocks the login process for development purposes.",
+            "itemtype": "method",
+            "name": "mockLogin",
+            "params": [
+                {
+                    "name": "credentials",
+                    "description": "Object hash containing user credentials.",
+                    "type": "Object"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "Handler for successful operation.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "Handler for unsucssessful operation.",
+                    "type": "Function"
+                }
+            ],
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 146,
+            "description": "Method performs authentication through the uMobile application server\nlocal authentication controller.",
+            "itemtype": "method",
+            "name": "localLogin",
+            "params": [
+                {
+                    "name": "credentials",
+                    "description": "Object hash containing user credentials.",
+                    "type": "Object"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "Handler for successful operation.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "Handler for unsucssessful operation.",
+                    "type": "Function"
+                }
+            ],
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 196,
+            "description": "Method performs CAS authentication.",
+            "itemtype": "method",
+            "name": "casLogin",
+            "params": [
+                {
+                    "name": "credentials",
+                    "description": "Object hash containing user credentials.",
+                    "type": "Object"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "Handler for successful operation.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "Handler for unsucssessful operation.",
+                    "type": "Function"
+                }
+            ],
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Authentication.js",
+            "line": 280,
+            "description": "Method logs the current user out of the application and attempts\nto reauthenticate based upon the given credentials parameter.",
+            "itemtype": "method",
+            "name": "switchuser",
+            "params": [
+                {
+                    "name": "credentials",
+                    "description": "Object hash containing user credentials.",
+                    "type": "Object"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "Handler for successful operation.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "Handler for unsucssessful operation.",
+                    "type": "Function"
+                }
+            ],
+            "class": "auth.Authentication",
+            "submodule": "auth",
+            "namespace": "auth"
+        },
+        {
+            "file": "src\\js\\src\\service\\Storage.js",
+            "line": 14,
+            "description": "Method overrides Backbone.sync implementation\nto persist application data.",
+            "itemtype": "method",
+            "name": "sync",
+            "class": "storage.Storage",
+            "submodule": "storage",
+            "namespace": "storage"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 12,
+            "line": 14,
             "description": "Root DOM element.",
             "itemtype": "property",
             "name": "el",
             "type": "Object",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 20,
+            "line": 22,
             "description": "Object hash of valid DOM selectors.",
             "itemtype": "property",
             "name": "selectors",
             "type": "Object",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 33,
+            "line": 35,
             "description": "Collection of modules.",
             "itemtype": "property",
             "name": "moduleCollection",
             "type": "Object",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 41,
+            "line": 43,
             "description": "Credential model. Represents user credential state.",
             "itemtype": "property",
             "name": "credModel",
             "type": "Object",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 49,
+            "line": 51,
             "description": "State model. Represents user state.",
             "itemtype": "property",
             "name": "stateModel",
             "type": "Object",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 57,
+            "line": 59,
             "description": "Helper method. Given the passed property, this method\nparses the selector object looking for a match.",
             "itemtype": "method",
             "name": "loc",
@@ -534,51 +940,63 @@
                 "description": "Cached, jQuery-wrapped DOM element.",
                 "type": "Object"
             },
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 73,
-            "description": "...",
+            "line": 75,
+            "description": "Method is triggered whenever a user's credentials\nare updated. When triggered, this method directs\nusers to the home screen and makes a request to\nretrieve layout data for the updated credentials.",
+            "itemtype": "method",
+            "name": "onUpdateCredentials",
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
+        },
+        {
+            "file": "src\\js\\src\\view\\App.js",
+            "line": 89,
+            "description": "Method directs user to the current view when a user is unauthenticated\nand the current view is not the home screen.",
             "itemtype": "method",
             "name": "directToCurrentView",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 85,
-            "description": "Directs user to the current view when a user is unauthenticated\nand the current view is not the home screen.",
-            "itemtype": "method",
-            "name": "directToCurrentView",
-            "class": "App"
-        },
-        {
-            "file": "src\\js\\src\\view\\App.js",
-            "line": 107,
+            "line": 111,
             "description": "Renders the preferences view.",
             "itemtype": "method",
             "name": "renderPreferences",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 123,
+            "line": 127,
             "description": "Renders the footer on the home screen.",
             "itemtype": "method",
             "name": "renderFooter",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 137,
+            "line": 141,
             "description": "Render modules or portlets to the UI.",
             "itemtype": "method",
             "name": "renderModules",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 156,
+            "line": 160,
             "description": "Renders the UI for the App view.",
             "itemtype": "method",
             "name": "render",
@@ -589,11 +1007,13 @@
                     "type": "Array"
                 }
             ],
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 179,
+            "line": 183,
             "description": "Updates the UI with the selected module or portlet.",
             "itemtype": "method",
             "name": "updateModuleView",
@@ -604,73 +1024,89 @@
                     "type": "Object"
                 }
             ],
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\App.js",
-            "line": 202,
+            "line": 206,
             "description": "Entry point for the App view.\nInitialize is called when the view is first created.",
             "itemtype": "method",
             "name": "initialize",
-            "class": "App"
+            "class": "view.App",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 12,
+            "line": 14,
             "description": "HTML tag name used to build a Credential view.",
             "itemtype": "property",
             "name": "tagName",
             "type": "String",
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 20,
+            "line": 22,
             "description": "Class name that is added to the tagName\nwhen building a Credential view.",
             "itemtype": "property",
             "name": "className",
             "type": "String",
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 29,
+            "line": 31,
             "description": "Object hash of valid DOM selectors for\nthe Credential view.",
             "itemtype": "property",
             "name": "selectors",
             "type": "Object",
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 42,
+            "line": 44,
             "description": "Template for the Credential view.",
             "itemtype": "property",
             "name": "template",
             "type": "Object",
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 50,
+            "line": 52,
             "description": "Backbone events object.",
             "itemtype": "property",
             "name": "events",
             "type": "Object",
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 61,
+            "line": 63,
             "description": "Credential model. Represents user credential state.",
             "itemtype": "property",
             "name": "credModel",
             "type": "Object",
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 69,
+            "line": 71,
             "description": "Method extracts credentials from the login form\nand attempts to persist them by calling save on\nthe Credential model. Triggers a change event\non the Credential model.",
             "itemtype": "method",
             "name": "updateCredentials",
@@ -681,11 +1117,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 88,
+            "line": 90,
             "description": "Method clears the username and password input fields on the\nlogin form and persists null values for the username and password\non the Credential model. Triggers a change event on the Credential model.",
             "itemtype": "method",
             "name": "logout",
@@ -696,11 +1134,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 104,
+            "line": 106,
             "description": "Handler for the logout button on the Credential view.",
             "itemtype": "method",
             "name": "logoutHandler",
@@ -711,11 +1151,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 116,
+            "line": 118,
             "description": "Handler for the update button on the Credential view.",
             "itemtype": "method",
             "name": "submitHandler",
@@ -726,11 +1168,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 128,
+            "line": 130,
             "description": "Helper method. Given the passed property, this method\nparses the selector object looking for a match.",
             "itemtype": "method",
             "name": "loc",
@@ -745,11 +1189,13 @@
                 "description": "Cached, jQuery-wrapped DOM element.",
                 "type": "Object"
             },
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 144,
+            "line": 146,
             "description": "Method renders the UI for the Credential view.",
             "itemtype": "method",
             "name": "render",
@@ -757,11 +1203,13 @@
                 "description": "Credential view.",
                 "type": "Object"
             },
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Credential.js",
-            "line": 155,
+            "line": 157,
             "description": "Entry point for the Credential view.\nMethod is called when the view is first created.",
             "itemtype": "method",
             "name": "initialize",
@@ -772,65 +1220,79 @@
                     "type": "Object"
                 }
             ],
-            "class": "Credential"
+            "class": "view.Credential",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 12,
+            "line": 14,
             "description": "HTML tag name used to build a Module view.",
             "itemtype": "property",
             "name": "tagName",
             "type": "String",
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 20,
+            "line": 22,
             "description": "Class name that is added to the tagName\nwhen building a Module view.",
             "itemtype": "property",
             "name": "className",
             "type": "String",
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 29,
+            "line": 31,
             "description": "Object hash of valid DOM selectors for\nthe Module view.",
             "itemtype": "property",
             "name": "selectors",
             "type": "Object",
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 40,
+            "line": 42,
             "description": "Template for the Module view.",
             "itemtype": "property",
             "name": "template",
             "type": "Object",
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 48,
+            "line": 50,
             "description": "Model for the Module view.",
             "itemtype": "property",
             "name": "moduleModel",
             "type": "Object",
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 56,
+            "line": 58,
             "description": "Backbone events object.",
             "itemtype": "property",
             "name": "events",
             "type": "Object",
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 66,
+            "line": 68,
             "description": "Click handler for the portlet icon.",
             "itemtype": "method",
             "name": "showModuleClickHander",
@@ -841,11 +1303,13 @@
                     "type": "Object"
                 }
             ],
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 77,
+            "line": 79,
             "description": "Helper method. Given the passed property, this method\nparses the selector object looking for a match.",
             "itemtype": "method",
             "name": "loc",
@@ -860,11 +1324,13 @@
                 "description": "Cached, jQuery-wrapped DOM element.",
                 "type": "Object"
             },
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 93,
+            "line": 95,
             "description": "Method renders the UI for the Module view.",
             "itemtype": "method",
             "name": "render",
@@ -872,11 +1338,13 @@
                 "description": "Module view.",
                 "type": "Object"
             },
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\view\\Module.js",
-            "line": 105,
+            "line": 107,
             "description": "Entry point for the Module view.\nMethod is called when the view is first created.",
             "itemtype": "method",
             "name": "initialize",
@@ -887,23 +1355,49 @@
                     "type": "Object"
                 }
             ],
-            "class": "Module"
+            "class": "view.Module",
+            "submodule": "view",
+            "namespace": "view"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
             "line": 8,
-            "description": "...",
+            "description": "Method searches the URL for the given name argument.",
             "itemtype": "method",
             "name": "getUrlParam",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Parameter to search for on the URL.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "URL parameter.",
+                "type": "String"
+            },
             "access": "private",
             "tagname": "",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "namespace": "session"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 28,
-            "description": "Parses the data broadcasted by the Session.getSession() method.\nIterates over the layout JSON and adds modules (i.e. portlets)\nto the ModuleCollection based upon the number of portlets\ncontained within the JSON feed.",
+            "line": 29,
+            "description": "Property stores reference to umobile.app, which houses the\nrunning instance of the umobile application.",
+            "itemtype": "property",
+            "name": "app",
+            "type": "Object",
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
+        },
+        {
+            "file": "src\\js\\src\\bootstrap.js",
+            "line": 38,
+            "description": "Method parses the data received by the session.retrieved event.\nIterates over layout JSON and adds modules (i.e. portlets) to\nthe ModuleCollection based upon the number of portlets described\nby the JSON feed.",
             "itemtype": "method",
             "name": "buildModuleCollection",
             "params": [
@@ -913,72 +1407,77 @@
                     "type": "Object"
                 }
             ],
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 98,
-            "description": "Success handler for the Credential request.",
+            "line": 108,
+            "description": "Success handler for the Credential request. Method checks the backend session\naccess tracker. If the session tracker is non-zero, this method updates the application\nstate with the value from the session tracker. This method also checks the application\nstate for the last session access timestamp. If a timestamp is present and is within\nsession length, this method assumes a valid session and skips authentication. Otherwise,\nthe authentication process is started.",
             "itemtype": "method",
             "name": "credSuccessHandler",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 131,
+            "line": 146,
             "description": "Generic error handler for failed requests.",
             "itemtype": "method",
             "name": "errorHandler",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 140,
-            "description": "When triggered, the onDeviceReady() method renders a\nloader to end users, initializes the main application\nview and starts the process of requesting data.",
+            "line": 155,
+            "description": "When triggered, method renders a loader to end users,\ninitializes the main application view and starts the\ndata retrieval process.",
             "itemtype": "method",
             "name": "onDeviceReady",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 167,
-            "description": "Method adds the 'deviceready' event listener to the document.\nWhen triggered, the onDeviceReady() method is called.",
+            "line": 182,
+            "description": "Method sets up listeners for the umobile applicaiton during the bootstrap\nprocess. The application is currently set up to listen for the deviceready\nevent and a custom session.retrieved event.",
             "itemtype": "method",
             "name": "initEventListener",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 186,
+            "line": 202,
             "description": "Method initializes the State and Credential models as well as\nthe Module collection during the bootstrap phase.",
             "itemtype": "method",
             "name": "initModels",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 199,
+            "line": 215,
             "description": "Entry point for the umobile application.\nMethod kicks off the bootstrap process.",
             "itemtype": "method",
             "name": "init",
-            "class": "bootstrap",
-            "module": "umobile"
+            "class": "app.Bootstrap",
+            "module": "umobile",
+            "submodule": "app",
+            "namespace": "app"
         }
     ],
-    "warnings": [
-        {
-            "message": "Missing item type\nRetrieve the user's credentials from local app storage.",
-            "line": " src\\js\\src\\service\\Authentication.js:28"
-        },
-        {
-            "message": "Missing item type\nPerform authentication via the uMobile application server's local authentication\ncontroller.",
-            "line": " src\\js\\src\\service\\Authentication.js:83"
-        }
-    ]
+    "warnings": []
 }
