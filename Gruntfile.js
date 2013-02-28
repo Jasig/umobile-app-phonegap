@@ -7,7 +7,7 @@ var nconf = require('nconf'),
 	javascript, html, tearDown, taskList;
 
 // Grunt.
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	'use strict';
 
 	// Project configuration.
@@ -214,6 +214,7 @@ module.exports = function(grunt) {
 	grunt.log.ok('Using build environment: ' + config.targetEnvironment);
 
 	// Register tasks.
-	grunt.registerTask('docs', ['clean:cleanDocs','yuidoc']);
+	grunt.registerTask('docs', ['clean:cleanDocs', 'yuidoc']);
+	grunt.registerTask('lint', ['jshint']);
 	grunt.registerTask('default', taskList);
 };
