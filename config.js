@@ -28,5 +28,13 @@ config.targetEnvironment = nconf.get('environment') || 'web';
 /** Configuration type to be used. Supported types are 'mock', 'local', 'cas' **/
 config.configSettings = nconf.get('config') || 'mock';
 
+/** Supported builds are 'dev', 'prod' **/
+config.buildEnvironment = nconf.get('build') || 'dev';
+
+config.isDevBuild = function () {
+	'use strict';
+	return config.buildEnvironment === 'dev';
+};
+
 // Export module.
 module.exports = config;

@@ -2,13 +2,13 @@
 var config = {};
 
 // BASE SERVER URL
-config.uMobileServerUrl = 'http://localhost:5000'; // HTML5 testing url, otherwise 'http://10.0.2.2:8080' for android
+config.uMobileServerUrl = 'http://localhost:8080'; // HTML5 testing url, otherwise 'http://10.0.2.2:8080' for android
 
 // UMOBILE SERVER CONTEXT PATH
-config.uMobileServerContext = '/data';
+config.uMobileServerContext = '';
 
 // AUTHENTICATION
-config.loginFn = 'mockLogin';
+config.loginFn = 'casLogin';
 config.encryptionKey = 'umobile';
 config.casServerUrl = 'http://localhost:8080';
 

@@ -184,12 +184,22 @@
 			process. The application is currently set up to listen for the deviceready
 			event and a custom session.retrieved event.
 
+			Note: The deviceready event is a part of the PhoneGap API. This is a very
+			important event that every PhoneGap application should use. PhoneGap consists
+			of two code bases: native and JavaScript. While the native code is loading,
+			a custom loading image is displayed. However, JavaScript is only loaded once
+			the DOM loads. This means the application could, potentially, call a PhoneGap
+			JavaScript function before it is loaded.
+
+			The PhoneGap deviceready event fires once PhoneGap has fully loaded. After the
+			device has fired, you can safely make calls to PhoneGap function.
+
 			@method initEventListener
 			**/
 			initEventListener: function () {
 				// onDeviceReady event.
 				document.addEventListener('deviceready', this.onDeviceReady, false);
-				if (config.loginFn === 'localLogin') {
+				if (config.loginFn === 'mockLogin') {
 					this.onDeviceReady();
 				}
 

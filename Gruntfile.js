@@ -88,8 +88,8 @@ module.exports = function (grunt) {
 		htmlmin: {
 			minimizeHtml: {
 				options: {
-					removeComments: config.htmlRemoveComments,
-					collapseWhitespace: config.htmlCollapseWhitespace
+					removeComments: Boolean(config.htmlRemoveComments) && config.isDevBuild(),
+					collapseWhitespace: Boolean(config.htmlCollapseWhitespace) && config.isDevBuild()
 				},
 				files: {
 					'www/index.html': 'www/index.html',
@@ -130,9 +130,10 @@ module.exports = function (grunt) {
 		uglify: {
 			options: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-				mangle: config.javascriptMangle,
-				compress: true,
-				preserveComments: config.javascriptPreserveComments
+				mangle: !config.isDevBuild(),
+				compress: !config.isDevBuild(),
+				preserveComments: config.isDevBuild(),
+				beautify: config.isDevBuild()
 			},
 			umobile: {
 				files: {
@@ -213,8 +214,11 @@ module.exports = function (grunt) {
 	// Define task list.
 	taskList = setup.concat(clean, images, css, lint, javascript, html, copy, tearDown);
 
-	grunt.log.ok('Using build environment: ' + config.targetEnvironment);
+	grunt.log.ok('------------------------------------------------');
+	grunt.log.ok('Using target build environment: ' + config.targetEnvironment);
 	grunt.log.ok('Using configuration settings: ' + config.configSettings);
+	grunt.log.ok('Using build environment: ' + config.buildEnvironment);
+	grunt.log.ok('------------------------------------------------');
 
 	// Register tasks.
 	grunt.registerTask('docs', ['clean:cleanDocs', 'yuidoc']);
