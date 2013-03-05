@@ -22,14 +22,17 @@ config.configFile = config.path + '/config.json';
 // Setup nconf to use config.json file.
 nconf.file({file: config.configFile});
 
-/** Supported environments are: 'web', 'android', 'iphone' **/
+// Supported environments are: 'web', 'android', 'iphone'.
 config.targetEnvironment = nconf.get('environment') || 'web';
 
-/** Configuration type to be used. Supported types are 'mock', 'local', 'cas' **/
+// Configuration type to be used. Supported types are 'mock', 'local', 'cas'.
 config.configSettings = nconf.get('config') || 'mock';
 
-/** Supported builds are 'dev', 'prod' **/
+// Supported builds are 'dev', 'prod'.
 config.buildEnvironment = nconf.get('build') || 'dev';
+
+// Define cas.js, local.js & mock.js file path.
+config.configSettingsFile = config.path + '/js/' + config.configSettings + '.js';
 
 config.isDevBuild = function () {
 	'use strict';

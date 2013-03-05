@@ -6,7 +6,7 @@ var nconf = require('nconf'),
 	setup, clean, copy, images, css, lint,
 	javascript, html, tearDown, taskList;
 
-var configSettingsFile = 'filters/js/config/' + config.configSettings + '.js';
+//var configSettingsFile = 'filters/js/config/' + config.configSettings + '.js';
 
 // Grunt.
 module.exports = function (grunt) {
@@ -139,7 +139,7 @@ module.exports = function (grunt) {
 				files: {
 					'www/js/src/app.js': 'src/js/src/app.js',
 					'www/js/src/bootstrap.js': 'src/js/src/bootstrap.js',
-					'www/js/src/config.js': configSettingsFile,
+					'www/js/src/config.js': config.configSettingsFile,
 					'www/js/src/home.js': 'src/js/src/home.js',
 
 					'www/js/src/collection/ModuleCollection.js': 'src/js/src/collection/ModuleCollection.js',
