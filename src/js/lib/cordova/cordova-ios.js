@@ -1,5 +1,5 @@
 // commit 017a948047e355ae0c2cdc8c4188ae57b115528a
-// cordova-iphone-1.7.0rc1
+// cordova-ios-1.7.0rc1
 
 // File generated at :: Mon Apr 23 2012 11:53:41 GMT-0700 (PDT)
 
