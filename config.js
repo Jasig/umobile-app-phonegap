@@ -22,7 +22,7 @@ config.configFile = config.path + '/config.json';
 // Setup nconf to use config.json file.
 nconf.file({file: config.configFile});
 
-// Supported environments are: 'web', 'android', 'iphone'.
+// Supported environments are: 'web', 'android', 'ios'.
 config.targetEnvironment = nconf.get('environment') || 'web';
 
 // Configuration type to be used. Supported types are 'mock', 'local', 'cas'.
