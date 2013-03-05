@@ -5,7 +5,7 @@ var config = {};
 // HTML5 testing url: http://localhost:5000
 // Android: http://10.0.2.2:8080
 // iOS: http://localhost:8080
-config.uMobileServerUrl = 'http://localhost:8080';
+config.uMobileServerUrl = 'http://localhost:5000';
 
 // UMOBILE SERVER CONTEXT PATH
 config.uMobileServerContext = '/data';
