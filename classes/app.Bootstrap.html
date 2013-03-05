@@ -608,7 +608,7 @@ the authentication process is started.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;src_js_src_bootstrap.js.html#l215"><code>src\js\src\bootstrap.js:215</code></a>
+        <a href="..&#x2F;files&#x2F;src_js_src_bootstrap.js.html#l225"><code>src\js\src\bootstrap.js:225</code></a>
         
         </p>
 
@@ -677,6 +677,16 @@ Method kicks off the bootstrap process.</p>
         <p>Method sets up listeners for the umobile applicaiton during the bootstrap
 process. The application is currently set up to listen for the deviceready
 event and a custom session.retrieved event.</p>
+
+<p>Note: The deviceready event is a part of the PhoneGap API. This is a very
+important event that every PhoneGap application should use. PhoneGap consists
+of two code bases: native and JavaScript. While the native code is loading,
+a custom loading image is displayed. However, JavaScript is only loaded once
+the DOM loads. This means the application could, potentially, call a PhoneGap
+JavaScript function before it is loaded.</p>
+
+<p>The PhoneGap deviceready event fires once PhoneGap has fully loaded. After the
+device has fired, you can safely make calls to PhoneGap function.</p>
     </div>
 
     
@@ -719,7 +729,7 @@ event and a custom session.retrieved event.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;src_js_src_bootstrap.js.html#l202"><code>src\js\src\bootstrap.js:202</code></a>
+        <a href="..&#x2F;files&#x2F;src_js_src_bootstrap.js.html#l212"><code>src\js\src\bootstrap.js:212</code></a>
         
         </p>
 

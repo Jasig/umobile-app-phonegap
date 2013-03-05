@@ -230,7 +230,7 @@
             "module": "umobile",
             "namespace": "session",
             "file": "src\\js\\src\\service\\SessionTrackerMock.js",
-            "line": 10,
+            "line": 5,
             "description": "Namespace for the umobile session implementation."
         },
         "storage": {
@@ -439,7 +439,7 @@
             "module": "umobile",
             "namespace": "session",
             "file": "src\\js\\src\\service\\SessionTrackerMock.js",
-            "line": 10,
+            "line": 5,
             "description": "The SesssionTrackerMock class mocks the in-memory\nimplementation of the SessionTracking class.",
             "submodule": "session"
         },
@@ -1448,7 +1448,7 @@
         {
             "file": "src\\js\\src\\bootstrap.js",
             "line": 182,
-            "description": "Method sets up listeners for the umobile applicaiton during the bootstrap\nprocess. The application is currently set up to listen for the deviceready\nevent and a custom session.retrieved event.",
+            "description": "Method sets up listeners for the umobile applicaiton during the bootstrap\nprocess. The application is currently set up to listen for the deviceready\nevent and a custom session.retrieved event.\n\nNote: The deviceready event is a part of the PhoneGap API. This is a very\nimportant event that every PhoneGap application should use. PhoneGap consists\nof two code bases: native and JavaScript. While the native code is loading,\na custom loading image is displayed. However, JavaScript is only loaded once\nthe DOM loads. This means the application could, potentially, call a PhoneGap\nJavaScript function before it is loaded.\n\nThe PhoneGap deviceready event fires once PhoneGap has fully loaded. After the\ndevice has fired, you can safely make calls to PhoneGap function.",
             "itemtype": "method",
             "name": "initEventListener",
             "class": "app.Bootstrap",
@@ -1458,7 +1458,7 @@
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 202,
+            "line": 212,
             "description": "Method initializes the State and Credential models as well as\nthe Module collection during the bootstrap phase.",
             "itemtype": "method",
             "name": "initModels",
@@ -1469,7 +1469,7 @@
         },
         {
             "file": "src\\js\\src\\bootstrap.js",
-            "line": 215,
+            "line": 225,
             "description": "Entry point for the umobile application.\nMethod kicks off the bootstrap process.",
             "itemtype": "method",
             "name": "init",
