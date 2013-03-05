@@ -6,7 +6,7 @@ var nconf = require('nconf'),
 	setup, clean, copy, images, css, lint,
 	javascript, html, tearDown, taskList;
 
-var configSettingsFile = 'filters/js/config/' + config.configSettings + '.js';
+//var configSettingsFile = 'filters/js/config/' + config.configSettings + '.js';
 
 // Grunt.
 module.exports = function (grunt) {
@@ -44,7 +44,7 @@ module.exports = function (grunt) {
 
 		// Copies markup files to public www directory.
 		// Task is used to conditionally include script files in
-		// the markup files based upon the environment (i.e., web, android or iphone).
+		// the markup files based upon the environment (i.e., web, android or ios).
 		// TODO: Need to rewrite to support regex patterns
 		targethtml: {
 			deploy: {
@@ -139,7 +139,7 @@ module.exports = function (grunt) {
 				files: {
 					'www/js/src/app.js': 'src/js/src/app.js',
 					'www/js/src/bootstrap.js': 'src/js/src/bootstrap.js',
-					'www/js/src/config.js': configSettingsFile,
+					'www/js/src/config.js': config.configSettingsFile,
 					'www/js/src/home.js': 'src/js/src/home.js',
 
 					'www/js/src/collection/ModuleCollection.js': 'src/js/src/collection/ModuleCollection.js',
@@ -180,7 +180,7 @@ module.exports = function (grunt) {
 					'www/js/lib/underscore/underscore.js': 'src/js/lib/underscore/underscore.js',
 
 					'www/js/lib/cordova/cordova-android.js': 'src/js/lib/cordova/cordova-android.js',
-					'www/js/lib/cordova/cordova-iphone.js': 'src/js/lib/cordova/cordova-iphone.js'
+					'www/js/lib/cordova/cordova-ios.js': 'src/js/lib/cordova/cordova-ios.js'
 				}
 			}
 		},
