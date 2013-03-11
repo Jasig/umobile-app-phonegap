@@ -22,7 +22,7 @@ app.configure(function () {
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.errorHandler());
-	app.use(express.static(path.join(__dirname, 'www')));
+	app.use(express.static(path.join(__dirname, 'src')));
 });
 
 // Startup.
