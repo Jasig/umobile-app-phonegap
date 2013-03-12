@@ -36,7 +36,7 @@
 		@type Object
 		**/
 		selectors: {
-			template: '#auth-template',
+			template: '#views-partials-login',
 			username: 'input[name=username]',
 			password: 'input[name=password]'
 		},

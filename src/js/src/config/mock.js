@@ -11,7 +11,8 @@ config.uMobileServerUrl = 'http://localhost:5000';
 config.uMobileServerContext = '/data';
 
 // AUTHENTICATION
-config.loginFn = 'mockLogin'; 		// mockLogin, localLogin or casLogin.
+// mockLogin, localLogin or casLogin.
+config.loginFn = 'mockLogin';
 config.encryptionKey = 'umobile';
 config.casServerUrl = 'http://localhost:8080';
 
@@ -44,5 +45,8 @@ config.nativeIcons = {
 
 // SUPPORTED MODULES
 config.nativeModules = {
-	map: 'map.html'
+	news: '/modules/news.html',
+	map: '/modules/map.html',
+	calendar: '/modules/calendar.html',
+	courses: '/modules/courses.html'
 };

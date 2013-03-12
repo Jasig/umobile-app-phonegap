@@ -3,7 +3,7 @@
 // The purpose of this file is to setup the use of
 // configuration files for our node development server.
 
-// Modules & variables.
+// Modules & Variables.
 var nconf = require('nconf'),
 	fs = require('fs'),
 	config = {};
@@ -18,19 +18,63 @@ nconf.file({file: __dirname + '/config/config.json'});
 config.environment = nconf.get('environment') || 'web';
 
 // Supported types are mock, local and cas.
-config.authConfig = nconf.get('auth') || 'mock';
-
-// Define cas.js, local.js & mock.js file path.
-config.authConfigFile = nconf.get('auth_file_path') + nconf.get('auth') + '.js';
+config.auth = nconf.get('auth') || 'mock';
 
 // Supported modes are dev and prod.
 config.mode = nconf.get('mode') || 'dev';
 
-// Supported builds are 'dev', 'prod'.
-//config.buildEnvironment = nconf.get('build') || 'dev';
-config.isDevBuild = function () {
+// Performs a test on the current environment configuration.
+// (i.e., ios, android or web).
+config.isEnvironment = function (environment) {
 	'use strict';
-	return config.mode === 'dev';
+	return (config.environment === environment) ? true : false;
+};
+
+// Performs a test on the current auth configuration
+// (i.e., mock, cas or local).
+config.isAuthConfig = function (auth) {
+	'use strict';
+	return (config.auth === auth) ? true : false;
+};
+
+// Performs a test on the current mode configuration
+// (i.e., dev or prod).
+config.isDevelopment = function () {
+	'use strict';
+	return (config.mode === 'dev') ? true : false;
+};
+
+// Returns the authentication configuration.
+config.getAuth = function () {
+	'use strict';
+	return config.auth;
+};
+
+// Returns the environment configuration.
+config.getEnvironment = function () {
+	'use strict';
+	return config.environment;
+};
+
+// Returns the SessionTracker needed
+// based upon the environment configuration.
+config.getTracker = function () {
+	'use strict';
+	return (config.environment !== 'web') ? 'SessionTracker' : 'SessionTrackerMock';
+};
+
+// Returns the cordova version needed
+// based upon the environment configuration.
+config.getCordova = function () {
+	'use strict';
+	return (config.environment === 'web' || config.environment === 'android') ? 'android' : 'ios';
+};
+
+// Returns the public directory based upon
+// the mode configuration.
+config.getPublicDirectory = function () {
+	'use strict';
+	return (config.mode === 'dev') ? 'src' : 'www';
 };
 
 // Export module.

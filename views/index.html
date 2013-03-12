@@ -10,18 +10,8 @@
 		<link type="text/css" rel="stylesheet" href="css/portal.css">
 
 		<!--JavaScript Dependencies-->
-		{{#web}}
-		<script type="text/javascript" src="js/lib/cordova/cordova-android.js"></script>
-		{{/web}}
-
-		{{#android}}
-		<script type="text/javascript" src="js/lib/cordova/cordova-android.js"></script>
-		{{/android}}
-
-		{{#ios}}
-		<script type="text/javascript" src="js/lib/cordova/cordova-ios.js"></script>
-		{{/ios}}
-
+		{{#dev}}
+		<script type="text/javascript" src="js/lib/cordova/cordova-{{cordova}}.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="js/lib/jquerymobile/jquery-mobile.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
@@ -29,6 +19,11 @@
 		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
 		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
 		<script type="text/javascript" src="js/lib/handlebars/handlebars.js"></script>
+		{{/dev}}
+		{{^dev}}
+		<script type="text/javascript" src="js/lib/lib.min.js"></script>
+		{{/dev}}
+
 		<script type="text/javascript">
 			$(document).bind("mobileinit", function () {
 				$.extend($.mobile , {
@@ -106,32 +101,10 @@
 			</div>
 
 			<!--JavaScript Source Files-->
-			{{#cas}}
-			<script type="text/javascript" src="js/src/config/cas.js"></script>
-			{{/cas}}
-
-			{{#local}}
-			<script type="text/javascript" src="js/src/config/local.js"></script>
-			{{/local}}
-
-			{{#mock}}
-			<script type="text/javascript" src="js/src/config/mock.js"></script>
-			{{/mock}}
-
+			{{#dev}}
+			<script type="text/javascript" src="js/src/config/{{auth}}.js"></script>
 			<script type="text/javascript" src="js/src/app.js"></script>
-
-			{{#web}}
-			<script type="text/javascript" src="js/src/service/SessionTrackerMock.js"></script>
-			{{/web}}
-
-			{{#android}}
-			<script type="text/javascript" src="js/src/service/SessionTracker.js"></script>
-			{{/android}}
-
-			{{#ios}}
-			<script type="text/javascript" src="js/src/service/SessionTracker.js"></script>
-			{{/ios}}
-
+			<script type="text/javascript" src="js/src/service/{{tracker}}.js"></script>
 			<script type="text/javascript" src="js/src/service/Authentication.js"></script>
 			<script type="text/javascript" src="js/src/service/Storage.js"></script>
 			<script type="text/javascript" src="js/src/model/State.js"></script>
@@ -142,6 +115,10 @@
 			<script type="text/javascript" src="js/src/view/Credential.js"></script>
 			<script type="text/javascript" src="js/src/view/App.js"></script>
 			<script type="text/javascript" src="js/src/bootstrap.js"></script>
+			{{/dev}}
+			{{^dev}}
+			<script type="text/javascript" src="js/src/main.min.js"></script>
+			{{/dev}}
 		</div>
 	</body>
 </html>

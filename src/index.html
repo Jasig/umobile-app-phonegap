@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>uMobile || Development</title>
+		<title></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
 
@@ -11,9 +11,6 @@
 
 		<!--JavaScript Dependencies-->
 		<script type="text/javascript" src="js/lib/cordova/cordova-android.js"></script>
-
-
-
 		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="js/lib/jquerymobile/jquery-mobile.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
@@ -21,6 +18,7 @@
 		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
 		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
 		<script type="text/javascript" src="js/lib/handlebars/handlebars.js"></script>
+
 		<script type="text/javascript">
 			$(document).bind("mobileinit", function () {
 				$.extend($.mobile , {
@@ -98,16 +96,9 @@
 			</div>
 
 			<!--JavaScript Source Files-->
-
-
 			<script type="text/javascript" src="js/src/config/mock.js"></script>
-
 			<script type="text/javascript" src="js/src/app.js"></script>
-
 			<script type="text/javascript" src="js/src/service/SessionTrackerMock.js"></script>
-
-
-
 			<script type="text/javascript" src="js/src/service/Authentication.js"></script>
 			<script type="text/javascript" src="js/src/service/Storage.js"></script>
 			<script type="text/javascript" src="js/src/model/State.js"></script>
@@ -119,5 +110,25 @@
 			<script type="text/javascript" src="js/src/view/App.js"></script>
 			<script type="text/javascript" src="js/src/bootstrap.js"></script>
 		</div>
-	</body>
+	  <script type="text/x-handlebars-template" id="views-partials-login">
+    <form class="umobile-auth-form" action="javascript:;">
+    	<label for="usernameInput">Username:</label>
+    	<input id="usernameInput" name="username" type="text" value="{{username}}"/>
+    
+    	<label for="passwordInput">Password:</label>
+    	<input id="passwordInput" name="password" type="password" value="{{password}}"/>
+    
+    	<input type="submit" name="update" value="Update"/>
+    	<input type="button" class="logout-button" name="logout" value="Log out"/>
+    </form>
+    
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-module">
+    <a href="javascript:;" title="To view {{title}}" class="ui-link">
+    	<span class="badge new-item up-new-item-count-{{newItemCount}}">{{newItemCount}}</span>
+    	<span class="icon"><img class="portlet-icon" src="{{iconUrl}}" alt="{{title}}"/></span>
+    	<span class="title">{{title}}</span>
+    </a>
+  </script>
+</body>
 </html>

@@ -2,12 +2,5 @@
 	"port": 5000,
 	"environment": "web",
 	"auth": "mock",
-	"auth_file_path": "src/js/src/config/",
-	"mode": "dev",
-
-	"htmlRemoveComments": true,
-	"htmlCollapseWhitespace": true,
-
-	"imageOptimizationLevel": 3,
-	"imageOptimizationProgressive": true
+	"mode": "dev"
 }
