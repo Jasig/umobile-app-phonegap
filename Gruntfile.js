@@ -37,6 +37,16 @@ module.exports = function (grunt) {
 					}
 				]
 			},
+			modules: {
+				files: [
+					{
+						src: ['**'],
+						dest: 'www/modules',
+						expand: true,
+						cwd: 'src/modules/'
+					}
+				]
+			},
 			images: {
 				files: [
 					{
@@ -139,7 +149,7 @@ module.exports = function (grunt) {
 
 		// Compile html files and copy to target directories.
 		compilehtml: {
-			developmentViews: {
+			development: {
 				options: {
 					cordova: config.getCordova(),
 					tracker: config.getTracker(),
@@ -149,17 +159,7 @@ module.exports = function (grunt) {
 				src: 'views/*.html',
 				dest: 'src/FILE.html'
 			},
-			developmentModules: {
-				options: {
-					cordova: config.getCordova(),
-					tracker: config.getTracker(),
-					auth: config.getAuth(),
-					dev: true
-				},
-				src: 'views/modules/*.html',
-				dest: 'src/modules/FILE.html'
-			},
-			productionViews: {
+			production: {
 				options: {
 					cordova: config.getCordova(),
 					tracker: config.getTracker(),
@@ -168,16 +168,6 @@ module.exports = function (grunt) {
 				},
 				src: 'views/*.html',
 				dest: 'www/FILE.html'
-			},
-			productionModules: {
-				options: {
-					cordova: config.getCordova(),
-					tracker: config.getTracker(),
-					auth: config.getAuth(),
-					dev: false
-				},
-				src: 'views/modules/*.html',
-				dest: 'www/modules/FILE.html'
 			}
 		},
 
@@ -214,8 +204,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('development', [
 		'clean:development',
 		'jshint',
-		'compilehtml:developmentViews',
-		'compilehtml:developmentModules',
+		'compilehtml:development',
 		'appendpartials:development'
 	]);
 
@@ -225,8 +214,7 @@ module.exports = function (grunt) {
 		'cssmin',
 		'jshint',
 		'uglify',
-		'compilehtml:productionViews',
-		'compilehtml:productionModules',
+		'compilehtml:production',
 		'appendpartials:production'
 	]);
 };
