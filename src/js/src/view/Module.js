@@ -36,7 +36,7 @@
 		@type Object
 		**/
 		selectors: {
-			template: '#module-template'
+			template: '#views-partials-module'
 		},
 
 		/**

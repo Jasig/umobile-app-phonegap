@@ -1,2 +1,4 @@
-/www
+/www/
 /node_modules/
+/src/index.html
+/src/modules/

@@ -1,42 +1,80 @@
 /*global require:true, __dirname:true, process:true, module:true */
 
-// The purpose of this file is to setup the use
-// of a configuration file for our node development server.
+// The purpose of this file is to setup the use of
+// configuration files for our node development server.
 
-// Modules.
+// Modules & Variables.
 var nconf = require('nconf'),
-    fs = require('fs');
-
-// Configuration object.
-var config = {};
+	fs = require('fs'),
+	config = {};
 
 // Setup nconf to use (in-order) command-line arguments and environment variables.
 nconf.argv().env();
 
-// Define configuration path.
-config.path = __dirname + '/config';
+// Configure nconf to use config.json file.
+nconf.file({file: __dirname + '/config/config.json'});
 
-// Define config.json file path.
-config.configFile = config.path + '/config.json';
+// Supported environments are web, android and ios.
+config.environment = nconf.get('environment') || 'web';
 
-// Setup nconf to use config.json file.
-nconf.file({file: config.configFile});
+// Supported types are mock, local and cas.
+config.auth = nconf.get('auth') || 'mock';
 
-// Supported environments are: 'web', 'android', 'ios'.
-config.targetEnvironment = nconf.get('environment') || 'web';
+// Supported modes are dev and prod.
+config.mode = nconf.get('mode') || 'dev';
 
-// Configuration type to be used. Supported types are 'mock', 'local', 'cas'.
-config.configSettings = nconf.get('config') || 'mock';
-
-// Supported builds are 'dev', 'prod'.
-config.buildEnvironment = nconf.get('build') || 'dev';
-
-// Define cas.js, local.js & mock.js file path.
-config.configSettingsFile = config.path + '/js/' + config.configSettings + '.js';
-
-config.isDevBuild = function () {
+// Performs a test on the current environment configuration.
+// (i.e., ios, android or web).
+config.isEnvironment = function (environment) {
 	'use strict';
-	return config.buildEnvironment === 'dev';
+	return (config.environment === environment) ? true : false;
+};
+
+// Performs a test on the current auth configuration
+// (i.e., mock, cas or local).
+config.isAuthConfig = function (auth) {
+	'use strict';
+	return (config.auth === auth) ? true : false;
+};
+
+// Performs a test on the current mode configuration
+// (i.e., dev or prod).
+config.isDevelopment = function () {
+	'use strict';
+	return (config.mode === 'dev') ? true : false;
+};
+
+// Returns the authentication configuration.
+config.getAuth = function () {
+	'use strict';
+	return config.auth;
+};
+
+// Returns the environment configuration.
+config.getEnvironment = function () {
+	'use strict';
+	return config.environment;
+};
+
+// Returns the SessionTracker needed
+// based upon the environment configuration.
+config.getTracker = function () {
+	'use strict';
+	return (config.environment !== 'web') ? 'SessionTracker' : 'SessionTrackerMock';
+};
+
+// Returns the cordova version needed
+// based upon the environment configuration.
+config.getCordova = function () {
+	'use strict';
+	return (config.environment === 'web' || config.environment === 'android') ? 'android' : 'ios';
+};
+
+// Returns the public directory based upon
+// the mode configuration.
+config.getPublicDirectory = function () {
+	'use strict';
+	return (config.mode === 'dev') ? 'src' : 'www';
 };
 
 // Export module.

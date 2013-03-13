@@ -8,9 +8,11 @@
 	},
 	"dependencies": {
 		"grunt": "0.4.0",
-		"grunt-contrib": "*",
-        "grunt-exec": "*",
-		"nconf": "*",
-		"express": "3.1.0"
+		"grunt-contrib": "0.4.0",
+		"grunt-exec": "0.4.0",
+		"nconf": "0.6.7",
+		"express": "3.1.0",
+		"hogan.js": "2.0.0",
+		"hogan-express": "0.3.3"
 	}
 }

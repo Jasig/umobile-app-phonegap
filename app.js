@@ -5,6 +5,8 @@
 var express = require('express'),
 	http = require('http'),
 	path = require('path'),
+	nconf = require('nconf'),
+	config = require('./config'),
 	app;
 
 // Express configuration.
@@ -14,7 +16,7 @@ app = express();
 app.configure(function () {
 	'use strict';
 	// settings.
-	app.set('port', 5000);
+	app.set('port', nconf.get('port'));
 
 	// middleware.
 	app.use(express.logger('dev'));
@@ -22,7 +24,7 @@ app.configure(function () {
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.errorHandler());
-	app.use(express.static(path.join(__dirname, 'www')));
+	app.use(express.static(path.join(__dirname, config.getPublicDirectory())));
 });
 
 // Startup.
