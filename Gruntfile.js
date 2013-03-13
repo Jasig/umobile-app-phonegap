@@ -37,16 +37,6 @@ module.exports = function (grunt) {
 					}
 				]
 			},
-			modules: {
-				files: [
-					{
-						src: ['**'],
-						dest: 'www/modules',
-						expand: true,
-						cwd: 'src/modules/'
-					}
-				]
-			},
 			images: {
 				files: [
 					{
@@ -111,7 +101,11 @@ module.exports = function (grunt) {
 
 		// Compress javascript and copy to www directory.
 		uglify: {
-			options: {},
+			options: {
+				compress: true,
+				mangle: false,
+				preserveComments: false
+			},
 			lib: {
 				files: {
 					'www/js/lib/lib.min.js': [
@@ -149,7 +143,7 @@ module.exports = function (grunt) {
 
 		// Compile html files and copy to target directories.
 		compilehtml: {
-			development: {
+			devViews: {
 				options: {
 					cordova: config.getCordova(),
 					tracker: config.getTracker(),
@@ -159,7 +153,17 @@ module.exports = function (grunt) {
 				src: 'views/*.html',
 				dest: 'src/FILE.html'
 			},
-			production: {
+			devModules: {
+				options: {
+					cordova: config.getCordova(),
+					tracker: config.getTracker(),
+					auth: config.getAuth(),
+					dev: true
+				},
+				src: 'views/modules/*.html',
+				dest: 'src/modules/FILE.html'
+			},
+			prodViews: {
 				options: {
 					cordova: config.getCordova(),
 					tracker: config.getTracker(),
@@ -168,6 +172,16 @@ module.exports = function (grunt) {
 				},
 				src: 'views/*.html',
 				dest: 'www/FILE.html'
+			},
+			prodModules: {
+				options: {
+					cordova: config.getCordova(),
+					tracker: config.getTracker(),
+					auth: config.getAuth(),
+					dev: false
+				},
+				src: 'views/modules/*.html',
+				dest: 'www/modules/FILE.html'
 			}
 		},
 
@@ -201,20 +215,22 @@ module.exports = function (grunt) {
 	grunt.task.loadTasks('tasks');
 
 	// Register tasks.
-	grunt.registerTask('development', [
+	grunt.registerTask('dev', [
 		'clean:development',
 		'jshint',
-		'compilehtml:development',
+		'compilehtml:devViews',
+		'compilehtml:devModules',
 		'appendpartials:development'
 	]);
 
-	grunt.registerTask('production', [
+	grunt.registerTask('prod', [
 		'clean:production',
 		'copy',
 		'cssmin',
 		'jshint',
 		'uglify',
-		'compilehtml:production',
+		'compilehtml:prodViews',
+		'compilehtml:prodModules',
 		'appendpartials:production'
 	]);
 };
