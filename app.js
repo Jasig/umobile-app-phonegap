@@ -6,6 +6,7 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	nconf = require('nconf'),
+	less = require('less-middleware'),
 	config = require('./config'),
 	app;
 
@@ -23,6 +24,7 @@ app.configure(function () {
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	app.use(app.router);
+	app.use(less(nconf.get('less')));
 	app.use(express.errorHandler());
 	app.use(express.static(path.join(__dirname, config.getPublicDirectory())));
 });

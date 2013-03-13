@@ -2,5 +2,11 @@
 	"port": 5000,
 	"environment": "web",
 	"auth": "mock",
-	"mode": "dev"
+	"mode": "dev",
+	"less": {
+		"dest": "./src/css",
+		"src": "./src/less",
+		"prefix": "/css",
+		"debug": true
+	}
 }

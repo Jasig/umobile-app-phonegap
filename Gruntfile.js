@@ -13,12 +13,12 @@ module.exports = function (grunt) {
 
 		// Cleans out directories.
 		clean: {
-			development: [
+			dev: [
 				'src/modules',
 				'src/docs',
 				'src/index.html'
 			],
-			production: [
+			prod: [
 				'www/modules',
 				'www/docs',
 				'www/'
@@ -58,6 +58,23 @@ module.exports = function (grunt) {
 						cwd: 'src/css/lib/jquerymobile/images'
 					}
 				]
+			}
+		},
+
+		// Compile less files into css.
+		less: {
+			dev: {
+				files: {
+					'src/css/umobile.css': 'src/less/umobile.less'
+				}
+			},
+			prod: {
+				files: {
+					'www/css/umobile.css': 'src/less/umobile.less'
+				},
+				options: {
+					compress: true
+				}
 			}
 		},
 
@@ -116,7 +133,8 @@ module.exports = function (grunt) {
 						'src/js/lib/gibberish/gibberishAES.js',
 						'src/js/lib/underscore/underscore.js',
 						'src/js/lib/backbone/backbone.js',
-						'src/js/lib/handlebars/handlebars.js'
+						'src/js/lib/handlebars/handlebars.js',
+						'src/js/lib/bootstrap/bootstrap.js'
 					]
 				}
 			},
@@ -135,7 +153,7 @@ module.exports = function (grunt) {
 						'src/js/src/view/Module.js',
 						'src/js/src/view/Credential.js',
 						'src/js/src/view/App.js',
-						'src/js/src/bootstrap.js'
+						'src/js/src/umobile.js'
 					]
 				}
 			}
@@ -191,7 +209,7 @@ module.exports = function (grunt) {
 				tag: 'script',
 				type: 'text/x-handlebars-template'
 			},
-			development: {
+			dev: {
 				options: {
 					layout: 'src/index.html'
 				},
@@ -199,7 +217,7 @@ module.exports = function (grunt) {
 					'src/index.html': ['views/partials/*.html']
 				}
 			},
-			production: {
+			prod: {
 				options: {
 					layout: 'www/index.html'
 				},
@@ -216,21 +234,23 @@ module.exports = function (grunt) {
 
 	// Register tasks.
 	grunt.registerTask('dev', [
-		'clean:development',
+		'clean:dev',
+		'less:dev',
 		'jshint',
 		'compilehtml:devViews',
 		'compilehtml:devModules',
-		'appendpartials:development'
+		'appendpartials:dev'
 	]);
 
 	grunt.registerTask('prod', [
-		'clean:production',
+		'clean:prod',
 		'copy',
+		'less:prod',
 		'cssmin',
 		'jshint',
 		'uglify',
 		'compilehtml:prodViews',
 		'compilehtml:prodModules',
-		'appendpartials:production'
+		'appendpartials:prod'
 	]);
 };
