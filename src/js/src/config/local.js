@@ -5,13 +5,14 @@ var config = {};
 // HTML5 testing url: http://localhost:5000
 // Android: http://10.0.2.2:8080
 // iOS: http://localhost:8080
-config.uMobileServerUrl = 'http://localhost:5000';
+config.uMobileServerUrl = 'http://localhost:8080';
 
 // UMOBILE SERVER CONTEXT PATH
-config.uMobileServerContext = '/data';
+config.uMobileServerContext = '';
 
 // AUTHENTICATION
-config.loginFn = 'mockLogin'; 		// mockLogin, localLogin or casLogin.
+// mockLogin, localLogin or casLogin.
+config.loginFn = 'localLogin';
 config.encryptionKey = 'umobile';
 config.casServerUrl = 'http://localhost:8080';
 
@@ -44,5 +45,8 @@ config.nativeIcons = {
 
 // SUPPORTED MODULES
 config.nativeModules = {
-	map: 'map.html'
+	news: '/modules/news.html',
+	map: '/modules/map.html',
+	calendar: '/modules/calendar.html',
+	courses: '/modules/courses.html'
 };

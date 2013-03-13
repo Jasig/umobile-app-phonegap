@@ -1,9 +1,6 @@
 {
+	"port": 5000,
 	"environment": "web",
-
-	"htmlRemoveComments": true,
-	"htmlCollapseWhitespace": true, 
-
-	"imageOptimizationLevel": 3,
-	"imageOptimizationProgressive": true
+	"auth": "mock",
+	"mode": "dev"
 }

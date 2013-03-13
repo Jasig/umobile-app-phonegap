@@ -2,75 +2,62 @@
 
 // Modules & variables.
 var nconf = require('nconf'),
-	config = require('./config'),
-	setup, clean, copy, images, css, lint,
-	javascript, html, tearDown, taskList;
-
-//var configSettingsFile = 'filters/js/config/' + config.configSettings + '.js';
+	config = require('./config');
 
 // Grunt.
 module.exports = function (grunt) {
 	'use strict';
 
-	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		// Cleans out public www directory.
+		// Cleans out directories.
 		clean: {
-			cleanWWW: {
-				src: ['www']
-			},
-			cleanDocs: {
-				src: ['www/docs']
-			}
+			development: [
+				'src/modules',
+				'src/docs',
+				'src/index.html'
+			],
+			production: [
+				'www/modules',
+				'www/docs',
+				'www/'
+			]
 		},
 
 		// Copies assests to public www directory.
 		copy: {
 			main: {
 				files: [
-					{src: ['**'], dest: 'www/data/', expand: true, cwd: 'src/data/'}
+					{
+						src: ['**'],
+						dest: 'www/data/',
+						expand: true,
+						cwd: 'src/data/'
+					}
 				]
 			},
 			images: {
 				files: [
-					{src: ['**'], dest: 'www/images/', expand: true, cwd: 'src/images/'},
-					{src: ['**'], dest: 'www/data/icons/', expand: true, cwd: 'src/data/icons/'},
-					{src: ['**'], dest: 'www/css/lib/jquerymobile/images/', expand: true, cwd: 'src/css/lib/jquerymobile/images'}
+					{
+						src: ['**'],
+						dest: 'www/images/',
+						expand: true,
+						cwd: 'src/images/'
+					},
+					{
+						src: ['**'],
+						dest: 'www/data/icons/',
+						expand: true,
+						cwd: 'src/data/icons/'
+					},
+					{
+						src: ['**'],
+						dest: 'www/css/lib/jquerymobile/images/',
+						expand: true,
+						cwd: 'src/css/lib/jquerymobile/images'
+					}
 				]
-			}
-		},
-
-		// Copies markup files to public www directory.
-		// Task is used to conditionally include script files in
-		// the markup files based upon the environment (i.e., web, android or ios).
-		// TODO: Need to rewrite to support regex patterns
-		targethtml: {
-			deploy: {
-				files: {
-					'www/index.html': 'src/index.html'
-				}
-			},
-			deployMap: {
-				files: {
-					'www/map.html': 'src/map.html'
-				}
-			},
-			deployNews: {
-				files: {
-					'www/news.html': 'src/news.html'
-				}
-			},
-			deployCalendar: {
-				files: {
-					'www/calendar.html': 'src/calendar.html'
-				}
-			},
-			deployCourses: {
-				files: {
-					'www/courses.html': 'src/courses.html'
-				}
 			}
 		},
 
@@ -80,20 +67,6 @@ module.exports = function (grunt) {
 				files: {
 					'www/css/portal.css': ['src/css/portal.css'],
 					'www/css/lib/jquerymobile/jqm.theme.css': ['src/css/lib/jquerymobile/jqm.theme.css']
-				}
-			}
-		},
-
-		// Minify HTML.
-		htmlmin: {
-			minimizeHtml: {
-				options: {
-					removeComments: Boolean(config.htmlRemoveComments) && config.isDevBuild(),
-					collapseWhitespace: Boolean(config.htmlCollapseWhitespace) && config.isDevBuild()
-				},
-				files: {
-					'www/index.html': 'www/index.html',
-					'www/map.html': 'www/map.html'
 				}
 			}
 		},
@@ -126,71 +99,112 @@ module.exports = function (grunt) {
 			]
 		},
 
-		// Optimize and compress JavaScript files.
+		// Compress javascript and copy to www directory.
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-				mangle: !config.isDevBuild(),
-				compress: !config.isDevBuild(),
-				preserveComments: config.isDevBuild(),
-				beautify: config.isDevBuild()
+				compress: true,
+				mangle: false,
+				preserveComments: false
 			},
-			umobile: {
-				files: {
-					'www/js/src/app.js': 'src/js/src/app.js',
-					'www/js/src/bootstrap.js': 'src/js/src/bootstrap.js',
-					'www/js/src/config.js': config.configSettingsFile,
-					'www/js/src/home.js': 'src/js/src/home.js',
-
-					'www/js/src/collection/ModuleCollection.js': 'src/js/src/collection/ModuleCollection.js',
-
-					'www/js/src/model/Credential.js': 'src/js/src/model/Credential.js',
-					'www/js/src/model/Module.js': 'src/js/src/model/Module.js',
-					'www/js/src/model/State.js': 'src/js/src/model/State.js',
-
-					'www/js/src/service/Authentication.js': 'src/js/src/service/Authentication.js',
-					'www/js/src/service/SessionTracker.js': 'src/js/src/service/SessionTracker.js',
-					'www/js/src/service/SessionTrackerMock.js': 'src/js/src/service/SessionTrackerMock.js',
-					'www/js/src/service/Storage.js': 'src/js/src/service/Storage.js',
-
-					'www/js/src/view/Credential.js': 'src/js/src/view/Credential.js',
-					'www/js/src/view/Module.js': 'src/js/src/view/Module.js',
-					'www/js/src/view/App.js': 'src/js/src/view/App.js'
-				}
-			},
-
 			lib: {
 				files: {
-					'www/js/lib/backbone/backbone.js': 'src/js/lib/backbone/backbone.js',
-
-					'www/js/lib/fluid/fluid-all.js': 'src/js/lib/fluid/fluid-all.js',
-
-					'www/js/lib/gibberish/gibberishAES.js': 'src/js/lib/gibberish/gibberishAES.js',
-
-					'www/js/lib/handlebars/handlebars.js': 'src/js/lib/handlebars/handlebars.js',
-					'www/js/lib/handlebars/handlebars-runtime.js': 'src/js/lib/handlebars/handlebars-runtime.js',
-
-					'www/js/lib/jquery/jquery.js': 'src/js/lib/jquery/jquery.js',
-					'www/js/lib/jquery/jquery-pubsub.js': 'src/js/lib/jquery/jquery-pubsub.js',
-
-					'www/js/lib/jquerymobile/jquery-mobile.js': 'src/js/lib/jquerymobile/jquery-mobile.js',
-
-					'www/js/lib/jqueryui/jquery-ui.js': 'src/js/lib/jqueryui/jquery-ui.js',
-
-					'www/js/lib/underscore/underscore.js': 'src/js/lib/underscore/underscore.js',
-
-					'www/js/lib/cordova/cordova-android.js': 'src/js/lib/cordova/cordova-android.js',
-					'www/js/lib/cordova/cordova-ios.js': 'src/js/lib/cordova/cordova-ios.js'
+					'www/js/lib/lib.min.js': [
+						'src/js/lib/cordova/cordova-' + config.getCordova() + '.js',
+						'src/js/lib/jquery/jquery.js',
+						'src/js/lib/jquerymobile/jquery-mobile.js',
+						'src/js/lib/jquery/jquery-pubsub.js',
+						'src/js/lib/gibberish/gibberishAES.js',
+						'src/js/lib/underscore/underscore.js',
+						'src/js/lib/backbone/backbone.js',
+						'src/js/lib/handlebars/handlebars.js'
+					]
+				}
+			},
+			source: {
+				files: {
+					'www/js/src/main.min.js': [
+						'src/js/src/config/' + config.getAuth() + '.js',
+						'src/js/src/app.js',
+						'src/js/src/service/' + config.getTracker() + '.js',
+						'src/js/src/service/Authentication.js',
+						'src/js/src/service/Storage.js',
+						'src/js/src/model/State.js',
+						'src/js/src/model/Module.js',
+						'src/js/src/model/Credential.js',
+						'src/js/src/collection/ModuleCollection.js',
+						'src/js/src/view/Module.js',
+						'src/js/src/view/Credential.js',
+						'src/js/src/view/App.js',
+						'src/js/src/bootstrap.js'
+					]
 				}
 			}
 		},
 
-		// Compile documentation.
-		yuidoc: {
-			compile: {
+		// Compile html files and copy to target directories.
+		compilehtml: {
+			devViews: {
 				options: {
-					paths: 'src/js/src/',
-					outdir: 'www/docs/'
+					cordova: config.getCordova(),
+					tracker: config.getTracker(),
+					auth: config.getAuth(),
+					dev: true
+				},
+				src: 'views/*.html',
+				dest: 'src/FILE.html'
+			},
+			devModules: {
+				options: {
+					cordova: config.getCordova(),
+					tracker: config.getTracker(),
+					auth: config.getAuth(),
+					dev: true
+				},
+				src: 'views/modules/*.html',
+				dest: 'src/modules/FILE.html'
+			},
+			prodViews: {
+				options: {
+					cordova: config.getCordova(),
+					tracker: config.getTracker(),
+					auth: config.getAuth(),
+					dev: false
+				},
+				src: 'views/*.html',
+				dest: 'www/FILE.html'
+			},
+			prodModules: {
+				options: {
+					cordova: config.getCordova(),
+					tracker: config.getTracker(),
+					auth: config.getAuth(),
+					dev: false
+				},
+				src: 'views/modules/*.html',
+				dest: 'www/modules/FILE.html'
+			}
+		},
+
+		// Append script-based templates to index file.
+		appendpartials: {
+			options: {
+				tag: 'script',
+				type: 'text/x-handlebars-template'
+			},
+			development: {
+				options: {
+					layout: 'src/index.html'
+				},
+				files: {
+					'src/index.html': ['views/partials/*.html']
+				}
+			},
+			production: {
+				options: {
+					layout: 'www/index.html'
+				},
+				files: {
+					'www/index.html': ['views/partials/*.html']
 				}
 			}
 		}
@@ -200,28 +214,23 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib');
 	grunt.task.loadTasks('tasks');
 
-	// Define tasks.
-	setup = [];
-	clean = ['clean'];
-	copy = ['copy:main', 'copy:images'];
-	images = [];
-	css = ['cssmin'];
-	lint = ['jshint'];
-	javascript = ['uglify'];
-	html = ['targethtml', 'htmlmin'];
-	tearDown = [];
-
-	// Define task list.
-	taskList = setup.concat(clean, images, css, lint, javascript, html, copy, tearDown);
-
-	grunt.log.ok('------------------------------------------------');
-	grunt.log.ok('Using target build environment: ' + config.targetEnvironment);
-	grunt.log.ok('Using configuration settings: ' + config.configSettings);
-	grunt.log.ok('Using build environment: ' + config.buildEnvironment);
-	grunt.log.ok('------------------------------------------------');
-
 	// Register tasks.
-	grunt.registerTask('docs', ['clean:cleanDocs', 'yuidoc']);
-	grunt.registerTask('lint', lint);
-	grunt.registerTask('default', taskList);
+	grunt.registerTask('dev', [
+		'clean:development',
+		'jshint',
+		'compilehtml:devViews',
+		'compilehtml:devModules',
+		'appendpartials:development'
+	]);
+
+	grunt.registerTask('prod', [
+		'clean:production',
+		'copy',
+		'cssmin',
+		'jshint',
+		'uglify',
+		'compilehtml:prodViews',
+		'compilehtml:prodModules',
+		'appendpartials:production'
+	]);
 };
