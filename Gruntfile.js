@@ -16,7 +16,8 @@ module.exports = function (grunt) {
 			dev: [
 				'src/modules',
 				'src/docs',
-				'src/index.html'
+				'src/index.html',
+				'src/css/umobile.css'
 			],
 			prod: [
 				'www/modules',
