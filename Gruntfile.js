@@ -236,6 +236,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('dev', [
 		'clean:dev',
 		'less:dev',
+		'cssmin',
 		'jshint',
 		'compilehtml:devViews',
 		'compilehtml:devModules',
