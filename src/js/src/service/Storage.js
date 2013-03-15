@@ -20,21 +20,27 @@
 	umobile.storage.sync = function (storage, key) {
 		storage.init();
 		return function (method, model, options) {
-			var id = model.id || key;
-			var storageKey = key + '.' + model.id;
+			var id, storageKey;
+			id = model.id || key;
+			storageKey = key + '.' + id;
+
 			switch (method) {
 			case 'read':
-				console.log('reading ' + storageKey);
+				console.log('Reading storage key: ' + storageKey);
 				storage.getItem(
 					storageKey,
 					function (result) {
+						var arr, modules;
 						if (result) {
-							console.log('read ' + result);
+							console.log('Reading result: ' + result);
 							if (model.id) {
+								console.log('Result has id property.');
+								console.log('Updating model with result.');
 								model.set(JSON.parse(result));
+								console.log('===================');
 							} else {
-								var arr = JSON.parse(result);
-								var modules = [];
+								arr = JSON.parse(result);
+								modules = [];
 								$(arr).each(function (idx, module) {
 									modules.push(new model.model(module));
 								});
@@ -42,7 +48,7 @@
 							}
 							options.success(model);
 						} else {
-							console.log('initializing new ' + storageKey + ' for ' + JSON.stringify(model));
+							console.log('Initializing new ' + storageKey + ' for ' + JSON.stringify(model));
 							storage.setItem(storageKey, JSON.stringify(model));
 							options.success(model);
 						}
@@ -52,17 +58,24 @@
 			case 'create':
 				console.log('creating ' + storageKey + ': ' + JSON.stringify(model));
 				storage.setItem(storageKey, JSON.stringify(model));
-				options.success(model);
+				if (options && options.hasOwnProperty('success')) {
+					options.success(model);
+				}
 				break;
 			case 'update':
-				console.log('saving ' + storageKey + ': ' + JSON.stringify(model));
+				console.log('Saving ' + storageKey + ': ' + JSON.stringify(model));
 				storage.setItem(storageKey, JSON.stringify(model));
-				options.success(model);
+				if (options && options.hasOwnProperty('success')) {
+					options.success(model);
+				}
+				console.log('===================');
 				break;
 			case 'delete':
 				console.log('removing ' + storageKey);
 				storage.removeItem(storageKey);
-				options.success(model);
+				if (options && options.hasOwnProperty('success')) {
+					options.success(model);
+				}
 				break;
 			}
 		};
@@ -76,16 +89,41 @@
 	@namespace storage
 	**/
 	umobile.storage.local = {
-		init: function () {},
+		/**
+		Method retrieves item from local storage.
+
+		@method getItem
+		@param {String} storageKey
+		@param {Function} success
+		**/
 		getItem: function (storageKey, success) {
 			return success(window.localStorage.getItem(storageKey));
 		},
+
+		/**
+		Method sets item into local storage.
+
+		@method setItem
+		**/
 		setItem: function (storageKey, json) {
 			window.localStorage.setItem(storageKey, json);
 		},
+
+		/**
+		Method removes item from local storage.
+
+		@method setItem
+		**/
 		removeItem: function (storageKey) {
 			window.localStorage.removeItem(storageKey);
-		}
+		},
+
+		/**
+		Entry point for the local storage implementation.
+
+		@method init
+		**/
+		init: function () {}
 	};
 
 	/**

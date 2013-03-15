@@ -24,6 +24,12 @@
 			password: null
 		},
 
+		/**
+		...
+
+		@property validation
+		@type Object
+		**/
 		validation: {
 			username: {
 				required: true

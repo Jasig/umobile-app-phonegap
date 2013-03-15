@@ -11,13 +11,24 @@
 	@namespace session
 	**/
 	umobile.session.SessionTracker = {
+		/**
+		@property time
+		**/
 		time: 0,
+
+		/**
+		@method get
+		**/
 		get: function (success) {
 			if (typeof success !== 'function') {
 				throw new Error('The success parameter must be a function, was ' + typeof success + '.');
 			}
 			success(this.time);
 		},
+
+		/**
+		@method set
+		**/
 		set: function (time, success, failure) {
 			this.time = time;
 			if (success) {

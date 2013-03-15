@@ -38,15 +38,17 @@
 	function. Data pertaining to a user and thier layout is made
 	available when successful.
 
-	@method getSession
+	@method establishSession
 	**/
-	umobile.auth.getSession = function () {
+	umobile.auth.establishSession = function () {
+		console.log('Establish a session with ' + config.loginFn + '.');
 		var loginFn = umobile.auth[config.loginFn];
 		loginFn(
 			umobile.app.credModel,
 			_.bind(function (data) {
-				console.log('Broadcasting data for user: ' + data.user);
-				$.publish('session.retrieved', data);
+				console.log('Broadcasting data for user: ' + data.user + '.');
+				console.log('===================');
+				$.publish('session.established', data);
 			}, this),
 			_.bind(function (jqXHR, textStatus, errorThrown) {
 				console.log('Error: ' + textStatus + ', ' + errorThrown);
@@ -113,10 +115,10 @@
 		// If credentials are included, add them to the POST data.
 		if (credentials && credentials.get('username') && credentials.get('password')) {
 			url = config.uMobileServerUrl + config.uMobileServerContext + '/layout-student.json';
-			console.log('Attempting local login via URL ' + url);
+			console.log('Attempting local login via URL: ' + url);
 		} else {
 			url = config.uMobileServerUrl + config.uMobileServerContext + '/layout-guest.json';
-			console.log('Establishing guest session via URL ' + url);
+			console.log('Establishing guest session via URL: ' + url);
 		}
 
 		// Request to uMobile login servlet.
@@ -129,7 +131,7 @@
 					console.log('Established guest session.');
 					onSuccess(data);
 				} else if (credentials.attributes.username === data.user) {
-					console.log('Successful authentication for user ' + credentials.attributes.username);
+					console.log('Successful authentication for user: ' + credentials.attributes.username);
 					onSuccess(data);
 				} else {
 					console.log('Error performing local authentication: ' + textStatus);

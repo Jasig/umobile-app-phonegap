@@ -19,6 +19,10 @@ config.casServerUrl = 'http://localhost:8080';
 // LOCAL STORAGE.
 config.storageFn = 'local';
 
+// SESSION TIMEOUT.
+// 600000 millseconds = 10 minutes.
+config.sessionTimeout = '600000';
+
 // LOCALLY HOSTED ICONS
 // For uMobile modules. Keyed by module fname.
 config.nativeIcons = {

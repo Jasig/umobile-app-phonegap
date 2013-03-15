@@ -20,7 +20,8 @@
 		defaults: {
 			id: 'state',
 			authenticated: false,
-			lastSessionAccess: null
+			lastSessionAccess: null,
+			currentView: null
 		},
 
 		/**
