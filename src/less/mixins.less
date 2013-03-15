@@ -1,0 +1,20 @@
+//
+// Mixins
+// --------------------------------------------------
+
+.um-shadow {
+	-webkit-box-shadow: 0 1px 10px @darkGray;
+	-moz-box-shadow: 0 1px 10px @darkGray;
+	box-shadow: 0 1px 10px @darkGray;
+}
+
+.um-navbar-gradient {
+	background: @darkGray;
+	background: -moz-linear-gradient(top, @darkGray 0%, @black 100%, @black 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@darkGray), color-stop(100%,@black), color-stop(100%,@black));
+	background: -webkit-linear-gradient(top, @darkGray 0%,@black 100%,@black 100%);
+	background: -o-linear-gradient(top, @darkGray 0%,@black 100%,@black 100%);
+	background: -ms-linear-gradient(top, @darkGray 0%,@black 100%,@black 100%);
+	background: linear-gradient(to bottom, @darkGray 0%,@black 100%,@black 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkGray', endColorstr='@black',GradientType=0);
+}

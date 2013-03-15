@@ -229,9 +229,9 @@
 			@method init
 			**/
 			initialize: function () {
-				_.bindAll(this);
-				this.initModels();
-				this.initEventListener();
+				//_.bindAll(this);
+				//this.initModels();
+				//this.initEventListener();
 			}
 		};
 

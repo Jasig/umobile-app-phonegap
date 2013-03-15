@@ -63,10 +63,10 @@
 		/**
 		Credential model. Represents user credential state.
 
-		@property credModel
+		@property model
 		@type Object
 		**/
-		credModel: {},
+		model: {},
 
 		/**
 		Method extracts credentials from the login form
@@ -83,8 +83,9 @@
 				password = form.find(this.selectors.password);
 
 			// Save credentials without raising an event.
-			this.credModel.save({username: username.val(), password: password.val()}, {silent: true});
-			this.credModel.change();
+			console.log('Save Credentials: ', username.val(), ' & ', password.val());
+			this.model.save({username: username.val(), password: password.val()}, {silent: false});
+			this.model.change();
 		},
 
 		/**
@@ -100,7 +101,7 @@
 			var username = form.find(this.selectors.username).val(''),
 				password = form.find(this.selectors.password).val('');
 
-			this.credModel.save({username: null, password: null});
+			this.model.save({username: null, password: null});
 		},
 
 		/**
@@ -150,7 +151,7 @@
 		@return {Object} Credential view.
 		**/
 		render: function () {
-			this.$el.html(this.template(this.credModel.attributes));
+			this.$el.html(this.template(this.model.attributes));
 			return this;
 		},
 
@@ -163,8 +164,19 @@
 		**/
 		initialize: function (options) {
 			_.bindAll(this);
-			this.credModel = options.model;
+			this.model = options.model;
+			Backbone.Validation.bind(this);
 			this.template = Handlebars.compile($(this.selectors.template).html());
+
+			// Bind to model. Valid model callback.
+			this.model.bind('validated:valid', function (model) {
+				console.log('Model is valid: ', model);
+			});
+
+			// Bind to model. Invalid model callback.
+			this.model.bind('validated:invalid', function (model, errors) {
+				console.log('Model is invalid: ', errors);
+			});
 		}
 	});
 

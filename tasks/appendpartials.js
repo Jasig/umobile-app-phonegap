@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 
 			// Insert before body in the destination file.
 			var dest = grunt.file.read(options.layout);
-			dest = insert(dest, '</body>', scripts);
+			dest = insert(dest, '</templates>', scripts);
 			grunt.file.write(fileObj.dest, dest);
 
 			// Print a success message.

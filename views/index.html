@@ -6,119 +6,85 @@
 		<meta charset="utf-8">
 
 		<!--CSS Dependencies-->
-		<link type="text/css" rel="stylesheet" href="css/lib/jquerymobile/jqm.theme.css">
-		<link type="text/css" rel="stylesheet" href="css/portal.css">
+		<link type="text/css" rel="stylesheet" href="css/umobile.css">
 
 		<!--JavaScript Dependencies-->
 		{{#dev}}
 		<script type="text/javascript" src="js/lib/cordova/cordova-{{cordova}}.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
-		<script type="text/javascript" src="js/lib/jquerymobile/jquery-mobile.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
 		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
 		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
 		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
 		<script type="text/javascript" src="js/lib/handlebars/handlebars.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap/bootstrap.js"></script>
 		{{/dev}}
 		{{^dev}}
 		<script type="text/javascript" src="js/lib/lib.min.js"></script>
 		{{/dev}}
-
-		<script type="text/javascript">
-			$(document).bind("mobileinit", function () {
-				$.extend($.mobile , {
-					ajaxEnabled: false,
-					ajaxFormsEnabled: false
-				});
-			});
-			var localStorage;
-		</script>
 	</head>
 
-	<body class="up fl-theme-iphone dashboard-grid">
-		<div id="appView">
-			<!--
-			| =====================
-			| Home View
-			| =====================
-			-->
-			<div id="home" class="portal dashboard" data-role="page">
-				<!--header-->
-				<div data-role="header" data-backbtn="false" class="titlebar portlet-wrapper-titlebar">
-					<h1 class="title">uMobile</h1>
-					<a href="#preference" class="ui-btn-right" data-transition="none" data-icon="gear">
-						<span>Prefs</span>
+	<body class="um">
+		<!--Header-->
+		<header>
+			<div class="navbar navbar-static-top navbar-inverse um-navbar">
+				<div class="navbar-inner um-navbar-inner">
+					<a class="brand um-brand" href="#">
+						<span class="navbar-text um-navbar-text">uMobile</span>
 					</a>
-				</div>
-
-				<!--links-->
-				<div id="portalNav" class="portal-nav"></div>
-
-				<!--reload
-				<a href="index.html?module=news">reload</a>
-				-->
-
-				<!--footer-->
-				<div data-role="footer" class="umobile-auth-invitation">
-					<a href="#preference" data-transition="none">
-						You are using uMobile as a guest user. Click here to log in!
+					<a href="#login" class="btn pull-right um-btn-login">
+						<i class="icon-lock"></i>
+						<span>Login</span>
 					</a>
 				</div>
 			</div>
+		</header>
 
-			<!--
-			| =====================
-			| Module View
-			| =====================
-			-->
-			<div id="module" class="portal focused" data-role="page">
-				<!--titlebar-->
-				<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
-					<a href="#home" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
-					<h1 class="title module-page-title">Portlet</h1>
-				</div>
-
-				<!--content-->
-				<iframe style="width: 100%; height:500px; border: none; padding: 0; margin: 0"></iframe>
-			</div>
-
-			<!--
-			| =====================
-			| Preferences View
-			| =====================
-			-->
-			<div id="preference" class="portal focused" data-role="page">
-				<!--titlebar-->
-				<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
-					<a href="#home" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
-					<h1 class="title module-page-title">Preferences</h1>
-				</div>
-
-				<!--content-->
-				<div class="portlet">
-					<div class="portlet-content" data-role="content"></div>
+		<!--Views-->
+		<div class="row-fluid">
+			<div class="span12">
+				<div id="page" class="um-page">
+					<div id="screen" class="um-screen hidden"></div>
+					<div id="loader" class="um-loader"></div>
 				</div>
 			</div>
-
-			<!--JavaScript Source Files-->
-			{{#dev}}
-			<script type="text/javascript" src="js/src/config/{{auth}}.js"></script>
-			<script type="text/javascript" src="js/src/app.js"></script>
-			<script type="text/javascript" src="js/src/service/{{tracker}}.js"></script>
-			<script type="text/javascript" src="js/src/service/Authentication.js"></script>
-			<script type="text/javascript" src="js/src/service/Storage.js"></script>
-			<script type="text/javascript" src="js/src/model/State.js"></script>
-			<script type="text/javascript" src="js/src/model/Module.js"></script>
-			<script type="text/javascript" src="js/src/model/Credential.js"></script>
-			<script type="text/javascript" src="js/src/collection/ModuleCollection.js"></script>
-			<script type="text/javascript" src="js/src/view/Module.js"></script>
-			<script type="text/javascript" src="js/src/view/Credential.js"></script>
-			<script type="text/javascript" src="js/src/view/App.js"></script>
-			<script type="text/javascript" src="js/src/umobile.js"></script>
-			{{/dev}}
-			{{^dev}}
-			<script type="text/javascript" src="js/src/main.min.js"></script>
-			{{/dev}}
 		</div>
+
+		<!--JavaScript Template Files-->
+		<templates></templates>
+
+		<!--JavaScript Source Files-->
+		{{#dev}}
+		<!--
+		<script type="text/javascript" src="js/src/service/{{tracker}}.js"></script>
+		<script type="text/javascript" src="js/src/service/Authentication.js"></script>
+		<script type="text/javascript" src="js/src/service/Storage.js"></script>
+		<script type="text/javascript" src="js/src/model/State.js"></script>
+		<script type="text/javascript" src="js/src/model/Module.js"></script>
+		<script type="text/javascript" src="js/src/model/Credential.js"></script>
+		<script type="text/javascript" src="js/src/collection/ModuleCollection.js"></script>
+		<script type="text/javascript" src="js/src/umobile.js"></script>
+		<script type="text/javascript" src="js/src/view/Module.js"></script>
+		<script type="text/javascript" src="js/src/view/Credential.js"></script>
+		<script type="text/javascript" src="js/src/view/App.js"></script>
+		-->
+		<script type="text/javascript" src="js/src/config/{{auth}}.js"></script>
+		<script type="text/javascript" src="js/src/app.js"></script>
+
+		<script type="text/javascript" src="js/src/view/ViewManager.js"></script>
+		<script type="text/javascript" src="js/src/view/Screen.js"></script>
+		<script type="text/javascript" src="js/src/view/Home.js"></script>
+		<script type="text/javascript" src="js/src/view/Login.js"></script>
+		<script type="text/javascript" src="js/src/router.js"></script>
+		{{/dev}}
+		{{^dev}}
+		<script type="text/javascript" src="js/src/main.min.js"></script>
+		{{/dev}}
+		<script type="text/javascript">
+			$(function () {
+				'use strict';
+				umobile.initialize();
+			});
+		</script>
 	</body>
 </html>

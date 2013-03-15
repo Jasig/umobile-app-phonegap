@@ -24,6 +24,15 @@
 			password: null
 		},
 
+		validation: {
+			username: {
+				required: true
+			},
+			password: {
+				required: true
+			}
+		},
+
 		/**
 		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.
