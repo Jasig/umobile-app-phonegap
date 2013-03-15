@@ -226,6 +226,21 @@ module.exports = function (grunt) {
 					'www/index.html': ['views/partials/*.html']
 				}
 			}
+		},
+
+		watch: {
+			dev: {
+				files: [
+					'views/*.html',
+					'views/modules/*.html',
+					'views/partials/*.html'
+				],
+				tasks: [
+					'compilehtml:devViews',
+					'compilehtml:devModules',
+					'appendpartials:dev'
+				]
+			}
 		}
 	});
 
@@ -234,6 +249,7 @@ module.exports = function (grunt) {
 	grunt.task.loadTasks('tasks');
 
 	// Register tasks.
+	grunt.registerTask('templates', ['watch:dev']);
 	grunt.registerTask('dev', [
 		'clean:dev',
 		'less:dev',
