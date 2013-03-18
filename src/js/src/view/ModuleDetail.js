@@ -12,6 +12,14 @@
 	**/
 	umobile.view.ModuleDetail = umobile.view.LoadedView.extend({
 		/**
+		Name of the loaded view.
+
+		@property name
+		@type String
+		**/
+		name: 'module',
+
+		/**
 		Object hash of valid DOM selectors.
 
 		@property selectors

@@ -2,7 +2,6 @@
 // Mixins
 // --------------------------------------------------
 
-// TODO: Change to accept parameters.
 .um-shadow {
 	-webkit-box-shadow: 0 1px 10px @darkGray;
 	-moz-box-shadow: 0 1px 10px @darkGray;
@@ -13,6 +12,12 @@
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	border-radius: @radius;
+}
+
+.um-list, .um-list li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
 }
 
 .um-gradient(@startColor: @darkGary, @fromColor: @black) {

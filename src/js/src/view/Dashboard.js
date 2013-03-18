@@ -3,14 +3,22 @@
 	'use strict';
 
 	/**
-	Manages the loaded Home view.
+	Manages the loaded Dashboard view.
 
-	@class Home
+	@class Dashboard
 	@submodule view
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Home = umobile.view.LoadedView.extend({
+	umobile.view.Dashboard = umobile.view.LoadedView.extend({
+		/**
+		Name of the loaded view.
+
+		@property name
+		@type String
+		**/
+		name: 'dashboard',
+
 		/**
 		Object hash of valid DOM selectors.
 
@@ -18,7 +26,7 @@
 		@type Object
 		**/
 		selectors: {
-			template: '#views-partials-home',
+			template: '#views-partials-dashboard',
 			moduleList: '#moduleList'
 		},
 
@@ -43,7 +51,7 @@
 		},
 
 		/**
-		Method renders the UI for the loaded Home view.
+		Method renders the UI for the loaded Dashboard view.
 
 		@method render
 		@override LoadedView
@@ -57,7 +65,7 @@
 			this.showLoader();
 
 			if (moduleCollection.hasOwnProperty('models') && moduleCollection.models.length > 0) {
-				// Render the loaded Home view.
+				// Render the loaded Dashboard view.
 				this.$el.addClass('hidden')
 					.html(this.template({}))
 					.removeClass('hidden');
@@ -73,7 +81,7 @@
 		},
 
 		/**
-		Entry point for loaded Home view.
+		Entry point for loaded Dashboard view.
 
 		@method initialize
 		@override LoadedView

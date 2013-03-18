@@ -7,11 +7,11 @@
 		<meta charset="utf-8">
 
 		<!--CSS Dependencies-->
-		<link type="text/css" rel="stylesheet" href="../css/umobile.css">
+		<link type="text/css" rel="stylesheet" href="../css/module.css">
 
 		<!--JavaScript Dependencies-->
 		{{#dev}}
-		<script type="text/javascript" src="../js/lib/cordova/cordova-android.js"></script>
+		<script type="text/javascript" src="../js/lib/cordova/cordova-{{cordova}}.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="../js/lib/jquery/jquery-pubsub.js"></script>
 		<script type="text/javascript" src="../js/lib/gibberish/gibberishAES.js"></script>
@@ -23,33 +23,15 @@
 		{{^dev}}
 		<script type="text/javascript" src="../js/lib/lib.min.js"></script>
 		{{/dev}}
-		<script type="text/javascript">
-			$(document).bind("mobileinit", function(){
-				$.extend($.mobile , {
-					ajaxEnabled: false,
-					ajaxFormsEnabled: false
-				});
-			});
-		</script>
 	<head>
-	<body>
+	<body class="um-module">
 		<!--
 		| =====================
 		| Map View
 		| =====================
 		-->
-		<div class="portal focused" data-role="page" id="map">
-			<!--titlebar
-			<div class="titlebar portlet-wrapper-titlebar" data-role="header" data-position="inline">
-				<a href="index.html" data-icon="home" data-direction="reverse" data-transition="none">Home</a>
-				<h1 class="title module-page-title">Map</h1>
-			</div>-->
-			<!--portlet-->
-			<div class="portlet">
-				<div class="portlet-content" data-role="content">
-					<div id="map_canvas" style="width:100%; height:400px"></div>
-				</div>
-			</div>
+		<div id="map" class="um-map">
+			<div id="mapCanvas" class="um-map-canvas"></div>
 		</div>
 
 		<!--JavaScript Source Files-->
@@ -62,7 +44,7 @@
 					zoom: 8,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				},
-				map = new google.maps.Map(document.getElementById("map_canvas"), options);
+				map = new google.maps.Map(document.getElementById('mapCanvas'), options);
 			});
 		</script>
 	</body>

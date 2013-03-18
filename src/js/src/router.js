@@ -19,18 +19,17 @@
 		@property routes
 		**/
 		routes: {
-			'': 'home',
+			'': 'dashboard',
 			'login': 'login',
 			'modules/*module': 'module'
 		},
 
 		/**
-		@method home
+		@method dashboard
 		**/
-		home: function () {
-			var home = new umobile.view.Home();
-			home.name = 'home';
-			this.viewManager.show(home);
+		dashboard: function () {
+			var dashboard = new umobile.view.Dashboard();
+			this.viewManager.show(dashboard);
 		},
 
 		/**
@@ -38,7 +37,6 @@
 		**/
 		login: function () {
 			var login = new umobile.view.Login();
-			login.name = 'login';
 			this.viewManager.show(login);
 		},
 
@@ -47,16 +45,35 @@
 		**/
 		module: function () {
 			var module = new umobile.view.ModuleDetail({path: Backbone.history.fragment});
-			module.name = 'module';
 			this.viewManager.show(module);
+		},
+
+		/**
+		Listens for the route to change. When triggered,
+		it updates the class name on the body.
+
+		@method onRouteChanged
+		**/
+		onRouteChanged: function (route, routeParam) {
+			var className;
+			route = route.split(':');
+			className = ('um-' + route[1]);
+			$('body').removeAttr('class').addClass(className);
 		},
 
 		/**
 		@method initialize
 		**/
 		initialize: function () {
+			// Initialize the Page view.
 			var page = new umobile.view.Page();
+
+			// Initialize the ViewManager.
 			this.viewManager = new umobile.view.ViewManager();
+
+			// Bind to all the routes. When they change, call
+			// the onRouteChanged method.
+			this.on('all', _.bind(this.onRouteChanged, this));
 		}
 	});
 

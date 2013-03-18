@@ -39,8 +39,9 @@
 		@param {Object} view The current view.
 		**/
 		toggleLogin: function (view) {
-			var loginButton = this.loc('loginButton');
-			(view.name === 'login') ? loginButton.addClass('hidden') : loginButton.removeClass('hidden');
+			var loginButton, login;
+			loginButton = this.loc('loginButton');
+			login = (view.getLoadedViewName() === 'login') ? loginButton.addClass('hidden') : loginButton.removeClass('hidden');
 		},
 
 		/**

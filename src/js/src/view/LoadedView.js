@@ -13,12 +13,29 @@
 	**/
 	umobile.view.LoadedView = umobile.view.BaseView.extend({
 		/**
+		Name of the loaded view.
+
+		@property name
+		@type String
+		**/
+		name: 'base',
+
+		/**
 		Root DOM element.
 
 		@property el
 		@type Object
 		**/
 		el: '#view',
+
+		/**
+		Method returns the name of the loaded view.
+
+		@method getLoadedViewName
+		**/
+		getLoadedViewName: function () {
+			return this.name;
+		},
 
 		/**
 		Method cleans up the DOM and unbinds

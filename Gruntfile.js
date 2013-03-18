@@ -66,12 +66,14 @@ module.exports = function (grunt) {
 		less: {
 			dev: {
 				files: {
-					'src/css/umobile.css': 'src/less/umobile.less'
+					'src/css/umobile.css': 'src/less/umobile.less',
+					'src/css/module.css': 'src/less/module.less'
 				}
 			},
 			prod: {
 				files: {
-					'www/css/umobile.css': 'src/less/umobile.less'
+					'www/css/umobile.css': 'src/less/umobile.less',
+					'www/css/module.css': 'src/less/module.less'
 				},
 				options: {
 					compress: true

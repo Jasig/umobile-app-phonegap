@@ -12,6 +12,14 @@
 	**/
 	umobile.view.Login = umobile.view.LoadedView.extend({
 		/**
+		Name of the loaded view.
+
+		@property name
+		@type String
+		**/
+		name: 'login',
+
+		/**
 		Object hash of valid DOM selectors.
 
 		@property selectors
