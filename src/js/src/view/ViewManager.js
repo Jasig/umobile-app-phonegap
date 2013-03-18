@@ -27,6 +27,7 @@
 
 				this.currentView = view;
 				this.currentView.render();
+				$.publish('view.rendered', view);
 			}
 
 		};

@@ -1,22 +1,27 @@
 //
-// Navbar
+// Header
 // --------------------------------------------------
 
-.um {
+.um-header {
+
+	// Overrides bootstrap navbar.
 	.um-navbar {
 		.um-navbar-inner {
-			.um-navbar-gradient;
+			.um-gradient(@darkGray, @black);
 			.um-shadow;
 
+			// uMobile logo.
 			.um-brand {
 				background: url('../images/um-logo-32x32.png') 8px 50% no-repeat;
 				padding: 10px 20px 10px 40px;
 
+				// uMobile text.
 				.um-navbar-text {
 					color: @white;
 				}
 			}
 
+			// Login button.
 			.um-btn-login {
 				margin-top: 10px;
 			}

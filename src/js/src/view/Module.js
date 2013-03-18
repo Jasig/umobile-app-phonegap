@@ -10,14 +10,14 @@
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Module = Backbone.View.extend({
+	umobile.view.Module = umobile.view.BaseView.extend({
 		/**
 		HTML tag name used to build a Module view.
 
 		@property tagName
 		@type String
 		**/
-		tagName: 'div',
+		tagName: 'li',
 
 		/**
 		Class name that is added to the tagName
@@ -26,7 +26,7 @@
 		@property className
 		@type String
 		**/
-		className: 'module-item portlet',
+		className: 'um-module-item',
 
 		/**
 		Object hash of valid DOM selectors for
@@ -40,57 +40,12 @@
 		},
 
 		/**
-		Template for the Module view.
-
-		@property template
-		@type Object
-		**/
-		template: {},
-
-		/**
 		Model for the Module view.
 
 		@property moduleModel
 		@type Object
 		**/
 		moduleModel: {},
-
-		/**
-		Backbone events object.
-
-		@property events
-		@type Object
-		**/
-		events: {
-			'click a': 'moduleClickHander'
-		},
-
-		/**
-		Click handler for the portlet icon.
-
-		@method showModuleClickHander
-		@param {Object} e Event object.
-		**/
-		moduleClickHander: function (e) {
-			e.preventDefault();
-			$.publish('module.selected', this.moduleModel);
-		},
-
-		/**
-		Helper method. Given the passed property, this method
-		parses the selector object looking for a match.
-
-		@method loc
-		@param {String} property The property to look up.
-		@return {Object} Cached, jQuery-wrapped DOM element.
-		**/
-		loc: function (property) {
-			if (!this.selectors.hasOwnProperty(property)) {
-				throw new Error('The property, ' + property + ' is not a valid selector.');
-			}
-
-			return this.$(this.selectors[property]);
-		},
 
 		/**
 		Method renders the UI for the Module view.
@@ -106,7 +61,6 @@
 
 		/**
 		Entry point for the Module view.
-		Method is called when the view is first created.
 
 		@method initialize
 		@param {Object} options Object hash of options.

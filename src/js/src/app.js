@@ -130,6 +130,9 @@ var umobile = {
 					portlet.url = config.uMobileServerUrl + portlet.url;
 				}
 
+				// Define hasNewItem property based upon the newItemCount property.
+				portlet.hasNewItem = (!Number(portlet.newItemCount)) ? false : true;
+
 				modules.push(new this.model.Module(portlet));
 			}, this);
 		}, this);
@@ -184,7 +187,8 @@ var umobile = {
 			// When session exists, fetch modules from module collection.
 			// When the session has expired, attempt to re-establish a session.
 			if ((now - lastSession) < sessionTimeout) {
-				this.app.moduleCollection.fetch();
+				this.auth.establishSession();
+				//this.app.moduleCollection.fetch();
 			} else {
 				this.auth.establishSession();
 			}

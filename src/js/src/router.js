@@ -20,7 +20,8 @@
 		**/
 		routes: {
 			'': 'home',
-			'login': 'login'
+			'login': 'login',
+			'modules/*module': 'module'
 		},
 
 		/**
@@ -28,6 +29,7 @@
 		**/
 		home: function () {
 			var home = new umobile.view.Home();
+			home.name = 'home';
 			this.viewManager.show(home);
 		},
 
@@ -36,13 +38,24 @@
 		**/
 		login: function () {
 			var login = new umobile.view.Login();
+			login.name = 'login';
 			this.viewManager.show(login);
+		},
+
+		/**
+		@method module
+		**/
+		module: function () {
+			var module = new umobile.view.ModuleDetail({path: Backbone.history.fragment});
+			module.name = 'module';
+			this.viewManager.show(module);
 		},
 
 		/**
 		@method initialize
 		**/
 		initialize: function () {
+			var page = new umobile.view.Page();
 			this.viewManager = new umobile.view.ViewManager();
 		}
 	});

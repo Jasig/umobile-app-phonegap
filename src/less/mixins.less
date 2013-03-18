@@ -2,19 +2,26 @@
 // Mixins
 // --------------------------------------------------
 
+// TODO: Change to accept parameters.
 .um-shadow {
 	-webkit-box-shadow: 0 1px 10px @darkGray;
 	-moz-box-shadow: 0 1px 10px @darkGray;
 	box-shadow: 0 1px 10px @darkGray;
 }
 
-.um-navbar-gradient {
-	background: @darkGray;
-	background: -moz-linear-gradient(top, @darkGray 0%, @black 100%, @black 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@darkGray), color-stop(100%,@black), color-stop(100%,@black));
-	background: -webkit-linear-gradient(top, @darkGray 0%,@black 100%,@black 100%);
-	background: -o-linear-gradient(top, @darkGray 0%,@black 100%,@black 100%);
-	background: -ms-linear-gradient(top, @darkGray 0%,@black 100%,@black 100%);
-	background: linear-gradient(to bottom, @darkGray 0%,@black 100%,@black 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkGray', endColorstr='@black',GradientType=0);
+.um-border-radius(@radius) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.um-gradient(@startColor: @darkGary, @fromColor: @black) {
+	background: @startColor;
+	background: -moz-linear-gradient(top, @startColor 0%, @fromColor 100%, @fromColor 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@startColor), color-stop(100%,@fromColor), color-stop(100%,@fromColor));
+	background: -webkit-linear-gradient(top, @startColor 0%,@fromColor 100%,@fromColor 100%);
+	background: -o-linear-gradient(top, @startColor 0%,@fromColor 100%,@fromColor 100%);
+	background: -ms-linear-gradient(top, @startColor 0%,@fromColor 100%,@fromColor 100%);
+	background: linear-gradient(to bottom, @startColor 0%,@fromColor 100%,@fromColor 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{startColor}', endColorstr='@{fromColor}',GradientType=0);
 }

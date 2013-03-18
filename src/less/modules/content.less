@@ -1,0 +1,30 @@
+//
+// Header
+// --------------------------------------------------
+
+.um-content {
+
+	// Expand content passed the padding
+	// on the body tag when rendered on
+	// smaller screens.
+	@media (max-width: 767px) {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	// Houses loaded views.
+	.um-view-loader {
+		padding: 20px 0 0 0;
+		position: relative;
+		min-height: 200px;
+	}
+
+	// Mask or spinner for loaded views.
+	.um-loader {
+		position: absolute;
+		top: 0; left: 0;
+		bottom: 0; right: 0;
+		background: transparent url('../images/um_loader.gif') 50% 50% no-repeat;
+	}
+
+}

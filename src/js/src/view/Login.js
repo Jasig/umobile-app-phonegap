@@ -3,17 +3,16 @@
 	'use strict';
 
 	/**
-	...
+	Manages the loaded Login view.
 
 	@class Login
 	@submodule view
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Login = umobile.view.Screen.extend({
+	umobile.view.Login = umobile.view.LoadedView.extend({
 		/**
-		Object hash of valid DOM selectors for
-		the Login screen.
+		Object hash of valid DOM selectors.
 
 		@property selectors
 		@type Object

@@ -25,30 +25,7 @@
 	</head>
 
 	<body class="um">
-		<!--Header-->
-		<header>
-			<div class="navbar navbar-static-top navbar-inverse um-navbar">
-				<div class="navbar-inner um-navbar-inner">
-					<a class="brand um-brand" href="#">
-						<span class="navbar-text um-navbar-text">uMobile</span>
-					</a>
-					<a href="#login" class="btn pull-right um-btn-login">
-						<i class="icon-lock"></i>
-						<span>Login</span>
-					</a>
-				</div>
-			</div>
-		</header>
-
-		<!--Views-->
-		<div class="row-fluid">
-			<div class="span12">
-				<div id="page" class="um-page">
-					<div id="screen" class="um-screen hidden"></div>
-					<div id="loader" class="um-loader"></div>
-				</div>
-			</div>
-		</div>
+		<div id="page"></div>
 
 		<!--JavaScript Template Files-->
 		<templates></templates>
@@ -72,9 +49,15 @@
 		<script type="text/javascript" src="js/src/model/Credential.js"></script>
 		<script type="text/javascript" src="js/src/collection/ModuleCollection.js"></script>
 		<script type="text/javascript" src="js/src/view/ViewManager.js"></script>
-		<script type="text/javascript" src="js/src/view/Screen.js"></script>
+		<script type="text/javascript" src="js/src/view/BaseView.js"></script>
+		<script type="text/javascript" src="js/src/view/Page.js"></script>
+		<script type="text/javascript" src="js/src/view/Header.js"></script>
+		<script type="text/javascript" src="js/src/view/Footer.js"></script>
+		<script type="text/javascript" src="js/src/view/LoadedView.js"></script>
 		<script type="text/javascript" src="js/src/view/Home.js"></script>
 		<script type="text/javascript" src="js/src/view/Login.js"></script>
+		<script type="text/javascript" src="js/src/view/Module.js"></script>
+		<script type="text/javascript" src="js/src/view/ModuleDetail.js"></script>
 		<script type="text/javascript" src="js/src/router.js"></script>
 		{{/dev}}
 		{{^dev}}

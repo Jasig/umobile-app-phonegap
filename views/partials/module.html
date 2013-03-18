@@ -1,5 +1,9 @@
-<a href="javascript:;" title="To view {{title}}" class="ui-link">
-	<span class="badge new-item up-new-item-count-{{newItemCount}}">{{newItemCount}}</span>
-	<span class="icon"><img class="portlet-icon" src="{{iconUrl}}" alt="{{title}}"/></span>
-	<span class="title">{{title}}</span>
+<a href="#{{url}}" title="To view {{title}}" class="um-module-link">
+	{{#hasNewItem}}
+	<div class="badge um-new">{{newItemCount}}</div>
+	{{/hasNewItem}}
+	<div class="um-icon">
+		<img src="{{iconUrl}}" alt="{{title}}"/>
+	</div>
+	<div class="um-title">{{title}}</div>
 </a>
