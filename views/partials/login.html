@@ -1,10 +1,29 @@
-<form class="umobile-auth-form" action="javascript:;">
-	<label for="usernameInput">Username:</label>
-	<input id="usernameInput" name="username" type="text" value="{{username}}"/>
+<div class="um-form-container clearfix">
+	<form class="form-inline um-login-form" action="javascript:;">
+		<fieldset>
+			<legend>Sign In</legend>
+			<!--Username-->
+			<div class="control-group">
+				<label class="control-label hidden" for="username">Username:</label>
+				<div class="controls">
+					<input type="text" id="username" name="username" value="{{username}}" placeholder="Username">
+				</div>
+			</div>
 
-	<label for="passwordInput">Password:</label>
-	<input id="passwordInput" name="password" type="password" value="{{password}}"/>
+			<!--Password-->
+			<div class="control-group">
+				<label class="control-label hidden" for="password">Password:</label>
+				<div class="controls">
+					<input type="password" id="password" name="password" value="{{password}}" placeholder="Password">
+				</div>
+			</div>
 
-	<input type="submit" name="update" value="Update"/>
-	<input type="button" class="logout-button" name="logout" value="Log out"/>
-</form>
+			<!--Controls-->
+			<div class="control-group">
+				<div class="controls">
+					<button id="submitButton" type="submit" class="btn">Go</button>
+				</div>
+			</div>
+		<fieldset>
+	</form>
+</div>

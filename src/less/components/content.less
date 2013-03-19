@@ -3,28 +3,17 @@
 // --------------------------------------------------
 
 .um-content {
+	border-bottom: 1px solid @lightGray;
+}
 
-	// Expand content passed the padding
-	// on the body tag when rendered on
-	// smaller screens.
-	@media (max-width: 767px) {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-
-	// Houses loaded views.
-	.um-view-loader {
-		padding: 0 0 0 0;
-		position: relative;
-		min-height: 200px;
-	}
-
-	// Mask or spinner for loaded views.
-	.um-loader {
-		position: absolute;
-		top: 0; left: 0;
-		bottom: 0; right: 0;
-		background: transparent url('../images/um_loader.gif') 50% 50% no-repeat;
-	}
-
+// View-specific classes added to the content container.
+.um-dashboard {
+	background-color: @blue;
+	border-bottom: 1px solid @darkGray;
+}
+.um-module {
+	background-color: @smoke;
+}
+.um-login {
+	background-color: @smoke;
 }

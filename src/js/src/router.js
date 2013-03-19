@@ -16,6 +16,11 @@
 		viewManager: {},
 
 		/**
+		@property currentViewClass
+		**/
+		currentViewClass: null,
+
+		/**
 		@property routes
 		**/
 		routes: {
@@ -50,15 +55,28 @@
 
 		/**
 		Listens for the route to change. When triggered,
-		it updates the class name on the body.
+		it updates the class name on the content container.
 
 		@method onRouteChanged
 		**/
 		onRouteChanged: function (route, routeParam) {
-			var className;
+			// Define.
+			var className, container;
+
+			// Initialize.
+			container = $('#content');
 			route = route.split(':');
 			className = ('um-' + route[1]);
-			$('body').removeAttr('class').addClass(className);
+
+			// Remove the class from the container when generated className
+			// is different from the stored currentViewClass.
+			if (this.currentViewClass && className !== this.currentViewClass) {
+				container.removeClass(this.currentViewClass);
+			}
+
+			// Add class name to container.
+			container.addClass(className);
+			this.currentViewClass = className;
 		},
 
 		/**

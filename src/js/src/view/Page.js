@@ -31,6 +31,7 @@
 		selectors: {
 			template: '#views-partials-page',
 			header: '#header',
+			breadcrumb: '#breadcrumb',
 			footer: '#footer'
 		},
 
@@ -46,6 +47,20 @@
 			// Initialize.
 			header = this.loc('header').html('');
 			headerView = new umobile.view.Header();
+		},
+
+		/**
+		Method initializes the Breadcrumb view.
+
+		@method renderBreadcrumb
+		**/
+		renderBreadcrumb: function () {
+			// Define.
+			var breadcrumb, breadcrumbView;
+
+			// Initialize.
+			breadcrumb = this.loc('breadcrumb').html('');
+			breadcrumbView = new umobile.view.Breadcrumb();
 		},
 
 		/**
@@ -74,6 +89,9 @@
 
 			// Render the header.
 			this.renderHeader();
+
+			// Render the breadcrumb.
+			this.renderBreadcrumb();
 
 			// Render the footer.
 			this.renderFooter();

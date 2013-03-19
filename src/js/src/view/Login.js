@@ -26,7 +26,53 @@
 		@type Object
 		**/
 		selectors: {
-			template: '#views-partials-login'
+			template: '#views-partials-login',
+			username: '#username',
+			password: '#password',
+			submit: '#submitButton'
+		},
+
+		/**
+		Backbone events object.
+
+		@property events
+		@type Object
+		**/
+		events: {
+			'submit form': 'submitHandler'
+		},
+
+		/**
+		Method extracts credentials from the login form
+		and attempts to persist them by calling save on
+		the Credential model. Triggers a change event
+		on the Credential model.
+
+		@method updateCredentials
+		@param {Object} form jQuery-wrapped form element.
+		**/
+		updateCredentials: function (form) {
+			// Define & initialize.
+			var username = form.find(this.selectors.username),
+				password = form.find(this.selectors.password);
+
+			// Save credentials without raising an event.
+			console.log('Save Credentials: ', username.val(), ' & ', password.val());
+			this.credModel.save({username: username.val(), password: password.val()}, {silent: false});
+			this.credModel.change();
+		},
+
+		/**
+		Handler for the update button on the Credential view.
+
+		@method submitHandler
+		@param {Object} e Event object.
+		**/
+		submitHandler: function (e) {
+			var form;
+			e.preventDefault();
+			form = $(e.target).closest('form');
+			this.updateCredentials(form);
 		}
 	});
 
