@@ -100,7 +100,6 @@
 		@return {Object} Reference to loaded view.
 		**/
 		render: function () {
-			console.log('LoadedView render: ', this.options);
 			// Define & Initialize.
 			var collection = this.moduleCollection.toJSON();
 

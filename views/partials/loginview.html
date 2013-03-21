@@ -1,12 +1,16 @@
 <div id="formContainer" class="um-form-container clearfix">
 	<form id="login" class="form-inline um-login-form" action="javascript:;">
+		<div id="loginAlert" style="display: none;" class="alert alert-error">
+			<strong>Oops! Something went wrong.</strong>
+		</div>
 		<fieldset>
 			<legend>Sign In</legend>
 			<!--Username-->
 			<div class="control-group">
 				<label class="control-label hidden" for="username">Username:</label>
 				<div class="controls">
-					<input type="text" id="username" name="username" value="{{username}}" placeholder="Username">
+					<input type="text" id="username" name="username" class="input-block-level" value="{{username}}" placeholder="Username">
+					<span class="help-inline" style="display: none;"></span>
 				</div>
 			</div>
 
@@ -14,7 +18,8 @@
 			<div class="control-group">
 				<label class="control-label hidden" for="password">Password:</label>
 				<div class="controls">
-					<input type="password" id="password" name="password" value="{{password}}" placeholder="Password">
+					<input type="password" id="password" name="password" class="input-block-level" value="{{password}}" placeholder="Password">
+					<span class="help-inline" style="display: none;"></span>
 				</div>
 			</div>
 
