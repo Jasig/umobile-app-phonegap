@@ -46,7 +46,9 @@
 								});
 								model.reset(modules);
 							}
-							options.success(model);
+							if (options && options.hasOwnProperty('success')) {
+								options.success(model);
+							}
 						} else {
 							console.log('Initializing new ' + storageKey + ' for ' + JSON.stringify(model));
 							storage.setItem(storageKey, JSON.stringify(model));

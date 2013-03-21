@@ -84,13 +84,14 @@ var umobile = {
 	/**
 	Method parses the data received by the session.established event.
 	Iterates over layout JSON and adds modules (i.e. portlets) to
-	the ModuleCollection based upon the number of portlets described
-	by the JSON feed.
+	the modues array based upon the number of portlets described
+	by the JSON feed. The modules array is then returned.
 
-	@method buildModuleCollection
+	@method buildModuleArray
 	@param {Object} data Object containing layout and portlet information.
+	@return {Array} modules Array of module objects.
 	**/
-	buildModuleCollection: function (data) {
+	buildModuleArray: function (data) {
 		'use strict';
 		// Define.
 		var modules, folders;
@@ -137,11 +138,7 @@ var umobile = {
 			}, this);
 		}, this);
 
-		// Add all modules to the module collection.
-		this.app.moduleCollection.reset(modules);
-
-		// Save the collection.
-		this.app.moduleCollection.save();
+		return modules;
 	},
 
 	/**
@@ -187,8 +184,7 @@ var umobile = {
 			// When session exists, fetch modules from module collection.
 			// When the session has expired, attempt to re-establish a session.
 			if ((now - lastSession) < sessionTimeout) {
-				this.auth.establishSession();
-				//this.app.moduleCollection.fetch();
+				this.app.moduleCollection.fetch();
 			} else {
 				this.auth.establishSession();
 			}
@@ -253,13 +249,25 @@ var umobile = {
 		// Subscribe to 'session.established' event.
 		// When triggered, updates the State model and SessionTracker.
 		$.subscribe('session.established', _.bind(function (data) {
-			this.buildModuleCollection(data);
+			// Define.
+			var modules;
+
+			// Update credentials.
+			this.app.credModel.set({username: data.user});
+			this.app.credModel.save();
 
 			// Update state.
-			this.app.stateModel.save({
+			this.app.stateModel.set({
 				lastSessionAccess: (new Date()).getTime(),
 				authenticated: (this.app.credModel.get('username')) ? true : false
 			});
+			this.app.stateModel.save();
+
+			// Build module array.
+			// Populate the collection with modules.
+			modules = this.buildModuleArray(data);
+			this.app.moduleCollection.reset(modules);
+			this.app.moduleCollection.save();
 
 			// Update time in the Session Tracker.
 			this.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));

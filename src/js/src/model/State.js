@@ -12,7 +12,7 @@
 	**/
 	umobile.model.State = Backbone.Model.extend({
 		/**
-		The defaults hash is used to specify the default attributes.
+		Property houses default model attributes.
 
 		@property defaults
 		@type Object

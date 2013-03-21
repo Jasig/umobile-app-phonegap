@@ -10,9 +10,9 @@
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Module = umobile.view.BaseView.extend({
+	umobile.view.Module = umobile.view.Base.extend({
 		/**
-		HTML tag name used to build a Module view.
+		Property houses HTML tag name used to build view.
 
 		@property tagName
 		@type String
@@ -20,8 +20,7 @@
 		tagName: 'li',
 
 		/**
-		Class name that is added to the tagName
-		when building a Module view.
+		Property houses class name that is added to the tagName.
 
 		@property className
 		@type String
@@ -29,8 +28,7 @@
 		className: 'um-module-item',
 
 		/**
-		Object hash of valid DOM selectors for
-		the Module view.
+		Property houses DOM selectors.
 
 		@property selectors
 		@type Object
@@ -40,7 +38,7 @@
 		},
 
 		/**
-		Model for the Module view.
+		Property houses Module model.
 
 		@property moduleModel
 		@type Object
@@ -48,19 +46,19 @@
 		moduleModel: {},
 
 		/**
-		Method renders the UI for the Module view.
+		Method renders the Module template.
 
 		@method render
-		@return {Object} Module view.
+		@return {Object} Reference to the Module view.
 		**/
 		render: function () {
-			var model = this.moduleModel.attributes;
+			var model = this.moduleModel;
 			this.$el.html(this.template(model));
 			return this;
 		},
 
 		/**
-		Entry point for the Module view.
+		Method initializes the view.
 
 		@method initialize
 		@param {Object} options Object hash of options.

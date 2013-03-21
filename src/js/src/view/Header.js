@@ -10,22 +10,22 @@
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Header = umobile.view.BaseView.extend({
+	umobile.view.Header = umobile.view.Base.extend({
 		/**
-		Root DOM element.
+		Property houses the root DOM element.
 
 		@property el
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		el: '#header',
 
 		/**
-		Object hash of valid DOM selectors.
+		Property houses DOM selectors.
 
 		@property selectors
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		selectors: {
 			template: '#views-partials-header',
@@ -36,19 +36,19 @@
 		Method toggles the visibility of the login button.
 
 		@method toggleLogin
-		@param {Object} view The current view.
+		@param {Object} view Object containing the current view name property.
 		**/
 		toggleLogin: function (view) {
 			var loginButton, login;
 			loginButton = this.loc('loginButton');
-			login = (view.getLoadedViewName() === 'login') ? loginButton.addClass('hidden') : loginButton.removeClass('hidden');
+			login = (view.name === 'login') ? loginButton.addClass('hidden') : loginButton.removeClass('hidden');
 		},
 
 		/**
 		Method renders the Header template.
 
 		@method render
-		@return {Object}
+		@return {Object} Reference to the Header view.
 		**/
 		render: function () {
 			this.$el.html(this.template({}));
@@ -56,10 +56,10 @@
 		},
 
 		/**
-		Entry point for the Header view.
+		Method initializes the view.
 
 		@method initialize
-		@override BaseView
+		@override Base
 		**/
 		initialize: function () {
 			// Bind all properties and methods.
@@ -71,8 +71,8 @@
 			// Render template.
 			this.render();
 
-			// Listen for the view.rendered event.
-			$.subscribe('view.rendered', _.bind(this.toggleLogin, this));
+			// Listen for the route.changed event.
+			$.subscribe('route.changed', _.bind(this.toggleLogin, this));
 		}
 	});
 

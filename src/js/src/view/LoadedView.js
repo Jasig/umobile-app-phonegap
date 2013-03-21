@@ -4,16 +4,16 @@
 
 	/**
 	Class abstraction. Defines properties and methods
-	that all loaded views.
+	for all loaded views.
 
 	@class LoadedView
 	@submodule view
 	@namespace view
 	@constructor
 	**/
-	umobile.view.LoadedView = umobile.view.BaseView.extend({
+	umobile.view.LoadedView = umobile.view.Base.extend({
 		/**
-		Name of the loaded view.
+		Property houses the name of the loaded view.
 
 		@property name
 		@type String
@@ -21,7 +21,7 @@
 		name: 'base',
 
 		/**
-		Root DOM element.
+		Property houses root DOM element.
 
 		@property el
 		@type Object
@@ -32,6 +32,7 @@
 		Method returns the name of the loaded view.
 
 		@method getLoadedViewName
+		@return {String} Name of the loaded view.
 		**/
 		getLoadedViewName: function () {
 			return this.name;
@@ -41,16 +42,36 @@
 		Method cleans up the DOM and unbinds
 		events when the loaded view changes.
 
-		@method close
+		@method destroy
 		**/
-		close: function () {
-			// Clean up the DOM and DOM events.
+		destroy: function () {
+			// Remove DOM.
 			this.remove();
-			$('#viewLoader').prepend(this.$el);
 
-			// Unbind any events that our view triggers.
+			// Unbind.
 			this.unbind();
+
+			// Unbind models & collections.
+			this.moduleCollection.off('reset', this.render);
+
+			// Undelegate events.
+			this.undelegateEvents();
+
+			// Custom removal.
+			if (this.close && _.isFunction(this.close)) {
+				this.close();
+			}
 		},
+
+		/**
+		Method is meant to be overwritten. This method is
+		a placeholder for child views to place their custom
+		view content.
+
+		@method renderContent
+		@param {Object} collection Reference to ModuleCollection.
+		**/
+		renderContent: function (collection) {},
 
 		/**
 		Method shows the loading mask when switching views.
@@ -76,29 +97,59 @@
 		Method renders the UI for all loaded views.
 
 		@method render
-		@return {Object}
+		@return {Object} Reference to loaded view.
 		**/
 		render: function () {
+			console.log('LoadedView render: ', this.options);
+			// Define & Initialize.
+			var collection = this.moduleCollection.toJSON();
+
+			// Loader & Render main template.
 			this.showLoader();
-			this.$el.addClass('hidden')
-				.html(this.template({}))
-				.removeClass('hidden');
-			this.hideLoader();
+
+			// Render view when data is available.
+			if (!_.isEmpty(collection)) {
+				// Render main template.
+				this.$el.addClass('hidden')
+					.html(this.template(this.options))
+					.removeClass('hidden');
+
+				// Render custom content.
+				this.renderContent(collection);
+
+				// Append '#view' to '#viewLoader'.
+				$('#viewLoader').append(this.$el);
+
+				// Delegate Events.
+				this.delegateEvents(this.events);
+
+				// Loader.
+				this.hideLoader();
+			}
+
 			return this;
 		},
 
 		/**
-		Entry point for all loadedViews.
+		Method initializes the view.
 
 		@method initialize
-		@override BaseView
+		@param {Object} options Options object.
+		@override Base
 		**/
-		initialize: function () {
+		initialize: function (options) {
 			// Call super.
-			umobile.view.BaseView.prototype.initialize.apply(this, arguments);
+			this._super();
+
+			// Cache options.
+			this.options = (options && !_.isEmpty(options)) ? options: {};
 
 			// Compile screen template.
 			this.template = Handlebars.compile($(this.selectors.template).html());
+
+			// Listen to the reset event on the moduleCollection.
+			// When triggered recall the render method.
+			this.moduleCollection.on('reset', _.bind(this.render, this));
 		}
 	});
 

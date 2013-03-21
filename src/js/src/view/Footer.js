@@ -5,27 +5,27 @@
 	/**
 	Manages the application Footer.
 
-	@class Header
+	@class Footer
 	@submodule view
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Footer = umobile.view.BaseView.extend({
+	umobile.view.Footer = umobile.view.Base.extend({
 		/**
-		Root DOM element.
+		Property houses root DOM element.
 
 		@property el
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		el: '#footer',
 
 		/**
-		Object hash of valid DOM selectors.
+		Property houses DOM selectors.
 
 		@property selectors
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		selectors: {
 			template: '#views-partials-footer'
@@ -35,7 +35,7 @@
 		Method renders the Footer template.
 
 		@method render
-		@return {Object}
+		@return {Object} Reference to Footer view.
 		**/
 		render: function () {
 			this.$el.html(this.template({}));
@@ -43,10 +43,10 @@
 		},
 
 		/**
-		Entry point for the Footer view.
+		Method initializes the view.
 
 		@method initialize
-		@override BaseView
+		@override Base
 		**/
 		initialize: function () {
 			// Bind all properties and methods.

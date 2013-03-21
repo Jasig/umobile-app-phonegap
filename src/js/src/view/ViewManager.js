@@ -13,21 +13,25 @@
 	umobile.view.ViewManager = function () {
 		var ViewManager = {
 			/**
+			Property houses a reference to the current view.
+
 			@property currentView
 			**/
 			currentView: null,
 
 			/**
+			Method destroys old views and renders new views.
+
 			@method show
+			@param {Object} view Reference to current view.
 			**/
 			show: function (view) {
 				if (this.currentView) {
-					this.currentView.close();
+					this.currentView.destroy();
 				}
 
 				this.currentView = view;
 				this.currentView.render();
-				$.publish('view.rendered', view);
 			}
 
 		};

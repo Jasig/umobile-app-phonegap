@@ -6,14 +6,14 @@
 	Class abstraction. Defines properties and methods
 	that all views require.
 
-	@class BaseView
+	@class Base
 	@submodule view
 	@namespace view
 	@constructor
 	**/
-	umobile.view.BaseView = Backbone.View.extend({
+	umobile.view.Base = Backbone.View.extend({
 		/**
-		Object hash of valid DOM selectors.
+		Property houses DOM selectors.
 
 		@property selectors
 		@type Object
@@ -21,7 +21,7 @@
 		selectors: {},
 
 		/**
-		Houses the compiled handlebar template.
+		Property houses compiled handlebar template.
 
 		@property template
 		@type Object
@@ -29,7 +29,7 @@
 		template: {},
 
 		/**
-		Collection of modules.
+		Property houses collection of modules.
 
 		@property moduleCollection
 		@type Object
@@ -37,7 +37,7 @@
 		moduleCollection: {},
 
 		/**
-		Credential model. Represents user credential state.
+		Property houses the Credential model.
 
 		@property credModel
 		@type Object
@@ -45,12 +45,36 @@
 		credModel: {},
 
 		/**
-		State model. Represents application state.
+		Property houses the State model.
 
 		@property stateModel
 		@type Object
 		**/
 		stateModel: {},
+
+		/**
+		Property houses binding to $.publish method.
+
+		@property publish
+		@type Object
+		**/
+		publish: _.bind($.publish, this),
+
+		/**
+		Property houses binding to $.subscribe method.
+
+		@property subscribe
+		@type Object
+		**/
+		subscribe: _.bind($.subscribe, this),
+
+		/**
+		Property houses binding to $.unsubscribe method.
+
+		@property unsubscribe
+		@type Object
+		**/
+		unsubscribe: _.bind($.unsubscribe, this),
 
 		/**
 		Helper method. Given the passed property, this method
@@ -69,11 +93,12 @@
 		},
 
 		/**
-		Entry point for the base view.
+		Method initializes the view.
 
 		@method initialize
 		**/
 		initialize: function () {
+			// Bind all properties & methods.
 			_.bindAll(this);
 
 			// Cache module collection.

@@ -10,22 +10,22 @@
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Breadcrumb = umobile.view.BaseView.extend({
+	umobile.view.Breadcrumb = umobile.view.Base.extend({
 		/**
-		Root DOM element.
+		Property houses root DOM element.
 
 		@property el
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		el: '#breadcrumb',
 
 		/**
-		Object hash of valid DOM selectors.
+		Property houses DOM selectors.
 
 		@property selectors
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		selectors: {
 			template: '#views-partials-breadcrumb'
@@ -38,14 +38,14 @@
 		@param {Object} view The current view.
 		**/
 		toggleVisibility: function (view) {
-			var visibility = (view.getLoadedViewName() === 'dashboard') ? this.$el.addClass('hidden') : this.$el.removeClass('hidden');
+			var visibility = (view.name === 'dashboard') ? this.$el.addClass('hidden') : this.$el.removeClass('hidden');
 		},
 
 		/**
 		Method renders the Breadcrumb template.
 
 		@method render
-		@return {Object}
+		@return {Object} Reference to Breadcrumb view.
 		**/
 		render: function () {
 			this.$el.html(this.template({}));
@@ -53,10 +53,10 @@
 		},
 
 		/**
-		Entry point for the Breadcrumb view.
+		Method initializes the view.
 
 		@method initialize
-		@override BaseView
+		@override Base
 		**/
 		initialize: function () {
 			// Bind all properties and methods.
@@ -68,8 +68,8 @@
 			// Render template.
 			this.render();
 
-			// Listen for the view.rendered event.
-			$.subscribe('view.rendered', _.bind(this.toggleVisibility, this));
+			// Listen for the route.changed event.
+			$.subscribe('route.changed', _.bind(this.toggleVisibility, this));
 		}
 	});
 

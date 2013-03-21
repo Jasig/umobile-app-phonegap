@@ -11,22 +11,22 @@
 	@namespace view
 	@constructor
 	**/
-	umobile.view.Page = umobile.view.BaseView.extend({
+	umobile.view.Page = umobile.view.Base.extend({
 		/**
-		Root DOM element.
+		Property houses the root DOM element.
 
 		@property el
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		el: '#page',
 
 		/**
-		Object hash of valid DOM selectors.
+		Property houses DOM selectors.
 
 		@property selectors
 		@type Object
-		@override BaseView
+		@override Base
 		**/
 		selectors: {
 			template: '#views-partials-page',
@@ -81,7 +81,7 @@
 		Method renders header, content and footer.
 
 		@method render
-		@return {Object}
+		@return {Object} Reference to the Page view.
 		**/
 		render: function () {
 			// Render base page.
@@ -100,10 +100,10 @@
 		},
 
 		/**
-		Entry point for the view.
+		Method initializes the view.
 
 		@method initialize
-		@override BaseView
+		@override Base
 		**/
 		initialize: function () {
 			// Bind all properties and methods.
