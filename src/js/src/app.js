@@ -98,7 +98,7 @@ var umobile = {
 
 		// Initialize.
 		modules = [];
-		folders = data.layout.folders;
+		folders = (data && !_.isEmpty(data)) ? data.layout.folders : {};
 
 		// Iterate over folders.
 		_.each(folders, function (folder, idx) {
@@ -249,6 +249,8 @@ var umobile = {
 		// Subscribe to 'session.established' event.
 		// When triggered, updates the State model and SessionTracker.
 		$.subscribe('session.established', _.bind(function (data) {
+			console.log('SESSION.ESTABLISHED');
+
 			// Define.
 			var modules;
 
@@ -271,6 +273,11 @@ var umobile = {
 
 			// Update time in the Session Tracker.
 			this.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
+		}, this));
+
+		// Subscribe to 'session.established.error' event.
+		$.subscribe('session.failure', _.bind(function () {
+			this.app.moduleCollection.reset({});
 		}, this));
 	},
 

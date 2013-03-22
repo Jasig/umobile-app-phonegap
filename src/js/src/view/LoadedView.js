@@ -66,6 +66,15 @@
 		/**
 		Method is meant to be overwritten. This method is
 		a placeholder for child views to place their custom
+		view error content.
+
+		@method renderError
+		**/
+		renderError: function () {},
+
+		/**
+		Method is meant to be overwritten. This method is
+		a placeholder for child views to place their custom
 		view content.
 
 		@method renderContent
@@ -100,11 +109,11 @@
 		@return {Object} Reference to loaded view.
 		**/
 		render: function () {
+			// Loader.
+			this.showLoader();
+
 			// Define & Initialize.
 			var collection = this.moduleCollection.toJSON();
-
-			// Loader & Render main template.
-			this.showLoader();
 
 			// Render view when data is available.
 			if (!_.isEmpty(collection)) {
@@ -114,7 +123,11 @@
 					.removeClass('hidden');
 
 				// Render custom content.
-				this.renderContent(collection);
+				if (collection[0].fname === 'fname') {
+					this.renderError();
+				} else {
+					this.renderContent(collection);
+				}
 
 				// Append '#view' to '#viewLoader'.
 				$('#viewLoader').append(this.$el);

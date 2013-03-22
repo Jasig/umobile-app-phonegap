@@ -115,7 +115,7 @@
 					ele: this.loc('password'),
 					value: this.loc('password').val()
 				}
-			}
+			};
 			return inputs;
 		},
 

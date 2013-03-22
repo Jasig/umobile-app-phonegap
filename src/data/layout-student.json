@@ -1,44 +1,52 @@
-
 {
-        "user": "student",
-        "locale": "en-US", 
-        "layout":
-            { "folders": [
-            
-                { "id": "u32l1s5", "title": "Home",
-                "portlets": [
-                    {
-                        "fname": "news",
-                        "title": "News",
-                        "url": "/news.html",
-                        "description": "Personalized news and RSS reader",
-                        "newItemCount": "0",
-                        "iconUrl": "/images/icons/news.png"
-                    },
-                    {
-                        "fname": "calendar",
-                        "title": "Calendar",
-                        "url": "/calendar.html",
-                        "description": "Current weather conditions and forecast.",
-                        "newItemCount": "1",
-                        "iconUrl": "/images/icons/calendar.png"
-                    },
-                    {
-                        "fname": "courses",
-                        "title": "Courses",
-                        "url": "/courses.html",
-                        "description": "Current weather conditions and forecast.",
-                        "newItemCount": "2",
-                        "iconUrl": "/images/icons/courses.png"
-                    }]},
-                { "id": "u27l1s5", "title": "Map",
-                "portlets": [
-                    {
-                        "fname": "map",
-                        "title": "Map",
-                        "url": "/map.html",
-                        "description": "Campus Map Portlet",
-                        "newItemCount": "0",
-                        "iconUrl": "/images/icons/map.png"
-                    }]}]}
-    }
+	"user": "student",
+	"locale": "en-US", 
+	"layout": {
+		"folders": [
+			{
+				"id": "u32l1s5",
+				"title": "Home",
+				"portlets": [
+					{
+						"fname": "news",
+						"title": "News",
+						"url": "/news.html",
+						"description": "Personalized news and RSS reader",
+						"newItemCount": "0",
+						"iconUrl": "/images/icons/news.png"
+					},
+					{
+						"fname": "calendar",
+						"title": "Calendar",
+						"url": "/calendar.html",
+						"description": "Current weather conditions and forecast.",
+						"newItemCount": "1",
+						"iconUrl": "/images/icons/calendar.png"
+					},
+					{
+						"fname": "courses",
+						"title": "Courses",
+						"url": "/courses.html",
+						"description": "Current weather conditions and forecast.",
+						"newItemCount": "2",
+						"iconUrl": "/images/icons/courses.png"
+					}
+				]
+			},
+			{
+				"id": "u27l1s5",
+				"title": "Map",
+				"portlets": [
+					{
+						"fname": "map",
+						"title": "Map",
+						"url": "/map.html",
+						"description": "Campus Map Portlet",
+						"newItemCount": "0",
+						"iconUrl": "/images/icons/map.png"
+					}
+				]
+			}
+		]
+	}
+}

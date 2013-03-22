@@ -20,8 +20,8 @@
 		**/
 		defaults: {
 			id: 'credentials',
-			username: null,
-			password: null
+			username: 'guest',
+			password: 'guest'
 		},
 
 		/**

@@ -27,27 +27,55 @@
 		**/
 		selectors: {
 			template: '#views-partials-dashboardview',
-			moduleList: '#moduleList'
+			moduleList: '#moduleList',
+			notifier: '#notifier'
+		},
+
+		/**
+		Method empties root containers.
+
+		@method cleanContainers
+		**/
+		cleanContainers: function () {
+			var notifier = this.loc('notifier'),
+				moduleList = this.loc('moduleList');
+
+			notifier.empty().hide();
+			moduleList.empty().hide();
 		},
 
 		/**
 		Method renders modules.
 
 		@method renderModules
-		@param {Object} collection Reference to the ModuleCollection.
 		**/
-		renderModules: function (collection) {
+		renderModules: function () {
 			// Define & initialize.
-			var moduleList = this.loc('moduleList').html(''),
-				modules = collection || this.moduleCollection.toJSON();
+			var moduleList = this.loc('moduleList'),
+				modules = this.moduleCollection.toJSON();
 
 			// Iterate over modules and initialize each module view.
 			_.each(modules, function (module, idx) {
 				var moduleView = new umobile.view.Module({
 					model: module
 				});
-				moduleList.append(moduleView.render().el);
+				moduleList.append(moduleView.render().el).show();
 			}, this);
+		},
+
+		/**
+		Method renders the notifier.
+
+		@method renderNotifier
+		**/
+		renderNotifier: function () {
+			// Define.
+			var notifier, notifierView;
+
+			// Initialize.
+			notifier = this.loc('notifier');
+			notifierView = new umobile.view.Notifier();
+			notifier.append(notifierView.render().el).show();
 		},
 
 		/**
@@ -59,7 +87,20 @@
 		@override LoadedView
 		**/
 		renderContent: function (collection) {
-			this.renderModules(collection);
+			this.cleanContainers();
+			this.renderModules();
+		},
+
+		/**
+		Method overrides the LoadedView class. This method
+		provides custom content for the Dashboard view.
+
+		@method renderError
+		@override LoadedView
+		**/
+		renderError: function () {
+			this.cleanContainers();
+			this.renderNotifier();
 		}
 	});
 

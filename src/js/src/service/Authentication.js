@@ -1,5 +1,5 @@
-/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, GibberishAES:true, console:true */
-(function ($, _, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, debug:true, umobile:true, config:true, GibberishAES:true, console:true */
+(function ($, _, umobile, config, debug) {
 	'use strict';
 
 	/**
@@ -41,17 +41,21 @@
 	@method establishSession
 	**/
 	umobile.auth.establishSession = function () {
-		console.log('Establish a session with ' + config.loginFn + '.');
+		debug.info('Establish a session with: ' + config.loginFn);
+		debug.info('Using username: ' + umobile.app.credModel.get('username'));
+
 		var loginFn = umobile.auth[config.loginFn];
 		loginFn(
 			umobile.app.credModel,
 			_.bind(function (data) {
-				console.log('Broadcasting data for user: ' + data.user + '.');
-				console.log('===================');
+				debug.info('Broadcasting data for user: ' + data.user + '.');
 				$.publish('session.established', data);
 			}, this),
 			_.bind(function (jqXHR, textStatus, errorThrown) {
-				console.log('Error: ' + textStatus + ', ' + errorThrown);
+				var error = {xhr: jqXHR, status: textStatus, error: errorThrown};
+				debug.error('Login failed: ' + error.errorThrown);
+				debug.info('Broadcasting login failure for user: ' + umobile.app.credModel.get('username') + '.');
+				$.publish('session.failure', error);
 			}, this)
 		);
 	};
@@ -110,36 +114,27 @@
 	**/
 	umobile.auth.mockLogin = function (credentials, onSuccess, onError) {
 		// Define.
-		var data, url;
+		var data, url, username;
 
-		// If credentials are included, add them to the POST data.
-		if (credentials && credentials.get('username') && credentials.get('password')) {
-			url = config.uMobileServerUrl + config.uMobileServerContext + '/layout-student.json';
-			console.log('Attempting local login via URL: ' + url);
-		} else {
-			url = config.uMobileServerUrl + config.uMobileServerContext + '/layout-guest.json';
-			console.log('Establishing guest session via URL: ' + url);
+		// Can only use guest or student with the mock login.
+		username = credentials.get('username');
+		if (username !== 'guest' && username !== 'student') {
+			throw new Error('Username ' + username + ' not supported with mock login.');
 		}
 
-		// Request to uMobile login servlet.
+		// Build url.
+		url = config.uMobileServerUrl + config.uMobileServerContext + '/layout-' + username + '.json';
+		debug.info('Attempting login via URL: ' + url);
+
+		// Request for locally stored json file.
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			type: 'GET',
 			success: function (data, textStatus, jqXHR) {
-				if (!credentials || !credentials.attributes.username) {
-					console.log('Established guest session.');
-					onSuccess(data);
-				} else if (credentials.attributes.username === data.user) {
-					console.log('Successful authentication for user: ' + credentials.attributes.username);
-					onSuccess(data);
-				} else {
-					console.log('Error performing local authentication: ' + textStatus);
-					onError(jqXHR, 'Auth failure');
-				}
+				onSuccess(data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.log('Error performing local authentication: ' + textStatus + ', ' + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
 			}
 		});
@@ -307,4 +302,4 @@
 		});
 	};
 
-})(jQuery, _, umobile, config);
+})(jQuery, _, umobile, config, debug);

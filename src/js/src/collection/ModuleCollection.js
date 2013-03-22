@@ -20,6 +20,14 @@
 		model: umobile.model.Module,
 
 		/**
+		Property...
+
+		@property hasError
+		@type Boolean
+		**/
+		hasError: false,
+
+		/**
 		Method overrides Backbone.save. Makes an update call to the
 		umobile.storage.sync method.
 
@@ -47,16 +55,7 @@
 
 		@method sync
 		**/
-		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'modules'),
-
-		/**
-		Entry point for the ModuleCollection.
-
-		@method initialize
-		**/
-		initialize: function () {
-			this.sync = umobile.storage.sync(umobile.storage[config.storageFn], 'modules');
-		}
+		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'modules')
 	});
 
 })(jQuery, _, umobile, config);

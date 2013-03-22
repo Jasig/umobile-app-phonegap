@@ -26,7 +26,71 @@
 		@type Object
 		**/
 		selectors: {
-			template: '#views-partials-moduleview'
+			template: '#views-partials-moduleview',
+			notifier: '#notifier',
+			frame: '#moduleFrame'
+		},
+
+		/**
+		Method empties root containers.
+
+		@method cleanContainers
+		**/
+		cleanContainers: function () {
+			var notifier = this.loc('notifier'),
+				frame = this.loc('frame');
+
+			notifier.empty().hide();
+			frame.hide();
+		},
+
+		/**
+		Method renders the notifier.
+
+		@method renderNotifier
+		**/
+		renderNotifier: function () {
+			// Define.
+			var notifier, notifierView;
+
+			// Initialize.
+			notifier = this.loc('notifier');
+			notifierView = new umobile.view.Notifier();
+			notifier.append(notifierView.render().el).show();
+		},
+
+		/**
+		Method renders the frame container.
+
+		@method renderFrame
+		**/
+		renderFrame: function () {
+			var frame = this.loc('frame').show();
+		},
+
+		/**
+		Method overrides the LoadedView class. This method
+		provides custom content for the Module view.
+
+		@method renderError
+		@override LoadedView
+		**/
+		renderError: function () {
+			this.cleanContainers();
+			this.renderNotifier();
+		},
+
+		/**
+		Method overrides the LoadedView class. This method
+		provides custom content for the Module view.
+
+		@method renderContent
+		@param {Object} collection Reference to the ModuleCollection.
+		@override LoadedView
+		**/
+		renderContent: function (collection) {
+			this.cleanContainers();
+			this.renderFrame();
 		},
 
 		/**
@@ -37,7 +101,7 @@
 		@override LoadedView
 		**/
 		initialize: function (options) {
-			// Call super.
+			// Call super to pass options.
 			this._super(options);
 		}
 	});

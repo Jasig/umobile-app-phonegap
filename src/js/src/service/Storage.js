@@ -1,5 +1,5 @@
-/*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, GibberishAES:true, console:true */
-(function ($, _, umobile, config) {
+/*global window:true, document:true, jQuery:true, _:true, debug:true, umobile:true, config:true, GibberishAES:true, console:true */
+(function ($, _, umobile, config, debug) {
 	'use strict';
 
 	/**
@@ -26,18 +26,18 @@
 
 			switch (method) {
 			case 'read':
-				console.log('Reading storage key: ' + storageKey);
+				debug.info('Reading storage key: ' + storageKey);
 				storage.getItem(
 					storageKey,
 					function (result) {
 						var arr, modules;
 						if (result) {
-							console.log('Reading result: ' + result);
+							debug.info('Reading result: ' + result);
 							if (model.id) {
-								console.log('Result has id property.');
-								console.log('Updating model with result.');
+								debug.info('Result has id property.');
+								debug.info('Updating model with result.');
 								model.set(JSON.parse(result));
-								console.log('===================');
+								debug.info('===================');
 							} else {
 								arr = JSON.parse(result);
 								modules = [];
@@ -50,9 +50,12 @@
 								options.success(model);
 							}
 						} else {
-							console.log('Initializing new ' + storageKey + ' for ' + JSON.stringify(model));
+							debug.info('Initializing new ' + storageKey + ' for ' + JSON.stringify(model));
 							storage.setItem(storageKey, JSON.stringify(model));
-							options.success(model);
+							if (options && options.hasOwnProperty('success')) {
+								options.success(model);
+							}
+							debug.info('===================');
 						}
 					}
 				);
@@ -189,4 +192,4 @@
 		}
 	};
 
-})(jQuery, _, umobile, config);
+})(jQuery, _, umobile, config, debug);
