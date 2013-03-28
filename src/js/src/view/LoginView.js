@@ -276,8 +276,8 @@
 
 			// Initialize.
 			inputs = this.getInputs();
-			username = inputs['username'].value.toLowerCase();
-			password = inputs['password'].value;
+			username = inputs.username.value.toLowerCase();
+			password = inputs.password.value;
 
 			// Unbind the model.
 			this.unBindEventListeners();

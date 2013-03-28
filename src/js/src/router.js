@@ -27,7 +27,7 @@
 		routes: {
 			'dashboard': 'dashboard',
 			'login': 'login',
-			'modules/*module': 'module',
+			'modules/*module': 'modules',
 			'*other': 'dashboard'
 		},
 
@@ -54,40 +54,44 @@
 		/**
 		Method initializes the Module view.
 
-		@method module
+		@method modules
 		**/
-		module: function () {
+		modules: function () {
 			var module = new umobile.view.ModuleView({path: Backbone.history.fragment});
 			umobile.app.viewManager.show(module);
 		},
 
 		/**
 		Listens for the route to change. When triggered,
-		it updates the class name on the content container
+		it updates the class name on the html container
 		and broadcasts the changed route.
 
 		@method onRouteChanged
 		@param {String} route Reference to full route path.
 		**/
-		onRouteChanged: function (route) {
+		onRouteChanged: function (route, routeParam) {
 			// Define.
-			var className, container, view;
+			var className, root, view, path;
 
 			// Initialize.
-			container = $('#content');
+			root = $('html');
 			route = route.split(':');
 			view = route[1];
+			path = (!routeParam) ? view : view + '/' + routeParam;
 			className = ('um-' + view);
 
 			// Remove the class from the container when generated className
 			// is different from the stored currentViewClass.
 			if (this.currentViewClass && className !== this.currentViewClass) {
-				container.removeClass(this.currentViewClass);
+				root.removeClass(this.currentViewClass);
 			}
 
 			// Add class name to container.
-			container.addClass(className);
+			root.addClass(className);
 			this.currentViewClass = className;
+
+			// Update the current view on the state model.
+			umobile.app.stateModel.save({currentView: path});
 
 			// Broadcast route changed event.
 			$.publish('route.changed', {name: view});

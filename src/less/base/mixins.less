@@ -45,12 +45,12 @@
 }
 
 // Loader.
-.um-loader {
+.um-loader(@backgroundColor: @smoke, @imagePath: @smokeLoaderPath) {
 	position: absolute;
 	top: 0; left: 0;
 	bottom: 0; right: 0;
 	min-height: 150px;
-	background: @smoke url('../images/um_loader.gif') 50% 50% no-repeat;
+	background: @backgroundColor url(@imagePath) 50% 50% no-repeat;
 }
 
 // Expand element passed the padding on the body tag

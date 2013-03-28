@@ -126,8 +126,6 @@
 				// on the 'this' object with the view stored in the ViewManager.
 				// The ViewManager will always have the correct view to load.
 				if (this.getViewName() === currentView) {
-					console.log('LOADED VIEW: ', this.getViewName());
-
 					// Render main template.
 					this.$el.addClass('hidden')
 						.html(this.template(this.options))

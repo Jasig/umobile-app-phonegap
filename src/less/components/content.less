@@ -2,6 +2,7 @@
 // Content
 // --------------------------------------------------
 
+// Default. All content areas.
 .um-content {
 	border-bottom: 1px solid @lightGray;
 
@@ -10,14 +11,9 @@
 	}
 }
 
-// View-specific classes added to the content container.
+// Specific views.
 .um-dashboard {
-	background-color: @blue;
-	border-bottom: 1px solid @darkGray;
-}
-.um-module {
-	background-color: @smoke;
-}
-.um-login {
-	background-color: @smoke;
+	.um-content {
+		border: none;
+	}
 }

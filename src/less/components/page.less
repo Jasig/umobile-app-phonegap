@@ -2,6 +2,7 @@
 // Page
 // --------------------------------------------------
 
+// Default. All pages.
 .um-page {
 
 	// Application content.
@@ -12,6 +13,17 @@
 		// Content Loader.
 		.um-content-loader {
 			.um-loader;
+		}
+	}
+}
+
+// Specific views.
+.um-dashboard {
+	.um-page {
+		.um-main {
+			.um-content-loader {
+				.um-loader(@blue, @blueLoaderPath);
+			}
 		}
 	}
 }

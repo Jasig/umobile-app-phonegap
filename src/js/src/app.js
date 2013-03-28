@@ -150,19 +150,6 @@ var umobile = {
 	},
 
 	/**
-	Method searches the URL for the given name argument.
-
-	@method getUrlParam
-	@param {String} name Parameter to search for on the URL.
-	@return {String} URL parameter.
-	**/
-	getUrlParam: function (name) {
-		'use strict';
-		var result = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-		return (!result) ? null : result[1] || 0;
-	},
-
-	/**
 	Method leverages the SessionTracker plugin to determine
 	whether or not a valid session still exists.
 
@@ -171,13 +158,15 @@ var umobile = {
 	checkSession: function () {
 		'use strict';
 		this.session.SessionTracker.get(_.bind(function (time) {
-			var view, module, now, lastSession, sessionTimeout;
+			// Define.
+			var view, currentView, now, lastSession, sessionTimeout;
 
-			// Search the url for the module parameter.
+			// Get the current view.
+			currentView = this.app.stateModel.get('currentView');
 			// Update the 'currentView' property.
-			module = this.getUrlParam('module');
-			view = (module) ? module : 'dashboard';
-			this.app.stateModel.save({currentView: view});
+			if (!currentView) {
+				this.app.stateModel.save({currentView: 'dashboard'});
+			}
 
 			// Update the 'lastSessionAccess' property.
 			if (time !== 0) {
@@ -258,7 +247,7 @@ var umobile = {
 		// When triggered, updates the State model and SessionTracker.
 		$.subscribe('session.established', _.bind(function (data) {
 			// Define.
-			var modules;
+			var modules, currentView;
 
 			// Update credentials.
 			this.app.credModel.set({username: data.user});
@@ -280,7 +269,7 @@ var umobile = {
 			// Update time in the Session Tracker.
 			this.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
 
-			// Direct users to the dashboard.
+			// Redirect user to dashboard.
 			this.app.router.navigate('dashboard', {trigger: true});
 		}, this));
 
