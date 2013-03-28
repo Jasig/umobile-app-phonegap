@@ -82,6 +82,14 @@ var umobile = {
 	session: {},
 
 	/**
+	Namespace for umobile utilities.
+
+	@submodule utility
+	@namespace utility
+	**/
+	utility: {},
+
+	/**
 	Method parses the data received by the session.established event.
 	Iterates over layout JSON and adds modules (i.e. portlets) to
 	the modues array based upon the number of portlets described
@@ -168,7 +176,7 @@ var umobile = {
 			// Search the url for the module parameter.
 			// Update the 'currentView' property.
 			module = this.getUrlParam('module');
-			view = (module) ? module : 'home';
+			view = (module) ? module : 'dashboard';
 			this.app.stateModel.save({currentView: view});
 
 			// Update the 'lastSessionAccess' property.
@@ -221,7 +229,7 @@ var umobile = {
 	**/
 	initRouter: function () {
 		'use strict';
-		var router = new umobile.router.RouteManager();
+		this.app.router = new umobile.router.RouteManager();
 		Backbone.history.start();
 	},
 
@@ -249,8 +257,6 @@ var umobile = {
 		// Subscribe to 'session.established' event.
 		// When triggered, updates the State model and SessionTracker.
 		$.subscribe('session.established', _.bind(function (data) {
-			console.log('SESSION.ESTABLISHED');
-
 			// Define.
 			var modules;
 
@@ -273,11 +279,17 @@ var umobile = {
 
 			// Update time in the Session Tracker.
 			this.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
+
+			// Direct users to the dashboard.
+			this.app.router.navigate('dashboard', {trigger: true});
 		}, this));
 
-		// Subscribe to 'session.established.error' event.
+		// Subscribe to 'session.failure' event.
 		$.subscribe('session.failure', _.bind(function () {
 			this.app.moduleCollection.reset({});
+
+			// Direct users to the login screen.
+			this.app.router.navigate('login', {trigger: true});
 		}, this));
 	},
 

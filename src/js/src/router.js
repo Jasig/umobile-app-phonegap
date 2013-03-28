@@ -11,14 +11,6 @@
 	**/
 	umobile.router.RouteManager = Backbone.Router.extend({
 		/**
-		Property houses a reference to the ViewManager.
-
-		@property viewManager
-		@type Object
-		**/
-		viewManager: {},
-
-		/**
 		Property houses the current view class name.
 
 		@property currentViewClass
@@ -33,9 +25,10 @@
 		@type Object
 		**/
 		routes: {
-			'': 'dashboard',
+			'dashboard': 'dashboard',
 			'login': 'login',
-			'modules/*module': 'module'
+			'modules/*module': 'module',
+			'*other': 'dashboard'
 		},
 
 		/**
@@ -45,7 +38,7 @@
 		**/
 		dashboard: function () {
 			var dashboard = new umobile.view.DashboardView();
-			this.viewManager.show(dashboard);
+			umobile.app.viewManager.show(dashboard);
 		},
 
 		/**
@@ -55,7 +48,7 @@
 		**/
 		login: function () {
 			var login = new umobile.view.LoginView();
-			this.viewManager.show(login);
+			umobile.app.viewManager.show(login);
 		},
 
 		/**
@@ -65,7 +58,7 @@
 		**/
 		module: function () {
 			var module = new umobile.view.ModuleView({path: Backbone.history.fragment});
-			this.viewManager.show(module);
+			umobile.app.viewManager.show(module);
 		},
 
 		/**
@@ -74,8 +67,9 @@
 		and broadcasts the changed route.
 
 		@method onRouteChanged
+		@param {String} route Reference to full route path.
 		**/
-		onRouteChanged: function (route, routeParam) {
+		onRouteChanged: function (route) {
 			// Define.
 			var className, container, view;
 
@@ -109,7 +103,7 @@
 			var page = new umobile.view.Page();
 
 			// Initialize the ViewManager.
-			this.viewManager = new umobile.view.ViewManager();
+			umobile.app.viewManager = new umobile.view.ViewManager();
 
 			// Bind to all the routes. When they change, call
 			// the onRouteChanged method.

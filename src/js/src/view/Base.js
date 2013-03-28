@@ -77,19 +77,30 @@
 		unsubscribe: _.bind($.unsubscribe, this),
 
 		/**
+		Property houses utilty implementation.
+
+		@property utils
+		@type Object
+		**/
+		utils: {},
+
+		/**
 		Helper method. Given the passed property, this method
 		parses the selector object looking for a match.
 
 		@method loc
 		@param {String} property The property to look up.
+		@param {Boolean} isRoot Flag to search for property on the body tag.
 		@return {Object} Cached, jQuery-wrapped DOM element.
 		**/
-		loc: function (property) {
-			if (!this.selectors.hasOwnProperty(property)) {
-				throw new Error('The property, ' + property + ' is not a valid selector.');
+		loc: function (property, isRoot) {
+			var scope;
+			if (isRoot && typeof isRoot !== 'boolean') {
+				throw new Error('Unsupported type. Expected boolean for isRoot argument and not ' + typeof isRoot + '.');
 			}
 
-			return this.$(this.selectors[property]);
+			scope = (isRoot) ? $('body') : this.$el;
+			return scope.find(this.selectors[property]);
 		},
 
 		/**
@@ -109,6 +120,9 @@
 
 			// Cache state model.
 			this.stateModel = umobile.app.stateModel;
+
+			// Cache utilities.
+			this.utils = umobile.utility.Utils;
 		}
 	});
 

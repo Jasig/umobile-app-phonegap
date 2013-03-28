@@ -35,6 +35,24 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{startColor}', endColorstr='@{fromColor}',GradientType=0);
 }
 
+// Opacity.
+.opacity(@opacity: 0.5, @ieOpacity: 50) {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity='@{ieOpacity}')";
+	filter: alpha(opacity=@ieOpacity);
+	-moz-opacity: @opacity;
+	-khtml-opacity: @opacity;
+	opacity: @opacity;
+}
+
+// Loader.
+.um-loader {
+	position: absolute;
+	top: 0; left: 0;
+	bottom: 0; right: 0;
+	min-height: 150px;
+	background: @smoke url('../images/um_loader.gif') 50% 50% no-repeat;
+}
+
 // Expand element passed the padding on the body tag
 // when rendered on smaller screens.
 .um-expand {

@@ -20,6 +20,16 @@
 			currentView: null,
 
 			/**
+			Method returns a reference to the current view.
+
+			@method getCurrentView
+			@return {Object} Reference to the current view.
+			**/
+			getCurrentView: function () {
+				return this.currentView;
+			},
+
+			/**
 			Method destroys old views and renders new views.
 
 			@method show

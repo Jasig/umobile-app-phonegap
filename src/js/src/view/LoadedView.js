@@ -31,10 +31,10 @@
 		/**
 		Method returns the name of the loaded view.
 
-		@method getLoadedViewName
+		@method getViewName
 		@return {String} Name of the loaded view.
 		**/
-		getLoadedViewName: function () {
+		getViewName: function () {
 			return this.name;
 		},
 
@@ -58,8 +58,8 @@
 			this.undelegateEvents();
 
 			// Custom removal.
-			if (this.close && _.isFunction(this.close)) {
-				this.close();
+			if (this.clean && _.isFunction(this.clean)) {
+				this.clean();
 			}
 		},
 
@@ -88,7 +88,7 @@
 		@method showLoader
 		**/
 		showLoader: function () {
-			var loader = $('#loader');
+			var loader = $('#contentLoader');
 			loader.show();
 		},
 
@@ -98,7 +98,7 @@
 		@method hideLoader
 		**/
 		hideLoader: function () {
-			var loader = $('#loader');
+			var loader = $('#contentLoader');
 			loader.fadeOut();
 		},
 
@@ -113,30 +113,42 @@
 			this.showLoader();
 
 			// Define & Initialize.
-			var collection = this.moduleCollection.toJSON();
+			var collection = this.moduleCollection.toJSON(),
+				viewManager = umobile.app.viewManager,
+				currentView = viewManager.currentView.getViewName();
 
-			// Render view when data is available.
+			// The render method gets called numerous time in the present architecture.
+			// We only want to move forward when actual data is available.
 			if (!_.isEmpty(collection)) {
-				// Render main template.
-				this.$el.addClass('hidden')
-					.html(this.template(this.options))
-					.removeClass('hidden');
 
-				// Render custom content.
-				if (collection[0].fname === 'fname') {
-					this.renderError();
-				} else {
-					this.renderContent(collection);
+				// We want to make sure we are not calling loaded views that have
+				// been unloaded. To insure this, we compare the current view name
+				// on the 'this' object with the view stored in the ViewManager.
+				// The ViewManager will always have the correct view to load.
+				if (this.getViewName() === currentView) {
+					console.log('LOADED VIEW: ', this.getViewName());
+
+					// Render main template.
+					this.$el.addClass('hidden')
+						.html(this.template(this.options))
+						.removeClass('hidden');
+
+					// Render custom content for the loaded view.
+					if (collection[0].fname === 'fname') {
+						this.renderError();
+					} else {
+						this.renderContent(collection);
+					}
+
+					// Append '#view' to '#viewLoader'.
+					$('#viewLoader').append(this.$el);
+
+					// Delegate Events.
+					this.delegateEvents(this.events);
+
+					// Loader.
+					this.hideLoader();
 				}
-
-				// Append '#view' to '#viewLoader'.
-				$('#viewLoader').append(this.$el);
-
-				// Delegate Events.
-				this.delegateEvents(this.events);
-
-				// Loader.
-				this.hideLoader();
 			}
 
 			return this;

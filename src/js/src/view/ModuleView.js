@@ -91,18 +91,6 @@
 		renderContent: function (collection) {
 			this.cleanContainers();
 			this.renderFrame();
-		},
-
-		/**
-		Method initializes the view.
-
-		@method initialize
-		@param {Object} options Options object.
-		@override LoadedView
-		**/
-		initialize: function (options) {
-			// Call super to pass options.
-			this._super(options);
 		}
 	});
 
