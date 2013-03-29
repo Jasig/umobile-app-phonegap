@@ -40,6 +40,17 @@
 		},
 
 		/**
+		Method checks the model to determine whether the current user
+		is signed in as a guest user.
+
+		@method isGuest
+		@return {Boolean}
+		**/
+		isGuest: function () {
+			return (this.get('username') === 'guest') ? true : false;
+		},
+
+		/**
 		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.
 

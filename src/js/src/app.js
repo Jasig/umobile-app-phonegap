@@ -137,10 +137,15 @@ var umobile = {
 					portlet.isNative = true;
 				} else {
 					portlet.url = config.uMobileServerUrl + portlet.url;
+					portlet.isNative = false;
 				}
 
 				// Define hasNewItem property based upon the newItemCount property.
 				portlet.hasNewItem = (!Number(portlet.newItemCount)) ? false : true;
+
+				// Truncate portlet title.
+				portlet.fullTitle = portlet.title;
+				portlet.title = umobile.utility.Utils.truncate(portlet.title);
 
 				modules.push(new this.model.Module(portlet));
 			}, this);
@@ -158,15 +163,9 @@ var umobile = {
 	checkSession: function () {
 		'use strict';
 		this.session.SessionTracker.get(_.bind(function (time) {
-			// Define.
-			var view, currentView, now, lastSession, sessionTimeout;
 
-			// Get the current view.
-			currentView = this.app.stateModel.get('currentView');
-			// Update the 'currentView' property.
-			if (!currentView) {
-				this.app.stateModel.save({currentView: 'dashboard'});
-			}
+			// Define.
+			var now, lastSession, sessionTimeout;
 
 			// Update the 'lastSessionAccess' property.
 			if (time !== 0) {
@@ -247,18 +246,16 @@ var umobile = {
 		// When triggered, updates the State model and SessionTracker.
 		$.subscribe('session.established', _.bind(function (data) {
 			// Define.
-			var modules, currentView;
+			var modules;
 
 			// Update credentials.
-			this.app.credModel.set({username: data.user});
-			this.app.credModel.save();
+			this.app.credModel.save({username: data.user});
 
 			// Update state.
-			this.app.stateModel.set({
+			this.app.stateModel.save({
 				lastSessionAccess: (new Date()).getTime(),
 				authenticated: (this.app.credModel.get('username')) ? true : false
 			});
-			this.app.stateModel.save();
 
 			// Build module array.
 			// Populate the collection with modules.

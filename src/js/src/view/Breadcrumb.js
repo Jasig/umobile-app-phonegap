@@ -33,6 +33,7 @@
 
 		/**
 		Method toggles the visibility of the breadcrumb view.
+		Currently disabled since it is not needed.
 
 		@method toggleVisibility
 		@param {Object} view The current view.
@@ -69,7 +70,8 @@
 			this.render();
 
 			// Listen for the route.changed event.
-			$.subscribe('route.changed', _.bind(this.toggleVisibility, this));
+			// Disabled. Not currently needed.
+			//$.subscribe('route.changed', _.bind(this.toggleVisibility, this));
 		}
 	});
 

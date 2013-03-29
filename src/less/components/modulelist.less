@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 .um-module-container {
-	padding: 0 0 0 0;
+	padding: 0 0 0 0;	
 	position: relative;
 	text-align: center;
 	min-height: 150px;
@@ -32,10 +32,11 @@
 	// Link
 	.um-module-link {
 		display: block;
+		//width: 85px;
 		position: relative;
 		color: @white;
 		text-shadow: 1px 1px 3px @black;
-		margin: 0 15px 0 15px;
+		margin: 0 15px 20px 15px;
 
 		// New item indicator.
 		.um-new {
@@ -52,7 +53,18 @@
 
 		// Title.
 		.um-title {
+			width: 55px;
+			overflow: hidden;
 			padding: 10px 0 0 0;
+			font-size: 12px;
+		}
+
+		// Icon.
+		.um-icon {
+			img {
+				width: 57px;
+				height: 57px;
+			}
 		}
 	}
 

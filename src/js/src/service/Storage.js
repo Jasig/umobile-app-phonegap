@@ -37,7 +37,6 @@
 								debug.info('Result has id property.');
 								debug.info('Updating model with result.');
 								model.set(JSON.parse(result));
-								debug.info('===================');
 							} else {
 								arr = JSON.parse(result);
 								modules = [];
@@ -55,28 +54,26 @@
 							if (options && options.hasOwnProperty('success')) {
 								options.success(model);
 							}
-							debug.info('===================');
 						}
 					}
 				);
 				break;
 			case 'create':
-				console.log('creating ' + storageKey + ': ' + JSON.stringify(model));
+				debug.info('creating ' + storageKey + ': ' + JSON.stringify(model));
 				storage.setItem(storageKey, JSON.stringify(model));
 				if (options && options.hasOwnProperty('success')) {
 					options.success(model);
 				}
 				break;
 			case 'update':
-				console.log('Saving ' + storageKey + ': ' + JSON.stringify(model));
+				debug.info('Saving ' + storageKey + ': ' + JSON.stringify(model));
 				storage.setItem(storageKey, JSON.stringify(model));
 				if (options && options.hasOwnProperty('success')) {
 					options.success(model);
 				}
-				console.log('===================');
 				break;
 			case 'delete':
-				console.log('removing ' + storageKey);
+				debug.info('removing ' + storageKey);
 				storage.removeItem(storageKey);
 				if (options && options.hasOwnProperty('success')) {
 					options.success(model);
@@ -145,7 +142,7 @@
 				function (tx) {
 					tx.executeSql('CREATE TABLE IF NOT EXISTS umobile (id unique, data)');
 				},
-				function (tx, err) { console.log('Error processing SQL: ' + err); }
+				function (tx, err) { debug.info('Error processing SQL: ' + err); }
 			);
 		},
 		getItem: function (storageKey, success) {
@@ -162,10 +159,10 @@
 								success(null);
 							}
 						},
-						function (tx, err) { console.log('Error processing SQL: ' + err); }
+						function (tx, err) { debug.info('Error processing SQL: ' + err); }
 					);
 				},
-				function (tx, err) { console.log('Error processing SQL: ' + err); }
+				function (tx, err) { debug.info('Error processing SQL: ' + err); }
 			);
 
 			return window.localStorage.getItem(storageKey);
@@ -177,7 +174,7 @@
 					tx.executeSql('DELETE FROM umobile WHERE id=?', [storageKey]);
 					tx.executeSql('INSERT INTO umobile (id, data) VALUES (?, ?)', [storageKey, json]);
 				},
-				function (tx, err) { console.log('Error processing SQL: ' + err); }
+				function (tx, err) { debug.info('Error processing SQL: ' + err); }
 			);
 		},
 		removeItem: function (storageKey) {
@@ -186,7 +183,7 @@
 				function (tx) {
 					tx.executeSql('DELETE FROM umobile WHERE id=?', [storageKey]);
 				},
-				function (tx, err) { console.log('Error processing SQL: ' + err); }
+				function (tx, err) { debug.info('Error processing SQL: ' + err); }
 			);
 			window.localStorage.removeItem(storageKey);
 		}

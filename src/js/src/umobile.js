@@ -149,7 +149,7 @@
 			@method errorHandler
 			**/
 			errorHandler: function (model, xhr, options) {
-				console.log('Error: ' + model + ', ' + xhr);
+				debug.info('Error: ' + model + ', ' + xhr);
 			},
 
 			/**

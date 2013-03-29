@@ -99,7 +99,7 @@
 			password = GibberishAES.dec(credentials.encPassword, config.encryptionKey);
 			return { username: username, password: password };
 		} else {
-			console.log('No credentials found for user');
+			debug.info('No credentials found for user');
 			return null;
 		}
 	};
@@ -160,9 +160,9 @@
 		if (credentials && credentials.get('username') && credentials.get('password')) {
 			data.userName = credentials.attributes.username;
 			data.password = credentials.attributes.password;
-			console.log('Attempting local login via URL ' + url);
+			debug.info('Attempting local login via URL ' + url);
 		} else {
-			console.log('Establishing guest session via URL ' + url);
+			debug.info('Establishing guest session via URL ' + url);
 		}
 
 		// POST to the uMobile login servlet
@@ -173,18 +173,18 @@
 			type: 'POST',
 			success: function (data, textStatus, jqXHR) {
 				if (!credentials || !credentials.attributes.username) {
-					console.log('Established guest session');
+					debug.info('Established guest session');
 					onSuccess(data);
 				} else if (credentials.attributes.username === data.user) {
-					console.log('Successful authentication for user ' + credentials.attributes.username);
+					debug.info('Successful authentication for user ' + credentials.attributes.username);
 					onSuccess(data);
 				} else {
-					console.log('Error performing local authentication: ' + textStatus);
+					debug.info('Error performing local authentication: ' + textStatus);
 					onError(jqXHR, 'Auth failure');
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.log('Error performing local authentication: ' + textStatus + ', ' + errorThrown);
+				debug.info('Error performing local authentication: ' + textStatus + ', ' + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
 			}
 		});
@@ -210,7 +210,7 @@
 		// Initialize & define url paths.
 		casUrl = config.casServerUrl + '/cas/login';
 		serviceUrl = getLocalLoginServletUrl() + '?refUrl=' + config.uMobileServerContext + '/layout.json';
-		console.log('Attempting CAS authentication to URL ' + casUrl + ' using serviceUrl ' + serviceUrl);
+		debug.info('Attempting CAS authentication to URL ' + casUrl + ' using serviceUrl ' + serviceUrl);
 
 		// Request to the uMobile login servlet.
 		$.ajax({
@@ -229,7 +229,7 @@
 					if (!credentials || credentials.attributes.username === data.user) {
 						onSuccess(data);
 					} else {
-						console.log('Error parsing layout JSON response.');
+						debug.info('Error parsing layout JSON response.');
 						onError(jqXHR, 'Auth failure');
 					}
 				} else { // Otherwise submit the user's credentials.
@@ -238,7 +238,7 @@
 					flowId = flowRegex.exec(html)[1];
 					executionId = executionRegex.exec(html)[1];
 
-					console.log('Submitting user credentials to CAS.');
+					debug.info('Submitting user credentials to CAS.');
 					$.ajax({
 						url: casUrl,
 						data: {
@@ -256,19 +256,19 @@
 							if (!credentials || credentials.attributes.username === data.user) {
 								onSuccess(data);
 							} else {
-								console.log('Error parsing layout JSON response' + textStatus);
+								debug.info('Error parsing layout JSON response' + textStatus);
 								onError(jqXHR, 'Auth failure');
 							}
 						},
 						error: function (jqXHR, textStatus, errorThrown) {
-							console.log('Error submitting CAS credentials: ' + textStatus + ', ' + errorThrown);
+							debug.info('Error submitting CAS credentials: ' + textStatus + ', ' + errorThrown);
 							return umobile.auth.localLogin(credentials, onSuccess, onError);
 						}
 					});
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.log('Error accessing CAS login page: ' + textStatus + ', ' + errorThrown);
+				debug.info('Error accessing CAS login page: ' + textStatus + ', ' + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
 			}
 		});
@@ -287,14 +287,14 @@
 		// Define.
 		var logoutUrl = getLocalLogoutServletUrl();
 
-		console.log('Logging out via URL ' + logoutUrl);
+		debug.info('Logging out via URL ' + logoutUrl);
 		$.ajax({
 			url: logoutUrl,
 			success: function (html, textStatus, jqXHR) {
 				umobile.auth[config.loginFn](credentials, onSuccess, onError);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.log('Error logging out: ' + textStatus + ', ' + errorThrown);
+				debug.info('Error logging out: ' + textStatus + ', ' + errorThrown);
 				onError(jqXHR, textStatus, errorThrown);
 			},
 			dataType: 'html',

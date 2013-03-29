@@ -23,6 +23,9 @@ config.auth = nconf.get('auth') || 'mock';
 // Supported modes are dev and prod.
 config.mode = nconf.get('mode') || 'dev';
 
+// Server location.
+config.webappServerPath = nconf.get('webappServerPath') || '/';
+
 // Performs a test on the current environment configuration.
 // (i.e., ios, android or web).
 config.isEnvironment = function (environment) {
@@ -75,6 +78,12 @@ config.getCordova = function () {
 config.getPublicDirectory = function () {
 	'use strict';
 	return (config.mode === 'dev') ? 'src' : 'www';
+};
+
+// Returns server path for the webapp location.
+config.getWebappServerPath = function () {
+	'use strict';
+	return config.webappServerPath;
 };
 
 // Export module.

@@ -57,7 +57,9 @@
 		@method modules
 		**/
 		modules: function () {
-			var module = new umobile.view.ModuleView({path: Backbone.history.fragment});
+			var path, module;
+			path = umobile.utility.Utils.getParameter('url', Backbone.history.fragment);
+			module = new umobile.view.ModuleView({path: path});
 			umobile.app.viewManager.show(module);
 		},
 

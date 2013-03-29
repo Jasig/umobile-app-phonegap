@@ -26,37 +26,31 @@ module.exports = function (grunt) {
 			]
 		},
 
-		// Copies assests to public www directory.
+		// Copies assests.
 		copy: {
-			main: {
+			prod: {
 				files: [
 					{
 						src: ['**'],
 						dest: 'www/data/',
 						expand: true,
 						cwd: 'src/data/'
-					}
-				]
-			},
-			images: {
-				files: [
+					},
 					{
 						src: ['**'],
 						dest: 'www/images/',
 						expand: true,
 						cwd: 'src/images/'
-					},
+					}
+				]
+			},
+			tomcat: {
+				files: [
 					{
 						src: ['**'],
-						dest: 'www/data/icons/',
+						dest: config.getWebappServerPath(),
 						expand: true,
-						cwd: 'src/data/icons/'
-					},
-					{
-						src: ['**'],
-						dest: 'www/css/lib/jquerymobile/images/',
-						expand: true,
-						cwd: 'src/css/lib/jquerymobile/images'
+						cwd: 'src/'
 					}
 				]
 			}
@@ -264,7 +258,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('prod', [
 		'clean:prod',
-		'copy',
+		'copy:prod',
 		'less:prod',
 		'cssmin',
 		'jshint',
@@ -272,5 +266,16 @@ module.exports = function (grunt) {
 		'compilehtml:prodViews',
 		'compilehtml:prodModules',
 		'appendpartials:prod'
+	]);
+
+	grunt.registerTask('tomcat', [
+		'clean:dev',
+		'less:dev',
+		'cssmin',
+		'jshint',
+		'compilehtml:devViews',
+		'compilehtml:devModules',
+		'appendpartials:dev',
+		'copy:tomcat'
 	]);
 };

@@ -29,19 +29,38 @@
 		**/
 		selectors: {
 			template: '#views-partials-header',
-			loginButton: '#loginButton'
+			home: '#homeButton',
+			login: '#loginButton',
+			logout: '#logoutButton'
 		},
 
 		/**
-		Method toggles the visibility of the login button.
+		Method toggles the visibility of the header buttons.
 
-		@method toggleLogin
+		@method toggle
 		@param {Object} view Object containing the current view name property.
 		**/
-		toggleLogin: function (view) {
-			var loginButton, login;
-			loginButton = this.loc('loginButton');
-			login = (view.name === 'login') ? loginButton.addClass('hidden') : loginButton.removeClass('hidden');
+		toggle: function (view) {
+			// Define.
+			var home = this.loc('home'),
+				login = this.loc('login');
+
+			switch (view.name) {
+			case 'dashboard':
+				home.addClass('hidden');
+				login.removeClass('hidden');
+				break;
+			case 'login':
+				home.removeClass('hidden');
+				login.addClass('hidden');
+				break;
+			case 'modules':
+				home.removeClass('hidden');
+				break;
+			default:
+				home.removeClass('hidden');
+				login.removeClass('hidden');
+			}
 		},
 
 		/**
@@ -62,8 +81,8 @@
 		@override Base
 		**/
 		initialize: function () {
-			// Bind all properties and methods.
-			_.bindAll(this);
+			// Call super.
+			this._super();
 
 			// Compile view template.
 			this.template = Handlebars.compile($(this.selectors.template).html());
@@ -72,7 +91,7 @@
 			this.render();
 
 			// Listen for the route.changed event.
-			$.subscribe('route.changed', _.bind(this.toggleLogin, this));
+			$.subscribe('route.changed', _.bind(this.toggle, this));
 		}
 	});
 

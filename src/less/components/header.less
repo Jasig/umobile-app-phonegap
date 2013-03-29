@@ -7,13 +7,16 @@
 	// Overrides bootstrap navbar.
 	.um-navbar {
 		.um-navbar-inner {
+			position: relative;
 			.um-gradient(@darkGray, @black);
 			.um-shadow;
 
 			// uMobile logo.
 			.um-brand {
-				background: url('../images/um_logo_32x32.png') 8px 50% no-repeat;
-				padding: 10px 20px 10px 40px;
+				display: block;
+				width: 60px;
+
+				margin: 0 auto;
 
 				// uMobile text.
 				.um-navbar-text {
@@ -21,9 +24,18 @@
 				}
 			}
 
-			// Login button.
-			.um-btn-login {
-				margin-top: 10px;
+			// Home button.
+			.um-btn-home {
+				.um-border-radius(10px);
+				position: absolute;
+				top: 0; left: 10px;
+			}
+
+			// Login & logout button.
+			.um-btn-login, .um-btn-logout {
+				.um-border-radius(10px);
+				position: absolute;
+				top: 0; right: 10px;
 			}
 		}
 	}

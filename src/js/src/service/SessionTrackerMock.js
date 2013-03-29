@@ -20,9 +20,6 @@
 		@method get
 		**/
 		get: function (success) {
-			if (typeof success !== 'function') {
-				throw new Error('The success parameter must be a function, was ' + typeof success + '.');
-			}
 			success(this.time);
 		},
 

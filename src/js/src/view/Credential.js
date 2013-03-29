@@ -83,7 +83,6 @@
 				password = form.find(this.selectors.password);
 
 			// Save credentials without raising an event.
-			console.log('Save Credentials: ', username.val(), ' & ', password.val());
 			this.model.save({username: username.val(), password: password.val()}, {silent: false});
 			this.model.change();
 		},
@@ -170,12 +169,12 @@
 
 			// Bind to model. Valid model callback.
 			this.model.bind('validated:valid', function (model) {
-				console.log('Model is valid: ', model);
+				//
 			});
 
 			// Bind to model. Invalid model callback.
 			this.model.bind('validated:invalid', function (model, errors) {
-				console.log('Model is invalid: ', errors);
+				//
 			});
 		}
 	});
