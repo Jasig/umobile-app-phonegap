@@ -235,6 +235,23 @@ module.exports = function (grunt) {
 			}
 		},
 
+		yuidoc: {
+			dev: {
+				name: '<%= pkg.name %>',
+				options: {
+					paths: 'src/js/src/',
+					outdir: 'src/docs/'
+				}
+			},
+			prod: {
+				name: '<%= pkg.name %>',
+				options: {
+					paths: 'src/js/src/',
+					outdir: 'www/docs/'
+				}
+			}
+		},
+
 		watch: {
 			dev: {
 				files: [
@@ -257,13 +274,17 @@ module.exports = function (grunt) {
 
 	// Register tasks.
 	grunt.registerTask('templates', ['watch:dev']);
+
+	grunt.registerTask('docs', ['yuidoc:prod']);
+
 	grunt.registerTask('dev', [
 		'clean:dev',
 		'less:dev',
 		'jshint',
 		'compilehtml:devViews',
 		'compilehtml:devModules',
-		'appendpartials:dev'
+		'appendpartials:dev',
+		'yuidoc:dev'
 	]);
 
 	grunt.registerTask('prod', [
@@ -274,7 +295,8 @@ module.exports = function (grunt) {
 		'uglify',
 		'compilehtml:prodViews',
 		'compilehtml:prodModules',
-		'appendpartials:prod'
+		'appendpartials:prod',
+		'yuidoc:prod'
 	]);
 
 	grunt.registerTask('external.dev', [
@@ -284,7 +306,8 @@ module.exports = function (grunt) {
 		'compilehtml:devViews',
 		'compilehtml:devModules',
 		'appendpartials:dev',
-		'copy:externalDev'
+		'copy:externalDev',
+		'yuidoc:dev'
 	]);
 
 	grunt.registerTask('external.prod', [
@@ -296,6 +319,7 @@ module.exports = function (grunt) {
 		'compilehtml:prodViews',
 		'compilehtml:prodModules',
 		'appendpartials:prod',
-		'copy:externalProd'
+		'copy:externalProd',
+		'yuidoc:prod'
 	]);
 };

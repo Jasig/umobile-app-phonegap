@@ -88,7 +88,6 @@ config.getPublicDirectory = function () {
 // Returns server path for the webapp location.
 config.getExternal = function () {
 	'use strict';
-	console.log(config.external);
 	return (config.external) ? config.external : null;
 };
 
