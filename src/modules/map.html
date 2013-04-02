@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Map</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+
+		<!--CSS Dependencies-->
+		<link type="text/css" rel="stylesheet" href="../css/module.css">
+
+		<!--JavaScript Dependencies-->
+		<script type="text/javascript" src="../js/lib/jquery/jquery.js"></script>
+	<head>
+	<body class="um-module">
+		<!--
+		| =====================
+		| Map View
+		| =====================
+		-->
+		<div id="map" class="um-map">
+			<div id="mapCanvas" class="um-map-canvas"></div>
+		</div>
+
+		<!--JavaScript Source Files-->
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				var options, map;
+				options = {
+					center: new google.maps.LatLng(-34.397, 150.644),
+					zoom: 8,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				},
+				map = new google.maps.Map(document.getElementById('mapCanvas'), options);
+			});
+		</script>
+	</body>
+</html>

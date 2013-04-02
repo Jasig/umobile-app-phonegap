@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+
+		<!--CSS Dependencies-->
+		<link type="text/css" rel="stylesheet" href="css/umobile.css">
+
+		<!--JavaScript Dependencies-->
+		<script type="text/javascript" src="js/lib/cordova/cordova-android.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
+		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
+		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone-super.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone-validation.js"></script>
+		<script type="text/javascript" src="js/lib/handlebars/handlebars.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap/bootstrap.js"></script>
+		<script type="text/javascript" src="js/lib/debug/debug.js"></script>
+	</head>
+
+	<body>
+		<div id="page" class="um-page"></div>
+
+		<!--JavaScript Template Files-->
+		<templates>  <script type="text/x-handlebars-template" id="views-partials-breadcrumb">
+    <ul class="breadcrumb um-breadcrumb">
+    	<li>
+    		<a href="#dashboard" class="btn btn-small">
+    			<i class="icon-home"></i>
+    			<span>Home</span>
+    		</a>
+    	</li>
+    </ul>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-dashboardview">
+    <div id="modules" class="um-module-container">
+    	<div id="notifier"></div>
+    	<ul id="moduleList" class="um-module-list clearfix"></ul>
+    </div>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-footer">
+    <div>&nbsp;</div>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-header">
+    <div class="navbar navbar-static-top navbar-inverse um-navbar">
+    	<div class="navbar-inner um-navbar-inner">
+    		<!--Brand-->
+    		<a class="um-brand" href="#dashboard">
+    			<span class="navbar-text um-navbar-text">uMobile</span>
+    		</a>
+    		<!--Home-->
+    		<a id="homeButton" href="#dashboard" class="btn btn-link um-btn-home hidden">
+    			<i class="icon-home icon-white"></i>
+    		</a>
+    		<!--Logout-->
+    		<a id="logoutButton" href="javascript:;" class="btn btn-link um-btn-logout hidden">
+    			<i class="icon-hand-right icon-white"></i>
+    		</a>
+    		<!--Login-->
+    		<a id="loginButton" href="#login" class="btn btn-link um-btn-login hidden">
+    			<i class="icon-lock icon-white"></i>
+    		</a>
+    	</div>
+    </div>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-loginview">
+    <div id="formContainer" class="um-form-container clearfix">
+    	<form id="login" class="form-inline um-login-form" action="javascript:;">
+    		<div id="loginAlert" style="display: none;" class="alert alert-error">
+    			<strong>Warning.</strong>
+    			<span class="message"></span>
+    		</div>
+    		<fieldset>
+    			<legend>Sign In</legend>
+    			<!--Username-->
+    			<div class="control-group">
+    				<label class="control-label hidden" for="username">Username:</label>
+    				<div class="controls">
+    					<input type="text" id="username" name="username" class="input-block-level" value="{{username}}" placeholder="Username">
+    					<span class="help-inline" style="display: none;"></span>
+    				</div>
+    			</div>
+    
+    			<!--Password-->
+    			<div class="control-group">
+    				<label class="control-label hidden" for="password">Password:</label>
+    				<div class="controls">
+    					<input type="password" id="password" name="password" class="input-block-level" value="{{password}}" placeholder="Password">
+    					<span class="help-inline" style="display: none;"></span>
+    				</div>
+    			</div>
+    
+    			<!--Controls-->
+    			<div class="control-group">
+    				<div class="controls">
+    					<button id="submitButton" type="submit" class="btn">Go</button>
+    					<span id="submitSpinner" class="btn btn-link um-login-spinner invisible"></span>
+    				</div>
+    			</div>
+    		<fieldset>
+    	</form>
+    </div>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-module">
+    <a href="#modules/{{fname}}?url={{url}}" title="To view {{title}}" class="um-module-link">
+    	{{#hasNewItem}}
+    	<div class="badge um-new">{{newItemCount}}</div>
+    	{{/hasNewItem}}
+    	<div class="um-icon">
+    		<img src="{{iconUrl}}" alt="{{fullTitle}}"/>
+    	</div>
+    	<div class="um-title">{{title}}</div>
+    </a>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-moduleview">
+    <div id="moduleView" class="um-module-view">
+    	<div id="notifier"></div>
+    	<iframe id="moduleFrame" class="um-module-frame" src="{{path}}"></iframe>
+    </div
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-notifier">
+    <h1 class="title">{{title}}.</h1>
+    <p class="message">{{message}}.</p>
+    <a href="#login" class="btn btn-small btn-inverse">
+    	<i class="icon-lock icon-white"></i>
+    	<span>Login</span>
+    </a>
+  </script>
+  <script type="text/x-handlebars-template" id="views-partials-page">
+    <!--Application Header-->
+    <header id="header" class="um-header"></header>
+    
+    <!--Application Content-->
+    <section id="main" class="um-main">
+    	<!--Breadcrumb-->
+    	<div id="breadcrumb" class="hidden"></div>
+    
+    	<!--Views-->
+    	<div id="content" class="um-content">
+    		<div class="row-fluid">
+    			<div class="span12">
+    				<div id="viewLoader" class="um-view-loader">
+    					<div id="view" class="um-view hidden"></div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    
+    	<!--Content Loader-->
+    	<div id="contentLoader" class="um-content-loader um-loader"></div>
+    </section>
+    
+    <!--Footer-->
+    <footer id="footer" class="um-footer"></footer>
+  </script>
+</templates>
+
+		<!--JavaScript Source Files-->
+		<script type="text/javascript" src="js/src/config/mock.js"></script>
+		<script type="text/javascript" src="js/src/app.js"></script>
+		<script type="text/javascript" src="js/src/service/Utils.js"></script>
+		<script type="text/javascript" src="js/src/service/SessionTrackerMock.js"></script>
+		<script type="text/javascript" src="js/src/service/Authentication.js"></script>
+		<script type="text/javascript" src="js/src/service/Storage.js"></script>
+		<script type="text/javascript" src="js/src/model/State.js"></script>
+		<script type="text/javascript" src="js/src/model/Module.js"></script>
+		<script type="text/javascript" src="js/src/model/Credential.js"></script>
+		<script type="text/javascript" src="js/src/model/Notifier.js"></script>
+		<script type="text/javascript" src="js/src/collection/ModuleCollection.js"></script>
+		<script type="text/javascript" src="js/src/view/ViewManager.js"></script>
+		<script type="text/javascript" src="js/src/view/Base.js"></script>
+		<script type="text/javascript" src="js/src/view/Page.js"></script>
+		<script type="text/javascript" src="js/src/view/Breadcrumb.js"></script>
+		<script type="text/javascript" src="js/src/view/Header.js"></script>
+		<script type="text/javascript" src="js/src/view/Footer.js"></script>
+		<script type="text/javascript" src="js/src/view/LoadedView.js"></script>
+		<script type="text/javascript" src="js/src/view/DashboardView.js"></script>
+		<script type="text/javascript" src="js/src/view/LoginView.js"></script>
+		<script type="text/javascript" src="js/src/view/Module.js"></script>
+		<script type="text/javascript" src="js/src/view/ModuleView.js"></script>
+		<script type="text/javascript" src="js/src/view/Notifier.js"></script>
+		<script type="text/javascript" src="js/src/router.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				'use strict';
+				umobile.initialize();
+			});
+		</script>
+	</body>
+</html>

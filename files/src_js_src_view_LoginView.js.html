@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src&#x2F;js&#x2F;src&#x2F;view&#x2F;LoginView.js - uMobile</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="uMobile"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/auth.Authentication.html">auth.Authentication</a></li>
+            
+                <li><a href="..&#x2F;classes/collection.ModuleCollection.html">collection.ModuleCollection</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Credential.html">model.Credential</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Module.html">model.Module</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Notifier.html">model.Notifier</a></li>
+            
+                <li><a href="..&#x2F;classes/model.State.html">model.State</a></li>
+            
+                <li><a href="..&#x2F;classes/router.RouteManager.html">router.RouteManager</a></li>
+            
+                <li><a href="..&#x2F;classes/session.SessionTracker.html">session.SessionTracker</a></li>
+            
+                <li><a href="..&#x2F;classes/session.SessionTrackerMock.html">session.SessionTrackerMock</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.DB.html">storage.DB</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Local.html">storage.Local</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Storage.html">storage.Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/utility.Utils.html">utility.Utils</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Base.html">view.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Breadcrumb.html">view.Breadcrumb</a></li>
+            
+                <li><a href="..&#x2F;classes/view.DashboardView.html">view.DashboardView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Footer.html">view.Footer</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Header.html">view.Header</a></li>
+            
+                <li><a href="..&#x2F;classes/view.LoadedView.html">view.LoadedView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Login.html">view.Login</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Module.html">view.Module</a></li>
+            
+                <li><a href="..&#x2F;classes/view.ModuleView.html">view.ModuleView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Notifier.html">view.Notifier</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Page.html">view.Page</a></li>
+            
+                <li><a href="..&#x2F;classes/view.ViewManager.html">view.ViewManager</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/app.html">app</a></li>
+            
+                <li><a href="..&#x2F;modules/auth.html">auth</a></li>
+            
+                <li><a href="..&#x2F;modules/collection.html">collection</a></li>
+            
+                <li><a href="..&#x2F;modules/model.html">model</a></li>
+            
+                <li><a href="..&#x2F;modules/router.html">router</a></li>
+            
+                <li><a href="..&#x2F;modules/session.html">session</a></li>
+            
+                <li><a href="..&#x2F;modules/storage.html">storage</a></li>
+            
+                <li><a href="..&#x2F;modules/umobile.html">umobile</a></li>
+            
+                <li><a href="..&#x2F;modules/utility.html">utility</a></li>
+            
+                <li><a href="..&#x2F;modules/view.html">view</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src&#x2F;js&#x2F;src&#x2F;view&#x2F;LoginView.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true *&#x2F;
+(function ($, _, Backbone, umobile, config) {
+	&#x27;use strict&#x27;;
+
+	&#x2F;**
+	Manages the loaded Login view.
+
+	@class Login
+	@submodule view
+	@namespace view
+	@constructor
+	**&#x2F;
+	umobile.view.LoginView = umobile.view.LoadedView.extend({
+		&#x2F;**
+		Property houses the name of the loaded view.
+
+		@property name
+		@type String
+		**&#x2F;
+		name: &#x27;login&#x27;,
+
+		&#x2F;**
+		Property houses DOM selectors.
+
+		@property selectors
+		@type Object
+		**&#x2F;
+		selectors: {
+			template: &#x27;#views-partials-loginview&#x27;,
+			username: &#x27;#username&#x27;,
+			password: &#x27;#password&#x27;,
+			submit: &#x27;#submitButton&#x27;,
+			warn: &#x27;#loginAlert&#x27;,
+			login: &#x27;#login&#x27;,
+			spinner: &#x27;#submitSpinner&#x27;
+		},
+
+		&#x2F;**
+		Property houses messages.
+
+		@property messages
+		@type Object
+		**&#x2F;
+		messages: {
+			validationError: &#x27;You have errors with your username or password.&#x27;,
+			guestLoginError: &#x27;We tried to log you into the portal as a guest but something went wrong. Please try to login with your credentials.&#x27;,
+			loginError: &#x27;We tried to log you into the portal but something went wrong. Please try to login again.&#x27;
+		},
+
+		&#x2F;**
+		Property houses the Credential model.
+
+		@property model
+		@type Object
+		**&#x2F;
+		model: {},
+
+		&#x2F;**
+		Property houses Backbone events object.
+
+		@property events
+		@type Object
+		**&#x2F;
+		events: {
+			&#x27;submit form&#x27;: &#x27;submitHandler&#x27;
+		},
+
+		&#x2F;**
+		Method houses view clean up operations.
+
+		@method clean
+		**&#x2F;
+		clean: function () {
+			this.unBindEventListeners();
+		},
+
+		&#x2F;**
+		Method manages the alert.
+		TODO: Move the alert implementation into a seperate view.
+
+		@method warn
+		@param {String} action The action to take (i.e., hide or show).
+		@param {String} message The message to render.
+		**&#x2F;
+		warn: function (action, message) {
+			&#x2F;&#x2F; Define &amp; set defaults.
+			var warn = this.loc(&#x27;warn&#x27;);
+			action = (!action) ? &#x27;hide&#x27; : action;
+			message = (!message) ? this.messages.validationError : message;
+
+			switch (action) {
+			case &#x27;hide&#x27;:
+				warn.slideUp(&#x27;fast&#x27;);
+				break;
+			case &#x27;show&#x27;:
+				warn.find(&#x27;.message&#x27;).html(message);
+				warn.slideDown(&#x27;fast&#x27;);
+				break;
+			default:
+				warn.slideUp(&#x27;fast&#x27;);
+			}
+		},
+
+		&#x2F;**
+		Method removes existing error messages
+		from the login form.
+
+		@method resetErrors
+		**&#x2F;
+		resetErrors: function () {
+			var inputs = this.getInputs();
+			_.each(inputs, function (obj, key) {
+				var control = obj.el.closest(&#x27;.control-group&#x27;),
+					help = control.find(&#x27;.help-inline&#x27;);
+				if (control.hasClass(&#x27;error&#x27;)) {
+					control.removeClass(&#x27;error&#x27;);
+					help.hide();
+				}
+			}, this);
+		},
+
+		&#x2F;**
+		Method builds an object containing form input data.
+
+		@method getInputs
+		@return {Object} Object containing form input data.
+		**&#x2F;
+		getInputs: function () {
+			&#x2F;&#x2F; Define.
+			var inputs, elements;
+
+			&#x2F;&#x2F; Initialize.
+			inputs = {};
+			elements = this.$el.find(&#x27;:input&#x27;);
+
+			&#x2F;&#x2F; Iterate over elements.
+			_.each(elements, function (element, index) {
+				var tag, el, name;
+				tag = element.nodeName.toLowerCase();
+				if (tag === &#x27;input&#x27;) {
+					el = $(element);
+					name = el.attr(&#x27;name&#x27;);
+					inputs[name] = {
+						el: el,
+						value: el.val()
+					};
+				}
+			}, this);
+
+			return inputs;
+		},
+
+		&#x2F;**
+		Method locks or disables the form when being submitted.
+
+		@method lockLogin
+		**&#x2F;
+		lockLogin: function () {
+			if (this.loc(&#x27;spinner&#x27;).hasClass(&#x27;invisible&#x27;)) {
+				this.loc(&#x27;username&#x27;).attr(&#x27;disabled&#x27;, &#x27;disabled&#x27;);
+				this.loc(&#x27;password&#x27;).attr(&#x27;disabled&#x27;, &#x27;disabled&#x27;);
+				this.loc(&#x27;submit&#x27;).addClass(&#x27;disabled&#x27;);
+				this.loc(&#x27;spinner&#x27;).removeClass(&#x27;invisible&#x27;);
+			}
+		},
+
+		&#x2F;**
+		Method unlocks or removes the login form
+		from a disabled state.
+
+		@method unlockLogin
+		**&#x2F;
+		unlockLogin: function () {
+			if (!this.loc(&#x27;spinner&#x27;).hasClass(&#x27;invisible&#x27;)) {
+				this.loc(&#x27;username&#x27;).removeAttr(&#x27;disabled&#x27;);
+				this.loc(&#x27;password&#x27;).removeAttr(&#x27;disabled&#x27;);
+				this.loc(&#x27;submit&#x27;).removeClass(&#x27;disabled&#x27;);
+				this.loc(&#x27;spinner&#x27;).addClass(&#x27;invisible&#x27;);
+			}
+		},
+
+		&#x2F;**
+		Method updates the form when the validation on the model is invalid.
+
+		@method invalidFormHandler
+		@param {Object} model Reference to Credential model.
+		@param {Object} errors Reference to model errors.
+		**&#x2F;
+		invalidFormHandler: function (model, errors) {
+			&#x2F;&#x2F; Cache inputs.
+			var inputs = this.getInputs();
+
+			&#x2F;&#x2F; Unlock the login.
+			this.unlockLogin();
+
+			&#x2F;&#x2F; Reset existing errors.
+			this.resetErrors();
+
+			&#x2F;&#x2F; Show warning message.
+			this.warn(&#x27;show&#x27;, this.messages.validationError);
+
+			&#x2F;&#x2F; Show input errors.
+			_.each(errors, function (value, key) {
+				var input, control, help;
+				if (inputs.hasOwnProperty(key)) {
+					input = inputs[key].el;
+					control = input.closest(&#x27;.control-group&#x27;);
+					help = control.find(&#x27;.help-inline&#x27;);
+					control.addClass(&#x27;error&#x27;);
+					help.html(value).show();
+				}
+			});
+		},
+
+		&#x2F;**
+		Method sets up bindings on the view and model.
+
+		@method bindEventListeners
+		**&#x2F;
+		bindEventListeners: function () {
+			&#x2F;&#x2F; Bind Backbone.Validation to the Login view.
+			Backbone.Validation.bind(this);
+
+			&#x2F;&#x2F; Bind to model. Invalid model callback.
+			this.model.bind(&#x27;validated:invalid&#x27;, _.bind(this.invalidFormHandler, this));
+
+			&#x2F;&#x2F; Listen to the save event on the Credential model.
+			this.model.on(&#x27;change&#x27;, _.bind(this.onUpdateCredentials, this));
+		},
+
+		&#x2F;**
+		Method unbinds events on the view and model.
+
+		@method unBindEventListeners
+		**&#x2F;
+		unBindEventListeners: function () {
+			&#x2F;&#x2F; Unbind validation.
+			if (Backbone.Validation.unbind) {
+				Backbone.Validation.unbind(this);
+			}
+
+			&#x2F;&#x2F; Unbind model.
+			if (this.model.unbind) {
+				this.model.unbind(&#x27;validated:invalid&#x27;);
+				this.model.unbind(&#x27;change&#x27;);
+			}
+		},
+
+		&#x2F;**
+		Method logs the user into the portal.
+
+		@method onUpdateCredentials
+		**&#x2F;
+		onUpdateCredentials: function () {
+			&#x2F;&#x2F; Reset existing errors.
+			this.resetErrors();
+
+			&#x2F;&#x2F; Hide warning message.
+			this.warn(&#x27;hide&#x27;);
+
+			&#x2F;&#x2F; Log the user into the portal.
+			umobile.auth.establishSession();
+		},
+
+		&#x2F;**
+		Method extracts credentials from the login form
+		and attempts to persist them by calling save on
+		the Credential model. Triggers a change event
+		on the Credential model.
+
+		@method updateCredentials
+		**&#x2F;
+		updateCredentials: function () {
+			&#x2F;&#x2F; Define.
+			var inputs, username, password;
+
+			&#x2F;&#x2F; Initialize.
+			inputs = this.getInputs();
+			username = inputs.username.value.toLowerCase();
+			password = inputs.password.value;
+
+			&#x2F;&#x2F; Unbind the model.
+			this.unBindEventListeners();
+
+			&#x2F;&#x2F; When username entered matches what is stored
+			&#x2F;&#x2F; save a null value so we can trigger a change
+			&#x2F;&#x2F; event on model.
+			if (this.model.get(&#x27;username&#x27;) === username) {
+				this.model.save({username: null});
+			}
+
+			&#x2F;&#x2F; Lock the login.
+			this.lockLogin();
+
+			&#x2F;&#x2F; Bind the model.
+			this.bindEventListeners();
+
+			&#x2F;&#x2F; Save updated credentials.
+			this.model.save({username: username, password: password});
+		},
+
+		&#x2F;**
+		Methods sets up the model:{} object for validation.
+
+		@method initModel
+		**&#x2F;
+		initModel: function () {
+			&#x2F;&#x2F; Backbone.Validation plugin expects the model to be housed
+			&#x2F;&#x2F; within a model:{} and not the credModel:{}.
+			if (_.isEmpty(this.model)) {
+				this.model = this.credModel;
+			}
+		},
+
+		&#x2F;**
+		Method overrides the LoadedView class. This method
+		provides custom content for the Login view.
+
+		@method renderContent
+		@param {Object} collection Reference to ModuleCollection.
+		@override LoadedView
+		**&#x2F;
+		renderContent: function (collection) {
+			this.initModel();
+		},
+
+		&#x2F;**
+		Method overrides the LoadedView class. This method
+		provides custom error content for the Login view.
+
+		@method renderError
+		@override LoadedView
+		**&#x2F;
+		renderError: function () {
+			this.initModel();
+			var username = this.model.get(&#x27;username&#x27;);
+			if (username === &#x27;guest&#x27;) {
+				return;
+			}
+
+			this.warn(&#x27;show&#x27;, this.messages.loginError);
+		},
+
+		&#x2F;**
+		Handler for form submission.
+
+		@method submitHandler
+		@param {Object} e Event object.
+		**&#x2F;
+		submitHandler: function (e) {
+			e.preventDefault();
+			if (this.loc(&#x27;submit&#x27;).hasClass(&#x27;disabled&#x27;)) {
+				return;
+			}
+
+			this.updateCredentials();
+		}
+	});
+
+})(jQuery, _, Backbone, umobile, config);
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

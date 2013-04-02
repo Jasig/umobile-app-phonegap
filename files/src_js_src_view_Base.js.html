@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src&#x2F;js&#x2F;src&#x2F;view&#x2F;Base.js - uMobile</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="uMobile"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/auth.Authentication.html">auth.Authentication</a></li>
+            
+                <li><a href="..&#x2F;classes/collection.ModuleCollection.html">collection.ModuleCollection</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Credential.html">model.Credential</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Module.html">model.Module</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Notifier.html">model.Notifier</a></li>
+            
+                <li><a href="..&#x2F;classes/model.State.html">model.State</a></li>
+            
+                <li><a href="..&#x2F;classes/router.RouteManager.html">router.RouteManager</a></li>
+            
+                <li><a href="..&#x2F;classes/session.SessionTracker.html">session.SessionTracker</a></li>
+            
+                <li><a href="..&#x2F;classes/session.SessionTrackerMock.html">session.SessionTrackerMock</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.DB.html">storage.DB</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Local.html">storage.Local</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Storage.html">storage.Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/utility.Utils.html">utility.Utils</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Base.html">view.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Breadcrumb.html">view.Breadcrumb</a></li>
+            
+                <li><a href="..&#x2F;classes/view.DashboardView.html">view.DashboardView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Footer.html">view.Footer</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Header.html">view.Header</a></li>
+            
+                <li><a href="..&#x2F;classes/view.LoadedView.html">view.LoadedView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Login.html">view.Login</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Module.html">view.Module</a></li>
+            
+                <li><a href="..&#x2F;classes/view.ModuleView.html">view.ModuleView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Notifier.html">view.Notifier</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Page.html">view.Page</a></li>
+            
+                <li><a href="..&#x2F;classes/view.ViewManager.html">view.ViewManager</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/app.html">app</a></li>
+            
+                <li><a href="..&#x2F;modules/auth.html">auth</a></li>
+            
+                <li><a href="..&#x2F;modules/collection.html">collection</a></li>
+            
+                <li><a href="..&#x2F;modules/model.html">model</a></li>
+            
+                <li><a href="..&#x2F;modules/router.html">router</a></li>
+            
+                <li><a href="..&#x2F;modules/session.html">session</a></li>
+            
+                <li><a href="..&#x2F;modules/storage.html">storage</a></li>
+            
+                <li><a href="..&#x2F;modules/umobile.html">umobile</a></li>
+            
+                <li><a href="..&#x2F;modules/utility.html">utility</a></li>
+            
+                <li><a href="..&#x2F;modules/view.html">view</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src&#x2F;js&#x2F;src&#x2F;view&#x2F;Base.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true *&#x2F;
+(function ($, _, Backbone, umobile, config) {
+	&#x27;use strict&#x27;;
+
+	&#x2F;**
+	Class abstraction. Defines properties and methods
+	that all views require.
+
+	@class Base
+	@submodule view
+	@namespace view
+	@constructor
+	**&#x2F;
+	umobile.view.Base = Backbone.View.extend({
+		&#x2F;**
+		Property houses DOM selectors.
+
+		@property selectors
+		@type Object
+		**&#x2F;
+		selectors: {},
+
+		&#x2F;**
+		Property houses compiled handlebar template.
+
+		@property template
+		@type Object
+		**&#x2F;
+		template: {},
+
+		&#x2F;**
+		Property houses collection of modules.
+
+		@property moduleCollection
+		@type Object
+		**&#x2F;
+		moduleCollection: {},
+
+		&#x2F;**
+		Property houses the Credential model.
+
+		@property credModel
+		@type Object
+		**&#x2F;
+		credModel: {},
+
+		&#x2F;**
+		Property houses the State model.
+
+		@property stateModel
+		@type Object
+		**&#x2F;
+		stateModel: {},
+
+		&#x2F;**
+		Property houses binding to $.publish method.
+
+		@property publish
+		@type Object
+		**&#x2F;
+		publish: _.bind($.publish, this),
+
+		&#x2F;**
+		Property houses binding to $.subscribe method.
+
+		@property subscribe
+		@type Object
+		**&#x2F;
+		subscribe: _.bind($.subscribe, this),
+
+		&#x2F;**
+		Property houses binding to $.unsubscribe method.
+
+		@property unsubscribe
+		@type Object
+		**&#x2F;
+		unsubscribe: _.bind($.unsubscribe, this),
+
+		&#x2F;**
+		Property houses utilty implementation.
+
+		@property utils
+		@type Object
+		**&#x2F;
+		utils: {},
+
+		&#x2F;**
+		Helper method. Given the passed property, this method
+		parses the selector object looking for a match.
+
+		@method loc
+		@param {String} property The property to look up.
+		@param {Boolean} isRoot Flag to search for property on the body tag.
+		@return {Object} Cached, jQuery-wrapped DOM element.
+		**&#x2F;
+		loc: function (property, isRoot) {
+			var scope;
+			if (isRoot &amp;&amp; typeof isRoot !== &#x27;boolean&#x27;) {
+				throw new Error(&#x27;Unsupported type. Expected boolean for isRoot argument and not &#x27; + typeof isRoot + &#x27;.&#x27;);
+			}
+
+			scope = (isRoot) ? $(&#x27;body&#x27;) : this.$el;
+			return scope.find(this.selectors[property]);
+		},
+
+		&#x2F;**
+		Method initializes the view.
+
+		@method initialize
+		**&#x2F;
+		initialize: function () {
+			&#x2F;&#x2F; Bind all properties &amp; methods.
+			_.bindAll(this);
+
+			&#x2F;&#x2F; Cache module collection.
+			this.moduleCollection = umobile.app.moduleCollection;
+
+			&#x2F;&#x2F; Cache credential model.
+			this.credModel = umobile.app.credModel;
+
+			&#x2F;&#x2F; Cache state model.
+			this.stateModel = umobile.app.stateModel;
+
+			&#x2F;&#x2F; Cache utilities.
+			this.utils = umobile.utility.Utils;
+		}
+	});
+
+})(jQuery, _, Backbone, umobile, config);
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

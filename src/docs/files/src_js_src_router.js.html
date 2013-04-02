@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src&#x2F;js&#x2F;src&#x2F;router.js - uMobile</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="uMobile"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/auth.Authentication.html">auth.Authentication</a></li>
+            
+                <li><a href="..&#x2F;classes/collection.ModuleCollection.html">collection.ModuleCollection</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Credential.html">model.Credential</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Module.html">model.Module</a></li>
+            
+                <li><a href="..&#x2F;classes/model.Notifier.html">model.Notifier</a></li>
+            
+                <li><a href="..&#x2F;classes/model.State.html">model.State</a></li>
+            
+                <li><a href="..&#x2F;classes/router.RouteManager.html">router.RouteManager</a></li>
+            
+                <li><a href="..&#x2F;classes/session.SessionTracker.html">session.SessionTracker</a></li>
+            
+                <li><a href="..&#x2F;classes/session.SessionTrackerMock.html">session.SessionTrackerMock</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.DB.html">storage.DB</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Local.html">storage.Local</a></li>
+            
+                <li><a href="..&#x2F;classes/storage.Storage.html">storage.Storage</a></li>
+            
+                <li><a href="..&#x2F;classes/utility.Utils.html">utility.Utils</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Base.html">view.Base</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Breadcrumb.html">view.Breadcrumb</a></li>
+            
+                <li><a href="..&#x2F;classes/view.DashboardView.html">view.DashboardView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Footer.html">view.Footer</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Header.html">view.Header</a></li>
+            
+                <li><a href="..&#x2F;classes/view.LoadedView.html">view.LoadedView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Login.html">view.Login</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Module.html">view.Module</a></li>
+            
+                <li><a href="..&#x2F;classes/view.ModuleView.html">view.ModuleView</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Notifier.html">view.Notifier</a></li>
+            
+                <li><a href="..&#x2F;classes/view.Page.html">view.Page</a></li>
+            
+                <li><a href="..&#x2F;classes/view.ViewManager.html">view.ViewManager</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/app.html">app</a></li>
+            
+                <li><a href="..&#x2F;modules/auth.html">auth</a></li>
+            
+                <li><a href="..&#x2F;modules/collection.html">collection</a></li>
+            
+                <li><a href="..&#x2F;modules/model.html">model</a></li>
+            
+                <li><a href="..&#x2F;modules/router.html">router</a></li>
+            
+                <li><a href="..&#x2F;modules/session.html">session</a></li>
+            
+                <li><a href="..&#x2F;modules/storage.html">storage</a></li>
+            
+                <li><a href="..&#x2F;modules/umobile.html">umobile</a></li>
+            
+                <li><a href="..&#x2F;modules/utility.html">utility</a></li>
+            
+                <li><a href="..&#x2F;modules/view.html">view</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src&#x2F;js&#x2F;src&#x2F;router.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true *&#x2F;
+(function ($, _, Backbone, umobile, config) {
+	&#x27;use strict&#x27;;
+
+	&#x2F;**
+	Houses the Backbone.Router implementation.
+
+	@class RouteManager
+	@submodule router
+	@namespace router
+	**&#x2F;
+	umobile.router.RouteManager = Backbone.Router.extend({
+		&#x2F;**
+		Property houses the current view class name.
+
+		@property currentViewClass
+		@type String
+		**&#x2F;
+		currentViewClass: null,
+
+		&#x2F;**
+		Property houses Backbone routes.
+
+		@property routes
+		@type Object
+		**&#x2F;
+		routes: {
+			&#x27;dashboard&#x27;: &#x27;dashboard&#x27;,
+			&#x27;login&#x27;: &#x27;login&#x27;,
+			&#x27;modules&#x2F;*module&#x27;: &#x27;modules&#x27;,
+			&#x27;*other&#x27;: &#x27;dashboard&#x27;
+		},
+
+		&#x2F;**
+		Method initializes the Dashboard view.
+
+		@method dashboard
+		**&#x2F;
+		dashboard: function () {
+			var dashboard = new umobile.view.DashboardView();
+			umobile.app.viewManager.show(dashboard);
+		},
+
+		&#x2F;**
+		Method initializes the Login view.
+
+		@method login
+		**&#x2F;
+		login: function () {
+			var login = new umobile.view.LoginView();
+			umobile.app.viewManager.show(login);
+		},
+
+		&#x2F;**
+		Method initializes the Module view.
+
+		@method modules
+		**&#x2F;
+		modules: function () {
+			var path, module;
+			path = umobile.utility.Utils.getParameter(&#x27;url&#x27;, Backbone.history.fragment);
+			module = new umobile.view.ModuleView({path: path});
+			umobile.app.viewManager.show(module);
+		},
+
+		&#x2F;**
+		Listens for the route to change. When triggered,
+		it updates the class name on the html container
+		and broadcasts the changed route.
+
+		@method onRouteChanged
+		@param {String} route Reference to full route path.
+		**&#x2F;
+		onRouteChanged: function (route, routeParam) {
+			&#x2F;&#x2F; Define.
+			var className, root, view, path;
+
+			&#x2F;&#x2F; Initialize.
+			root = $(&#x27;html&#x27;);
+			route = route.split(&#x27;:&#x27;);
+			view = route[1];
+			path = (!routeParam) ? view : view + &#x27;&#x2F;&#x27; + routeParam;
+			className = (&#x27;um-&#x27; + view);
+
+			&#x2F;&#x2F; Remove the class from the container when generated className
+			&#x2F;&#x2F; is different from the stored currentViewClass.
+			if (this.currentViewClass &amp;&amp; className !== this.currentViewClass) {
+				root.removeClass(this.currentViewClass);
+			}
+
+			&#x2F;&#x2F; Add class name to container.
+			root.addClass(className);
+			this.currentViewClass = className;
+
+			&#x2F;&#x2F; Update the current view on the state model.
+			umobile.app.stateModel.save({currentView: path});
+
+			&#x2F;&#x2F; Broadcast route changed event.
+			$.publish(&#x27;route.changed&#x27;, {name: view});
+		},
+
+		&#x2F;**
+		Method initializes the router.
+
+		@method initialize
+		**&#x2F;
+		initialize: function () {
+			&#x2F;&#x2F; Initialize the Page view.
+			var page = new umobile.view.Page();
+
+			&#x2F;&#x2F; Initialize the ViewManager.
+			umobile.app.viewManager = new umobile.view.ViewManager();
+
+			&#x2F;&#x2F; Bind to all the routes. When they change, call
+			&#x2F;&#x2F; the onRouteChanged method.
+			this.on(&#x27;all&#x27;, _.bind(this.onRouteChanged, this));
+		}
+	});
+
+})(jQuery, _, Backbone, umobile, config);
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>
