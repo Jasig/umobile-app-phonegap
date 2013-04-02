@@ -1,4 +1,4 @@
-/*global require:true, __dirname:true, process:true, module:true */
+/*global require:true, __dirname:true, process:true, console:true, module:true */
 
 // The purpose of this file is to setup the use of
 // configuration files for our node development server.
@@ -24,7 +24,8 @@ config.auth = nconf.get('auth') || 'mock';
 config.mode = nconf.get('mode') || 'dev';
 
 // Server location.
-config.webappServerPath = nconf.get('webappServerPath') || '/';
+config.external = nconf.get('external');
+console.log('external: ', config.external);
 
 // Performs a test on the current environment configuration.
 // (i.e., ios, android or web).
@@ -61,9 +62,13 @@ config.getEnvironment = function () {
 
 // Returns the SessionTracker needed
 // based upon the environment configuration.
+// The session tracker plugin is currently
+// disabled with our upgrade to PhoneGap 2.5.
+// This method always returns SessionTrackerMock
+// until the session tracking plugins can be upgraded.
 config.getTracker = function () {
 	'use strict';
-	return (config.environment !== 'web') ? 'SessionTracker' : 'SessionTrackerMock';
+	return (config.environment !== 'web') ? 'SessionTrackerMock' : 'SessionTrackerMock';
 };
 
 // Returns the cordova version needed
@@ -81,9 +86,10 @@ config.getPublicDirectory = function () {
 };
 
 // Returns server path for the webapp location.
-config.getWebappServerPath = function () {
+config.getExternal = function () {
 	'use strict';
-	return config.webappServerPath;
+	console.log(config.external);
+	return (config.external) ? config.external : null;
 };
 
 // Export module.

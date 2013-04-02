@@ -26,6 +26,7 @@ app.configure(function () {
 	app.use(app.router);
 	app.use(less(nconf.get('less')));
 	app.use(express.errorHandler());
+	console.log('Express public directory: ', path.join(__dirname, config.getPublicDirectory()));
 	app.use(express.static(path.join(__dirname, config.getPublicDirectory())));
 });
 

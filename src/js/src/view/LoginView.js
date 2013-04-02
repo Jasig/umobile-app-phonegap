@@ -300,6 +300,19 @@
 		},
 
 		/**
+		Methods sets up the model:{} object for validation.
+
+		@method initModel
+		**/
+		initModel: function () {
+			// Backbone.Validation plugin expects the model to be housed
+			// within a model:{} and not the credModel:{}.
+			if (_.isEmpty(this.model)) {
+				this.model = this.credModel;
+			}
+		},
+
+		/**
 		Method overrides the LoadedView class. This method
 		provides custom content for the Login view.
 
@@ -307,7 +320,9 @@
 		@param {Object} collection Reference to ModuleCollection.
 		@override LoadedView
 		**/
-		renderContent: function (collection) {},
+		renderContent: function (collection) {
+			this.initModel();
+		},
 
 		/**
 		Method overrides the LoadedView class. This method
@@ -317,28 +332,13 @@
 		@override LoadedView
 		**/
 		renderError: function () {
+			this.initModel();
 			var username = this.model.get('username');
 			if (username === 'guest') {
 				return;
 			}
 
 			this.warn('show', this.messages.loginError);
-		},
-
-		/**
-		Method initializes the view.
-
-		@method initialize
-		@param {Object} options Options object.
-		@override LoadedView
-		**/
-		initialize: function (options) {
-			// Call super.
-			this._super();
-
-			// Backbone.Validation plugin expects the model to be housed
-			// within a model:{} and not the credModel:{}.
-			this.model = this.credModel;
 		},
 
 		/**

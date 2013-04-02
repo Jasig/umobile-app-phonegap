@@ -9,5 +9,5 @@
 		"prefix": "/css",
 		"debug": true
 	},
-	"webappServerPath": "/Users/mpolizzotti/Unicon/projects/uportal/apereo/umobile/umobile-1.1-RC1/apache-tomcat-6.0.35/webapps/umobile"
+	"external": ""
 }

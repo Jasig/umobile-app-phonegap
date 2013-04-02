@@ -147,7 +147,7 @@ var umobile = {
 				portlet.fullTitle = portlet.title;
 				portlet.title = umobile.utility.Utils.truncate(portlet.title);
 
-				modules.push(new this.model.Module(portlet));
+				modules.push(new umobile.model.Module(portlet));
 			}, this);
 		}, this);
 
@@ -162,27 +162,27 @@ var umobile = {
 	**/
 	checkSession: function () {
 		'use strict';
-		this.session.SessionTracker.get(_.bind(function (time) {
+		umobile.session.SessionTracker.get(_.bind(function (time) {
 
 			// Define.
 			var now, lastSession, sessionTimeout;
 
 			// Update the 'lastSessionAccess' property.
 			if (time !== 0) {
-				this.app.stateModel.save({lastSessionAccess: time});
+				umobile.app.stateModel.save({lastSessionAccess: time});
 			}
 
 			// Determine if our session has expired.
 			now = Number((new Date()).getTime());
-			lastSession = Number(this.app.stateModel.get('lastSessionAccess'));
+			lastSession = Number(umobile.app.stateModel.get('lastSessionAccess'));
 			sessionTimeout = Number(config.sessionTimeout);
 
 			// When session exists, fetch modules from module collection.
 			// When the session has expired, attempt to re-establish a session.
 			if ((now - lastSession) < sessionTimeout) {
-				this.app.moduleCollection.fetch();
+				umobile.app.moduleCollection.fetch();
 			} else {
-				this.auth.establishSession();
+				umobile.auth.establishSession();
 			}
 		}, this));
 	},
@@ -199,11 +199,11 @@ var umobile = {
 	**/
 	updateAppState: function () {
 		'use strict';
-		this.app.stateModel.fetch({
+		umobile.app.stateModel.fetch({
 			success: _.bind(function (stateModel) {
-				this.app.credModel.fetch({
+				umobile.app.credModel.fetch({
 					success: _.bind(function (credModel) {
-						this.checkSession();
+						umobile.checkSession();
 					}, this)
 				});
 			}, this)
@@ -217,7 +217,7 @@ var umobile = {
 	**/
 	initRouter: function () {
 		'use strict';
-		this.app.router = new umobile.router.RouteManager();
+		umobile.app.router = new umobile.router.RouteManager();
 		Backbone.history.start();
 	},
 
@@ -229,9 +229,9 @@ var umobile = {
 	**/
 	initModels: function () {
 		'use strict';
-		this.app.stateModel = new umobile.model.State();
-		this.app.credModel = new umobile.model.Credential();
-		this.app.moduleCollection = new umobile.collection.ModuleCollection();
+		umobile.app.stateModel = new umobile.model.State();
+		umobile.app.credModel = new umobile.model.Credential();
+		umobile.app.moduleCollection = new umobile.collection.ModuleCollection();
 	},
 
 	/**
@@ -249,33 +249,33 @@ var umobile = {
 			var modules;
 
 			// Update credentials.
-			this.app.credModel.save({username: data.user});
+			umobile.app.credModel.save({username: data.user});
 
 			// Update state.
-			this.app.stateModel.save({
+			umobile.app.stateModel.save({
 				lastSessionAccess: (new Date()).getTime(),
-				authenticated: (this.app.credModel.get('username')) ? true : false
+				authenticated: (umobile.app.credModel.get('username')) ? true : false
 			});
 
 			// Build module array.
 			// Populate the collection with modules.
-			modules = this.buildModuleArray(data);
-			this.app.moduleCollection.reset(modules);
-			this.app.moduleCollection.save();
+			modules = umobile.buildModuleArray(data);
+			umobile.app.moduleCollection.reset(modules);
+			umobile.app.moduleCollection.save();
 
 			// Update time in the Session Tracker.
-			this.session.SessionTracker.set(this.app.stateModel.get('lastSessionAccess'));
+			umobile.session.SessionTracker.set(umobile.app.stateModel.get('lastSessionAccess'));
 
 			// Redirect user to dashboard.
-			this.app.router.navigate('dashboard', {trigger: true});
+			umobile.app.router.navigate('dashboard', {trigger: true});
 		}, this));
 
 		// Subscribe to 'session.failure' event.
 		$.subscribe('session.failure', _.bind(function () {
-			this.app.moduleCollection.reset({});
+			umobile.app.moduleCollection.reset({});
 
 			// Direct users to the login screen.
-			this.app.router.navigate('login', {trigger: true});
+			umobile.app.router.navigate('login', {trigger: true});
 		}, this));
 	},
 
@@ -294,10 +294,11 @@ var umobile = {
 	**/
 	onDeviceReady: function () {
 		'use strict';
-		this.initEventListeners();
-		this.initModels();
-		this.initRouter();
-		this.updateAppState();
+
+		umobile.initEventListeners();
+		umobile.initModels();
+		umobile.initRouter();
+		umobile.updateAppState();
 	},
 
 	/**
@@ -309,9 +310,9 @@ var umobile = {
 	initialize: function () {
 		'use strict';
 		// Listen to onDeviceReady event.
-		document.addEventListener('deviceready', this.onDeviceReady, false);
+		document.addEventListener('deviceready', umobile.onDeviceReady, false);
 		if (config.loginFn === 'mockLogin') {
-			this.onDeviceReady();
+			umobile.onDeviceReady();
 		}
 	}
 };

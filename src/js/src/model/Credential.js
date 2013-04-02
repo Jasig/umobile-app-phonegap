@@ -20,8 +20,8 @@
 		**/
 		defaults: {
 			id: 'credentials',
-			username: 'guest',
-			password: 'guest'
+			username: null,
+			password: null
 		},
 
 		/**
@@ -37,17 +37,6 @@
 			password: {
 				required: true
 			}
-		},
-
-		/**
-		Method checks the model to determine whether the current user
-		is signed in as a guest user.
-
-		@method isGuest
-		@return {Boolean}
-		**/
-		isGuest: function () {
-			return (this.get('username') === 'guest') ? true : false;
 		},
 
 		/**

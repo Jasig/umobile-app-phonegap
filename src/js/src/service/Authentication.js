@@ -118,7 +118,14 @@
 
 		// Can only use guest or student with the mock login.
 		username = credentials.get('username');
-		if (username !== 'guest' && username !== 'student') {
+
+		// Set the username to guest when false.
+		if (!username) {
+			username = 'guest';
+		}
+
+		// Can only use guest or student with the mock login.
+		if (username !== null && username !== 'guest' && username !== 'student') {
 			throw new Error('Username ' + username + ' not supported with mock login.');
 		}
 

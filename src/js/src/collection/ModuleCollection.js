@@ -20,14 +20,6 @@
 		model: umobile.model.Module,
 
 		/**
-		Property...
-
-		@property hasError
-		@type Boolean
-		**/
-		hasError: false,
-
-		/**
 		Method overrides Backbone.save. Makes an update call to the
 		umobile.storage.sync method.
 

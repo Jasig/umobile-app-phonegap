@@ -49,8 +49,8 @@ config.nativeIcons = {
 
 // SUPPORTED MODULES
 config.nativeModules = {
-	news: 'modules/news.html',
-	map: 'modules/map.html',
-	calendar: 'modules/calendar.html',
-	courses: 'modules/courses.html'
+	//news: 'modules/news.html',
+	//map: 'modules/map.html',
+	//calendar: 'modules/calendar.html',
+	//courses: 'modules/courses.html'
 };

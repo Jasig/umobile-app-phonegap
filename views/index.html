@@ -23,7 +23,17 @@
 		<script type="text/javascript" src="js/lib/debug/debug.js"></script>
 		{{/dev}}
 		{{^dev}}
-		<script type="text/javascript" src="js/lib/lib.min.js"></script>
+		<script type="text/javascript" src="js/lib/cordova/cordova.min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.min.js"></script>
+		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.min.js"></script>
+		<script type="text/javascript" src="js/lib/underscore/underscore.min.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone.min.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone-super.min.js"></script>
+		<script type="text/javascript" src="js/lib/backbone/backbone-validation.min.js"></script>
+		<script type="text/javascript" src="js/lib/handlebars/handlebars.min.js"></script>
+		<script type="text/javascript" src="js/lib/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/lib/debug/debug.min.js"></script>
 		{{/dev}}
 	</head>
 
@@ -35,13 +45,6 @@
 
 		<!--JavaScript Source Files-->
 		{{#dev}}
-		<!--
-		<script type="text/javascript" src="js/src/service/{{tracker}}.js"></script>
-		<script type="text/javascript" src="js/src/umobile.js"></script>
-		<script type="text/javascript" src="js/src/view/Module.js"></script>
-		<script type="text/javascript" src="js/src/view/Credential.js"></script>
-		<script type="text/javascript" src="js/src/view/App.js"></script>
-		-->
 		<script type="text/javascript" src="js/src/config/{{auth}}.js"></script>
 		<script type="text/javascript" src="js/src/app.js"></script>
 		<script type="text/javascript" src="js/src/service/Utils.js"></script>
@@ -69,6 +72,11 @@
 		{{/dev}}
 		{{^dev}}
 		<script type="text/javascript" src="js/src/main.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				debug.setLevel(0);
+			});
+		</script>
 		{{/dev}}
 		<script type="text/javascript">
 			$(function () {

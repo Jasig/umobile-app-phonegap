@@ -3,7 +3,7 @@
 	'use strict';
 
 	/**
-	...
+	Manages message notifications.
 
 	@class Notifier
 	@submodule view

@@ -6,11 +6,10 @@
 	Houses utility methods.
 
 	@class Utils
-	@submodule session
-	@namespace session
+	@submodule utility
+	@namespace utility
 	**/
 	umobile.utility.Utils = {
-
 		/**
 		Method returns the current timestamp.
 
@@ -24,6 +23,7 @@
 		Method returns the length of an object.
 
 		@method getObjectLength
+		@param {Object} object Object to examine for length.
 		**/
 		getObjectLength: function (object) {
 			return _.keys(object).length;
@@ -33,6 +33,9 @@
 		Method returns a truncated string.
 
 		@method truncate
+		@param {String} str String to be truncated.
+		@param {Number} length Allowable length of a string.
+		@param {String} suffix Characters appended to truncated string.
 		**/
 		truncate: function (str, length, suffix) {
 			length = (!length) ? 9 : length;
@@ -44,6 +47,8 @@
 		Method returns the contents of a parameter on a url string.
 
 		@method getParameter
+		@param {String} param Property to search.
+		@param {String} path Url string to examine.
 		**/
 		getParameter: function (param, path) {
 			return path.split(param + '=')[1];

@@ -4,6 +4,8 @@
 
 	/**
 	Gets and sets the last accessed timestamp for the current session.
+	This plugin has been temporarily disabled with the latest upgrade to
+	PhoneGap 2.5.
 
 	@class SessionTracker
 	@submodule session

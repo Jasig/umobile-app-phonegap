@@ -12,19 +12,31 @@
 	**/
 	umobile.session.SessionTracker = {
 		/**
+		Property houses the current timestamp.
+
 		@property time
 		**/
 		time: 0,
 
 		/**
+		Method executes the passed success method with
+		the current timestamp.
+
 		@method get
+		@param {Function} success Success callback.
 		**/
 		get: function (success) {
 			success(this.time);
 		},
 
 		/**
+		Method sets the timestamp and calls the passed
+		success method when present.
+
 		@method set
+		@param {Number} time Timestamp to be stored.
+		@param {Function} success Success callback.
+		@param {Function} failure Error callback.
 		**/
 		set: function (time, success, failure) {
 			this.time = time;

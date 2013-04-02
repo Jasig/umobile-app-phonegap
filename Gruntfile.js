@@ -44,13 +44,23 @@ module.exports = function (grunt) {
 					}
 				]
 			},
-			tomcat: {
+			externalDev: {
 				files: [
 					{
 						src: ['**'],
-						dest: config.getWebappServerPath(),
+						dest: config.getExternal(),
 						expand: true,
 						cwd: 'src/'
+					}
+				]
+			},
+			externalProd: {
+				files: [
+					{
+						src: ['**'],
+						dest: config.getExternal(),
+						expand: true,
+						cwd: 'www/'
 					}
 				]
 			}
@@ -71,16 +81,6 @@ module.exports = function (grunt) {
 				},
 				options: {
 					compress: true
-				}
-			}
-		},
-
-		// Minify CSS.
-		cssmin: {
-			compressCssFiles: {
-				files: {
-					'www/css/portal.css': ['src/css/portal.css'],
-					'www/css/lib/jquerymobile/jqm.theme.css': ['src/css/lib/jquerymobile/jqm.theme.css']
 				}
 			}
 		},
@@ -116,23 +116,23 @@ module.exports = function (grunt) {
 		// Compress javascript and copy to www directory.
 		uglify: {
 			options: {
-				compress: true,
+				compress: false,
 				mangle: false,
 				preserveComments: false
 			},
 			lib: {
 				files: {
-					'www/js/lib/lib.min.js': [
-						'src/js/lib/cordova/cordova-' + config.getCordova() + '.js',
-						'src/js/lib/jquery/jquery.js',
-						'src/js/lib/jquerymobile/jquery-mobile.js',
-						'src/js/lib/jquery/jquery-pubsub.js',
-						'src/js/lib/gibberish/gibberishAES.js',
-						'src/js/lib/underscore/underscore.js',
-						'src/js/lib/backbone/backbone.js',
-						'src/js/lib/handlebars/handlebars.js',
-						'src/js/lib/bootstrap/bootstrap.js'
-					]
+					'www/js/lib/cordova/cordova.min.js': ['src/js/lib/cordova/cordova-' + config.getCordova() + '.js'],
+					'www/js/lib/jquery/jquery.min.js': ['src/js/lib/jquery/jquery.js'],
+					'www/js/lib/jquery/jquery-pubsub.min.js': ['src/js/lib/jquery/jquery-pubsub.js'],
+					'www/js/lib/gibberish/gibberishAES.min.js': ['src/js/lib/gibberish/gibberishAES.js'],
+					'www/js/lib/underscore/underscore.min.js': ['src/js/lib/underscore/underscore.js'],
+					'www/js/lib/backbone/backbone.min.js': ['src/js/lib/backbone/backbone.js'],
+					'www/js/lib/backbone/backbone-super.min.js': ['src/js/lib/backbone/backbone-super.js'],
+					'www/js/lib/backbone/backbone-validation.min.js': ['src/js/lib/backbone/backbone-validation.js'],
+					'www/js/lib/handlebars/handlebars.min.js': ['src/js/lib/handlebars/handlebars.js'],
+					'www/js/lib/bootstrap/bootstrap.min.js': ['src/js/lib/bootstrap/bootstrap.js'],
+					'www/js/lib/debug/debug.min.js': ['src/js/lib/debug/debug.js']
 				}
 			},
 			source: {
@@ -140,17 +140,28 @@ module.exports = function (grunt) {
 					'www/js/src/main.min.js': [
 						'src/js/src/config/' + config.getAuth() + '.js',
 						'src/js/src/app.js',
+						'src/js/src/service/Utils.js',
 						'src/js/src/service/' + config.getTracker() + '.js',
 						'src/js/src/service/Authentication.js',
 						'src/js/src/service/Storage.js',
 						'src/js/src/model/State.js',
 						'src/js/src/model/Module.js',
 						'src/js/src/model/Credential.js',
+						'src/js/src/model/Notifier.js',
 						'src/js/src/collection/ModuleCollection.js',
+						'src/js/src/view/ViewManager.js',
+						'src/js/src/view/Base.js',
+						'src/js/src/view/Page.js',
+						'src/js/src/view/Breadcrumb.js',
+						'src/js/src/view/Header.js',
+						'src/js/src/view/Footer.js',
+						'src/js/src/view/LoadedView.js',
+						'src/js/src/view/DashboardView.js',
+						'src/js/src/view/LoginView.js',
 						'src/js/src/view/Module.js',
-						'src/js/src/view/Credential.js',
-						'src/js/src/view/App.js',
-						'src/js/src/umobile.js'
+						'src/js/src/view/ModuleView.js',
+						'src/js/src/view/Notifier.js',
+						'src/js/src/router.js'
 					]
 				}
 			}
@@ -249,7 +260,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('dev', [
 		'clean:dev',
 		'less:dev',
-		'cssmin',
 		'jshint',
 		'compilehtml:devViews',
 		'compilehtml:devModules',
@@ -260,7 +270,6 @@ module.exports = function (grunt) {
 		'clean:prod',
 		'copy:prod',
 		'less:prod',
-		'cssmin',
 		'jshint',
 		'uglify',
 		'compilehtml:prodViews',
@@ -268,14 +277,25 @@ module.exports = function (grunt) {
 		'appendpartials:prod'
 	]);
 
-	grunt.registerTask('tomcat', [
+	grunt.registerTask('external.dev', [
 		'clean:dev',
 		'less:dev',
-		'cssmin',
 		'jshint',
 		'compilehtml:devViews',
 		'compilehtml:devModules',
 		'appendpartials:dev',
-		'copy:tomcat'
+		'copy:externalDev'
+	]);
+
+	grunt.registerTask('external.prod', [
+		'clean:prod',
+		'copy:prod',
+		'less:prod',
+		'jshint',
+		'uglify',
+		'compilehtml:prodViews',
+		'compilehtml:prodModules',
+		'appendpartials:prod',
+		'copy:externalProd'
 	]);
 };

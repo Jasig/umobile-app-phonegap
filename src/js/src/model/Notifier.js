@@ -3,7 +3,8 @@
 	'use strict';
 
 	/**
-	...
+	The Notifier model houses information pertaining to the Notifier view.
+	It contains title and message content to be rendered to the end user.
 
 	@class Notifier
 	@submodule model
