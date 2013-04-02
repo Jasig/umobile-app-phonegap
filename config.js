@@ -25,7 +25,6 @@ config.mode = nconf.get('mode') || 'dev';
 
 // Server location.
 config.external = nconf.get('external');
-console.log('external: ', config.external);
 
 // Performs a test on the current environment configuration.
 // (i.e., ios, android or web).
