@@ -273,10 +273,18 @@ module.exports = function (grunt) {
 	grunt.task.loadTasks('tasks');
 
 	// Register tasks.
+
+	// Template watch command. Listens for changes
+	// to templates and outputs changes to the /src
+	// directory.
 	grunt.registerTask('templates', ['watch:dev']);
 
+	// Documentation command. Outputs documentation
+	// to /docs.
 	grunt.registerTask('docs', ['yuidoc:prod']);
 
+	// Build command for development code.
+	// Pushes code to /src directory.
 	grunt.registerTask('dev', [
 		'clean:dev',
 		'less:dev',
@@ -287,6 +295,8 @@ module.exports = function (grunt) {
 		'yuidoc:dev'
 	]);
 
+	// Build command for production-ready code.
+	// Pushes code to /www directory.
 	grunt.registerTask('prod', [
 		'clean:prod',
 		'copy:prod',
@@ -299,27 +309,15 @@ module.exports = function (grunt) {
 		'yuidoc:prod'
 	]);
 
-	grunt.registerTask('external.dev', [
-		'clean:dev',
-		'less:dev',
-		'jshint',
-		'compilehtml:devViews',
-		'compilehtml:devModules',
-		'appendpartials:dev',
-		'copy:externalDev',
-		'yuidoc:dev'
+	// Copies contents of src directory
+	// to external source.
+	grunt.registerTask('push.dev', [
+		'copy:externalDev'
 	]);
 
-	grunt.registerTask('external.prod', [
-		'clean:prod',
-		'copy:prod',
-		'less:prod',
-		'jshint',
-		'uglify',
-		'compilehtml:prodViews',
-		'compilehtml:prodModules',
-		'appendpartials:prod',
-		'copy:externalProd',
-		'yuidoc:prod'
+	// Copies contents of www directory
+	// to external source.
+	grunt.registerTask('push.prod', [
+		'copy:externalProd'
 	]);
 };

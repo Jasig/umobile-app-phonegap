@@ -9,5 +9,5 @@
 		"prefix": "/css",
 		"debug": true
 	},
-	"external": ""
+	"external": "../www"
 }
