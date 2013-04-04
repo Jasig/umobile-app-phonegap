@@ -1,29 +1,13 @@
 //
-// Page
+// Page (Component Rules)
 // --------------------------------------------------
 
-// Default. All pages.
-.um-page {
-
-	// Application content.
-	.um-main {
-		.um-expand;
-		position: relative;
-
-		// Content Loader.
-		.um-content-loader {
-			.um-loader;
-		}
-	}
+.um-dashboard, .um-dashboard body {
+	background-color: @blue;
 }
-
-// Specific views.
-.um-dashboard {
-	.um-page {
-		.um-main {
-			.um-content-loader {
-				.um-loader(@blue, @blueLoaderPath);
-			}
-		}
-	}
+.um-modules, .um-modules body {
+	background-color: @smoke;
+}
+.um-login, .um-login body {
+	background-color: @smoke;
 }

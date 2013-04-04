@@ -1,0 +1,20 @@
+//
+// Main (Layout Rules)
+// --------------------------------------------------
+
+.um-main {
+	.um-expand;
+	position: relative;
+
+	.um-content-loader {
+		.um-loader;
+	}
+}
+
+.um-dashboard {
+	.um-main {
+		.um-content-loader {
+			.um-loader(@blue, @blueLoaderPath);
+		}
+	}
+}

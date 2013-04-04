@@ -257,12 +257,14 @@ module.exports = function (grunt) {
 				files: [
 					'views/*.html',
 					'views/modules/*.html',
-					'views/partials/*.html'
+					'views/partials/*.html',
+					'src/less/**'
 				],
 				tasks: [
 					'compilehtml:devViews',
 					'compilehtml:devModules',
-					'appendpartials:dev'
+					'appendpartials:dev',
+					'less:dev'
 				]
 			}
 		}
@@ -277,7 +279,7 @@ module.exports = function (grunt) {
 	// Template watch command. Listens for changes
 	// to templates and outputs changes to the /src
 	// directory.
-	grunt.registerTask('templates', ['watch:dev']);
+	grunt.registerTask('work', ['watch:dev']);
 
 	// Documentation command. Outputs documentation
 	// to /docs.

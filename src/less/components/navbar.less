@@ -1,0 +1,45 @@
+//
+// Navbar (Component Rules)
+// --------------------------------------------------
+
+.um-navbar {
+	border-top: 1px solid @black80;
+	border-bottom: 1px solid @black80;
+
+	.um-navbar-inner {
+		.um-gradient(@darkGray, @black);
+		.um-shadow;
+		position: relative;
+		min-height: 45px;
+
+		// uMobile logo.
+		.um-brand {
+			display: block;
+			width: 60px;
+			margin: 0 auto;
+
+			// uMobile text.
+			.um-navbar-text {
+				display: block;
+				font-size: 16px;
+				font-weight: bold;
+				color: @white;
+				margin: 2px 0 0 0;
+			}
+		}
+
+		// Home button.
+		.um-btn-home {
+			position: absolute;
+			top: 0; left: 10px;
+			margin-top: 6px;
+		}
+
+		// Login & logout button.
+		.um-btn-login, .um-btn-logout {
+			position: absolute;
+			top: 0; right: 10px;
+			margin-top: 6px;
+		}
+	}
+}
