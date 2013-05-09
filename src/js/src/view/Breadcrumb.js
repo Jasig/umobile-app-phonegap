@@ -43,35 +43,14 @@
 		},
 
 		/**
-		Method renders the Breadcrumb template.
+		Method is triggered when the route changes.
 
-		@method render
-		@return {Object} Reference to Breadcrumb view.
-		**/
-		render: function () {
-			this.$el.html(this.template({}));
-			return this;
-		},
-
-		/**
-		Method initializes the view.
-
-		@method initialize
+		@method onRouteChanged
 		@override Base
 		**/
-		initialize: function () {
-			// Bind all properties and methods.
-			_.bindAll(this);
-
-			// Compile view template.
-			this.template = Handlebars.compile($(this.selectors.template).html());
-
-			// Render template.
-			this.render();
-
-			// Listen for the route.changed event.
-			// Disabled. Not currently needed.
-			//$.subscribe('route.changed', _.bind(this.toggleVisibility, this));
+		onRouteChanged: function (view) {
+			// Disabled. Not in use.
+			//this.toggleVisibility(view);
 		}
 	});
 

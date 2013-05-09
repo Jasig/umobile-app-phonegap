@@ -1,0 +1,13 @@
+//
+// Buttons
+// --------------------------------------------------
+
+.um-btn-inverse {
+	.um-gradient(@startColor: @inverseButtonGradientStartColor, @fromColor: @inverseButtonGradientEndColor);
+	border-color: @inverseButtonBorderColor;
+
+	&:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+		color: @inverseButtonTextColor;
+		.um-gradient(@startColor: @inverseButtonGradientStartColor, @fromColor: @inverseButtonHoverColor);
+	}
+}

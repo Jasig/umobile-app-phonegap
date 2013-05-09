@@ -38,6 +38,7 @@
 			show: function (view) {
 				if (this.currentView) {
 					this.currentView.destroy();
+					delete this.currentView;
 				}
 
 				this.currentView = view;

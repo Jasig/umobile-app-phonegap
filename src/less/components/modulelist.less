@@ -1,5 +1,5 @@
 //
-// Module List (Component Rules)
+// Module List
 // --------------------------------------------------
 
 .um-module-container {
@@ -8,7 +8,7 @@
 	text-align: center;
 	min-height: 150px;
 
-	// List & list item.
+	// List & list item
 	.um-module-list,
 	.um-module-item {
 		display: block;
@@ -17,14 +17,14 @@
 		list-style: none;
 	}
 
-	// List.
+	// List
 	.um-module-list {
 		width: 265px;
 		margin: 0 auto;
-		padding: 20px 0 20px 0;
+		padding: 10px 0 10px 0;
 	}
 
-	// List item.
+	// List item
 	.um-module-item {
 		float: left;
 	}
@@ -32,34 +32,34 @@
 	// Link
 	.um-module-link {
 		display: block;
-		//width: 85px;
 		position: relative;
-		color: @white;
-		text-shadow: 1px 1px 3px @black;
+		color: @moduleLinkColor;
+		text-shadow: 1px 1px 3px @moduleLinkShadowColor;
 		margin: 0 15px 20px 15px;
 
-		// New item indicator.
+		// New item indicator
 		.um-new {
 			position: absolute;
 			top: 0; right: -5px;
 			padding-left: 6px;
 			padding-right: 6px;
-			border: 2px solid @white;
-			background-color: @red;
-			.um-gradient(@red, @darkRed);
+			border: 2px solid @badgeBorderColor;
+			background-color: @badgeBg;
+			.um-gradient(@badgeGradientStartColor, @badgeGradientEndColor);
 			.um-border-radius(500px);
 			.um-shadow;
 		}
 
-		// Title.
+		// Title
 		.um-title {
 			width: 55px;
 			overflow: hidden;
 			padding: 10px 0 0 0;
 			font-size: 12px;
+			font-weight: bold;
 		}
 
-		// Icon.
+		// Icon
 		.um-icon {
 			img {
 				width: 57px;
@@ -68,7 +68,7 @@
 		}
 	}
 
-	// Link hover.
+	// Link hover
 	.um-module-link:hover {
 		text-decoration: none;
 	};

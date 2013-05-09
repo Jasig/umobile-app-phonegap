@@ -9,5 +9,5 @@
 		"prefix": "/css",
 		"debug": true
 	},
-	"external": "../www"
+	"external": "/Users/mpolizzotti/Unicon/projects/uportal/apereo/umobile/umobile-phonegap-ios/www"
 }

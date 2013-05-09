@@ -279,7 +279,7 @@ module.exports = function (grunt) {
 	// Template watch command. Listens for changes
 	// to templates and outputs changes to the /src
 	// directory.
-	grunt.registerTask('work', ['watch:dev']);
+	grunt.registerTask('watcher', ['watch:dev']);
 
 	// Documentation command. Outputs documentation
 	// to /docs.

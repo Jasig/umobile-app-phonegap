@@ -16,7 +16,6 @@
 
 		@property el
 		@type Object
-		@override Base
 		**/
 		el: '#footer',
 
@@ -32,31 +31,52 @@
 		},
 
 		/**
-		Method renders the Footer template.
+		Property houses the current route.
 
-		@method render
-		@return {Object} Reference to Footer view.
+		@property currentRoute
+		@type String
 		**/
-		render: function () {
-			this.$el.html(this.template({}));
-			return this;
+		currentRoute: null,
+
+		/**
+		Method toggles the visibility of the footer.
+
+		@method toggleVisibility
+		@param {Object} view The current view.
+		**/
+		toggleVisibility: function () {
+			// Define & initialize.
+			var username = this.credModel.get('username');
+
+			// Hide the footer and only show it when on the
+			// dashboard and logged in as a guest.
+			this.$el.hide();
+			if (username && this.currentRoute) {
+				if (username === 'guest' && this.currentRoute === 'dashboard') {
+					this.$el.show();
+				}
+			}
 		},
 
 		/**
-		Method initializes the view.
+		Method is triggered when a user's credentials are updated.
 
-		@method initialize
+		@method onCredChanged
 		@override Base
 		**/
-		initialize: function () {
-			// Bind all properties and methods.
-			_.bindAll(this);
+		onCredChanged: function (model) {
+			this.toggleVisibility();
+		},
 
-			// Compile view template.
-			this.template = Handlebars.compile($(this.selectors.template).html());
+		/**
+		Method is triggered when the route changes.
 
-			// Render template.
-			this.render();
+		@method onRouteChanged
+		@override Base
+		**/
+		onRouteChanged: function (view) {
+			this.currentRoute = view.name;
+			this.toggleVisibility();
 		}
 	});
 

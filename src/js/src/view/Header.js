@@ -16,7 +16,6 @@
 
 		@property el
 		@type Object
-		@override Base
 		**/
 		el: '#header',
 
@@ -35,63 +34,75 @@
 		},
 
 		/**
-		Method toggles the visibility of the header buttons.
+		Property houses the current route.
 
-		@method toggle
-		@param {Object} view Object containing the current view name property.
+		@property currentRoute
+		@type String
 		**/
-		toggle: function (view) {
-			// Define.
-			var home = this.loc('home'),
-				login = this.loc('login');
+		currentRoute: null,
 
-			switch (view.name) {
-			case 'dashboard':
-				home.addClass('hidden');
-				login.removeClass('hidden');
-				break;
-			case 'login':
-				home.removeClass('hidden');
-				login.addClass('hidden');
-				break;
-			case 'modules':
-				home.removeClass('hidden');
-				break;
-			default:
-				home.removeClass('hidden');
-				login.removeClass('hidden');
+		/**
+		Method manages the visibility of header icons.
+
+		@method toggleHeaderIcons
+		**/
+		toggleHeaderIcons: function () {
+			// Define.
+			var username, home, login, logout;
+
+			// Initialize.
+			username = this.credModel.get('username');
+			home = this.loc('home');
+			login = this.loc('login');
+			logout = this.loc('logout');
+
+			// Only toggle icons when our credential model
+			// contains a valid username.
+			if (username) {
+				// Toggles the login/logout button.
+				// TODO: Implement logout functionality.
+				if (username === 'guest') {
+					login.removeClass('hidden');
+					logout.addClass('hidden');
+				} else {
+					login.removeClass('hidden');
+					logout.addClass('hidden');
+				}
+
+				console.log(this.currentRoute);
+				switch (this.currentRoute) {
+				case 'dashboard':
+					home.addClass('hidden');
+					break;
+				case 'login':
+					home.removeClass('hidden');
+					break;
+				case 'modules':
+					home.removeClass('hidden');
+					break;
+				}
 			}
 		},
 
 		/**
-		Method renders the Header template.
+		Method is triggered when a user's credentials are updated.
 
-		@method render
-		@return {Object} Reference to the Header view.
+		@method onCredChanged
+		@override Base
 		**/
-		render: function () {
-			this.$el.html(this.template({}));
-			return this;
+		onCredChanged: function () {
+			this.toggleHeaderIcons();
 		},
 
 		/**
-		Method initializes the view.
+		Method is triggered when the route changes.
 
-		@method initialize
+		@method onRouteChanged
 		@override Base
 		**/
-		initialize: function () {
-			// Call super.
-			this._super();
-
-			// Compile view template.
-			this.template = Handlebars.compile($(this.selectors.template).html());
-
-			// Render template.
-			this.render();
-
-			// Listen for the route.changed event.
-			$.subscribe('route.changed', _.bind(this.toggle, this));
+		onRouteChanged: function (view) {
+			this.currentRoute = view.name;
+			this.toggleHeaderIcons();
 		}
 	});
 

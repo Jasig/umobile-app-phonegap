@@ -39,31 +39,6 @@
 		},
 
 		/**
-		Method cleans up the DOM and unbinds
-		events when the loaded view changes.
-
-		@method destroy
-		**/
-		destroy: function () {
-			// Remove DOM.
-			this.remove();
-
-			// Unbind.
-			this.unbind();
-
-			// Unbind models & collections.
-			this.moduleCollection.off('reset', this.render);
-
-			// Undelegate events.
-			this.undelegateEvents();
-
-			// Custom removal.
-			if (this.clean && _.isFunction(this.clean)) {
-				this.clean();
-			}
-		},
-
-		/**
 		Method is meant to be overwritten. This method is
 		a placeholder for child views to place their custom
 		view error content.
@@ -106,6 +81,7 @@
 		Method renders the UI for all loaded views.
 
 		@method render
+		@override Base
 		@return {Object} Reference to loaded view.
 		**/
 		render: function () {
@@ -153,26 +129,15 @@
 		},
 
 		/**
-		Method initializes the view.
+		Method is triggered when the Module Collection is reset.
 
-		@method initialize
-		@param {Object} options Options object.
+		@method onCollectionReset
 		@override Base
 		**/
-		initialize: function (options) {
-			// Call super.
-			this._super();
-
-			// Cache options.
-			this.options = (options && !_.isEmpty(options)) ? options: {};
-
-			// Compile screen template.
-			this.template = Handlebars.compile($(this.selectors.template).html());
-
-			// Listen to the reset event on the moduleCollection.
-			// When triggered recall the render method.
-			this.moduleCollection.on('reset', _.bind(this.render, this));
+		onCollectionReset: function () {
+			this.render();
 		}
+
 	});
 
 })(jQuery, _, Backbone, umobile, config);

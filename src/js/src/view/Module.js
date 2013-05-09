@@ -35,38 +35,6 @@
 		**/
 		selectors: {
 			template: '#views-partials-module'
-		},
-
-		/**
-		Property houses Module model.
-
-		@property moduleModel
-		@type Object
-		**/
-		moduleModel: {},
-
-		/**
-		Method renders the Module template.
-
-		@method render
-		@return {Object} Reference to the Module view.
-		**/
-		render: function () {
-			var model = this.moduleModel;
-			this.$el.html(this.template(model));
-			return this;
-		},
-
-		/**
-		Method initializes the view.
-
-		@method initialize
-		@param {Object} options Object hash of options.
-		**/
-		initialize: function (options) {
-			_.bindAll(this);
-			this.moduleModel = options.model;
-			this.template = Handlebars.compile($(this.selectors.template).html());
 		}
 	});
 

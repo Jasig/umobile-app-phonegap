@@ -47,6 +47,7 @@
 			// Initialize.
 			header = this.loc('header').html('');
 			headerView = new umobile.view.Header();
+			headerView.render();
 		},
 
 		/**
@@ -61,6 +62,7 @@
 			// Initialize.
 			breadcrumb = this.loc('breadcrumb').html('');
 			breadcrumbView = new umobile.view.Breadcrumb();
+			breadcrumbView.render();
 		},
 
 		/**
@@ -75,6 +77,7 @@
 			// Initialize.
 			footer = this.loc('footer').html('');
 			footerView = new umobile.view.Footer();
+			footerView.render();
 		},
 
 		/**
@@ -82,10 +85,11 @@
 
 		@method render
 		@return {Object} Reference to the Page view.
+		@override Base
 		**/
 		render: function () {
 			// Render base page.
-			this.$el.html(this.template({}));
+			this.$el.html(this.template(this.options));
 
 			// Render the header.
 			this.renderHeader();
@@ -97,23 +101,6 @@
 			this.renderFooter();
 
 			return this;
-		},
-
-		/**
-		Method initializes the view.
-
-		@method initialize
-		@override Base
-		**/
-		initialize: function () {
-			// Bind all properties and methods.
-			_.bindAll(this);
-
-			// Compile screen template.
-			this.template = Handlebars.compile($(this.selectors.template).html());
-
-			// Render template.
-			this.render();
 		}
 	});
 

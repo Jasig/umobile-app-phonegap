@@ -2,24 +2,98 @@
 // Variables (Base Rules)
 // --------------------------------------------------
 
-// Colors
+// Color Palette
 // -------------------------
-@blue: #3366CC;
-@white: #FFF;
-@smoke: #EFEFEF;
-@gray60: #9E9E9E;
-@lightGray: #CCCCCC;
-@darkGray: #2E2E2E;
-@black80: #232323;
-@black90: #0F0F0F;
-@black: #131313;
-@red: #F60000;
-@darkRed: #9B0000;
+
+// Black
+@black: rgba(0, 0, 0, 1);
+@blackLighten: lighten(@black, 10%);
+@blackLighter: lighten(@black, 20%);
+@blackLightest: lighten(@black, 30%);
+
+// White
+@white: rgba(255, 255, 255, 1);
+
+// c1: Light Gray
+@c1: rgba(220, 220, 220, 1);
+@c1Darken: darken(@c1, 10%);
+@c1Darker: darken(@c1, 20%);
+@c1Darkest: darken(@c1, 30%);
+
+// c2: Blue
+@c2: rgba(51, 102, 204, 1);
+@c2Darken: darken(@c2, 10%);
+@c2Darker: darken(@c2, 20%);
+@c2Darkest: darken(@c2, 30%);
+
+// c3: Red
+@c3: rgba(185, 74, 72, 1);
+@c3Darken: darken(@c3, 10%);
+@c3Darker: darken(@c3, 20%);
+@c3Darkest: darken(@c3, 30%);
+@c3Lighten: lighten(@c3, 10%);
+@c3Lighter: lighten(@c3, 20%);
+@c3Lightest: lighten(@c3, 40%);
+
+// c4: Dark Gray
+@c4: rgba(46, 46, 46, 1);
+@c4Darken: darken(@c4, 10%);
+@c4Darker: darken(@c4, 20%);
+@c4Darkest: darken(@c4, 30%);
+@c4Lighten: lighten(@c4, 10%);
+@c4Lighter: lighten(@c4, 20%);
+@c4Lightest: lighten(@c4, 30%);
+
+// Component Colors
+// -------------------------
+// Backgrounds
+@defaultBg: @c1;
+@dashboardBg: @c2;
+@moduleBg: @c1;
+@loginBg: @c1;
+
+// Buttons
+// Inverse
+@inverseButtonGradientStartColor: @c4;
+@inverseButtonGradientEndColor: @c4Darken;
+@inverseButtonHoverColor: @black;
+@inverseButtonBorderColor: @black;
+@inverseButtonTextColor: @white;
+
+// Alerts
+// Error
+@alertErrorBg: @c3Lightest;
+@alertErrorBorderColor: @c3;
+@alertErrorTextColor: @c3;
+
+// Navbar
+@navbarBorderTopColor: @blackLighter;
+@navbarBorderBottomColor: @blackLighter;
+@navbarGradientStartColor: @c4;
+@navbarGradientEndColor: @black;
+@navbarTextColor: @white;
+
+// Module list
+@moduleLinkColor: @white;
+@moduleLinkShadowColor: @black;
+@badgeBorderColor: @white;
+@badgeBg: @c3;
+@badgeGradientStartColor: @c3;
+@badgeGradientEndColor: @c3Darker;
+
+// Breadcrumb
+@breadcrumbBg: @c1;
+@breadCrumbBorderBottomColor: @c1Darken;
+
+// Login form
+@loginFormBg: @c1;
+@legendBorderBottomColor: @c1Darken;
 
 // Paths
 // -------------------------
 @logoPath: '../images/theme/default/um_logo.png';
+@backgroundPath: '../images/theme/default/bg_320x480_flat.png';
 @formLoaderPath: '../images/theme/default/um_form_loader.gif';
 @blueLoaderPath: '../images/theme/default/um_blue_loader.gif';
-@smokeLoaderPath: '../images/theme/default/um_smoke_loader.gif';
+@grayLoaderPath: '../images/theme/default/um_smoke_loader.gif';
 @whiteLoaderPath: '../images/theme/default/um_white_loader.gif';

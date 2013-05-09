@@ -1,30 +1,30 @@
 //
-// Mixins (Base Rules)
+// Mixins
 // --------------------------------------------------
 
-// Drop shadow.
-.um-shadow(@hShadow: 0, @vShadow: 1px, @blur: 10px, @color: @darkGray) {
+// Shadow
+.um-shadow(@hShadow: 0, @vShadow: 1px, @blur: 10px, @color: @c4) {
 	-webkit-box-shadow: @hShadow @vShadow @blur @color;
 	-moz-box-shadow: @hShadow @vShadow @blur @color;
 	box-shadow: @hShadow @vShadow @blur @color;
 }
 
-// Border radius.
+// Border radius
 .um-border-radius(@radius: 6) {
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	border-radius: @radius;
 }
 
-// Clear list.
+// Clear list
 .um-list, .um-list li {
 	padding: 0;
 	margin: 0;
 	list-style: none;
 }
 
-// Gradient.
-.um-gradient(@startColor: @darkGary, @fromColor: @black) {
+// Gradient
+.um-gradient(@startColor: @c4, @fromColor: @black) {
 	background: @startColor;
 	background: -moz-linear-gradient(top, @startColor 0%, @fromColor 100%, @fromColor 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@startColor), color-stop(100%,@fromColor), color-stop(100%,@fromColor));
@@ -35,7 +35,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{startColor}', endColorstr='@{fromColor}',GradientType=0);
 }
 
-// Opacity.
+// Opacity
 .opacity(@opacity: 0.5, @ieOpacity: 50) {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity='@{ieOpacity}')";
 	filter: alpha(opacity=@ieOpacity);
@@ -44,8 +44,8 @@
 	opacity: @opacity;
 }
 
-// Loader.
-.um-loader(@backgroundColor: @smoke, @imagePath: @smokeLoaderPath) {
+// Loader
+.um-loader(@backgroundColor: @c1, @imagePath: @grayLoaderPath) {
 	position: absolute;
 	top: 0; left: 0;
 	bottom: 0; right: 0;

@@ -16,6 +16,7 @@
 
 		@property name
 		@type String
+		@override LoadedView
 		**/
 		name: 'login',
 
@@ -24,6 +25,7 @@
 
 		@property selectors
 		@type Object
+		@override Base
 		**/
 		selectors: {
 			template: '#views-partials-loginview',

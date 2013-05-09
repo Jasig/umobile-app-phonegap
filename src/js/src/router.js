@@ -106,7 +106,7 @@
 		**/
 		initialize: function () {
 			// Initialize the Page view.
-			var page = new umobile.view.Page();
+			var page = new umobile.view.Page().render();
 
 			// Initialize the ViewManager.
 			umobile.app.viewManager = new umobile.view.ViewManager();

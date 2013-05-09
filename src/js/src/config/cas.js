@@ -8,7 +8,7 @@ var config = {};
 config.uMobileServerUrl = 'http://localhost:8080';
 
 // UMOBILE SERVER CONTEXT PATH
-config.uMobileServerContext = '';
+config.uMobileServerContext = '/uPortal';
 
 // AUTHENTICATION
 // mockLogin, localLogin or casLogin.

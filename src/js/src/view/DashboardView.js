@@ -16,6 +16,7 @@
 
 		@property name
 		@type String
+		@override LoadedView
 		**/
 		name: 'dashboard',
 
@@ -24,6 +25,7 @@
 
 		@property selectors
 		@type Object
+		@override Base
 		**/
 		selectors: {
 			template: '#views-partials-dashboardview',
@@ -70,11 +72,12 @@
 		**/
 		renderNotifier: function () {
 			// Define.
-			var notifier, notifierView;
+			var notifier, notifierModel, notifierView;
 
 			// Initialize.
 			notifier = this.loc('notifier');
-			notifierView = new umobile.view.Notifier();
+			notifierModel = new umobile.model.Notifier();
+			notifierView = new umobile.view.Notifier({model: notifierModel.toJSON()});
 			notifier.append(notifierView.render().el).show();
 		},
 
