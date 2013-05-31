@@ -49,8 +49,8 @@
 // Backgrounds
 @defaultBg: @c1;
 @dashboardBg: @c2;
-@moduleBg: @c1;
-@loginBg: @c1;
+@moduleBg: @defaultBg;
+@loginBg: @defaultBg;
 
 // Buttons
 // Inverse
@@ -95,5 +95,11 @@
 @backgroundPath: '../images/theme/default/bg_320x480_flat.png';
 @formLoaderPath: '../images/theme/default/um_form_loader.gif';
 @blueLoaderPath: '../images/theme/default/um_blue_loader.gif';
-@grayLoaderPath: '../images/theme/default/um_smoke_loader.gif';
+@smokeLoaderPath: '../images/theme/default/um_smoke_loader.gif';
 @whiteLoaderPath: '../images/theme/default/um_white_loader.gif';
+
+// Loader
+@defaultLoaderPath: @smokeLoaderPath;
+@dashboardLoaderPath: @blueLoaderPath;
+@moduleLoaderPath: @defaultLoaderPath;
+@loginLoaderPath: @defaultLoaderPath;

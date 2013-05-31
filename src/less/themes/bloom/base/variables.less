@@ -1,0 +1,69 @@
+//
+// Bloom (Theme Rules)
+// --------------------------------------------------
+
+// Color Palette
+// -------------------------
+
+// Black
+@black: rgba(0, 0, 0, 1);
+@blackLighten: lighten(@black, 10%);
+@blackLighter: lighten(@black, 20%);
+@blackLightest: lighten(@black, 30%);
+
+// White
+@white: rgba(255, 255, 255, 1);
+
+// b1: Huskey Red
+@b1: rgba(112, 29, 31, 1);
+@b1Darken: darken(@b1, 10%);
+@b1Darker: darken(@b1, 20%);
+@b1Darkest: darken(@b1, 30%);
+
+// b2: Huskey Gray
+@b2: rgba(195, 196, 198, 1);
+@b2Darken: darken(@b2, 10%);
+@b2Darker: darken(@b2, 20%);
+@b2Darkest: darken(@b2, 30%);
+
+// Component Colors
+// -------------------------
+// Backgrounds
+@defaultBg: @b2;
+@dashboardBg: @b2;
+@moduleBg: @b2;
+@loginBg: @b2;
+
+// Buttons
+// Inverse
+@inverseButtonGradientStartColor: @b1;
+@inverseButtonGradientEndColor: @b1;
+@inverseButtonHoverColor: @b1Darken;
+@inverseButtonBorderColor: @b1Darken;
+@inverseButtonTextColor: @white;
+
+// Navbar
+@navbarBorderTopColor: @b1;
+@navbarBorderBottomColor: @b1Darken;
+@navbarGradientStartColor: @b1;
+@navbarGradientEndColor: @b1Darken;
+@navbarTextColor: @white;
+
+// Module list
+@moduleLinkColor: @white;
+@moduleLinkShadowColor: @black;
+@badgeBorderColor: @white;
+@badgeBg: @b1;
+@badgeGradientStartColor: @b1;
+@badgeGradientEndColor: @b1Darker;
+
+// Paths
+// -------------------------
+@logoPath: '../images/theme/bloom/um_logo.png';
+@grayLoaderPath: '../images/theme/bloom/um_gray_loader.gif';
+
+// Loader
+@defaultLoaderPath: @grayLoaderPath;
+@dashboardLoaderPath: @defaultLoaderPath;
+@moduleLoaderPath: @defaultLoaderPath;
+@loginLoaderPath: @defaultLoaderPath;
