@@ -283,7 +283,7 @@ module.exports = function (grunt) {
 
 	// Documentation command. Outputs documentation
 	// to /docs.
-	grunt.registerTask('docs', ['yuidoc:prod']);
+	grunt.registerTask('docs', ['yuidoc']);
 
 	// Build command for development code.
 	// Pushes code to /src directory.
