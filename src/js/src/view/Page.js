@@ -32,6 +32,7 @@
 			template: '#views-partials-page',
 			header: '#header',
 			breadcrumb: '#breadcrumb',
+			background: '#background',
 			footer: '#footer'
 		},
 
@@ -66,6 +67,18 @@
 		},
 
 		/**
+		Method initializes the Background view.
+		@method renderBackground
+		**/
+		renderBackground: function () {
+			// Define.
+			var background, backgroundView;
+			// Initialize.
+			background = this.loc('background').html('');
+			backgroundView = new umobile.view.Background();
+			backgroundView.render();
+		},
+		/**
 		Method initializes the Footer view.
 
 		@method renderFooter
@@ -97,6 +110,8 @@
 			// Render the breadcrumb.
 			this.renderBreadcrumb();
 
+			// Render the background.
+			this.renderBackground();
 			// Render the footer.
 			this.renderFooter();
 

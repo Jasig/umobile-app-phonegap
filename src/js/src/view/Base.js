@@ -142,6 +142,7 @@
 		**/
 		onRouteChanged: function (view) {},
 
+		onReady: function () {},
 		/**
 		Method provides custom clean-up operations for child views.
 		This method is meant to be implemented by child views.
@@ -211,6 +212,7 @@
 
 			// Listen for the 'route.changed' event.
 			this.subscribe('route.changed', this.onRouteChanged, this);
+			this.onReady();
 		}
 	});
 
