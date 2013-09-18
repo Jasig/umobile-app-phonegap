@@ -54,19 +54,23 @@
 			return path.split(param + '=')[1];
 		},
 		/**
-		 * Method injects a script tag into the DOM above all the other scripts on the page.
-		 * This will be used instead of using eval on scripts since scripts dynamically added
-		 * to the DOM get executed automatically.
-		 *
-		 * @method loadScript
-		 * @param  {string}   url      URL of the script that you want to inject into the DOM
-		 * @param  {Function} callback Call back that you want called once the script is in the DOM
-		 */
+		Method injects a script tag into the DOM above all the other scripts on the page.
+		This will be used instead of using eval on scripts since scripts dynamically added
+		to the DOM get executed automatically.
+
+		@method loadScript
+		@param  {string}   url      URL of the script that you want to inject into the DOM
+		@param  {Function} callback Call back that you want called once the script is in the DOM
+		**/
 		loadScript: function (url, callback) {
-			var script = document.createElement('script');
+			// Define vars
+			var script, entry;
+
+			script = document.createElement('script');
 			script.ascync = true;
 			script.src = url;
-			var entry = document.getElementsByTagName('script')[0];
+			
+			entry = document.getElementsByTagName('script')[0];
 			entry.parentNode.insertBefore(script, entry);
 			script.onload = script.onreadystatechange = function () {
 				var rdyState = script.readyState;

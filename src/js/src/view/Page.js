@@ -112,6 +112,7 @@
 
 			// Render the background.
 			this.renderBackground();
+			
 			// Render the footer.
 			this.renderFooter();
 

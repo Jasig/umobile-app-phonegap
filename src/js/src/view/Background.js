@@ -21,6 +21,14 @@
 		el: '#background',
 
 		/**
+		Property houses the current route.
+
+		@property currentRoute
+		@type String
+		**/
+		currentRoute: null,
+
+		/**
 		Property houses DOM selectors.
 
 		@property selectors
@@ -32,10 +40,10 @@
 		},
 
 		/**
-		 * This method hides the background chooser button by default and only shows
-		 * it when on the dashboard view.
-		 * @return none
-		 */
+		This method hides the background chooser button by default and only shows
+		it when on the dashboard view.
+		@return none
+		**/
 		toggleVisibility: function () {
 			this.$el.hide();
 			if (this.currentRoute) {
@@ -58,8 +66,8 @@
 		},
 
 		/**
-		 * This sets up the pub-sub connection to listen when the background data has been received.
-		 */
+		This sets up the pub-sub connection to listen when the background data has been received.
+		**/
 		onReady: function () {
 			this.subscribe('background_retrieved', function (payload) {
 				$('#background').html(payload.content);
