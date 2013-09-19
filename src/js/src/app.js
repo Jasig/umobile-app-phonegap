@@ -87,7 +87,7 @@ var umobile = {
 	@namespace resource
 	**/
 	resource: {},
-	
+
 	/**
 	Namespace for umobile utilities.
 

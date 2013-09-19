@@ -43,7 +43,7 @@
 				url: url,
 				dataType: 'html',
 				type: 'GET',
-				success: _.bind(function (data, textStatus,jqXHR) {
+				success: _.bind(function (data, textStatus, jqXHR) {
 					// Call the extractBackgroundComponents method and store the data.
 					data = this.extractBackgroundComponents(data);
 
@@ -87,13 +87,13 @@
 
 		/**
 		Execute the extracted script since it does not get executed automatically.
-		Note: This is a temporary solution and will be removed once the code is moved 
+		Note: This is a temporary solution and will be removed once the code is moved
 		to an external file.
 
 		@method executeBackgroundScript
 		**/
 		executeBackgroundScript: function () {
-			if (_.isUndefined(this.backgroundChangerScript)) {
+			if (!_.isUndefined(this.backgroundChangerScript)) {
 				$.globalEval(this.backgroundChangerScript);
 			}
 		},

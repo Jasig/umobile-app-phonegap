@@ -42,6 +42,8 @@
 		/**
 		This method hides the background chooser button by default and only shows
 		it when on the dashboard view.
+
+		@method toggleVisibility
 		@return none
 		**/
 		toggleVisibility: function () {
@@ -67,6 +69,8 @@
 
 		/**
 		This sets up the pub-sub connection to listen when the background data has been received.
+
+		@method onReady
 		**/
 		onReady: function () {
 			this.subscribe('background_retrieved', function (payload) {
