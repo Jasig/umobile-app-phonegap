@@ -44,7 +44,6 @@
 		it when on the dashboard view.
 
 		@method toggleVisibility
-		@return none
 		**/
 		toggleVisibility: function () {
 			this.$el.hide();
