@@ -4,3 +4,7 @@
 /src/modules/
 /src/css/
 /src/docs/
+/nbproject/private/
+/phonegap/platforms/android/bin/
+/phonegap/platforms/android/gen/
+/phonegap/

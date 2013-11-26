@@ -1,6 +1,7 @@
 {
 	"port": 5000,
 	"environment": "web",
+        "platforms": [ "android", "ios" ],
 	"auth": "mock",
 	"mode": "dev",
 	"less": {
