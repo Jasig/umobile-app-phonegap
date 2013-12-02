@@ -353,14 +353,9 @@ module.exports = function(grunt) {
         'phonegap:build'
     ]);
 
-    grunt.registerTask('phonegap.build', [
-        'prod',
-        'phonegap:build'
-    ]);
-
     grunt.registerTask('phonegap.run', [
         'prod',
-        'phonegap.build',
+        //'phonegap.build',
         'phonegap:run'
     ]);
 
