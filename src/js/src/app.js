@@ -82,6 +82,13 @@ var umobile = {
 	session: {},
 
 	/**
+	Namespace for the umobile resource implementation.
+	@submodule resource
+	@namespace resource
+	**/
+	resource: {},
+
+	/**
 	Namespace for umobile utilities.
 
 	@submodule utility
@@ -102,11 +109,20 @@ var umobile = {
 	buildModuleArray: function (data) {
 		'use strict';
 		// Define.
-		var modules, folders;
+		var modules, folders, headers;
 
 		// Initialize.
 		modules = [];
 		folders = (data && !_.isEmpty(data)) ? data.layout.folders : {};
+		headers = (data && !_.isEmpty(data) && !_.isEmpty(data.layout.header)) ? data.layout.header.portlets : {};
+		// Iterate over Headers
+		// We need to iterate over the headers section of the JSON in order to get
+		// the information for the background changer implementation
+		_.each(headers, function (header, index) {
+			if (header.hasOwnProperty('fname') && header.fname === 'background-preference') {
+				umobile.resource.Background.getBackground(header.url);
+			}
+		});
 
 		// Iterate over folders.
 		_.each(folders, function (folder, idx) {
