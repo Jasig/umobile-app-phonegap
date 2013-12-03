@@ -7,10 +7,11 @@
 
 		<!--CSS Dependencies-->
 		<link type="text/css" rel="stylesheet" href="css/umobile.css">
-
+                
+                <script type="text/javascript" src="cordova.js"></script>
+                <script type="text/javascript" src="cordova_plugins.js"></script>
 		<!--JavaScript Dependencies-->
 		{{#dev}}
-		<script type="text/javascript" src="js/lib/cordova/cordova.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
 		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
@@ -23,7 +24,6 @@
 		<script type="text/javascript" src="js/lib/debug/debug.js"></script>
 		{{/dev}}
 		{{^dev}}
-		<script type="text/javascript" src="js/lib/cordova/cordova.min.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.min.js"></script>
 		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.min.js"></script>
