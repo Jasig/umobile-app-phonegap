@@ -325,10 +325,6 @@ var umobile = {
 	**/
 	initialize: function () {
 		'use strict';
-		// Listen to onDeviceReady event.
-		document.addEventListener('deviceready', umobile.onDeviceReady, false);
-		if (config.loginFn === 'mockLogin') {
 			umobile.onDeviceReady();
 		}
-	}
 };
