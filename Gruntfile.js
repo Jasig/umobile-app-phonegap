@@ -39,6 +39,13 @@ module.exports = function(grunt) {
                         dest: 'www/images/',
                         expand: true,
                         cwd: 'src/images/'
+                    },
+                    
+                    {
+                        src: ['**'],
+                        dest: 'www/js/',
+                        expand: true,
+                        cwd: 'src/js/'
                     }
                 ]
             }
@@ -97,7 +104,7 @@ module.exports = function(grunt) {
             },
             lib: {
                 files: {
-                    'www/js/lib/cordova/cordova.min.js': ['src/js/lib/cordova/cordova-' + config.getCordova() + '.js'],
+                    //'www/js/lib/cordova/cordova.min.js': ['src/js/lib/cordova/cordova-' + config.getCordova() + '.js'],
                     'www/js/lib/jquery/jquery.min.js': ['src/js/lib/jquery/jquery.js'],
                     'www/js/lib/jquery/jquery-pubsub.min.js': ['src/js/lib/jquery/jquery-pubsub.js'],
                     'www/js/lib/gibberish/gibberishAES.min.js': ['src/js/lib/gibberish/gibberishAES.js'],
@@ -126,6 +133,7 @@ module.exports = function(grunt) {
                         'src/js/src/collection/ModuleCollection.js',
                         'src/js/src/view/ViewManager.js',
                         'src/js/src/view/Base.js',
+                        'src/js/src/view/Background.js',
                         'src/js/src/view/Page.js',
                         'src/js/src/view/Breadcrumb.js',
                         'src/js/src/view/Header.js',
@@ -145,7 +153,6 @@ module.exports = function(grunt) {
         compilehtml: {
             devViews: {
                 options: {
-                    cordova: config.getCordova(),
                     tracker: config.getTracker(),
                     auth: config.getAuth(),
                     dev: true
@@ -155,7 +162,6 @@ module.exports = function(grunt) {
             },
             devModules: {
                 options: {
-                    cordova: config.getCordova(),
                     tracker: config.getTracker(),
                     auth: config.getAuth(),
                     dev: true
@@ -165,7 +171,6 @@ module.exports = function(grunt) {
             },
             prodViews: {
                 options: {
-                    cordova: config.getCordova(),
                     tracker: config.getTracker(),
                     auth: config.getAuth(),
                     dev: false
@@ -175,7 +180,6 @@ module.exports = function(grunt) {
             },
             prodModules: {
                 options: {
-                    cordova: config.getCordova(),
                     tracker: config.getTracker(),
                     auth: config.getAuth(),
                     dev: false
@@ -354,8 +358,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('phonegap.run', [
-        'prod',
-        //'phonegap.build',
+        'phonegap.build',
         'phonegap:run'
     ]);
 
