@@ -13,10 +13,9 @@ module.exports = function(grunt) {
         // Cleans out directories.
         clean: {
             dev: [
-                'src/modules',
-                'src/docs',
-                'src/index.html',
-                'src/css/umobile.css'
+                'www/modules',
+                'www/docs',
+                'www/'
             ],
             prod: [
                 'www/modules',
@@ -27,6 +26,29 @@ module.exports = function(grunt) {
         // Copies assests.
         copy: {
             prod: {
+                files: [
+                    {
+                        src: ['**'],
+                        dest: 'www/data/',
+                        expand: true,
+                        cwd: 'src/data/'
+                    },
+                    {
+                        src: ['**'],
+                        dest: 'www/images/',
+                        expand: true,
+                        cwd: 'src/images/'
+                    },
+                    
+                    {
+                        src: ['*.min.js'],
+                        dest: 'www/js/',
+                        expand: true,
+                        cwd: 'src/js/'
+                    }
+                ]
+            },
+            dev: {
                 files: [
                     {
                         src: ['**'],
@@ -54,8 +76,8 @@ module.exports = function(grunt) {
         less: {
             dev: {
                 files: {
-                    'src/css/umobile.css': 'src/less/umobile.less',
-                    'src/css/module.css': 'src/less/module.less'
+                    'www/css/umobile.css': 'src/less/umobile.less',
+                    'www/css/module.css': 'src/less/module.less'
                 }
             },
             prod: {
@@ -104,7 +126,6 @@ module.exports = function(grunt) {
             },
             lib: {
                 files: {
-                    //'www/js/lib/cordova/cordova.min.js': ['src/js/lib/cordova/cordova-' + config.getCordova() + '.js'],
                     'www/js/lib/jquery/jquery.min.js': ['src/js/lib/jquery/jquery.js'],
                     'www/js/lib/jquery/jquery-pubsub.min.js': ['src/js/lib/jquery/jquery-pubsub.js'],
                     'www/js/lib/gibberish/gibberishAES.min.js': ['src/js/lib/gibberish/gibberishAES.js'],
@@ -158,7 +179,7 @@ module.exports = function(grunt) {
                     dev: true
                 },
                 src: 'views/*.html',
-                dest: 'src/FILE.html'
+                dest: 'www/FILE.html'
             },
             devModules: {
                 options: {
@@ -167,7 +188,7 @@ module.exports = function(grunt) {
                     dev: true
                 },
                 src: 'views/modules/*.html',
-                dest: 'src/modules/FILE.html'
+                dest: 'www/modules/FILE.html'
             },
             prodViews: {
                 options: {
@@ -196,10 +217,10 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
-                    layout: 'src/index.html'
+                    layout: 'www/index.html'
                 },
                 files: {
-                    'src/index.html': ['views/partials/*.html']
+                    'www/index.html': ['views/partials/*.html']
                 }
             },
             prod: {
@@ -216,7 +237,7 @@ module.exports = function(grunt) {
                 name: '<%= pkg.name %>',
                 options: {
                     paths: 'src/js/src/',
-                    outdir: 'src/docs/'
+                    outdir: 'www/docs/'
                 }
             },
             prod: {
@@ -249,25 +270,7 @@ module.exports = function(grunt) {
                 config: 'src/config.xml',
                 cordova: '.cordova',
                 path: 'phonegap',
-                plugins: [
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-contacts.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-media-capture.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-motion.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git',
-                    'https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git'
-                ],
+                plugins: config.plugins,
                 platforms: config.platforms,
                 maxBuffer: 400, // You may need to raise this for iOS.
                 verbose: false,
@@ -330,6 +333,7 @@ module.exports = function(grunt) {
     // Pushes code to /src directory.
     grunt.registerTask('dev', [
         'clean:dev',
+        'copy:dev',
         'less:dev',
         'jshint',
         'compilehtml:devViews',
@@ -352,13 +356,18 @@ module.exports = function(grunt) {
         'yuidoc:prod'
     ]);
 
-    grunt.registerTask('phonegap.build', [
+    grunt.registerTask('phonegap.deploy', [
         'prod',
+        'phonegap:build'
+    ]);
+    
+    grunt.registerTask('phonegap.build', [
+        'dev',
         'phonegap:build'
     ]);
 
     grunt.registerTask('phonegap.run', [
-        'phonegap.build',
+        'dev',
         'phonegap:run'
     ]);
 
