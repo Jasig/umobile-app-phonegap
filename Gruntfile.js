@@ -356,19 +356,35 @@ module.exports = function(grunt) {
         'yuidoc:prod'
     ]);
 
-    grunt.registerTask('phonegap.deploy', [
-        'prod',
+
+    grunt.registerTask('build', [
         'phonegap:build'
     ]);
     
-    grunt.registerTask('phonegap.build', [
+    grunt.registerTask('build.dev', [
         'dev',
         'phonegap:build'
     ]);
 
-    grunt.registerTask('phonegap.run', [
-        'dev',
+    grunt.registerTask('build.prod', [
+        'prod',
+        'phonegap:build'
+    ]);
+    
+    grunt.registerTask('run', [
         'phonegap:run'
     ]);
+
+    grunt.registerTask('run.dev', [
+        'build.dev',
+        'phonegap:run'
+    ]);
+    
+    grunt.registerTask('run.prod', [
+        'build.prod',
+        'phonegap:run'
+    ]);
+    
+    grunt.registerTask('default', ['run.dev']);
 
 };
