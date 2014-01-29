@@ -21,7 +21,7 @@
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git",
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git"
         ],
-	"auth": "cas",
+	"auth": "mock",
 	"mode": "dev",
 	"less": {
 		"dest": "./src/css",
