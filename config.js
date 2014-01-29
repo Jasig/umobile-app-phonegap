@@ -26,6 +26,13 @@ config.mode = nconf.get('mode') || 'dev';
 // Server location.
 config.external = nconf.get('external');
 
+//Phonegap platoforms
+config.platforms = nconf.get('platforms') || 'android';
+
+
+//Phonegap plugins.
+config.plugins = nconf.get('plugins') || [];
+
 // Performs a test on the current environment configuration.
 // (i.e., ios, android or web).
 config.isEnvironment = function (environment) {

@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 		// Capture task configuration from the Gruntfile as
 		// well as src and dest information.
 		data = this.data;
-		src = grunt.file.expand(data.src),
+		src = grunt.file.expand(data.src);
 		dest = grunt.template.process(data.dest);
 
 		// Define default options.

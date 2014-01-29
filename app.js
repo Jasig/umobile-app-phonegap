@@ -1,4 +1,3 @@
-/*jshint es5:true */
 /*global require:true, __dirname:true, console:true, process:true, setTimeout:true */
 
 // Modules & Variables.
