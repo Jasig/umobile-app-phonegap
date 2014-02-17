@@ -98,6 +98,7 @@ module.exports = function (grunt) {
 				strict: true,
 				latedef: true,
 				indent: true,
+				expr: true,
 				quotmark: true
 			},
 			global: {

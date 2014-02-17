@@ -7,13 +7,14 @@
 		"start": "node app"
 	},
 	"dependencies": {
-		"grunt": "0.4.0",
-		"grunt-contrib": "0.4.0",
-		"grunt-exec": "0.4.0",
-		"nconf": "0.6.7",
-		"express": "3.1.0",
+		"grunt": "0.4.2",
+		"grunt-contrib": "0.9.0",
+		"grunt-exec": "0.4.5",
+		"nconf": "0.6.9",
+		"express": "3.4.8",
 		"hogan.js": "2.0.0",
-		"hogan-express": "0.3.3",
-		"less-middleware": "0.1.9"
+		"hogan-express": "0.5.2",
+		"less-middleware": "0.1.15",
+		"phonegap": "3.3.0-0.19.6"
 	}
 }
