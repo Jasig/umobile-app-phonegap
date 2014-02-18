@@ -55,7 +55,7 @@ config.getEnvironment = function () {
 // until the session tracking plugins can be upgraded.
 config.getTracker = function () {
 	'use strict';
-	return (config.getEnvironment() !== 'web') ? 'SessionTrackerMock' : 'SessionTracker';
+	return (config.getEnvironment() !== 'web') ? 'SessionTracker' : 'SessionTrackerMock';
 };
 
 // Returns the cordova version needed
@@ -73,10 +73,14 @@ config.getPublicDirectory = function () {
 	return 'www';
 };
 
-// Returns server path for the webapp location.
-config.getExternal = function () {
-	'use strict';
-	return (config.external) ? config.external : null;
+config.getOptionsForLess = function() {
+	var options = {
+		compress: config.isDevelopment() ? false : true,
+		cleancss: config.isDevelopment() ? false : true,
+		report: config.isDevelopment() ? 'min' : 'gzip',
+		optimization: config.isDevelopment() ? 1 : 5,
+	}
+	return options;
 };
 
 // Export module.

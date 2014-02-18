@@ -51,16 +51,9 @@ module.exports = function (grunt) {
 
 		// Cleans out directories.
 		clean: {
-			dev: [
-				'src/modules',
-				'src/docs',
+			all: [
 				'src/index.html',
-				'phonegap'
-			],
-			prod: [
-				'www/modules',
-				'www/docs',
-				'www/',
+				'www',
 				'phonegap'
 			]
 		},
@@ -87,29 +80,12 @@ module.exports = function (grunt) {
 
 		// Compile less files into css.
 		less: {
-			dev: {
+			all: {
 				files: {
 					'www/css/umobile.css': 'src/less/umobile.less',
 					'www/css/module.css': 'src/less/module.less'
 				},
-				options: {
-					compress: false,
-					cleancss: false,
-					report: 'gzip',
-					optimization: 1
-				}
-			},
-			prod: {
-				files: {
-					'www/css/umobile.css': 'src/less/umobile.less',
-					'www/css/module.css': 'src/less/module.less'
-				},
-				options: {
-					compress: true,
-					cleancss: true,
-					report: 'gzip',
-					optimization: 5
-				}
+				options: config.getOptionsForLess()
 			}
 		},
 
@@ -207,45 +183,27 @@ module.exports = function (grunt) {
 			}
 		},
 
+		targethtml: {
+			web: {
+				files: {
+			      'www/index.html': 'views/index.html'
+			    }
+			},
+			phonegap: {
+				files: {
+			      'www/index.html': 'views/index.html'
+			    }
+			}
+		},
+
 		// Compile html files and copy to target directories.
 		compilehtml: {
-			devViews: {
-				options: {
-					tracker: config.getTracker(),
-					auth: config.getAuth(),
-					dev: true
-				},
-				src: 'views/*.html',
-				dest: 'src/FILE.html'
-			},
-			devModules: {
-				options: {
-					tracker: config.getTracker(),
-					auth: config.getAuth(),
-					dev: true
-				},
-				src: 'views/modules/*.html',
-				dest: 'src/modules/FILE.html'
-			},
-			prodViews: {
-				options: {
-					tracker: config.getTracker(),
-					auth: config.getAuth(),
-					dev: false
-				},
-				src: 'views/*.html',
-				dest: 'www/FILE.html'
-			},
-			prodModules: {
-				options: {
-					tracker: config.getTracker(),
-					auth: config.getAuth(),
-					dev: false
-				},
+			modules: {
 				src: 'views/modules/*.html',
 				dest: 'www/modules/FILE.html'
 			}
 		},
+
 
 		// Append script-based templates to index file.
 		appendpartials: {
@@ -255,7 +213,7 @@ module.exports = function (grunt) {
 			},
 			all: {
 				options: {
-					layout: 'src/index.html'
+					layout: 'www/index.html'
 				},
 				files: {
 					'www/index.html': ['views/partials/*.html']
@@ -282,10 +240,9 @@ module.exports = function (grunt) {
 					'src/less/**'
 				],
 				tasks: [
-					'compilehtml:devViews',
-					'compilehtml:devModules',
-					'appendpartials:dev',
-					'less:dev'
+					'compilehtml',
+					'appendpartials',
+					'less'
 				]
 			}
 		}
@@ -294,6 +251,7 @@ module.exports = function (grunt) {
 	// Load plugins/tasks.
 	grunt.loadNpmTasks('grunt-phonegap');
 	grunt.loadNpmTasks('grunt-contrib');
+	grunt.loadNpmTasks('grunt-targethtml');
 	grunt.task.loadTasks('tasks');
 
 	grunt.option('force', true);
@@ -311,29 +269,14 @@ module.exports = function (grunt) {
 
 	// Build command for development code.
 	// Pushes code to /src directory.
-	grunt.registerTask('dev', [
-		'clean:dev',
+	grunt.registerTask('default', [
+		'clean',
 		'copy',
-		'less:dev',
+		'less',
 		'jshint',
 		'uglify',
-		'copy',
-		'compilehtml:devViews',
-		'compilehtml:devModules',
-		'appendpartials',
-		'yuidoc'
-	]);
-
-	// Build command for production-ready code.
-	// Pushes code to /www directory.
-	grunt.registerTask('prod', [
-		'clean:prod',
-		'copy',
-		'less:prod',
-		'jshint',
-		'uglify',
-		'compilehtml:prodViews',
-		'compilehtml:prodModules',
+		'targethtml:web',
+		'compilehtml',
 		'appendpartials',
 		'yuidoc'
 	]);
@@ -342,6 +285,7 @@ module.exports = function (grunt) {
 	// based on dev settings
 	grunt.registerTask('phonegap', [
 		config.mode,
+		'targethtml:phonegap',
 		'phonegap:build'
 	]);
 };
