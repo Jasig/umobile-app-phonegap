@@ -11,24 +11,63 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		phonegap: {
+			config: {
+			 	root: 'www',
+				config: 'config/config.xml',
+				cordova: '.cordova',
+				path: 'phonegap',
+				plugins: config.plugins,
+				platforms: function() {
+					var platformsUsed = [];
+					platformsUsed[0] = config.getCordova();
+					return platformsUsed;
+				},
+				
+				maxBuffer: 500, // You may need to raise this for iOS.
+				verbose: true,
+				releases: 'releases',
+				releaseName: function() {
+					return (pkg.name + '-' + pkg.version);
+				},
+
+				// Must be set for ios to work.
+				// Should return the app name.
+				name: function() {
+					return pkg.name;
+				},
+
+				// Android-only integer version to increase with each release.
+				// See http://developer.android.com/tools/publishing/versioning.html
+				versionCode: function() { return(1) },
+
+				// Android-only options that will override the defaults set by Phonegap in the
+				// generated AndroidManifest.xml
+				// See https://developer.android.com/guide/topics/manifest/uses-sdk-element.html
+				minSdkVersion: function() { return(10) },
+				targetSdkVersion: function() { return(19) }
+			}
+	  	},
+
 		// Cleans out directories.
 		clean: {
 			dev: [
 				'src/modules',
 				'src/docs',
 				'src/index.html',
-				'src/css/umobile.css'
+				'phonegap'
 			],
 			prod: [
 				'www/modules',
 				'www/docs',
-				'www/'
+				'www/',
+				'phonegap'
 			]
 		},
 
 		// Copies assests.
 		copy: {
-			prod: {
+			all: {
 				files: [
 					{
 						src: ['**'],
@@ -43,26 +82,6 @@ module.exports = function (grunt) {
 						cwd: 'src/images/'
 					}
 				]
-			},
-			externalDev: {
-				files: [
-					{
-						src: ['**'],
-						dest: config.getExternal(),
-						expand: true,
-						cwd: 'src/'
-					}
-				]
-			},
-			externalProd: {
-				files: [
-					{
-						src: ['**'],
-						dest: config.getExternal(),
-						expand: true,
-						cwd: 'www/'
-					}
-				]
 			}
 		},
 
@@ -70,8 +89,14 @@ module.exports = function (grunt) {
 		less: {
 			dev: {
 				files: {
-					'src/css/umobile.css': 'src/less/umobile.less',
-					'src/css/module.css': 'src/less/module.less'
+					'www/css/umobile.css': 'src/less/umobile.less',
+					'www/css/module.css': 'src/less/module.less'
+				},
+				options: {
+					compress: false,
+					cleancss: false,
+					report: 'gzip',
+					optimization: 1
 				}
 			},
 			prod: {
@@ -80,7 +105,10 @@ module.exports = function (grunt) {
 					'www/css/module.css': 'src/less/module.less'
 				},
 				options: {
-					compress: true
+					compress: true,
+					cleancss: true,
+					report: 'gzip',
+					optimization: 5
 				}
 			}
 		},
@@ -99,7 +127,11 @@ module.exports = function (grunt) {
 				latedef: true,
 				indent: true,
 				expr: true,
-				quotmark: true
+				quotmark: true,
+				'-W015': true,
+				'-W033': true,
+				'-W117': true,
+				'-W099': true
 			},
 			global: {
 				define: true,
@@ -119,11 +151,11 @@ module.exports = function (grunt) {
 			options: {
 				compress: false,
 				mangle: false,
-				preserveComments: false
+				preserveComments: false,
+				beautify: config.beautify
 			},
 			lib: {
 				files: {
-					'www/js/lib/cordova/cordova.min.js': ['src/js/lib/cordova/cordova-' + config.getCordova() + '.js'],
 					'www/js/lib/jquery/jquery.min.js': ['src/js/lib/jquery/jquery.js'],
 					'www/js/lib/jquery/jquery-pubsub.min.js': ['src/js/lib/jquery/jquery-pubsub.js'],
 					'www/js/lib/gibberish/gibberishAES.min.js': ['src/js/lib/gibberish/gibberishAES.js'],
@@ -133,25 +165,32 @@ module.exports = function (grunt) {
 					'www/js/lib/backbone/backbone-validation.min.js': ['src/js/lib/backbone/backbone-validation.js'],
 					'www/js/lib/handlebars/handlebars.min.js': ['src/js/lib/handlebars/handlebars.js'],
 					'www/js/lib/bootstrap/bootstrap.min.js': ['src/js/lib/bootstrap/bootstrap.js'],
-					'www/js/lib/debug/debug.min.js': ['src/js/lib/debug/debug.js']
-				}
-			},
-			source: {
-				files: {
+					'www/js/lib/debug/debug.min.js': ['src/js/lib/debug/debug.js'],
+
 					'www/js/src/main.min.js': [
 						'src/js/src/config/' + config.getAuth() + '.js',
+
 						'src/js/src/app.js',
+						'src/js/src/router.js',
+
 						'src/js/src/service/Utils.js',
 						'src/js/src/service/' + config.getTracker() + '.js',
 						'src/js/src/service/Authentication.js',
 						'src/js/src/service/Storage.js',
+
 						'src/js/src/model/State.js',
 						'src/js/src/model/Module.js',
 						'src/js/src/model/Credential.js',
 						'src/js/src/model/Notifier.js',
+
+						'src/js/src/resource/Background.js',
+
 						'src/js/src/collection/ModuleCollection.js',
+
+						
 						'src/js/src/view/ViewManager.js',
 						'src/js/src/view/Base.js',
+						'src/js/src/view/Background.js',
 						'src/js/src/view/Page.js',
 						'src/js/src/view/Breadcrumb.js',
 						'src/js/src/view/Header.js',
@@ -161,8 +200,8 @@ module.exports = function (grunt) {
 						'src/js/src/view/LoginView.js',
 						'src/js/src/view/Module.js',
 						'src/js/src/view/ModuleView.js',
-						'src/js/src/view/Notifier.js',
-						'src/js/src/router.js'
+						'src/js/src/view/Notifier.js'
+						
 					]
 				}
 			}
@@ -172,7 +211,6 @@ module.exports = function (grunt) {
 		compilehtml: {
 			devViews: {
 				options: {
-					cordova: config.getCordova(),
 					tracker: config.getTracker(),
 					auth: config.getAuth(),
 					dev: true
@@ -182,7 +220,6 @@ module.exports = function (grunt) {
 			},
 			devModules: {
 				options: {
-					cordova: config.getCordova(),
 					tracker: config.getTracker(),
 					auth: config.getAuth(),
 					dev: true
@@ -192,7 +229,6 @@ module.exports = function (grunt) {
 			},
 			prodViews: {
 				options: {
-					cordova: config.getCordova(),
 					tracker: config.getTracker(),
 					auth: config.getAuth(),
 					dev: false
@@ -202,7 +238,6 @@ module.exports = function (grunt) {
 			},
 			prodModules: {
 				options: {
-					cordova: config.getCordova(),
 					tracker: config.getTracker(),
 					auth: config.getAuth(),
 					dev: false
@@ -218,17 +253,9 @@ module.exports = function (grunt) {
 				tag: 'script',
 				type: 'text/x-handlebars-template'
 			},
-			dev: {
+			all: {
 				options: {
 					layout: 'src/index.html'
-				},
-				files: {
-					'src/index.html': ['views/partials/*.html']
-				}
-			},
-			prod: {
-				options: {
-					layout: 'www/index.html'
 				},
 				files: {
 					'www/index.html': ['views/partials/*.html']
@@ -237,14 +264,7 @@ module.exports = function (grunt) {
 		},
 
 		yuidoc: {
-			dev: {
-				name: '<%= pkg.name %>',
-				options: {
-					paths: 'src/js/src/',
-					outdir: 'src/docs/'
-				}
-			},
-			prod: {
+			all: {
 				name: '<%= pkg.name %>',
 				options: {
 					paths: 'src/js/src/',
@@ -272,8 +292,11 @@ module.exports = function (grunt) {
 	});
 
 	// Load plugins/tasks.
+	grunt.loadNpmTasks('grunt-phonegap');
 	grunt.loadNpmTasks('grunt-contrib');
 	grunt.task.loadTasks('tasks');
+
+	grunt.option('force', true);
 
 	// Register tasks.
 
@@ -290,37 +313,35 @@ module.exports = function (grunt) {
 	// Pushes code to /src directory.
 	grunt.registerTask('dev', [
 		'clean:dev',
+		'copy',
 		'less:dev',
 		'jshint',
+		'uglify',
+		'copy',
 		'compilehtml:devViews',
 		'compilehtml:devModules',
-		'appendpartials:dev',
-		'yuidoc:dev'
+		'appendpartials',
+		'yuidoc'
 	]);
 
 	// Build command for production-ready code.
 	// Pushes code to /www directory.
 	grunt.registerTask('prod', [
 		'clean:prod',
-		'copy:prod',
+		'copy',
 		'less:prod',
 		'jshint',
 		'uglify',
 		'compilehtml:prodViews',
 		'compilehtml:prodModules',
-		'appendpartials:prod',
-		'yuidoc:prod'
+		'appendpartials',
+		'yuidoc'
 	]);
 
-	// Copies contents of src directory
-	// to external source.
-	grunt.registerTask('push.dev', [
-		'copy:externalDev'
-	]);
-
-	// Copies contents of www directory
-	// to external source.
-	grunt.registerTask('push.prod', [
-		'copy:externalProd'
+	// Prepare a phonegap project
+	// based on dev settings
+	grunt.registerTask('phonegap', [
+		config.mode,
+		'phonegap:build'
 	]);
 };

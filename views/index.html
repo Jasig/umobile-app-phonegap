@@ -9,21 +9,13 @@
 		<link type="text/css" rel="stylesheet" href="css/umobile.css">
 
 		<!--JavaScript Dependencies-->
-		{{#dev}}
-		<script type="text/javascript" src="js/lib/cordova/cordova-{{cordova}}.js"></script>
-		<script type="text/javascript" src="js/lib/jquery/jquery.js"></script>
-		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.js"></script>
-		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.js"></script>
-		<script type="text/javascript" src="js/lib/underscore/underscore.js"></script>
-		<script type="text/javascript" src="js/lib/backbone/backbone.js"></script>
-		<script type="text/javascript" src="js/lib/backbone/backbone-super.js"></script>
-		<script type="text/javascript" src="js/lib/backbone/backbone-validation.js"></script>
-		<script type="text/javascript" src="js/lib/handlebars/handlebars.js"></script>
-		<script type="text/javascript" src="js/lib/bootstrap/bootstrap.js"></script>
-		<script type="text/javascript" src="js/lib/debug/debug.js"></script>
-		{{/dev}}
-		{{^dev}}
-		<script type="text/javascript" src="js/lib/cordova/cordova.min.js"></script>
+		{{#phonegap}}
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="cordova_plugins.js"></script>
+		<script type="text/javascript" src="phonegap.js"></script>
+		{{/phonegap}}
+
+
 		<script type="text/javascript" src="js/lib/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="js/lib/jquery/jquery-pubsub.min.js"></script>
 		<script type="text/javascript" src="js/lib/gibberish/gibberishAES.min.js"></script>
@@ -34,7 +26,6 @@
 		<script type="text/javascript" src="js/lib/handlebars/handlebars.min.js"></script>
 		<script type="text/javascript" src="js/lib/bootstrap/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/lib/debug/debug.min.js"></script>
-		{{/dev}}
 	</head>
 
 	<body>
@@ -44,35 +35,6 @@
 		<templates></templates>
 
 		<!--JavaScript Source Files-->
-		{{#dev}}
-		<script type="text/javascript" src="js/src/config/{{auth}}.js"></script>
-		<script type="text/javascript" src="js/src/app.js"></script>
-		<script type="text/javascript" src="js/src/resource/Background.js"></script>
-		<script type="text/javascript" src="js/src/service/Utils.js"></script>
-		<script type="text/javascript" src="js/src/service/{{tracker}}.js"></script>
-		<script type="text/javascript" src="js/src/service/Authentication.js"></script>
-		<script type="text/javascript" src="js/src/service/Storage.js"></script>
-		<script type="text/javascript" src="js/src/model/State.js"></script>
-		<script type="text/javascript" src="js/src/model/Module.js"></script>
-		<script type="text/javascript" src="js/src/model/Credential.js"></script>
-		<script type="text/javascript" src="js/src/model/Notifier.js"></script>
-		<script type="text/javascript" src="js/src/collection/ModuleCollection.js"></script>
-		<script type="text/javascript" src="js/src/view/ViewManager.js"></script>
-		<script type="text/javascript" src="js/src/view/Base.js"></script>
-		<script type="text/javascript" src="js/src/view/Page.js"></script>
-		<script type="text/javascript" src="js/src/view/Background.js"></script>
-		<script type="text/javascript" src="js/src/view/Breadcrumb.js"></script>
-		<script type="text/javascript" src="js/src/view/Header.js"></script>
-		<script type="text/javascript" src="js/src/view/Footer.js"></script>
-		<script type="text/javascript" src="js/src/view/LoadedView.js"></script>
-		<script type="text/javascript" src="js/src/view/DashboardView.js"></script>
-		<script type="text/javascript" src="js/src/view/LoginView.js"></script>
-		<script type="text/javascript" src="js/src/view/Module.js"></script>
-		<script type="text/javascript" src="js/src/view/ModuleView.js"></script>
-		<script type="text/javascript" src="js/src/view/Notifier.js"></script>
-		<script type="text/javascript" src="js/src/router.js"></script>
-		{{/dev}}
-		{{^dev}}
 		<script type="text/javascript" src="js/src/main.min.js"></script>
 		<script type="text/javascript">
 			$(function () {
@@ -80,7 +42,7 @@
 				debug.setLevel(0);
 			});
 		</script>
-		{{/dev}}
+		
 		<script type="text/javascript">
 			$(function () {
 				'use strict';
