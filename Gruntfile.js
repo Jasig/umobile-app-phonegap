@@ -284,8 +284,15 @@ module.exports = function (grunt) {
 	// Prepare a phonegap project
 	// based on dev settings
 	grunt.registerTask('phonegap', [
-		config.mode,
+		'clean',
+		'copy',
+		'less',
+		'jshint',
+		'uglify',
 		'targethtml:phonegap',
+		'compilehtml',
+		'appendpartials',
+		'yuidoc',
 		'phonegap:build'
 	]);
 };
