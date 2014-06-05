@@ -325,9 +325,11 @@ var umobile = {
 	**/
 	initialize: function () {
 		'use strict';
-		// Listen to onDeviceReady event.
-		document.addEventListener('deviceready', umobile.onDeviceReady, false);
-		if (config.loginFn === 'mockLogin') {
+		// Check if uMobile is running on Cordova/Phonegap
+		if((cordova || PhoneGap || phonegap) && /^file:\/{3}[^\/]/i.test(window.location.href)) {
+			// Listen to onDeviceReady event.
+			document.addEventListener('deviceready', umobile.onDeviceReady, false);
+		} else {
 			umobile.onDeviceReady();
 		}
 	}
