@@ -326,7 +326,7 @@ var umobile = {
 	initialize: function () {
 		'use strict';
 		// Check if uMobile is running on Cordova/Phonegap
-		if((cordova || PhoneGap || phonegap) && /^file:\/{3}[^\/]/i.test(window.location.href)) {
+		if((window.cordova || window.PhoneGap || window.phonegap) && /^file:\/{3}[^\/]/i.test(window.location.href)) {
 			// Listen to onDeviceReady event.
 			document.addEventListener('deviceready', umobile.onDeviceReady, false);
 		} else {
