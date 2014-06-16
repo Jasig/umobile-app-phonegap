@@ -210,7 +210,6 @@
 
 			// Translation method
 			Handlebars.registerHelper('t', function(str, param) {
-				console.log(str);
 				return umobile.i18n.t(str, { param : param }) || str;
 			});
 

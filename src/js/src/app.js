@@ -271,6 +271,7 @@ var umobile = {
 
 		$.get(config.messages[locale]).done(function(data) {
 			umobile.i18n.extend(data);
+			umobile.initRouter();
 		});
 	},
 
@@ -338,7 +339,6 @@ var umobile = {
 		umobile.initEventListeners();
 		umobile.initModels();
 		umobile.initI18n();
-		umobile.initRouter();
 		umobile.updateAppState();
 	},
 

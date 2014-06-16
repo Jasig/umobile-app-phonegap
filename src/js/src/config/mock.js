@@ -5,7 +5,7 @@ var config = {};
 // HTML5 testing url: http://localhost:5000
 // Android: http://10.0.2.2:8080
 // iOS: http://localhost:8080
-config.uMobileServerUrl = 'https://cas-server:8443';
+config.uMobileServerUrl = 'http://localhost:5000';
 
 // UMOBILE SERVER CONTEXT PATH
 config.uMobileServerContext = '/data';
@@ -14,10 +14,7 @@ config.uMobileServerContext = '/data';
 // mockLogin, localLogin or casLogin.
 config.loginFn = 'mockLogin';
 config.encryptionKey = 'umobile';
-config.casServerUrl = 'https://cas-server:8443';
-
-// LOCAL STORAGE.
-config.storageFn = 'local';
+config.casServerUrl = 'http://localhost:8080';
 
 // SESSION TIMEOUT.
 // 600000 millseconds = 10 minutes.
