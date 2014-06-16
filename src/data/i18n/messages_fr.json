@@ -15,12 +15,17 @@
 		"username_placeholder" : "Nom d'utilisateur",
 		"password_label" : "Mot de passe :",
 		"password_placeholder" : "Mot de passe",
-		"submit" : "Se connecter"
+		"submit" : "Se connecter",
+		"validationError": "Votre nom d'utilisateur ou votre mot de passe est incorrect.",
+		"guestLoginError": "Impossible de vous authentifier au portail en tant qu'invité. Merci de vous connecter avec votre nom d'utilisateur et mot de passe",
+		"loginError": "Impossible de vous authentifier au portail. Merci de réessayer.",
+		"error_username" : "Le nom d'utilisateur est requis.",
+		"error_password" : "Le mot de passe est requis."
 	},
 	"notifier" : {
 		"login" : "Se connecter",
-		"title" : "Bienvenue",
-		"message" : "Il semblerais que vous ayez besoin de vous connecter. Cliquez sur le bouton ci-dessous pour vous connecter à uMobile"
+		"title" : "Bienvenue.",
+		"message" : "Il semblerais que vous ayez besoin de vous connecter. Cliquez sur le bouton ci-dessous pour vous connecter à uMobile."
 	},
 	"module" : {
 		"to_view" : "Aller à %{param}"

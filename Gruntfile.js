@@ -177,7 +177,8 @@ module.exports = function (grunt) {
 						'src/js/src/view/LoginView.js',
 						'src/js/src/view/Module.js',
 						'src/js/src/view/ModuleView.js',
-						'src/js/src/view/Notifier.js'
+						'src/js/src/view/Notifier.js',
+						'src/js/src/view/Error.js'
 						
 					]
 				}
