@@ -18,7 +18,9 @@
 		"submit" : "Se connecter"
 	},
 	"notifier" : {
-		"login" : "Se connecter"
+		"login" : "Se connecter",
+		"title" : "Bienvenue",
+		"message" : "Il semblerais que vous ayez besoin de vous connecter. Cliquez sur le bouton ci-dessous pour vous connecter à uMobile"
 	},
 	"module" : {
 		"to_view" : "Aller à %{param}"

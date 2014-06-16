@@ -15,12 +15,14 @@
 		/**
 		Property houses default model attributes.
 
+		Values are keys referring to i18n datas
+
 		@property defaults
 		@type Object
 		**/
 		defaults: {
-			title: 'Welcome',
-			message: 'It looks like you need to login. Click the below login button to sign into uMobile'
+			title: 'notifier.title',
+			message: 'notifier.message'
 		}
 	});
 

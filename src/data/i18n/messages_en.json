@@ -18,7 +18,9 @@
 		"submit" : "Go"
 	},
 	"notifier" : {
-		"login" : "Login"
+		"login" : "Login",
+		"title" : "Welcome",
+		"message" : "It looks like you need to login. Click the below login button to sign into uMobile"
 	},
 	"module" : {
 		"to_view" : "To view %{param}"
