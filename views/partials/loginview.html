@@ -1,25 +1,25 @@
 <div id="formContainer" class="um-form-container clearfix">
 	<form id="login" class="form-inline um-login-form" action="javascript:;">
 		<div id="loginAlert" style="display: none;" class="alert alert-error um-alert-error">
-			<strong>Warning.</strong>
+			<strong>{{t 'login.warning'}}</strong>
 			<span class="message"></span>
 		</div>
 		<fieldset>
-			<legend>Sign In</legend>
+			<legend>{{t 'login.sign_in'}}</legend>
 			<!--Username-->
 			<div class="control-group">
-				<label class="control-label hidden" for="username">Username:</label>
+				<label class="control-label hidden" for="username">{{t 'login.username_label'}}</label>
 				<div class="controls">
-					<input type="text" id="username" name="username" class="input-block-level" value="{{username}}" placeholder="Username">
+					<input type="text" id="username" name="username" class="input-block-level" value="{{username}}" placeholder="{{t 'login.username_placeholder'}}">
 					<span class="help-inline" style="display: none;"></span>
 				</div>
 			</div>
 
 			<!--Password-->
 			<div class="control-group">
-				<label class="control-label hidden" for="password">Password:</label>
+				<label class="control-label hidden" for="password">{{t 'login.password_label'}}</label>
 				<div class="controls">
-					<input type="password" id="password" name="password" class="input-block-level" value="{{password}}" placeholder="Password">
+					<input type="password" id="password" name="password" class="input-block-level" value="{{password}}" placeholder="{{t 'login.password_placeholder'}}">
 					<span class="help-inline" style="display: none;"></span>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 			<!--Controls-->
 			<div class="control-group">
 				<div class="controls">
-					<button id="submitButton" type="submit" class="btn btn-inverse um-btn-inverse">Go</button>
+					<button id="submitButton" type="submit" class="btn btn-inverse um-btn-inverse">{{t 'login.submit'}}</button>
 					<span id="submitSpinner" class="btn btn-link um-login-spinner invisible"></span>
 				</div>
 			</div>

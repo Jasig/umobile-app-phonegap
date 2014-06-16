@@ -1,0 +1,38 @@
+{
+	"breadcrumb" : {
+		"home" : "Accueil"
+	},
+	"footer" : {
+		"call_to_login" : "Se connecter pour un contenu personnalisé"
+	},
+	"header" : {
+		"title" : "uMobile"
+	}, 
+	"login" : {
+		"warning" : "Attention.",
+		"sign_in" : "Se connecter",
+		"username_label" : "Nom d'utilisateur :",
+		"username_placeholder" : "Nom d'utilisateur",
+		"password_label" : "Mot de passe :",
+		"password_placeholder" : "Mot de passe",
+		"submit" : "Se connecter"
+	},
+	"notifier" : {
+		"login" : "Se connecter"
+	},
+	"module" : {
+		"to_view" : "Aller à %{param}"
+	},
+	"calendar" : {
+		"title" : "Calendrier"
+	},
+	"courses" : {
+		"title" : "Cours"
+	},
+	"map" : {
+		"title" : "Carte"
+	},
+	"news" : {
+		"title" : "Informations"
+	}
+}

@@ -97,6 +97,14 @@ var umobile = {
 	utility: {},
 
 	/**
+	Namespace for umobile i18n.
+
+	@submodule i18n
+	@namespace i18n
+	**/
+	i18n: {},
+
+	/**
 	Method parses the data received by the session.established event.
 	Iterates over layout JSON and adds modules (i.e. portlets) to
 	the modues array based upon the number of portlets described
@@ -251,6 +259,22 @@ var umobile = {
 	},
 
 	/**
+	 * Method initializes the i18n module 
+	 *
+	 * @method initI18n
+	 */
+	initI18n : function() {
+		'use strict';
+
+		umobile.i18n = new Polyglot({ allowMissing : true });
+		var locale = config.locale || umobile.i18n.locale();
+
+		$.get(config.messages[locale]).done(function(data) {
+			umobile.i18n.extend(data);
+		});
+	},
+
+	/**
 	Method registers subscribed events.
 
 	@method initEventListeners
@@ -313,6 +337,7 @@ var umobile = {
 
 		umobile.initEventListeners();
 		umobile.initModels();
+		umobile.initI18n();
 		umobile.initRouter();
 		umobile.updateAppState();
 	},

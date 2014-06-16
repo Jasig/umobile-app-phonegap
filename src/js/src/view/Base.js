@@ -208,6 +208,12 @@
 			// Cache options.
 			this.options = (options && !_.isEmpty(options)) ? options : {};
 
+			// Translation method
+			Handlebars.registerHelper('t', function(str, param) {
+				console.log(str);
+				return umobile.i18n.t(str, { param : param }) || str;
+			});
+
 			// Compile screen template.
 			this.template = Handlebars.compile($(this.selectors.template).html());
 
