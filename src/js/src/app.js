@@ -266,10 +266,12 @@ var umobile = {
 	initI18n : function() {
 		'use strict';
 
-		umobile.i18n = new Polyglot({ allowMissing : true });
-		var locale = config.locale || umobile.i18n.locale();
+		umobile.i18n = new Polyglot({
+			allowMissing : true,
+			locale : config.locale || 'en'
+		});
 
-		$.get(config.messages[locale]).done(function(data) {
+		$.get(config.messages[umobile.i18n.locale()]).done(function(data) {
 			umobile.i18n.extend(data);
 			umobile.initRouter();
 		});

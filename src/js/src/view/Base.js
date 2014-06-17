@@ -221,6 +221,9 @@
 			 * "foo.bar" : "%{smart_count} car |||| %{smart_count} cars" 
 			 * will output "2 cars"
 			 *
+			 * Learn more about pluralization in Polyglot.js
+			 * <http://airbnb.github.io/polyglot.js/polyglot.html#section-12>
+			 * 
 			 * ---
 			 * 
 			 * {{t 'foo.bar' 'John' 'Doe'}} will do the same as the first example but will change
