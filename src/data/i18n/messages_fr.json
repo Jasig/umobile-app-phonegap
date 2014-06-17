@@ -28,7 +28,7 @@
 		"message" : "Il semblerais que vous ayez besoin de vous connecter. Cliquez sur le bouton ci-dessous pour vous connecter à uMobile."
 	},
 	"module" : {
-		"to_view" : "Aller à %{param}"
+		"to_view" : "Aller à %{0}"
 	},
 	"calendar" : {
 		"title" : "Calendrier"

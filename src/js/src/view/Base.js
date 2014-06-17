@@ -208,9 +208,43 @@
 			// Cache options.
 			this.options = (options && !_.isEmpty(options)) ? options : {};
 
-			// Translation method
-			Handlebars.registerHelper('t', function(str, param) {
-				return umobile.i18n.t(str, { param : param }) || str;
+			/**
+			 * Translation method
+			 *
+			 * {{t 'foo.bar'}} 
+			 * "foo.bar" : "Hello" will output "Hello"
+			 *
+			 * ---
+			 * 
+			 * {{t 'foo.bar' 2}} will pluralize foo.bar value if possible
+			 * 
+			 * "foo.bar" : "%{smart_count} car |||| %{smart_count} cars" 
+			 * will output "2 cars"
+			 *
+			 * ---
+			 * 
+			 * {{t 'foo.bar' 'John' 'Doe'}} will do the same as the first example but will change
+			 * %{0} with 'John' and %{1} with 'Doe'
+			 *
+			 * "foo.bar" : "My name is %{0} %{1}" will output : "My name is John Doe"
+			 *
+			 *
+			 * Check <http://airbnb.github.io/polyglot.js/polyglot.html> for more informations 
+			 */
+			Handlebars.registerHelper('t', function(str) {
+
+				// If param is a number, then it is done for 
+				if(arguments.length > 1 && !isNaN(arguments[1])) {
+					var smartCount = parseInt(arguments[1], 10);
+					return umobile.i18n.t(str, smartCount);
+				}
+
+				var params = {};
+				for(var i=1; i<arguments.length; i++) {
+					params[i-1] = arguments[i];
+				}
+
+				return umobile.i18n.t(str, params);
 			});
 
 			// Compile screen template.

@@ -104,7 +104,7 @@
 				break;
 			case 'show':
 				var errorView = new umobile.view.Error({ model : notifierModel.toJSON() });
-				warn.append(errorView.render().el).show();
+				warn.html('').append(errorView.render().el).show();
 				break;
 			default:
 				warn.html('');
