@@ -80,6 +80,27 @@
 					script.onreadystatechange = null;
 				}
 			};
+		},
+
+
+		/**
+		 * Method switchs lang and realod the current view
+		 * 
+		 * @param  {String} lang : property houses the lang to switch to.
+		 * @method switchLang
+		 */
+		switchLang : function(lang) {
+
+			umobile.i18n.clear();
+			umobile.i18n.locale(lang);
+			
+			$.get(config.messages[umobile.i18n.locale()]).done(function(data) {
+				umobile.i18n.extend(data);
+
+				var currentView = umobile.app.stateModel.get('currentView');
+				umobile.app.router[currentView]();
+			});
+			umobile.app.stateModel.save({ lang : lang });
 		}
 
 	};
