@@ -54,3 +54,10 @@ config.nativeModules = {
 	calendar: 'modules/calendar.html',
 	courses: 'modules/courses.html'
 };
+
+config.locale = 'en';
+
+config.messages = {
+	en : './data/i18n/messages_en.json',
+	fr : './data/i18n/messages_fr.json'
+};

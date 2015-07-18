@@ -21,7 +21,8 @@
 			id: 'state',
 			authenticated: false,
 			lastSessionAccess: null,
-			currentView: null
+			currentView: null,
+			lang : config.locale
 		},
 
 		/**

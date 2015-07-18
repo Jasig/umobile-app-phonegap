@@ -74,12 +74,13 @@ config.getPublicDirectory = function () {
 };
 
 config.getOptionsForLess = function() {
+	'use strict';
 	var options = {
 		compress: config.isDevelopment() ? false : true,
 		cleancss: config.isDevelopment() ? false : true,
 		report: config.isDevelopment() ? 'min' : 'gzip',
 		optimization: config.isDevelopment() ? 1 : 5,
-	}
+	};
 	return options;
 };
 

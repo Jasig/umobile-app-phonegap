@@ -97,6 +97,14 @@ var umobile = {
 	utility: {},
 
 	/**
+	Namespace for umobile i18n.
+
+	@submodule i18n
+	@namespace i18n
+	**/
+	i18n: {},
+
+	/**
 	Method parses the data received by the session.established event.
 	Iterates over layout JSON and adds modules (i.e. portlets) to
 	the modues array based upon the number of portlets described
@@ -251,6 +259,25 @@ var umobile = {
 	},
 
 	/**
+	 * Method initializes the i18n module 
+	 *
+	 * @method initI18n
+	 */
+	initI18n : function() {
+		'use strict';
+
+		umobile.i18n = new Polyglot({
+			allowMissing : true,
+			locale : config.locale || 'en'
+		});
+
+		$.get(config.messages[umobile.i18n.locale()]).done(function(data) {
+			umobile.i18n.extend(data);
+			umobile.initRouter();
+		});
+	},
+
+	/**
 	Method registers subscribed events.
 
 	@method initEventListeners
@@ -313,7 +340,7 @@ var umobile = {
 
 		umobile.initEventListeners();
 		umobile.initModels();
-		umobile.initRouter();
+		umobile.initI18n();
 		umobile.updateAppState();
 	},
 
@@ -325,9 +352,11 @@ var umobile = {
 	**/
 	initialize: function () {
 		'use strict';
-		// Listen to onDeviceReady event.
-		document.addEventListener('deviceready', umobile.onDeviceReady, false);
-		if (config.loginFn === 'mockLogin') {
+		// Check if uMobile is running on Cordova/Phonegap
+		if((window.cordova || window.PhoneGap || window.phonegap) && /^file:\/{3}[^\/]/i.test(window.location.href)) {
+			// Listen to onDeviceReady event.
+			document.addEventListener('deviceready', umobile.onDeviceReady, false);
+		} else {
 			umobile.onDeviceReady();
 		}
 	}

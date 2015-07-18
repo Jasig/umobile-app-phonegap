@@ -44,9 +44,18 @@
 		@type Object
 		**/
 		messages: {
-			validationError: 'You have errors with your username or password.',
-			guestLoginError: 'We tried to log you into the portal as a guest but something went wrong. Please try to login with your credentials.',
-			loginError: 'We tried to log you into the portal but something went wrong. Please try to login again.'
+			validationError: new umobile.model.Notifier({
+				title : 'login.warning',
+				message : 'login.validationError'
+			}),
+			guestLoginError: new umobile.model.Notifier({
+				title : 'login.warning',
+				message : 'login.guestLoginError'
+			}),
+			loginError: new umobile.model.Notifier({
+				title : 'login.warning',
+				message : 'login.loginError'
+			})
 		},
 
 		/**
@@ -84,22 +93,21 @@
 		@param {String} action The action to take (i.e., hide or show).
 		@param {String} message The message to render.
 		**/
-		warn: function (action, message) {
+		warn: function (action, notifierModel) {
 			// Define & set defaults.
+
 			var warn = this.loc('warn');
-			action = (!action) ? 'hide' : action;
-			message = (!message) ? this.messages.validationError : message;
 
 			switch (action) {
 			case 'hide':
-				warn.slideUp('fast');
+				warn.html('');
 				break;
 			case 'show':
-				warn.find('.message').html(message);
-				warn.slideDown('fast');
+				var errorView = new umobile.view.Error({ model : notifierModel.toJSON() });
+				warn.html('').append(errorView.render().el).show();
 				break;
 			default:
-				warn.slideUp('fast');
+				warn.html('');
 			}
 		},
 
@@ -209,7 +217,8 @@
 					control = input.closest('.control-group');
 					help = control.find('.help-inline');
 					control.addClass('error');
-					help.html(value).show();
+					var i18nValue = umobile.i18n.t(value);
+					help.html(i18nValue).show();
 				}
 			});
 		},

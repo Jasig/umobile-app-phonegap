@@ -1,0 +1,45 @@
+{
+	"breadcrumb" : {
+		"home" : "Home"
+	},
+	"footer" : {
+		"call_to_login" : "Login for Personalized Content"
+	},
+	"header" : {
+		"title" : "uMobile"
+	}, 
+	"login" : {
+		"warning" : "Warning.",
+		"sign_in" : "Sign In",
+		"username_label" : "Username:",
+		"username_placeholder" : "Username",
+		"password_label" : "Password:",
+		"password_placeholder" : "Password",
+		"submit" : "Go",
+		"validationError": "You have errors with your username or password.",
+		"guestLoginError": "We tried to log you into the portal as a guest but something went wrong. Please try to login with your credentials.",
+		"loginError": "We tried to log you into the portal but something went wrong. Please try to login again.",
+		"error_username" : "Username is required",
+		"error_password" : "Password is required"
+	},
+	"notifier" : {
+		"login" : "Login",
+		"title" : "Welcome.",
+		"message" : "It looks like you need to login. Click the below login button to sign into uMobile."
+	},
+	"module" : {
+		"to_view" : "To view %{0}"
+	},
+	"calendar" : {
+		"title" : "Calendar"
+	},
+	"courses" : {
+		"title" : "Courses"
+	},
+	"map" : {
+		"title" : "Map"
+	},
+	"news" : {
+		"title" : "News"
+	}
+}

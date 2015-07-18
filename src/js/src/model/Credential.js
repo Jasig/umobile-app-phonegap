@@ -27,15 +27,19 @@
 		/**
 		Property houses validation rules.
 
+		msg is the returned error message, it has to match the key in message_xx.json
+
 		@property validation
 		@type Object
 		**/
 		validation: {
 			username: {
-				required: true
+				required: true,
+				msg : 'login.error_username'
 			},
 			password: {
-				required: true
+				required: true,
+				msg : 'login.error_password'
 			}
 		},
 

@@ -141,6 +141,7 @@ module.exports = function (grunt) {
 					'www/js/lib/backbone/backbone-validation.min.js': ['src/js/lib/backbone/backbone-validation.js'],
 					'www/js/lib/handlebars/handlebars.min.js': ['src/js/lib/handlebars/handlebars.js'],
 					'www/js/lib/bootstrap/bootstrap.min.js': ['src/js/lib/bootstrap/bootstrap.js'],
+					'www/js/lib/polyglot/polyglot.min.js': ['src/js/lib/polyglot/polyglot.js'],
 					'www/js/lib/debug/debug.min.js': ['src/js/lib/debug/debug.js'],
 
 					'www/js/src/main.min.js': [
@@ -176,7 +177,8 @@ module.exports = function (grunt) {
 						'src/js/src/view/LoginView.js',
 						'src/js/src/view/Module.js',
 						'src/js/src/view/ModuleView.js',
-						'src/js/src/view/Notifier.js'
+						'src/js/src/view/Notifier.js',
+						'src/js/src/view/Error.js'
 						
 					]
 				}
